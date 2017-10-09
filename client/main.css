@@ -1,0 +1,24 @@
+/* CSS declarations go here */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+// csstricks best practice :)
+
+body {
+    background: red;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+#graphiql {
+    height: 100vh;
+}
