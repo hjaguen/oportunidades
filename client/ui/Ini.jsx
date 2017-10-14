@@ -8,7 +8,7 @@ import GraphiQL from 'graphiql';
 import schema from '../api/schema.js';
 //import fetch from 'isomorphic-fetch';
 
-function graphQLFetcher(graphQLParams) {
+ function graphQLFetcher(graphQLParams) {
   return fetch(window.location.origin + '/graphql', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
