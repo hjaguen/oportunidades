@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import {
+const {
     GraphQLSchema,
     GraphQLList,
     GraphQLObjectType,
     GraphQLString
-} from 'graphql';
+} = require('graphql');
 
+const fetch = require('isomorphic-fetch');
 
 
 //fetchTenda({}): `${URL_API}/jpages/data/general/?pageId=${tendaId}`
@@ -83,7 +83,7 @@ const
 
     ColorType = new GraphQLObjectType({
         name: `Color`,
-        description: `Color de ropa`,
+        description: `Color de la ropa`,
         fields: () => ({
             colorId: {
                 type: GraphQLString
@@ -123,7 +123,7 @@ const
     }),
 
     galleryColorType = new GraphQLObjectType({
-        name: `Color`,
+        name: `Colors`,
         description: `Color for the gallery to display`,
         fields: () => ({
             id: {
@@ -203,19 +203,41 @@ const
                 type: new GraphQLList(ImageType)
             },
             galleryColors: {
-                type: {
-                    type: new GraphQLList(galleryColorType)
-                }
+                type: new GraphQLList(galleryColorType)
             }
         })
     })
 ;
 
+//apiUrl, pageId, categoryId, subcategoryId, brandId, sizeId, colorId
+
+function CATEGORIA(relativeUrl) {
+    return fetch(`${apiUrl}/jcategories/data/${relativeUrl}`)
+        .then(res => res.json());
+}
+function SUBCATEGORIA(relativeUrl) {
+    return fetch(`${apiUrl}/jsubcategories/data/${relativeUrl}`)
+        .then(res => res.json());
+}
+function TALLA(relativeUrl) {
+    return fetch(`${apiUrl}/jsizes/data/${relativeUrl}`)
+        .then(res => res.json());
+}
+function MARCA(relativeUrl) {
+    return fetch(`${apiUrl}/jbrands/data/${relativeUrl}`)
+        .then(res => res.json());
+}
+function COLOR(relativeUrl) {
+    return fetch(`${apiUrl}/jcolors/data/${relativeUrl}`)
+        .then(res => res.json());
+}
+
 const QueryType = new GraphQLObjectType({
     name: 'Query',
     description: `The root of all... queries.`,
     fields: () => ({
-        allSubcategories: {
+
+        subcategories: {
             type: new GraphQLList(CategoriaType),
             args: {
                 apiUrl: { type: GraphQLString },
@@ -224,16 +246,183 @@ const QueryType = new GraphQLObjectType({
             },
             resolve:
                 (root, args) =>
-                    fetch(`${args.apiUrl}/jpages/data/subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
-                        .then(res => res.json())
+                    CATEGORIA(`subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
         },
-        laCosa: {
-            type: GraphQLString,
-            resolve: () => "Un text per a la coseta..."
+
+        subcategoriaTALLES: {
+            type: new GraphQLList(TallaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    SUBCATEGORIA(`sizes/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
+        },
+        subcategoriaMARQUES: {
+            type: new GraphQLList(MarcaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    SUBCATEGORIA(`brands/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
+        },
+        subcategoriaCOLORS: {
+            type: new GraphQLList(ColorType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    SUBCATEGORIA(`colors/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
+        },
+        subcategoriaPRODUCTES: {
+            type: new GraphQLList(ProductType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    SUBCATEGORIA(`products/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
+        },
+
+        tallaSubcategoriaMARQUES: {
+            type: new GraphQLList(MarcaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                sizeId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    TALLA(`brands/2d.php?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&sizeId=${args.sizeId}`)
+        },
+        tallaSubcategoriaCOLORS: {
+            type: new GraphQLList(ColorType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                sizeId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    TALLA(`colors-subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&sizeId=${args.sizeId}`)
+        },
+        tallaSubcategoriaMarcaCOLORS: {
+            type: new GraphQLList(ColorType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                sizeId: { type: GraphQLString },
+                brandId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    TALLA(`colors/3d.php?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&sizeId=${args.sizeId}&brandId=${args.brandId}`)
+        },
+
+        marcaSubcategoriaTALLES: {
+            type: new GraphQLList(TallaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                brandId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    MARCA(`sizes/2d.php?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&brandId=${args.brandId}`)
+        },
+        marcaSubcategoriaCOLORS: {
+            type: new GraphQLList(ColorType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                brandId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    MARCA(`colors/2d.php?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&brandId=${args.brandId}`)
+        },
+
+        colorSUBCATEGORIES: {
+            type: new GraphQLList(SubcategoriaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                colorId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    COLOR(`subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}&colorId=${args.colorId}`)
+        },
+        colorSubcategoriaTALLES: {
+            type: new GraphQLList(TallaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                colorId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    COLOR(`sizes-subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&colorId=${args.colorId}`)
+        },  
+        colorSubcategoriaMARQUES: {
+            type: new GraphQLList(MarcaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                colorId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    COLOR(`brands/2d.php?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&colorId=${args.colorId}`)
+        },
+        colorSubcategoriaMarcaTALLES: {
+            type: new GraphQLList(TallaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                colorId: { type: GraphQLString },
+                brandId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    COLOR(`sizes/3d.php?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&colorId=${args.colorId}&brandId=${args.brandId}`)
         }
     })
 });
 
-export default new GraphQLSchema({
+const schema = new GraphQLSchema({
     query: QueryType
 });
+
+module.exports = schema;
