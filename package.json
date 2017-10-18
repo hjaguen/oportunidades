@@ -12,9 +12,11 @@
     "graphql": "^0.10.5",
     "graphql-tag": "^2.5.0",
     "meteor-node-stubs": "~0.2.4",
+    "prop-types": "^15.6.0",
     "react": "^15.6.2",
     "react-apollo": "^1.4.16",
     "react-dom": "^15.6.2",
+    "react-masonry-component": "^6.0.0",
     "react-router-dom": "^4.2.2",
     "xhr-promise": "^2.0.0"
   }
