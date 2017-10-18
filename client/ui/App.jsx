@@ -21,7 +21,7 @@ import Masonry from 'react-masonry-component';
 
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        uri: `http://localhost:4000/graphql`
+        uri: `http://sybr.sytes.net:11010/graphql`
     })
 })
 
@@ -146,11 +146,7 @@ class Mostrari extends Component {
         }
 
         return (
-            <div
-                style={{
-                    overflow: `visible`
-                }}
-            >
+            <div>
                 <h1>Productes de la categoria 2...</h1>
                 <Masonry
                     elementType={'ul'}
@@ -158,7 +154,7 @@ class Mostrari extends Component {
                     {   this.props.data.subcategoriaPRODUCTES.map(
                             (v,i,a) => {
                                 console.log(v);
-                                if (i < 20) {
+                                if (i < 40) {
                                     return (
                                         <li key={i}
                                             style={{
