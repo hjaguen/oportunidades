@@ -153,8 +153,7 @@ class Mostrari extends Component {
         return (
             <div>
                 <ul>
-                    {
-                        this.props.data.subcategoriaPRODUCTES.map(
+                    {   this.props.data.subcategoriaPRODUCTES.map(
                             (v,i,a) => {
                                 <li>Referencia: {v.referencia} - Nombre: {v.descripcion}</li>
                             }
@@ -166,9 +165,9 @@ class Mostrari extends Component {
     }
 }
 
-const MostrariAmbProductes = graphql()
+const MostrariAmbProductes = graphql(ProductesQuery)(Mostrari);
 
-export default class IniComp extends Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
     }
@@ -199,7 +198,7 @@ export default class IniComp extends Component {
                             </div>
                         )}/>
                         <Route path="/query" render={() => (
-                            null
+                            <MostrariAmbProductes />
                         )}/>
                     </div>
                 </Router>

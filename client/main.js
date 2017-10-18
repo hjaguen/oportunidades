@@ -2,11 +2,11 @@ import './main.html';
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { render } from 'react-dom';
-import IniComp from './ui/Ini.jsx';
+import App from './ui/App.jsx';
 import './ui/graphiql.css';
 //import './ui/solarized.css';
 
 
 Meteor.startup(() => {
-  render(<IniComp />, document.getElementById('app'));
+  render(<App />, document.getElementById('app'));
 });
