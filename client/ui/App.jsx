@@ -1,126 +1,250 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Route,
+    Link
 } from 'react-router-dom';
-
-// import ApolloClient, { HttpLink } from 'apollo-client-preset';
 import gql from 'graphql-tag';
-//
-// const client = new ApolloClient({
-//     link: new HttpLink({
-//         uri: 'https://localhost:4000/graphql'
-//     })
-// });
-
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
-import { graphql, ApolloProvider } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import Masonry from 'react-masonry-component';
-
-const client = new ApolloClient({
-    networkInterface: createNetworkInterface({
-        uri: `http://sybr.sytes.net:11010/graphql`
-    })
-})
+import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 
-
-// const
-//     url = `http://localhost:4000/graphql`,
-//     query = `query {
-//         allSubcategories(
-//             apiUrl: "http://api.colombiaespassion.net",
-//             pageId: "1",
-//             categoryId: "2"
-//         ) {
-//             categoriaId
-//             nom_categoria
-//         }
-//     }`
-// ;
-
-// fetch(url, {
-//     method: 'POST',
-//     Accept: 'api_version=2',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ query })
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.dir('Here is the data: ', data);
-//         //resultats = data;
-//     })
-// ;
-
-//console.dir('Resultats: ', resultats);
-
-const ProductesQuery = gql`
-    query Subcategories(
-        $apiUrl: String,
-        $pageId: String,
-        $categoryId: String,
-        $subcategoryId: String,
-        $sizeId: String,
-        $brandId: String,
-        $colorId: String
-    ) {
-        subcategoriaPRODUCTES(
-            apiUrl: $apiUrl,
-            pageId: $pageId,
-            categoryId: $categoryId,
-            subcategoryId: $subcategoryId,
-            colorId: $colorId,
-            brandId: $brandId,
-            sizeId: $sizeId
+const
+    TallesQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
         ) {
-            id
-            referencia
-            descripcion
-            categoria
-            marca
-            precioBase
-            precio2
-            precio3
-            precio4
-            precioMiscelaneo
-            proveedor
-            descripcion_long_es
-            nom_marca
-            logo_marca
-            nom_categoria
-            imagen_principal
-            gallery {
+            subcategoriaTALLES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            )
+    }`,
+
+    ColorsQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaCOLORS(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            )
+    }`,
+
+    MarquesQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaMARQUES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            )
+    }`,
+
+    ProductesQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaPRODUCTES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ) {
                 id
-                producto
-                imagen
-                imagen_min
-                type
-                ppal
+                referencia
+                descripcion
+                categoria
+                marca
+                precioBase
+                precio2
+                precio3
+                precio4
+                precioMiscelaneo
+                proveedor
+                descripcion_long_es
+                nom_marca
+                logo_marca
+                nom_categoria
+                imagen_principal
+                gallery {
+                    id
+                    producto
+                    imagen
+                    imagen_min
+                    type
+                    ppal
+                }
+                galleryColors {
+                    id
+                    fotoId
+                    colorId
+                    num_color
+                    label_color
+                    imagen_min
+                }
+          }
+    }`,
+
+    SubcategoriesQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategories(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ) {
+                categoriaId
+                nom_categoria
             }
-            galleryColors {
-                id
-                fotoId
-                colorId
-                num_color
-                label_color
-                imagen_min
-            }
-      }
-}`;
+        }`
+    ;
 
 let variables = {
     apiUrl: "http://api.colombiaespassion.net",
     pageId: "1",
-    categoryId: "2",
+    categoryId: "18",
     subcategoryId: "31",
     sizeId: "21",
     brandId: "4",
     colorId: "17"
 };
+
+class NavbarAdaptat extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    static: propTypes = {
+        data: PropTypes.shape({
+            loading: PropTypes.bool,
+            error: PropTypes.object,
+            subcategories: PropTypes.array
+        }).isRequired
+    }
+
+    render() {
+        if (this.props.data.loading) {
+            return (<div>Cargando...</div>);
+        }
+
+        if (this.props.data.error) {
+            //console.log(this.props.data.error)
+            return (<div>Ocurrió un error inesperado.</div>);
+        }
+
+        return (
+            <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <a href="#">Logo</a>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                        <LinkContainer to="/">
+                            <NavItem eventKey="eK">Inicio</NavItem>
+                        </LinkContainer>
+                        {
+                            this.props.data.subcategories.map(
+                                (v,i,a) => {
+                                    return (
+                                        <LinkContainer key={i} to={`/categoria/${v.categoriaId}`}>
+                                            <NavItem
+                                                eventKey={i}
+                                                onClick={this.props.subcategoryIdAlState}
+                                                data-subcategory-id={v.categoriaId}
+                                            >
+                                                {v.nom_categoria}
+                                            </NavItem>
+                                        </LinkContainer>
+                                    )
+                                }
+                            )
+                        }
+                        <NavDropdown
+                            eventKey={this.props.data.subcategories.length + 1}
+                            title="Dropdown"
+                            id="basic-nav-dropdown"
+                        >
+                            {
+                                this.props.data.subcategories.map(
+                                    (v,i,a) => {
+                                        return (
+                                            <MenuItem key={i} eventKey={`${a.length + 1}.${i}`}>{v.nom_categoria}</MenuItem>
+                                        )
+                                    }
+                                )
+                            }
+                            <MenuItem divider />
+                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                        </NavDropdown>
+                    </Nav>
+                    <Nav pullRight>
+                        <NavItem eventKey={1} href="#">Link Right</NavItem>
+                        <NavItem eventKey={2} href="#">Link Right</NavItem>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        );
+    }
+}
 
 class Mostrari extends Component {
     constructor(props) {
@@ -141,7 +265,7 @@ class Mostrari extends Component {
         }
 
         if (this.props.data.error) {
-            console.log(this.props.data.error)
+           /* console.log(this.props.data.error)*/
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
@@ -153,7 +277,7 @@ class Mostrari extends Component {
                 >
                     {   this.props.data.subcategoriaPRODUCTES.map(
                             (v,i,a) => {
-                                console.log(v);
+                                //console.log(v);
                                 if (i < 40) {
                                     return (
                                         <li key={i}
@@ -184,54 +308,64 @@ class Mostrari extends Component {
     }
 }
 
-const MostrariAmbProductes = graphql(ProductesQuery, {
+const NavbarAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
     options: {
         variables
     }
-})(Mostrari);
+})(NavbarAdaptat);
+
+
+
 
 export default class App extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            variables
+        };
+
+        this.subcategoryIdAlState = this.subcategoryIdAlState.bind(this);
+    }
+
+    subcategoryIdAlState(ev) {
+        console.dir(ev.target.dataset);
+        let
+            variables = Object.assign({}, this.state.variables, {subcategoryId: ev.target.dataset.subcategoryId});
+
+        this.setState({
+            variables
+        });
     }
 
     render() {
-        // queryAmbVariables({
-        //     apiUrl: "http://api.colombiaespassion.net",
-        //     pageId: "1",
-        //     categoryId: "2",
-        //     subcategoryId: "2",
-        //     sizeId: "21",
-        //     brandId: "4",
-        //     colorId: "17"
-        // })
-        //   .then(data => console.log(data))
-        //   .catch(error => console.error(error));
+        let
+            MostrariAmbProductes = graphql(ProductesQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(Mostrari)
+        ;
 
         return (
-            <ApolloProvider client={client}>
-                <Router>
-                    <div>
-                        <Route exact path="/" render={() => (
+            <Router>
+                <div>
+                    <Route path="/" render={() => (
+                        <NavbarAdaptatAmbSubcategories subcategoryIdAlState={this.subcategoryIdAlState} />
+                    )}/>
+                    <Route exact path="/" render={() => (
+                        <div>
+                            <h1>Component INICIAL!</h1>
                             <div>
-                                <h1>Component INICIAL!</h1>
-                                <div>
-                                    <h2>Meeec</h2>
-                                </div>
+                                <h2>Weeeee</h2>
                             </div>
-                        )}/>
-                        <Route path="/query" render={() => (
-                            <MostrariAmbProductes />
-                        )}/>
-                    </div>
-                </Router>
-            </ApolloProvider>
+                        </div>
+                    )}/>
+                    <Route path="/categoria/:categoryId" render={({ match }) => {
+                        return <MostrariAmbProductes />;
+                    }}/>
+                </div>
+            </Router>
         );
     }
 };
-// <ul>{
-//    xhr.response.map(
-//        (v,i,a) => <li key={i}>{v.data.allSubcategories.nom}</li>
-//    )
-// }
-// </ul>
