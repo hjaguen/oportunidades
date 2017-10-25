@@ -205,7 +205,7 @@ class NavbarAdaptat extends Component {
                             this.props.data.subcategories.map(
                                 (v,i,a) => {
                                     return (
-                                        <LinkContainer key={i} to={`/categoria/${v.categoriaId}`}>
+                                        <LinkContainer key={i} to={`/${v.nom_categoria.replace(/\s+/g, '')}`}>
                                             <NavItem
                                                 eventKey={i}
                                                 onClick={this.props.subcategoryIdAlState}
@@ -361,7 +361,7 @@ export default class App extends Component {
                             </div>
                         </div>
                     )}/>
-                    <Route path="/categoria/:categoryId" render={({ match }) => {
+                    <Route exact path="/:categoryId" render={({ match }) => {
                         return <MostrariAmbProductes />;
                     }}/>
                 </div>
