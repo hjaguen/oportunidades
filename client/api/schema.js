@@ -237,6 +237,18 @@ const QueryType = new GraphQLObjectType({
     description: `The root of all... queries.`,
     fields: () => ({
 
+        categoriaPRODUCTES: {
+            type: new GraphQLList(ProductType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    CATEGORIA(`products/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
+        },
+
         subcategories: {
             type: new GraphQLList(CategoriaType),
             args: {
@@ -390,7 +402,7 @@ const QueryType = new GraphQLObjectType({
             resolve:
                 (root, args) =>
                     COLOR(`sizes-subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&colorId=${args.colorId}`)
-        },  
+        },
         colorSubcategoriaMARQUES: {
             type: new GraphQLList(MarcaType),
             args: {

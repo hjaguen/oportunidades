@@ -10,9 +10,62 @@ import { graphql } from 'react-apollo';
 import Masonry from 'react-masonry-component';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Card } from  'react-mdl';
+
+//import StackGrid from "react-stack-grid";
 
 
 const
+    CategoriaPRODUCTESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            categoriaPRODUCTES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+               	id
+        		referencia
+                descripcion
+                categoria
+                marca
+                precioBase
+                proveedor
+                descripcion_long_es
+                nom_marca
+                logo_marca
+                nom_categoria
+                imagen_principal
+                gallery {
+                  id
+                  producto
+                  imagen
+                  imagen_min
+                  type
+                  ppal
+                }
+                galleryColors {
+                  id
+                  fotoId
+                  colorId
+                  num_color
+                  label_color
+                  imagen_min
+                }
+             }
+    }`,
+
     TallesQuery = gql`
         query (
             $apiUrl: String,
@@ -158,7 +211,7 @@ const
 let variables = {
     apiUrl: "http://api.colombiaespassion.net",
     pageId: "1",
-    categoryId: "18",
+    categoryId: "12",
     subcategoryId: "31",
     sizeId: "21",
     brandId: "4",
@@ -246,7 +299,69 @@ class NavbarAdaptat extends Component {
     }
 }
 
-class Mostrari extends Component {
+class MostrariTOTS extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    static propTypes = {
+        data: PropTypes.shape({
+            loading: PropTypes.bool,
+            error: PropTypes.object,
+            subcategoriaPRODUCTES: PropTypes.array
+        }).isRequired
+    }
+
+    render() {
+        if (this.props.data.loading) {
+            return (<div>Cargando...</div>);
+        }
+
+        if (this.props.data.error) {
+           /* console.log(this.props.data.error)*/
+            return (<div>Ocurrió un error inesperado.</div>);
+        }
+
+        return (
+            <div>
+                <h1>Productes de la categoria 2...</h1>
+                <Masonry
+                    elementType={'ul'}
+                >
+                    {   this.props.data.categoriaPRODUCTES.map(
+                            (v,i,a) => {
+                                //console.log(v);
+                                if (i < 40000) {
+                                    return (
+                                        <li key={i}
+                                            style={{
+                                                width: `100px`,
+                                                display: `inline-block`
+                                            }}
+                                        >
+                                            Referencia: {v.referencia} - Nombre: {v.descripcion}
+                                            <img
+                                                src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
+                                                alt={v.descripcion}
+                                                title={v.descripcion_long_es}
+                                                style={{
+                                                    width: `100px`
+                                                }}
+                                            />
+                                        </li>
+                                    );
+                                }
+                                return null;
+                            }
+                        )
+                    }
+                </Masonry>
+            </div>
+        );
+    }
+}
+
+class MostrariSubcategoriaPRODUCTES extends Component {
     constructor(props) {
         super(props);
     }
@@ -278,7 +393,7 @@ class Mostrari extends Component {
                     {   this.props.data.subcategoriaPRODUCTES.map(
                             (v,i,a) => {
                                 //console.log(v);
-                                if (i < 40) {
+                                if (i < 40000) {
                                     return (
                                         <li key={i}
                                             style={{
@@ -314,7 +429,26 @@ const NavbarAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
     }
 })(NavbarAdaptat);
 
+class Buscador extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <Select />
+                <Marques />
+                <Talles />
+                <Colors />
+            </div>
+        );
+    }
+}
 
 
 export default class App extends Component {
@@ -340,11 +474,17 @@ export default class App extends Component {
 
     render() {
         let
+            MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(MostrariTOTS),
+
             MostrariAmbProductes = graphql(ProductesQuery, {
                 options: {
                     variables: this.state.variables
                 }
-            })(Mostrari)
+            })(MostrariSubcategoriaPRODUCTES)
         ;
 
         return (
@@ -354,12 +494,7 @@ export default class App extends Component {
                         <NavbarAdaptatAmbSubcategories subcategoryIdAlState={this.subcategoryIdAlState} />
                     )}/>
                     <Route exact path="/" render={() => (
-                        <div>
-                            <h1>Component INICIAL!</h1>
-                            <div>
-                                <h2>Weeeee</h2>
-                            </div>
-                        </div>
+                        <MostrariAmbTOTSElsProductes />
                     )}/>
                     <Route exact path="/:categoryId" render={({ match }) => {
                         return <MostrariAmbProductes />;
