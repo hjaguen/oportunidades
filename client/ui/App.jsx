@@ -24,6 +24,12 @@ import {
   generateShareIcon
 } from 'react-share';
 
+import Select from 'react-select';
+// Be sure to include styles at some point, probably during your bootstrapping
+import 'react-select/dist/react-select.css';
+
+
+
 const {
   FacebookShareButton,
   TwitterShareButton,
@@ -659,17 +665,28 @@ class MarquesTOTS extends Component {
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
+        let arrOpts = [];
+
+        this.props.data.categoriaMARQUES.map(
+            (v,i,a) => {
+                arrOpts.push({
+                    value: v.marcaId,
+                    label: v.nom_marca
+                })
+            }
+        )
+
         return (
-            <div>
-                <ul>
-                    {
-                        this.props.data.categoriaMARQUES.map(
-                            (v,i,a) => {
-                                return <li key={i}>{v.nom_marca}</li>
-                            }
-                        )
-                    }
-                </ul>
+            <div
+                style={{
+                    margin: `1em auto`
+                }}
+            >
+                <Select
+                    options={arrOpts}
+                    onChange={(val) => alert(val.label)}
+                    placeholder="Filtrar por marca..."
+                />
             </div>
         );
     }
@@ -698,17 +715,28 @@ class TallesTOTS extends Component {
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
+        let arrOpts = [];
+
+        this.props.data.categoriaTALLES.map(
+            (v,i,a) => {
+                arrOpts.push({
+                    value: v.tallaId,
+                    label: v.nom_talla
+                })
+            }
+        )
+
         return (
-            <div>
-                <ul>
-                    {
-                        this.props.data.categoriaTALLES.map(
-                            (v,i,a) => {
-                                return <li key={i}>{v.nom_talla}</li>
-                            }
-                        )
-                    }
-                </ul>
+            <div
+                style={{
+                    margin: `3em auto`
+                }}
+            >
+                <Select
+                    options={arrOpts}
+                    onChange={(val) => alert(val.label)}
+                    placeholder="Filtrar por talla..."
+                />
             </div>
         );
     }
@@ -737,28 +765,32 @@ class ColorsTOTS extends Component {
             return (<div>Ocurrió un error inesperado.</div>);
         }
         return (
-            <div>
-                <ul>
+            <div
+                style={{
+                    marginTop: `3em`
+                }}
+            >
                 {
                     this.props.data.categoriaCOLORS.map(
                         (v,i,a) => {
                             return (
-                                <li key={i}>
-                                    <span
-                                        style={{
-                                            display: `inline-block`,
-                                            border: `1px black solid`,
-                                            width: `20px`,
-                                            height: `20px`,
-                                            background: `${v.nom_color}`
-                                        }}
-                                    />
-                                </li>
+                                <span
+                                    key={i}
+                                    style={{
+                                        display: `inline-block`,
+                                        border: `1px black solid`,
+                                        width: `20px`,
+                                        height: `20px`,
+                                        background: `${v.nom_color}`,
+                                        margin: `.2em`
+                                    }}
+                                    title={v.label_color}
+                                />
                             );
                         }
                     )
                 }
-                </ul>
+
             </div>
         );
     }
@@ -910,7 +942,19 @@ export default class App extends Component {
 
             render() {
                 return (
-                    <div>
+                    <div
+                        style={{
+                            background: `rgba(255,255,255,.7)`,
+                            width: `90%`,
+                            maxWidth: `400px`,
+                            margin: `14em 3em`,
+                            padding: `2em`,
+                            borderRadius: `1em`
+                            // ,
+                            // position: `fixed`
+                        }}
+                    >
+
                         <MarquesTOTSCategoria />
                         <TallesTOTSCategoria />
                         <ColorsTOTSCategoria />
@@ -925,6 +969,7 @@ export default class App extends Component {
                     style={{
                         height: `100%`,
                         display: `grid`,
+                        gridTemplateColumns: `1fr 1fr 1fr 1fr`,
                         gridTemplateAreas: `
                             "navbar navbar navbar navbar"
                             "columna content content content"
