@@ -324,7 +324,7 @@ const
 let variables = {
     apiUrl: "http://api.colombiaespassion.net",
     pageId: "1",
-    categoryId: "12",
+    categoryId: "13",
     subcategoryId: "31",
     sizeId: "21",
     brandId: "4",
@@ -439,7 +439,6 @@ class MostrariTOTS extends Component {
 
         return (
             <div>
-                <h1>Productes de la categoria 2...</h1>
                 <Masonry
                     elementType={'ul'}
                 >
@@ -549,7 +548,6 @@ class MostrariSubcategoriaPRODUCTES extends Component {
 
         return (
             <div>
-                <h1>Productes de la categoria 2...</h1>
                 <Masonry
                     elementType={'ul'}
                 >
