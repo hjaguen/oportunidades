@@ -237,6 +237,50 @@ const QueryType = new GraphQLObjectType({
     description: `The root of all... queries.`,
     fields: () => ({
 
+        categoriaTALLES: {
+            type: new GraphQLList(TallaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    CATEGORIA(`sizes/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
+        },
+
+        categoriaCOLORS: {
+            type: new GraphQLList(ColorType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                sizeId: { type: GraphQLString },
+                brandId: { type: GraphQLString },
+                colorId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    CATEGORIA(`colors/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
+        },
+
+        categoriaMARQUES: {
+            type: new GraphQLList(MarcaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                sizeId: { type: GraphQLString },
+                brandId: { type: GraphQLString },
+                colorId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    CATEGORIA(`brands/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
+        },
+
         categoriaPRODUCTES: {
             type: new GraphQLList(ProductType),
             args: {

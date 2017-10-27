@@ -10,12 +10,119 @@ import { graphql } from 'react-apollo';
 import Masonry from 'react-masonry-component';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Card } from  'react-mdl';
-
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
+import {
+    Card, CardTitle, CardText, CardActions, Button as ButtonCard,
+    Footer, FooterSection, FooterDropDownSection, FooterLinkList
+} from  'react-mdl';
+import sanitizeHtml from 'sanitize-html-react';
 //import StackGrid from "react-stack-grid";
+import {
+  ShareButtons,
+  ShareCounts,
+  generateShareIcon
+} from 'react-share';
 
+const {
+  FacebookShareButton,
+  TwitterShareButton,
+  TelegramShareButton,
+  WhatsappShareButton,
+  RedditShareButton,
+  EmailShareButton,
+} = ShareButtons;
+
+const {
+  FacebookShareCount,
+  GooglePlusShareCount,
+  RedditShareCount,
+} = ShareCounts;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+const TelegramIcon = generateShareIcon('telegram');
+const WhatsappIcon = generateShareIcon('whatsapp');
+const RedditIcon = generateShareIcon('reddit');
+const EmailIcon = generateShareIcon('email');
 
 const
+    CategoriaMARQUESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            categoriaMARQUES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                marcaId
+                nom_marca
+             }
+    }`,
+
+    CategoriaTALLESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            categoriaTALLES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                tallaId
+                nom_talla
+                label_talla
+                orden_talla
+                publicar_talla
+             }
+    }`,
+
+    CategoriaCOLORSQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            categoriaCOLORS(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                colorId
+                nom_color
+                label_color
+             }
+    }`,
+
     CategoriaPRODUCTESQuery = gql`
         query (
             $apiUrl: String,
@@ -242,59 +349,61 @@ class NavbarAdaptat extends Component {
         }
 
         return (
-            <Navbar inverse collapseOnSelect>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a href="#">Logo</a>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Nav>
-                        <LinkContainer to="/">
-                            <NavItem eventKey="eK">Inicio</NavItem>
-                        </LinkContainer>
-                        {
-                            this.props.data.subcategories.map(
-                                (v,i,a) => {
-                                    return (
-                                        <LinkContainer key={i} to={`/${v.nom_categoria.replace(/\s+/g, '')}`}>
-                                            <NavItem
-                                                eventKey={i}
-                                                onClick={this.props.subcategoryIdAlState}
-                                                data-subcategory-id={v.categoriaId}
-                                            >
-                                                {v.nom_categoria}
-                                            </NavItem>
-                                        </LinkContainer>
-                                    )
-                                }
-                            )
-                        }
-                        <NavDropdown
-                            eventKey={this.props.data.subcategories.length + 1}
-                            title="Dropdown"
-                            id="basic-nav-dropdown"
-                        >
+            <div>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <a href="#">Logo</a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav>
+                            <LinkContainer to="/">
+                                <NavItem eventKey="eK">Inicio</NavItem>
+                            </LinkContainer>
                             {
                                 this.props.data.subcategories.map(
                                     (v,i,a) => {
                                         return (
-                                            <MenuItem key={i} eventKey={`${a.length + 1}.${i}`}>{v.nom_categoria}</MenuItem>
+                                            <LinkContainer key={i} to={`/${v.nom_categoria.replace(/\s+/g, '')}`}>
+                                                <NavItem
+                                                    eventKey={i}
+                                                    onClick={this.props.subcategoryIdAlState}
+                                                    data-subcategory-id={v.categoriaId}
+                                                >
+                                                    {v.nom_categoria}
+                                                </NavItem>
+                                            </LinkContainer>
                                         )
                                     }
                                 )
                             }
-                            <MenuItem divider />
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                        </NavDropdown>
-                    </Nav>
-                    <Nav pullRight>
-                        <NavItem eventKey={1} href="#">Link Right</NavItem>
-                        <NavItem eventKey={2} href="#">Link Right</NavItem>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+                            <NavDropdown
+                                eventKey={this.props.data.subcategories.length + 1}
+                                title="Dropdown"
+                                id="basic-nav-dropdown"
+                            >
+                                {
+                                    this.props.data.subcategories.map(
+                                        (v,i,a) => {
+                                            return (
+                                                <MenuItem key={i} eventKey={`${a.length + 1}.${i}`}>{v.nom_categoria}</MenuItem>
+                                            )
+                                        }
+                                    )
+                                }
+                                <MenuItem divider />
+                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav pullRight>
+                            <NavItem eventKey={1} href="#">Link Right</NavItem>
+                            <NavItem eventKey={2} href="#">Link Right</NavItem>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
         );
     }
 }
@@ -304,11 +413,11 @@ class MostrariTOTS extends Component {
         super(props);
     }
 
-    static propTypes = {
+    static: propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
-            subcategoriaPRODUCTES: PropTypes.array
+            categoriaPRODUCTES: PropTypes.array
         }).isRequired
     }
 
@@ -335,19 +444,67 @@ class MostrariTOTS extends Component {
                                     return (
                                         <li key={i}
                                             style={{
-                                                width: `100px`,
-                                                display: `inline-block`
+                                                width: `110px`,
+                                                height: `auto`,
+                                                display: `inline-block`,
+                                                border: `1px rgba(0,0,0,.5) solid`,
+                                                borderRadius: `.3em`,
+                                                margin: `.3em`,
+                                                background: `rgba(255,255,255,.8)`
+
                                             }}
                                         >
-                                            Referencia: {v.referencia} - Nombre: {v.descripcion}
                                             <img
                                                 src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
                                                 alt={v.descripcion}
                                                 title={v.descripcion_long_es}
                                                 style={{
-                                                    width: `100px`
+                                                    position: `relative`,
+                                                    width: `100%`,
+                                                    display: `block`,
+                                                    borderRadius: `.3em`
                                                 }}
                                             />
+                                            <div
+                                                style={{
+                                                    padding: `.3em`
+                                                }}
+                                            >
+                                                Referencia: {v.referencia} - Nombre: {v.descripcion}
+                                            </div>
+                                            <div
+                                                style={{
+                                                    padding: `.3em`
+                                                }}
+                                            >
+                                                Colores:
+                                                <br />
+                                                {v.galleryColors.map(
+                                                    (v2,i2,a2) => (
+                                                        // <img
+                                                        //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                                        //     style={{
+                                                        //         width: `20px`,
+                                                        //         height: `20px`
+                                                        //     }}
+                                                        // />
+                                                        <span
+                                                            key={i2}
+                                                            style={{
+                                                                background: `${v2.num_color}`,
+                                                                minWidth: `20px`,
+                                                                minHeight: `20px`,
+                                                                border: `1px solid black`,
+                                                                margin: `.1em`,
+                                                                display: `inline-block`
+                                                            }}
+                                                            title={`${v2.label_color}`}
+                                                        />
+                                                    )
+                                                )}
+                                                <br />
+                                                Tallas:
+                                            </div>
                                         </li>
                                     );
                                 }
@@ -366,7 +523,7 @@ class MostrariSubcategoriaPRODUCTES extends Component {
         super(props);
     }
 
-    static propTypes = {
+    static: propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
@@ -397,19 +554,67 @@ class MostrariSubcategoriaPRODUCTES extends Component {
                                     return (
                                         <li key={i}
                                             style={{
-                                                width: `100px`,
-                                                display: `inline-block`
+                                                width: `110px`,
+                                                height: `auto`,
+                                                display: `inline-block`,
+                                                border: `1px rgba(0,0,0,.5) solid`,
+                                                borderRadius: `.3em`,
+                                                margin: `.3em`,
+                                                background: `rgba(255,255,255,.8)`
+
                                             }}
                                         >
-                                            Referencia: {v.referencia} - Nombre: {v.descripcion}
                                             <img
                                                 src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
                                                 alt={v.descripcion}
                                                 title={v.descripcion_long_es}
                                                 style={{
-                                                    width: `100px`
+                                                    position: `relative`,
+                                                    width: `100%`,
+                                                    display: `block`,
+                                                    borderRadius: `.3em`
                                                 }}
                                             />
+                                            <div
+                                                style={{
+                                                    padding: `.3em`
+                                                }}
+                                            >
+                                                Referencia: {v.referencia} - Nombre: {v.descripcion}
+                                            </div>
+                                            <div
+                                                style={{
+                                                    padding: `.3em`
+                                                }}
+                                            >
+                                                Colores:
+                                                <br />
+                                                {v.galleryColors.map(
+                                                    (v2,i2,a2) => (
+                                                        // <img
+                                                        //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                                        //     style={{
+                                                        //         width: `20px`,
+                                                        //         height: `20px`
+                                                        //     }}
+                                                        // />
+                                                        <span
+                                                            key={i2}
+                                                            style={{
+                                                                background: `${v2.num_color}`,
+                                                                minWidth: `20px`,
+                                                                minHeight: `20px`,
+                                                                border: `1px solid black`,
+                                                                margin: `.1em`,
+                                                                display: `inline-block`
+                                                            }}
+                                                            title={`${v2.label_color}`}
+                                                        />
+                                                    )
+                                                )}
+                                                <br />
+                                                Tallas:
+                                            </div>
                                         </li>
                                     );
                                 }
@@ -429,27 +634,210 @@ const NavbarAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
     }
 })(NavbarAdaptat);
 
-class Buscador extends Component {
+
+
+class MarquesTOTS extends Component {
     constructor(props) {
         super(props);
+    }
 
-        this.state = {
-
-        }
+    static: propTypes = {
+        data: PropTypes.shape({
+            loading: PropTypes.bool,
+            error: PropTypes.object,
+            categoriaMARQUES: PropTypes.array
+        }).isRequired
     }
 
     render() {
+        if (this.props.data.loading) {
+            return (<div>Cargando...</div>);
+        }
+
+        if (this.props.data.error) {
+           /* console.log(this.props.data.error)*/
+            return (<div>Ocurrió un error inesperado.</div>);
+        }
+
         return (
             <div>
-                <Select />
-                <Marques />
-                <Talles />
-                <Colors />
+                <ul>
+                    {
+                        this.props.data.categoriaMARQUES.map(
+                            (v,i,a) => {
+                                return <li key={i}>{v.nom_marca}</li>
+                            }
+                        )
+                    }
+                </ul>
             </div>
         );
     }
 }
 
+class TallesTOTS extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    static: propTypes = {
+        data: PropTypes.shape({
+            loading: PropTypes.bool,
+            error: PropTypes.object,
+            categoriaTALLES: PropTypes.array
+        }).isRequired
+    }
+
+    render() {
+        if (this.props.data.loading) {
+            return (<div>Cargando...</div>);
+        }
+
+        if (this.props.data.error) {
+           /* console.log(this.props.data.error)*/
+            return (<div>Ocurrió un error inesperado.</div>);
+        }
+
+        return (
+            <div>
+                <ul>
+                    {
+                        this.props.data.categoriaTALLES.map(
+                            (v,i,a) => {
+                                return <li key={i}>{v.nom_talla}</li>
+                            }
+                        )
+                    }
+                </ul>
+            </div>
+        );
+    }
+}
+
+class ColorsTOTS extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    static: propTypes = {
+        data: PropTypes.shape({
+            loading: PropTypes.bool,
+            error: PropTypes.object,
+            categoriaCOLORS: PropTypes.array
+        }).isRequired
+    }
+
+    render() {
+        if (this.props.data.loading) {
+            return (<div>Cargando...</div>);
+        }
+
+        if (this.props.data.error) {
+           /* console.log(this.props.data.error)*/
+            return (<div>Ocurrió un error inesperado.</div>);
+        }
+        return (
+            <div>
+                <ul>
+                {
+                    this.props.data.categoriaCOLORS.map(
+                        (v,i,a) => {
+                            return (
+                                <li key={i}>
+                                    <span
+                                        style={{
+                                            display: `inline-block`,
+                                            border: `1px black solid`,
+                                            width: `20px`,
+                                            height: `20px`,
+                                            background: `${v.nom_color}`
+                                        }}
+                                    />
+                                </li>
+                            );
+                        }
+                    )
+                }
+                </ul>
+            </div>
+        );
+    }
+}
+
+class FootrAdaptat extends Component {
+    constructor(props) {
+        super(props);
+
+    }
+
+    static: propTypes = {
+        data: PropTypes.shape({
+            loading: PropTypes.bool,
+            error: PropTypes.object,
+            subcategories: PropTypes.array
+        }).isRequired
+    }
+
+    render() {
+        if (this.props.data.loading) {
+            return (<div>Cargando...</div>);
+        }
+
+        if (this.props.data.error) {
+            //console.log(this.props.data.error)
+            return (<div>Ocurrió un error inesperado.</div>);
+        }
+
+        return (
+            <div>
+                <Footer size="mega">
+                    <FooterSection type="middle">
+                        <FooterDropDownSection title="Features">
+                            <FooterLinkList>
+                                <a href="#">About</a>
+                                <a href="#">Terms</a>
+                                <a href="#">Partners</a>
+                                <a href="#">Updates</a>
+                            </FooterLinkList>
+                        </FooterDropDownSection>
+                        <FooterDropDownSection title="Details">
+                            <FooterLinkList>
+                                <a href="#">Specs</a>
+                                <a href="#">Tools</a>
+                                <a href="#">Resources</a>
+                            </FooterLinkList>
+                        </FooterDropDownSection>
+                        <FooterDropDownSection title="Technology">
+                            <FooterLinkList>
+                                <a href="#">How it works</a>
+                                <a href="#">Patterns</a>
+                                <a href="#">Usage</a>
+                                <a href="#">Products</a>
+                                <a href="#">Contracts</a>
+                            </FooterLinkList>
+                        </FooterDropDownSection>
+                        <FooterDropDownSection title="FAQ">
+                            <FooterLinkList>
+                                <a href="#">Questions</a>
+                                <a href="#">Answers</a>
+                                <a href="#">Contact Us</a>
+                            </FooterLinkList>
+                        </FooterDropDownSection>
+                    </FooterSection>
+                    <FooterSection type="bottom" logo="Title">
+                        <FooterLinkList>
+                            <a href="#">Help</a>
+                            <a href="#">Privacy & Terms</a>
+                        </FooterLinkList>
+                    </FooterSection>
+
+                    <FacebookShareButton url="http://www.facebook.com/latinmoda" />
+                    <TwitterShareButton url="http://twitter.com/latinmoda"/>
+                </Footer>
+            </div>
+        );
+    }
+}
 
 export default class App extends Component {
     constructor(props) {
@@ -473,6 +861,7 @@ export default class App extends Component {
     }
 
     render() {
+
         let
             MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
                 options: {
@@ -480,25 +869,120 @@ export default class App extends Component {
                 }
             })(MostrariTOTS),
 
+            MarquesTOTSCategoria = graphql(CategoriaMARQUESQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(MarquesTOTS),
+
+            TallesTOTSCategoria = graphql(CategoriaTALLESQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(TallesTOTS),
+
+            ColorsTOTSCategoria = graphql(CategoriaCOLORSQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(ColorsTOTS),
+
             MostrariAmbProductes = graphql(ProductesQuery, {
                 options: {
                     variables: this.state.variables
                 }
-            })(MostrariSubcategoriaPRODUCTES)
+            })(MostrariSubcategoriaPRODUCTES),
+
+//>>>>>>>>>>>>>>>>>>>>>>><< FOOTR - Un per a cada tipus de consulta
+            FootrAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
+                options: {
+                    variables
+                }
+            })(FootrAdaptat)
         ;
+
+        class BuscadorColumnaTOTS extends Component {
+            constructor(props) {
+                super(props);
+
+
+            }
+
+            render() {
+                return (
+                    <div>
+                        <MarquesTOTSCategoria />
+                        <TallesTOTSCategoria />
+                        <ColorsTOTSCategoria />
+                    </div>
+                );
+            }
+        }
 
         return (
             <Router>
-                <div>
+                <div
+                    style={{
+                        height: `100%`,
+                        display: `grid`,
+                        gridTemplateAreas: `
+                            "navbar navbar navbar navbar"
+                            "columna content content content"
+                            "footer footer footer footer"
+                        `
+
+                    }}
+                >
                     <Route path="/" render={() => (
-                        <NavbarAdaptatAmbSubcategories subcategoryIdAlState={this.subcategoryIdAlState} />
+                        <div
+                            style={{
+                                gridArea: `navbar`
+                            }}
+                        >
+                            <NavbarAdaptatAmbSubcategories
+                                subcategoryIdAlState={this.subcategoryIdAlState}
+                            />
+                        </div>
+                    )}/>
+                    <Route path="/" render={() => (
+                        <div
+                            style={{
+                                position: `relative`,
+                                gridArea: `columna`
+                            }}
+                        >
+                            <BuscadorColumnaTOTS />
+                        </div>
                     )}/>
                     <Route exact path="/" render={() => (
-                        <MostrariAmbTOTSElsProductes />
+                        <div
+                            style={{
+                                gridArea: `content`
+                            }}
+                        >
+                            <MostrariAmbTOTSElsProductes />
+                        </div>
                     )}/>
-                    <Route exact path="/:categoryId" render={({ match }) => {
-                        return <MostrariAmbProductes />;
-                    }}/>
+                    <Route exact path="/:categoryId" render={() => (
+                        <div
+                            style={{
+                                gridArea: `content`
+                            }}
+                        >
+                            <MostrariAmbProductes />
+                        </div>
+                    )}/>
+                    <Route path="/" render={() => (
+                        <div
+                            style={{
+                                gridArea: `footer`
+                            }}
+                        >
+                            <FootrAdaptatAmbSubcategories
+                                subcategoryIdAlState={this.subcategoryIdAlState}
+                            />
+                        </div>
+                    )}/>
                 </div>
             </Router>
         );

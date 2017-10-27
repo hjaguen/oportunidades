@@ -17,6 +17,11 @@ body {
     margin: 0;
     width: 100%;
     overflow: auto;
+
+    background-image: url(Aqua-Background4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #graphiql {
