@@ -11,7 +11,7 @@ import { graphql, ApolloProvider } from 'react-apollo';
 
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
-        uri: `http://localhost:11010/graphql`
+        uri: `http://blusascolombianas.es:11010/graphql`
     })
 })
 
