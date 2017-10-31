@@ -28,6 +28,9 @@ import Select from 'react-select';
 // Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css';
 
+import './bootstrap.min.css';
+import './bootstrap-theme.min.css';
+
 
 
 const {
@@ -324,7 +327,7 @@ const
 let variables = {
     apiUrl: "http://api.colombiaespassion.net",
     pageId: "1",
-    categoryId: "13",
+    categoryId: "4",
     subcategoryId: "31",
     sizeId: "21",
     brandId: "4",
@@ -359,7 +362,15 @@ class NavbarAdaptat extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="#">Logo</a>
+                            <a href="#">
+                                <img
+                                    src="logo.jpg"
+                                    style={{
+                                        width: `50px`,
+                                        right: `100px`
+                                    }}
+                                />
+                            </a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
