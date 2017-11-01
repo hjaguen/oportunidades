@@ -28,8 +28,9 @@ import Select from 'react-select';
 // Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css';
 
-import './bootstrap.min.css';
-import './bootstrap-theme.min.css';
+import '../api/b4/bootstrap.css';
+//import '../api/b4/bootstrap.css.map';
+import * as freeContent from './config.jsx';
 
 
 
@@ -467,7 +468,6 @@ class MostrariTOTS extends Component {
                                                 borderRadius: `.3em`,
                                                 margin: `.3em`,
                                                 background: `rgba(255,255,255,.8)`
-
                                             }}
                                         >
                                             <img
@@ -569,7 +569,7 @@ class MostrariSubcategoriaPRODUCTES extends Component {
                                     return (
                                         <li key={i}
                                             style={{
-                                                width: `110px`,
+                                                width: freeContent.amplaria_fitxetes,
                                                 height: `auto`,
                                                 display: `inline-block`,
                                                 border: `1px rgba(0,0,0,.5) solid`,
@@ -880,6 +880,16 @@ class FootrAdaptat extends Component {
     }
 }
 
+class FreeContent extends Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+
+    render() {
+        return this.props.children;
+    }
+}
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -996,6 +1006,34 @@ export default class App extends Component {
                             <NavbarAdaptatAmbSubcategories
                                 subcategoryIdAlState={this.subcategoryIdAlState}
                             />
+                            <FreeContent children={freeContent.primer_contingut} />
+                            <FreeContent>
+                                {freeContent.primer_contingut}
+                            </FreeContent>
+                            <FreeContent>
+                                <div>
+                                    Ací voldria un paràgraf... que posaré ara:
+                                    <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
+                                    </p>
+                                </div>
+                            </FreeContent>
+                            <FreeContent>
+
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-sm">
+                                            One of three columns
+                                        </div>
+                                        <div className="col-sm">
+                                            One of three columns
+                                            <iframe className="" width="560" height="315" src="https://www.youtube.com/embed/o0-U7A4gLWc" frameBorder="0" allowFullScreen></iframe>
+                                        </div>
+                                        <div className="col-sm">
+                                            One of three columns
+                                        </div>
+                                    </div>
+                                </div>
+                            </FreeContent>
                         </div>
                     )}/>
                     <Route path="/" render={() => (
