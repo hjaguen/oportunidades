@@ -15,7 +15,7 @@
     "prop-types": "^15.6.0",
     "react": "^15.6.2",
     "react-apollo": "^1.4.16",
-    "react-bootstrap": "^0.31.3",
+    "react-bootstrap-4": "^0.29.1",
     "react-dom": "^15.6.2",
     "react-masonry-component": "^6.0.0",
     "react-mdl": "^1.10.3",
