@@ -348,26 +348,6 @@ export default class App extends Component {
                                     fluid
                                     inverse
                                 />
-
-                                <FreeContent children={conf.primer_contingut} />
-
-                                <FreeContent>
-                                    {conf.primer_contingut}
-                                </FreeContent>
-
-                                <FreeContent>
-                                    <div>
-                                        Ací voldria un paràgraf... que posaré ara:
-                                        <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
-                                        </p>
-                                    </div>
-                                </FreeContent>
-
-                                <FreeContent>
-
-                                    {conf.segon_lliure}
-
-                                </FreeContent>
                             </div>
                         )}
                     />
@@ -388,6 +368,24 @@ export default class App extends Component {
                             }}
                         >
                             <MostrariAmbTOTSElsProductes />
+
+                            <FreeContent children={conf.primer_contingut} />
+
+                            <FreeContent>
+                                {conf.primer_contingut}
+                            </FreeContent>
+
+                            <FreeContent>
+                                <div>
+                                    Ací voldria un paràgraf... que posaré ara:
+                                    <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
+                                    </p>
+                                </div>
+                            </FreeContent>
+
+                            <FreeContent>
+                                {conf.segon_lliure}
+                            </FreeContent>
                         </div>
                     )}/>
                     <Route exact path="/:categoryId" render={() => (
