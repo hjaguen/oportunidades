@@ -17,13 +17,17 @@ import {
 
 
 export let
+// Imagen de fondo y sus opciones
+    fonsPrincipal = `Aqua-Background4.jpg`,
+        backgroundSize =  `cover`,
+        backgroundRepeat = `no-repeat`,
+        backgroundAttachment = `fixed`
+    ,
 
     categoryId = `12`
-
     ,
 
     amplaria_fitxetes_subcategoria = `220px`
-
     ,
 
     primer_contingut =
@@ -46,7 +50,6 @@ export let
                 </div>
             </div>
         </div>
-
     ,
 
     segon_lliure =
@@ -96,6 +99,5 @@ export let
                 ><code>&lt;{'Col xsHidden md={3}'} /&gt;</code></Col>
             </Row>
         </Grid>
-
 
 ;

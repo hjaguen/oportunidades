@@ -6,11 +6,11 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-// csstricks best practice :)
+/* csstricks best practice :)
 
-body {
+/*body {
     background: red;
-}
+}*/
 
 body {
     height: 100%;
@@ -18,10 +18,6 @@ body {
     width: 100%;
     overflow: auto;
 
-    background-image: url(Aqua-Background4.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 #graphiql {
