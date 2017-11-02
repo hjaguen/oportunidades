@@ -8,7 +8,19 @@ import {
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import Masonry from 'react-masonry-component';
-import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+
+//import './bootstrap.min.css';
+import {
+    Button,
+    Navbar,
+    Nav,
+    NavItem,
+    NavDropdown,
+    MenuItem,
+    Grid,
+    Row,
+    Col
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
@@ -28,9 +40,9 @@ import Select from 'react-select';
 // Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css';
 
-import '../api/b4/bootstrap.css';
+//import '../api/b4/bootstrap.css';
 //import '../api/b4/bootstrap.css.map';
-import * as freeContent from './config.jsx';
+import * as conf from './config.jsx';
 
 
 
@@ -328,7 +340,7 @@ const
 let variables = {
     apiUrl: "http://api.colombiaespassion.net",
     pageId: "1",
-    categoryId: "4",
+    categoryId: conf.categoryId,
     subcategoryId: "31",
     sizeId: "21",
     brandId: "4",
@@ -360,7 +372,11 @@ class NavbarAdaptat extends Component {
 
         return (
             <div>
-                <Navbar inverse collapseOnSelect>
+                <Navbar
+                    inverse={this.props.inverse}
+                    collapseOnSelect
+                    fluid={this.props.fluid}
+                >
                     <Navbar.Header>
                         <Navbar.Brand>
                             <a href="#">
@@ -569,7 +585,7 @@ class MostrariSubcategoriaPRODUCTES extends Component {
                                     return (
                                         <li key={i}
                                             style={{
-                                                width: freeContent.amplaria_fitxetes,
+                                                width: conf.amplaria_fitxetes_subcategoria,
                                                 height: `auto`,
                                                 display: `inline-block`,
                                                 border: `1px rgba(0,0,0,.5) solid`,
@@ -997,45 +1013,42 @@ export default class App extends Component {
 
                     }}
                 >
-                    <Route path="/" render={() => (
-                        <div
-                            style={{
-                                gridArea: `navbar`
-                            }}
-                        >
-                            <NavbarAdaptatAmbSubcategories
-                                subcategoryIdAlState={this.subcategoryIdAlState}
-                            />
-                            <FreeContent children={freeContent.primer_contingut} />
-                            <FreeContent>
-                                {freeContent.primer_contingut}
-                            </FreeContent>
-                            <FreeContent>
-                                <div>
-                                    Ací voldria un paràgraf... que posaré ara:
-                                    <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
-                                    </p>
-                                </div>
-                            </FreeContent>
-                            <FreeContent>
+                    <Route
+                        path="/"
+                        render={() => (
+                            <div
+                                style={{
+                                    gridArea: `navbar`
+                                }}
+                            >
+                                <NavbarAdaptatAmbSubcategories
+                                    subcategoryIdAlState={this.subcategoryIdAlState}
+                                    fluid
+                                    inverse
+                                />
 
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-sm">
-                                            One of three columns
-                                        </div>
-                                        <div className="col-sm">
-                                            One of three columns
-                                            <iframe className="" width="560" height="315" src="https://www.youtube.com/embed/o0-U7A4gLWc" frameBorder="0" allowFullScreen></iframe>
-                                        </div>
-                                        <div className="col-sm">
-                                            One of three columns
-                                        </div>
+                                <FreeContent children={conf.primer_contingut} />
+
+                                <FreeContent>
+                                    {conf.primer_contingut}
+                                </FreeContent>
+
+                                <FreeContent>
+                                    <div>
+                                        Ací voldria un paràgraf... que posaré ara:
+                                        <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
+                                        </p>
                                     </div>
-                                </div>
-                            </FreeContent>
-                        </div>
-                    )}/>
+                                </FreeContent>
+
+                                <FreeContent>
+
+                                    {conf.segon_lliure}
+
+                                </FreeContent>
+                            </div>
+                        )}
+                    />
                     <Route path="/" render={() => (
                         <div
                             style={{
