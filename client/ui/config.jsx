@@ -103,8 +103,10 @@ export let
         ,
 
         vimeoEx =
-        <iframe src="https://player.vimeo.com/video/240463716?color=ff0179&title=0&byline=0&portrait=0" width="640" height="360" frameBorder="0" webkitAllowFullScreen mozAllowFullScreen allowFullScreen></iframe>
+            <div>
+                <iframe src="https://player.vimeo.com/video/240463716?color=ff0179&title=0&byline=0&portrait=0" width="640" height="360" frameBorder="0" webkitAllowFullScreen mozAllowFullScreen allowFullScreen></iframe>
 <p><a href="https://vimeo.com/240463716">BACKSTAGE 1 Cheviotto Noviembre 2017</a> from <a href="https://vimeo.com/latinmoda">Latinmoda.net</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+            </div>
 
 
 
