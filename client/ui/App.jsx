@@ -382,7 +382,7 @@ export default class App extends Component {
                             </FreeContent>
 
                             <FreeContent>
-                                {conf.segon_lliure}
+                                {conf.vimeoEx}
                             </FreeContent>
 
                             <MostrariAmbTOTSElsProductes />
