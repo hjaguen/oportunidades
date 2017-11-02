@@ -367,8 +367,6 @@ export default class App extends Component {
                                 gridArea: `content`
                             }}
                         >
-                            <MostrariAmbTOTSElsProductes />
-
                             <FreeContent children={conf.primer_contingut} />
 
                             <FreeContent>
@@ -386,6 +384,9 @@ export default class App extends Component {
                             <FreeContent>
                                 {conf.segon_lliure}
                             </FreeContent>
+
+                            <MostrariAmbTOTSElsProductes />
+
                         </div>
                     )}/>
                     <Route exact path="/:categoryId" render={() => (
