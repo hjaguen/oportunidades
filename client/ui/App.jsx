@@ -367,14 +367,30 @@ export default class App extends Component {
                                 gridArea: `content`
                             }}
                         >
-                            <FreeContent children={conf.primer_contingut} />
+                            
+                            {/*Titulo de la Pagina*/}
+                            <FreeContent>
+                                <div
+                                    style={{
+                                        marginLeft: `50px`
+                                    }}
+                                    >
+                                    <h1>Blusas Colombianas</h1>
+                                </div>
+                            </FreeContent>    
+                            
+                            <FreeContent children={conf.video_latinmoda} /> {/*Asi se comenta en JSX, entre llaves.*/}
 
                             <FreeContent>
                                 {conf.primer_contingut}
                             </FreeContent>
 
                             <FreeContent>
-                                <div>
+                                <div
+                                    style={{
+                                        margin: `50px`
+                                    }}
+                                    >
                                     Ací voldria un paràgraf... que posaré ara:
                                     <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
                                     </p>
