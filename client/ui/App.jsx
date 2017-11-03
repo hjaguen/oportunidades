@@ -326,7 +326,8 @@ export default class App extends Component {
                         gridTemplateColumns: `1fr 1fr 1fr 1fr`,
                         gridTemplateAreas: `
                             "navbar navbar navbar navbar"
-                            "content content content content"
+                            "columna content content content"
+                            "present present present present"
                             "footer footer footer footer"
                         `,
                         backgroundImage: `url(${conf.fonsPrincipal})`,
@@ -355,7 +356,7 @@ export default class App extends Component {
                     <Route exact path="/" render={() => (
                         <div
                             style={{
-                                gridArea: `content`
+                                gridArea: `present`
                             }}
                         >
 
