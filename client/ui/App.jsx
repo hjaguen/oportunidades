@@ -48,6 +48,9 @@ import {
 } from './Queries.jsx';
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
+import Radium from 'radium';
+
+FreeContent = Radium(FreeContent);
 
 
 let variables = {
@@ -365,6 +368,10 @@ export default class App extends Component {
                                 <div
                                     style={{
                                         marginLeft: `50px`,
+
+                                        '@media (min-width: 320px)': {
+                                            color: 'fuchsia'
+                                          }
                                     }}
                                 >
                                         <h1>Blusas Colombianas</h1>
