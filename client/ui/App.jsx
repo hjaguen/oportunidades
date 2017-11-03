@@ -364,10 +364,10 @@ export default class App extends Component {
                             <FreeContent>
                                 <div
                                     style={{
-                                        marginLeft: `50px`
+                                        marginLeft: `50px`,
                                     }}
                                 >
-                                    <h1>Blusas Colombianas</h1>
+                                        <h1>Blusas Colombianas</h1>
                                 </div>
                             </FreeContent>
 

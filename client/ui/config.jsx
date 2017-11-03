@@ -58,7 +58,8 @@ export let
 
         <Grid
             style={{
-                background: `fuchsia`
+                background: `fuchsia`,
+                margin: `50px`
             }}
             fluid
         >
@@ -82,14 +83,6 @@ export let
                         background: `grey`
                     }}
                 >
-                    <iframe
-                        className=""
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/DHVSTMmyUUg"
-                        frameBorder="0"
-                        allowFullScreen
-                    ></iframe>
                 </Col>
                 <Col
                     xsHidden
@@ -107,7 +100,7 @@ export let
         
         <div 
             style={{
-                margin: `50px`,
+                margin: `auto`,
                 position: `relative`,
                 paddingBottom: `56.25%`,
                 height: `0`,
@@ -123,9 +116,9 @@ export let
                     height: `100%`
                 }}
                     className=""
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/DHVSTMmyUUg"
+                    width="800"
+                    height="450"
+                    src="https://player.vimeo.com/video/240463716"
                     frameBorder="0"
                     allowFullScreen
             ></iframe>
