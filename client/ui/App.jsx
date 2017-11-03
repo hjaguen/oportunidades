@@ -48,7 +48,7 @@ import {
 } from './Queries.jsx';
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 
 FreeContent = Radium(FreeContent);
 
@@ -320,6 +320,22 @@ export default class App extends Component {
             }
         }
 
+        let
+            FCMedia = () =>
+                <FreeContent>
+                    <div
+                        style={{
+                            marginLeft: `50px`,
+
+                            '@media (min-width: 320px)': {
+                                color: 'fuchsia'
+                              }
+                        }}
+                    >
+                            <h1>Blusas Colombianas</h1>
+                    </div>
+                </FreeContent>
+        ;
         return (
             <Router>
                 <div
@@ -364,19 +380,9 @@ export default class App extends Component {
                         >
 
                             {/*Titulo de la Pagina*/}
-                            <FreeContent>
-                                <div
-                                    style={{
-                                        marginLeft: `50px`,
-
-                                        '@media (min-width: 320px)': {
-                                            color: 'fuchsia'
-                                          }
-                                    }}
-                                >
-                                        <h1>Blusas Colombianas</h1>
-                                </div>
-                            </FreeContent>
+                            <StyleRoot>
+                                <FCMedia />
+                            </StyleRoot>
 
                             <FreeContent children={conf.video_latinmoda} /> {/*Asi se comenta en JSX, entre llaves.*/}
 
