@@ -351,34 +351,25 @@ export default class App extends Component {
                             </div>
                         )}
                     />
-                    <Route path="/" render={() => (
-                        <div
-                            style={{
-                                position: `relative`,
-                                gridArea: `columna`
-                            }}
-                        >
-                            <BuscadorColumnaTOTS />
-                        </div>
-                    )}/>
+
                     <Route exact path="/" render={() => (
                         <div
                             style={{
                                 gridArea: `content`
                             }}
                         >
-                            
+
                             {/*Titulo de la Pagina*/}
                             <FreeContent>
                                 <div
                                     style={{
                                         marginLeft: `50px`
                                     }}
-                                    >
+                                >
                                     <h1>Blusas Colombianas</h1>
                                 </div>
-                            </FreeContent>    
-                            
+                            </FreeContent>
+
                             <FreeContent children={conf.video_latinmoda} /> {/*Asi se comenta en JSX, entre llaves.*/}
 
                             <FreeContent>
@@ -390,7 +381,7 @@ export default class App extends Component {
                                     style={{
                                         margin: `50px`
                                     }}
-                                    >
+                                >
                                     Ací voldria un paràgraf... que posaré ara:
                                     <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
                                     </p>
@@ -401,17 +392,25 @@ export default class App extends Component {
                                 {conf.segon_lliure}
                             </FreeContent>
 
-                            <MostrariAmbTOTSElsProductes />
-
                         </div>
                     )}/>
                     <Route exact path="/:categoryId" render={() => (
-                        <div
-                            style={{
-                                gridArea: `content`
-                            }}
-                        >
-                            <MostrariAmbProductes />
+                        <div>
+                            <div
+                                style={{
+                                    position: `relative`,
+                                    gridArea: `columna`
+                                }}
+                            >
+                                <BuscadorColumnaTOTS />
+                            </div>
+                            <div
+                                style={{
+                                    gridArea: `content`
+                                }}
+                            >
+                                <MostrariAmbProductes />
+                            </div>
                         </div>
                     )}/>
                     <Route path="/" render={() => (
