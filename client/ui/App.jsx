@@ -326,7 +326,7 @@ export default class App extends Component {
                         gridTemplateColumns: `1fr 1fr 1fr 1fr`,
                         gridTemplateAreas: `
                             "navbar navbar navbar navbar"
-                            "columna content content content"
+                            "content content content content"
                             "footer footer footer footer"
                         `,
                         backgroundImage: `url(${conf.fonsPrincipal})`,
