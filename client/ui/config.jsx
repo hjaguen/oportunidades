@@ -18,10 +18,10 @@ import {
 
 export let
 // Imagen de fondo y sus opciones
-    fonsPrincipal = `Aqua-Background4.jpg`,
-        backgroundSize =  `cover`,
-        backgroundRepeat = `no-repeat`,
-        backgroundAttachment = `fixed`
+    fonsPrincipal = `background_blue_v0011.jpg`,
+    backgroundSize =  `cover`,
+    backgroundRepeat = `no-repeat`,
+    backgroundAttachment = `fixed`
     ,
 
     categoryId = `12`
@@ -31,8 +31,10 @@ export let
     ,
 
     primer_contingut =
-        <div>
-            <h1>Capçalera de prova</h1>
+        <div style={{
+            margin: `50px`
+        }}>
+            <h2>Ropa Colombiana de Venta en Europa</h2>
             <div
                 className="divFreeContent"
                 style={{
@@ -56,7 +58,8 @@ export let
 
         <Grid
             style={{
-                background: `fuchsia`
+                background: `fuchsia`,
+                margin: `50px`
             }}
             fluid
         >
@@ -80,14 +83,6 @@ export let
                         background: `grey`
                     }}
                 >
-                    <iframe
-                        className=""
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/o0-U7A4gLWc"
-                        frameBorder="0"
-                        allowFullScreen
-                    ></iframe>
                 </Col>
                 <Col
                     xsHidden
@@ -99,6 +94,35 @@ export let
                 ><code>&lt;{'Col xsHidden md={3}'} /&gt;</code></Col>
             </Row>
         </Grid>
+    
+    ,
+        video_latinmoda =
+        
+        <div 
+            style={{
+                margin: `auto`,
+                position: `relative`,
+                paddingBottom: `56.25%`,
+                height: `0`,
+                overflow: `hidden`
+            }}
+        >
+            <iframe 
+                style={{
+                    position: `absolute`,
+                    top: `0`,
+                    left: `0`,
+                    width: `100%`,
+                    height: `100%`
+                }}
+                    className=""
+                    width="800"
+                    height="450"
+                    src="https://player.vimeo.com/video/240463716"
+                    frameBorder="0"
+                    allowFullScreen
+            ></iframe>
+        </div>
 
         ,
 

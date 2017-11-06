@@ -48,6 +48,9 @@ import {
 } from './Queries.jsx';
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
+import Radium, { StyleRoot } from 'radium';
+
+FreeContent = Radium(FreeContent);
 
 
 let variables = {
@@ -317,6 +320,22 @@ export default class App extends Component {
             }
         }
 
+        let
+            FCMedia = () =>
+                <FreeContent>
+                    <div
+                        style={{
+                            marginLeft: `50px`,
+
+                            '@media (min-width: 320px)': {
+                                color: 'fuchsia'
+                              }
+                        }}
+                    >
+                            <h1>Blusas Colombianas</h1>
+                    </div>
+                </FreeContent>
+        ;
         return (
             <Router>
                 <div
@@ -327,6 +346,7 @@ export default class App extends Component {
                         gridTemplateAreas: `
                             "navbar navbar navbar navbar"
                             "columna content content content"
+                            "present present present present"
                             "footer footer footer footer"
                         `,
                         backgroundImage: `url(${conf.fonsPrincipal})`,
@@ -351,30 +371,31 @@ export default class App extends Component {
                             </div>
                         )}
                     />
-                    <Route path="/" render={() => (
-                        <div
-                            style={{
-                                position: `relative`,
-                                gridArea: `columna`
-                            }}
-                        >
-                            <BuscadorColumnaTOTS />
-                        </div>
-                    )}/>
+
                     <Route exact path="/" render={() => (
                         <div
                             style={{
-                                gridArea: `content`
+                                gridArea: `present`
                             }}
                         >
-                            <FreeContent children={conf.primer_contingut} />
+
+                            {/*Titulo de la Pagina*/}
+                            <StyleRoot>
+                                <FCMedia />
+                            </StyleRoot>
+
+                            <FreeContent children={conf.video_latinmoda} /> {/*Asi se comenta en JSX, entre llaves.*/}
 
                             <FreeContent>
                                 {conf.primer_contingut}
                             </FreeContent>
 
                             <FreeContent>
-                                <div>
+                                <div
+                                    style={{
+                                        margin: `50px`
+                                    }}
+                                >
                                     Ací voldria un paràgraf... que posaré ara:
                                     <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
                                     </p>
@@ -385,17 +406,25 @@ export default class App extends Component {
                                 {conf.vimeoEx}
                             </FreeContent>
 
-                            <MostrariAmbTOTSElsProductes />
-
                         </div>
                     )}/>
                     <Route exact path="/:categoryId" render={() => (
-                        <div
-                            style={{
-                                gridArea: `content`
-                            }}
-                        >
-                            <MostrariAmbProductes />
+                        <div>
+                            <div
+                                style={{
+                                    position: `relative`,
+                                    gridArea: `columna`
+                                }}
+                            >
+                                <BuscadorColumnaTOTS />
+                            </div>
+                            <div
+                                style={{
+                                    gridArea: `content`
+                                }}
+                            >
+                                <MostrariAmbProductes />
+                            </div>
                         </div>
                     )}/>
                     <Route path="/" render={() => (
