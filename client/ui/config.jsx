@@ -1,20 +1,5 @@
 import React from 'react';
-import {
-    Button,
-    Navbar,
-    Nav,
-    NavItem,
-    NavDropdown,
-    MenuItem,
-    Grid,
-    Row,
-    Col
-} from 'react-bootstrap';
-
-
-
-
-
+import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
 
 export let
 // Imagen de fondo y sus opciones
@@ -94,11 +79,11 @@ export let
                 ><code>&lt;{'Col xsHidden md={3}'} /&gt;</code></Col>
             </Row>
         </Grid>
-    
+
     ,
         video_latinmoda =
-        
-        <div 
+
+        <div
             style={{
                 margin: `auto`,
                 position: `relative`,
@@ -107,7 +92,7 @@ export let
                 overflow: `hidden`
             }}
         >
-            <iframe 
+            <iframe
                 style={{
                     position: `absolute`,
                     top: `0`,
