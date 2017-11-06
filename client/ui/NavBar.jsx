@@ -45,17 +45,6 @@ export default class NavbarAdaptat extends Component {
                     fluid={this.props.fluid}
                 >
                     <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="#">
-                                <img
-                                    src="logo.jpg"
-                                    style={{
-                                        width: `50px`,
-                                        right: `100px`
-                                    }}
-                                />
-                            </a>
-                        </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
@@ -67,7 +56,7 @@ export default class NavbarAdaptat extends Component {
                                 this.props.data.subcategories.map(
                                     (v,i,a) => {
                                         return (
-                                            <LinkContainer key={i} to={`/${v.nom_categoria.replace(/\s+/g, '')}`}>
+                                            <LinkContainer key={i} to={`/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
                                                 <NavItem
                                                     eventKey={i}
                                                     onClick={this.props.subcategoryIdAlState}

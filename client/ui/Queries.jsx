@@ -1,6 +1,132 @@
 import gql from 'graphql-tag';
 
 export const
+    SubCategoriaMARQUESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaMARQUES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                marcaId
+                nom_marca
+             }
+    }`,
+
+    SubCategoriaTALLESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaTALLES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                tallaId
+                nom_talla
+                label_talla
+                orden_talla
+                publicar_talla
+             }
+    }`,
+
+    SubCategoriaCOLORSQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaCOLORS(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                colorId
+                nom_color
+                label_color
+             }
+    }`,
+
+    SubCategoriaPRODUCTESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            subcategoriaPRODUCTES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                id
+                referencia
+                descripcion
+                categoria
+                marca
+                precioBase
+                proveedor
+                descripcion_long_es
+                nom_marca
+                logo_marca
+                nom_categoria
+                imagen_principal
+                gallery {
+                  id
+                  producto
+                  imagen
+                  imagen_min
+                  type
+                  ppal
+                }
+                galleryColors {
+                  id
+                  fotoId
+                  colorId
+                  num_color
+                  label_color
+                  imagen_min
+                }
+             }
+    }`,
+
     CategoriaMARQUESQuery = gql`
         query (
             $apiUrl: String,

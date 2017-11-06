@@ -96,8 +96,6 @@ export class MostrariTOTS extends Component {
                                                         />
                                                     )
                                                 )}
-                                                <br />
-                                                Tallas:
                                             </div>
                                         </li>
                                     );
@@ -205,8 +203,6 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                         />
                                                     )
                                                 )}
-                                                <br />
-                                                Tallas:
                                             </div>
                                         </li>
                                     );

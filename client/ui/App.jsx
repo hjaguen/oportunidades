@@ -32,10 +32,14 @@ import 'react-select/dist/react-select.css';
 import * as conf from './config.jsx';
 import NavbarAdaptat from './NavBar.jsx';
 import {
-    MostrariTOTS,
+    //MostrariTOTS,
     MostrariSubcategoriaPRODUCTES
 } from './Mostraris.jsx';
 import {
+    SubCategoriaMARQUESQuery,
+    SubCategoriaTALLESQuery,
+    SubCategoriaCOLORSQuery,
+    SubCategoriaPRODUCTESQuery,
     CategoriaMARQUESQuery,
     CategoriaTALLESQuery,
     CategoriaCOLORSQuery,
@@ -73,7 +77,7 @@ const NavbarAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
 
 
 
-class MarquesTOTS extends Component {
+class MarquesSUBCAT extends Component {
     constructor(props) {
         super(props);
     }
@@ -82,7 +86,7 @@ class MarquesTOTS extends Component {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
-            categoriaMARQUES: PropTypes.array
+            subcategoriaMARQUES: PropTypes.array
         }).isRequired
     }
 
@@ -98,7 +102,7 @@ class MarquesTOTS extends Component {
 
         let arrOpts = [];
 
-        this.props.data.categoriaMARQUES.map(
+        this.props.data.subcategoriaMARQUES.map(
             (v,i,a) => {
                 arrOpts.push({
                     value: v.marcaId,
@@ -123,7 +127,7 @@ class MarquesTOTS extends Component {
     }
 }
 
-class TallesTOTS extends Component {
+class TallesSUBCAT extends Component {
     constructor(props) {
         super(props);
     }
@@ -132,7 +136,7 @@ class TallesTOTS extends Component {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
-            categoriaTALLES: PropTypes.array
+            subcategoriaTALLES: PropTypes.array
         }).isRequired
     }
 
@@ -148,7 +152,7 @@ class TallesTOTS extends Component {
 
         let arrOpts = [];
 
-        this.props.data.categoriaTALLES.map(
+        this.props.data.subcategoriaTALLES.map(
             (v,i,a) => {
                 arrOpts.push({
                     value: v.tallaId,
@@ -173,7 +177,7 @@ class TallesTOTS extends Component {
     }
 }
 
-class ColorsTOTS extends Component {
+class ColorsSUBCAT extends Component {
     constructor(props) {
         super(props);
     }
@@ -182,7 +186,7 @@ class ColorsTOTS extends Component {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
-            categoriaCOLORS: PropTypes.array
+            subcategoriaCOLORS: PropTypes.array
         }).isRequired
     }
 
@@ -202,7 +206,7 @@ class ColorsTOTS extends Component {
                 }}
             >
                 {
-                    this.props.data.categoriaCOLORS.map(
+                    this.props.data.subcategoriaCOLORS.map(
                         (v,i,a) => {
                             return (
                                 <span
@@ -252,29 +256,29 @@ export default class App extends Component {
     render() {
 
         let
-            MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
-                options: {
-                    variables: this.state.variables
-                }
-            })(MostrariTOTS),
+            // MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
+            //     options: {
+            //         variables: this.state.variables
+            //     }
+            // })(MostrariTOTS),
 
-            MarquesTOTSCategoria = graphql(CategoriaMARQUESQuery, {
+            MarquesSubCategoria = graphql(SubCategoriaMARQUESQuery, {
                 options: {
                     variables: this.state.variables
                 }
-            })(MarquesTOTS),
+            })(MarquesSUBCAT),
 
-            TallesTOTSCategoria = graphql(CategoriaTALLESQuery, {
+            TallesSubCategoria = graphql(SubCategoriaTALLESQuery, {
                 options: {
                     variables: this.state.variables
                 }
-            })(TallesTOTS),
+            })(TallesSUBCAT),
 
-            ColorsTOTSCategoria = graphql(CategoriaCOLORSQuery, {
+            ColorsSubCategoria = graphql(SubCategoriaCOLORSQuery, {
                 options: {
                     variables: this.state.variables
                 }
-            })(ColorsTOTS),
+            })(ColorsSUBCAT),
 
             MostrariAmbProductes = graphql(ProductesQuery, {
                 options: {
@@ -290,7 +294,7 @@ export default class App extends Component {
             })(FootrAdaptat)
         ;
 
-        class BuscadorColumnaTOTS extends Component {
+        class BuscadorColumnaSUBCAT extends Component {
             constructor(props) {
                 super(props);
 
@@ -304,7 +308,7 @@ export default class App extends Component {
                             background: `rgba(255,255,255,.7)`,
                             width: `90%`,
                             maxWidth: `400px`,
-                            margin: `14em 3em`,
+                            margin: `1em 3em`,
                             padding: `2em`,
                             borderRadius: `1em`
                             // ,
@@ -312,9 +316,9 @@ export default class App extends Component {
                         }}
                     >
 
-                        <MarquesTOTSCategoria />
-                        <TallesTOTSCategoria />
-                        <ColorsTOTSCategoria />
+                        <MarquesSubCategoria />
+                        <TallesSubCategoria />
+                        <ColorsSubCategoria />
                     </div>
                 );
             }
@@ -409,23 +413,33 @@ export default class App extends Component {
                         </div>
                     )}/>
                     <Route exact path="/:categoryId" render={() => (
-                        <div>
+                        [
                             <div
+                                key="columna"
                                 style={{
                                     position: `relative`,
                                     gridArea: `columna`
                                 }}
                             >
-                                <BuscadorColumnaTOTS />
+                                <div
+                                    style={{
+                                        position: `sticky`,
+                                        top: `20px`
+                                    }}
+                                >
+                                    <BuscadorColumnaSUBCAT />
+                                </div>
                             </div>
+                        ,
                             <div
+                                key="content"
                                 style={{
                                     gridArea: `content`
                                 }}
                             >
                                 <MostrariAmbProductes />
                             </div>
-                        </div>
+                        ]
                     )}/>
                     <Route path="/" render={() => (
                         <div
