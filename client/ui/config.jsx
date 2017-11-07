@@ -13,6 +13,18 @@ export let
     ,
 
     amplaria_fitxetes_subcategoria = `220px`
+
+    ,
+
+    estil_fitxetes = {
+        width: amplaria_fitxetes_subcategoria,
+        height: `auto`,
+        display: `inline-block`,
+        border: `1px rgba(0,0,0,.5) solid`,
+        borderRadius: `.3em`,
+        margin: `.3em`,
+        background: `rgba(255,255,55,.8)`
+    }
     ,
 
     primer_contingut =

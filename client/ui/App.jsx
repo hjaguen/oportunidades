@@ -119,7 +119,7 @@ class MarquesSUBCAT extends Component {
             >
                 <Select
                     options={arrOpts}
-                    onChange={(val) => alert(val.label)}
+                    onChange={(val) => this.props.marcaIdAVariables(val.value)}
                     placeholder="Filtrar por marca..."
                 />
             </div>
@@ -169,7 +169,7 @@ class TallesSUBCAT extends Component {
             >
                 <Select
                     options={arrOpts}
-                    onChange={(val) => alert(val.label)}
+                    onChange={(val) => this.props.tallaIdAVariables(val.value)}
                     placeholder="Filtrar por talla..."
                 />
             </div>
@@ -241,12 +241,46 @@ export default class App extends Component {
         };
 
         this.subcategoryIdAlState = this.subcategoryIdAlState.bind(this);
+        this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
+        this.tallaIdAVariables = this.tallaIdAVariables.bind(this);
+        this.colorIdAVariables = this.colorIdAVariables.bind(this);
     }
 
     subcategoryIdAlState(ev) {
         console.dir(ev.target.dataset);
         let
-            variables = Object.assign({}, this.state.variables, {subcategoryId: ev.target.dataset.subcategoryId});
+            variables = Object.assign({}, this.state.variables, {subcategoryId: ev.target.dataset.subcategoryId})
+        ;
+
+        this.setState({
+            variables
+        });
+    }
+
+    marcaIdAVariables(marcaId) {
+        let
+            variables = Object.assign({}, this.state.variables, {brandId: marcaId})
+        ;
+
+        this.setState({
+            variables
+        });
+    }
+
+    tallaIdAVariables(tallaId) {
+        let
+            variables = Object.assign({}, this.state.variables, {sizeId: tallaId})
+        ;
+
+        this.setState({
+            variables
+        });
+    }
+
+    colorIdAVariables(colorId) {
+        let
+            variables = Object.assign({}, this.state.variables, {colorId})
+        ;
 
         this.setState({
             variables
@@ -316,10 +350,63 @@ export default class App extends Component {
                         }}
                     >
 
-                        <MarquesSubCategoria />
-                        <TallesSubCategoria />
-                        <ColorsSubCategoria />
+                        <MarquesSubCategoria
+                            marcaIdAVariables={this.props.marcaIdAVariables}
+                        />
+                        <TallesSubCategoria
+                            tallaIdAVariables={this.props.tallaIdAVariables}
+                        />
+                        <ColorsSubCategoria
+                            colorIdAVariables={this.props.colorIdAVariables}
+                        />
                     </div>
+                );
+            }
+        }
+
+        class MainContentSubCat extends Component {
+            constructor(props, context) {
+                super(props, context);
+
+                this.state = {
+
+                }
+            }
+
+            render() {
+                return (
+                    [
+                        <div
+                            key="columna"
+                            style={{
+                                position: `relative`,
+                                gridArea: `columna`
+                            }}
+                        >
+                            <div
+                                style={{
+                                    position: `-webkit-sticky`,
+                                    position: `sticky`,
+                                    top: `20px`
+                                }}
+                            >
+                                <BuscadorColumnaSUBCAT
+                                    marcaIdAVariables={this.props.marcaIdAVariables}
+                                    tallaIdAVariables={this.props.tallaIdAVariables}
+                                    colorIdAVariables={this.props.colorIdAVariables}
+                                />
+                            </div>
+                        </div>
+                    ,
+                        <div
+                            key="content"
+                            style={{
+                                gridArea: `content`
+                            }}
+                        >
+                            <MostrariAmbProductes />
+                        </div>
+                    ]
                 );
             }
         }
@@ -412,35 +499,15 @@ export default class App extends Component {
 
                         </div>
                     )}/>
+
                     <Route exact path="/:categoryId" render={() => (
-                        [
-                            <div
-                                key="columna"
-                                style={{
-                                    position: `relative`,
-                                    gridArea: `columna`
-                                }}
-                            >
-                                <div
-                                    style={{
-                                        position: `sticky`,
-                                        top: `20px`
-                                    }}
-                                >
-                                    <BuscadorColumnaSUBCAT />
-                                </div>
-                            </div>
-                        ,
-                            <div
-                                key="content"
-                                style={{
-                                    gridArea: `content`
-                                }}
-                            >
-                                <MostrariAmbProductes />
-                            </div>
-                        ]
+                        <MainContentSubCat
+                            marcaIdAVariables={this.marcaIdAVariables}
+                            tallaIdAVariables={this.tallaIdAVariables}
+                            colorIdAVariables={this.colorIdAVariables}
+                        />
                     )}/>
+
                     <Route path="/" render={() => (
                         <div
                             style={{
