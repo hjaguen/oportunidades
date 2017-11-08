@@ -494,6 +494,10 @@ export default class App extends Component {
                             </FreeContent>
 
                             <FreeContent>
+                                {conf.segon_lliure}
+                            </FreeContent>
+
+                            <FreeContent>
                                 {conf.vimeoEx}
                             </FreeContent>
 
