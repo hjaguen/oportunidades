@@ -453,8 +453,7 @@ export default class App extends Component {
                         backgroundAttachment: conf.backgroundAttachment
                     }}
                 >
-                    <Route
-                        path="/"
+                    <Route path="/"
                         render={() => (
                             <div
                                 style={{
