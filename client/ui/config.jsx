@@ -10,12 +10,11 @@ export let
     ,
 
     categoryId = `12`
+
     ,
 
     amplaria_fitxetes_subcategoria = `220px`
-
     ,
-
     estil_fitxetes = {
         width: amplaria_fitxetes_subcategoria,
         height: `auto`,
@@ -25,6 +24,30 @@ export let
         margin: `.3em`,
         background: `rgba(255,255,55,.8)`
     }
+
+    ,
+
+    filtres_posicio = `columna` // `columna` | `bloque`
+    ,
+                                    layoutTemplateArea =
+                                        filtres_posicio === `columna`
+                                            ? `"columna content content content"`
+                                            : filtres_posicio === `bloque`
+                                                ? `"bloque bloque bloque bloque"
+                                                    "content content content content"`
+                                                : ""
+    ,
+    estil_filtres = {
+        background: `rgba(255,55,255,.7)`,
+        width: `90%`,
+        //maxWidth: `400px`,
+        margin: `1em 3em`,
+        padding: `2em`,
+        borderRadius: `1em`
+        // ,
+        // position: `fixed`
+    }
+
     ,
 
     primer_contingut =
@@ -52,7 +75,6 @@ export let
     ,
 
     segon_lliure =
-
         <Grid
             style={{
                 background: `fuchsia`,
@@ -94,32 +116,31 @@ export let
 
     ,
         video_latinmoda =
-
-        <div
-            style={{
-                margin: `auto`,
-                position: `relative`,
-                paddingBottom: `56.25%`,
-                height: `0`,
-                overflow: `hidden`
-            }}
-        >
-            <iframe
+            <div
                 style={{
-                    position: `absolute`,
-                    top: `0`,
-                    left: `0`,
-                    width: `100%`,
-                    height: `100%`
+                    margin: `auto`,
+                    position: `relative`,
+                    paddingBottom: `56.25%`,
+                    height: `0`,
+                    overflow: `hidden`
                 }}
-                    className=""
-                    width="800"
-                    height="450"
-                    src="https://player.vimeo.com/video/240463716"
-                    frameBorder="0"
-                    allowFullScreen
-            ></iframe>
-        </div>
+            >
+                <iframe
+                    style={{
+                        position: `absolute`,
+                        top: `0`,
+                        left: `0`,
+                        width: `100%`,
+                        height: `100%`
+                    }}
+                        className=""
+                        width="800"
+                        height="450"
+                        src="https://player.vimeo.com/video/240463716"
+                        frameBorder="0"
+                        allowFullScreen
+                ></iframe>
+            </div>
 
         ,
 

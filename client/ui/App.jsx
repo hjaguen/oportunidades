@@ -320,6 +320,22 @@ export default class App extends Component {
                 }
             })(MostrariSubcategoriaPRODUCTES),
 
+// Falta definir les consultes correctes DE FILTRAT, de moment
+// prenem ProductesQuery com a base:
+  ProductesMARCAQuery = ProductesTALLAQuery = ProductesQuery,
+
+            MostrariAmbProductesMARCA = graphql(ProductesMARCAQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(MostrariSubcategoriaPRODUCTES),
+
+            MostrariAmbProductesTALLA = graphql(ProductesTALLAQuery, {
+                options: {
+                    variables: this.state.variables
+                }
+            })(MostrariSubcategoriaPRODUCTES),
+
 //>>>>>>>>>>>>>>>>>>>>>>><< FOOTR - Un per a cada tipus de consulta
             FootrAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
                 options: {
@@ -338,16 +354,7 @@ export default class App extends Component {
             render() {
                 return (
                     <div
-                        style={{
-                            background: `rgba(255,255,255,.7)`,
-                            width: `90%`,
-                            maxWidth: `400px`,
-                            margin: `1em 3em`,
-                            padding: `2em`,
-                            borderRadius: `1em`
-                            // ,
-                            // position: `fixed`
-                        }}
+                        style={conf.estil_filtres}
                     >
 
                         <MarquesSubCategoria
@@ -380,7 +387,7 @@ export default class App extends Component {
                             key="columna"
                             style={{
                                 position: `relative`,
-                                gridArea: `columna`
+                                gridArea: conf.filtres_posicio
                             }}
                         >
                             <div
@@ -436,7 +443,7 @@ export default class App extends Component {
                         gridTemplateColumns: `1fr 1fr 1fr 1fr`,
                         gridTemplateAreas: `
                             "navbar navbar navbar navbar"
-                            "columna content content content"
+                            ${conf.layoutTemplateArea}
                             "present present present present"
                             "footer footer footer footer"
                         `,
