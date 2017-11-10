@@ -36,6 +36,7 @@ import {
     MostrariSubcategoriaPRODUCTES
 } from './Mostraris.jsx';
 import {
+    ProducteDETALLSQuery,
     SubCategoriaMARQUESQuery,
     SubCategoriaTALLESQuery,
     SubCategoriaCOLORSQuery,
@@ -53,6 +54,7 @@ import {
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
 import Radium, { StyleRoot } from 'radium';
+import Layout from './Layout.jsx';
 
 FreeContent = Radium(FreeContent);
 
@@ -64,7 +66,8 @@ let variables = {
     subcategoryId: "31",
     sizeId: "21",
     brandId: "4",
-    colorId: "17"
+    colorId: "17",
+    productId: ""
 };
 
 
@@ -82,7 +85,7 @@ class MarquesSUBCAT extends Component {
         super(props);
     }
 
-    static: propTypes = {
+    static propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
@@ -231,6 +234,24 @@ class ColorsSUBCAT extends Component {
     }
 }
 
+class MainContentProducte extends Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+
+    componentDidMount() {
+        //this.props.productIdAlState(this.props.productId);
+    }
+
+    render() {
+        return (
+            <div>
+                <div>{this.props.productId}</div>
+            </div>
+        );
+    }
+}
+
 
 export default class App extends Component {
     constructor(props) {
@@ -244,6 +265,7 @@ export default class App extends Component {
         this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
         this.tallaIdAVariables = this.tallaIdAVariables.bind(this);
         this.colorIdAVariables = this.colorIdAVariables.bind(this);
+        this.productIdAlState = this.productIdAlState.bind(this);
     }
 
     subcategoryIdAlState(ev) {
@@ -287,6 +309,16 @@ export default class App extends Component {
         });
     }
 
+    productIdAlState(productId) {
+        let
+            variables = Object.assign({}, this.state.variables, {productId})
+        ;
+
+        this.setState({
+            variables
+        });
+    }
+
     render() {
 
         let
@@ -319,6 +351,7 @@ export default class App extends Component {
                     variables: this.state.variables
                 }
             })(MostrariSubcategoriaPRODUCTES),
+
 
 // Falta definir les consultes correctes DE FILTRAT, de moment
 // prenem ProductesQuery com a base:
@@ -436,23 +469,7 @@ export default class App extends Component {
         ;
         return (
             <Router>
-                <div
-                    style={{
-                        height: `100%`,
-                        display: `grid`,
-                        gridTemplateColumns: `1fr 1fr 1fr 1fr`,
-                        gridTemplateAreas: `
-                            "navbar navbar navbar navbar"
-                            ${conf.layoutTemplateArea}
-                            "present present present present"
-                            "footer footer footer footer"
-                        `,
-                        backgroundImage: `url(${conf.fonsPrincipal})`,
-                        backgroundSize: conf.backgroundSize,
-                        backgroundRepeat: conf.backgroundRepeat,
-                        backgroundAttachment: conf.backgroundAttachment
-                    }}
-                >
+                <Layout>
                     <Route path="/"
                         render={() => (
                             <div
@@ -510,13 +527,34 @@ export default class App extends Component {
                         </div>
                     )}/>
 
-                    <Route exact path="/:categoryId" render={() => (
+                    <Route exact path="/categoria/:categoryId" render={({ match }) => (
                         <MainContentSubCat
                             marcaIdAVariables={this.marcaIdAVariables}
                             tallaIdAVariables={this.tallaIdAVariables}
                             colorIdAVariables={this.colorIdAVariables}
                         />
                     )}/>
+
+                    <Route exact path="/producto/:productId" render={({ match }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                productId: match.params.productId
+                            }),
+
+                            MainProducteDETALLS = graphql(ProducteDETALLSQuery, {
+                                options: {
+                                    variables
+                                }
+                            })(MainContentProducte);
+
+                        return (
+                            <MainProducteDETALLS
+                                productId={match.params.productId}
+                                productIdAlState={this.productIdAlState}
+                            />
+                        );
+                    }
+                }/>
 
                     <Route path="/" render={() => (
                         <div
@@ -529,7 +567,7 @@ export default class App extends Component {
                             />
                         </div>
                     )}/>
-                </div>
+                </Layout>
             </Router>
         );
     }

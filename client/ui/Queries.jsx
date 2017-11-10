@@ -1,6 +1,58 @@
 import gql from 'graphql-tag';
 
 export const
+    ProducteDETALLSQuery = gql`
+        query ProducteDETALLSQuery(
+                $apiUrl: String,
+                        $productId: String
+            ) {
+                producteDETALLS(
+                    apiUrl: $apiUrl,
+                    productId: $productId
+                ) {
+                  id
+                    referencia
+                    descripcion
+                    categoria
+                    marca
+                    precioBase
+                    precio2
+                    precio3
+                    precio4
+                    precioMiscelaneo
+                    proveedor
+                    descripcion_long_es
+                    nom_marca
+                    logo_marca
+                    nom_categoria
+                    imagen_principal
+                    tallas {
+                      id
+                    barCode
+                    producto
+                    talla
+                    color
+                    existencias
+                    costoPonderado
+                    tallaId
+                    num_color
+                    labelColor
+                    nom_talla
+                    label_talla
+                    orden_talla
+                    publicar_talla
+                    }
+                    gallery {
+                      id
+                    producto
+                    imagen
+                    imagen_min
+                    type
+                    ppal
+                    }
+                }
+    }`,
+
     SubCategoriaMARQUESQuery = gql`
         query (
             $apiUrl: String,
