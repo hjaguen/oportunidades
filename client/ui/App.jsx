@@ -424,8 +424,9 @@ export default class App extends Component {
                     <div
                         style={{
                             marginLeft: `50px`,
+                            color: 'black',
 
-                            '@media (min-width: 320px)': {
+                            '@media (max-width: 900px)': {
                                 color: 'fuchsia'
                               }
                         }}
@@ -433,6 +434,20 @@ export default class App extends Component {
                             <h1>Blusas Colombianas</h1>
                     </div>
                 </FreeContent>
+        ,
+            FCMediaVideo = () =>
+                <FreeContent>
+                    <div 
+                    style={{
+                        '@media (max-width: 1000px)': {
+                                margin: '20px'
+                              }           
+                        }}>
+                    {conf.video_latinmoda}
+                    </div>    
+                </FreeContent>
+        
+        
         ;
         return (
             <Router>
@@ -479,6 +494,10 @@ export default class App extends Component {
                             {/*Titulo de la Pagina*/}
                             <StyleRoot>
                                 <FCMedia />
+                            </StyleRoot>
+                                
+                            <StyleRoot>
+                                <FCMediaVideo />
                             </StyleRoot>
 
                             <FreeContent children={conf.video_latinmoda} /> {/*Asi se comenta en JSX, entre llaves.*/}

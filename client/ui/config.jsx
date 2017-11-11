@@ -13,6 +13,7 @@ export let
 
     ,
 
+// Tamaño de columna y estilo para las fotos de producto    
     amplaria_fitxetes_subcategoria = `220px`
     ,
     estil_fitxetes = {
@@ -27,7 +28,8 @@ export let
 
     ,
 
-    filtres_posicio = `columna` // `columna` | `bloque`
+// Estilo para modulo de filtro    
+    filtres_posicio = `bloque` // `columna` | `bloque`
     ,
                                     layoutTemplateArea =
                                         filtres_posicio === `columna`
@@ -50,6 +52,7 @@ export let
 
     ,
 
+// 1er Contenido libre em "Home"    
     primer_contingut =
         <div style={{
             margin: `50px`
@@ -74,6 +77,7 @@ export let
         </div>
     ,
 
+// 2do Contendido libre en "Home"    
     segon_lliure =
         <Grid
             style={{
@@ -115,6 +119,9 @@ export let
         </Grid>
 
     ,
+    
+
+// Contenido libre de Video en "Home"    
         video_latinmoda =
             <div
                 style={{
@@ -122,7 +129,7 @@ export let
                     position: `relative`,
                     paddingBottom: `56.25%`,
                     height: `0`,
-                    overflow: `hidden`
+                    overflow: `hidden`,
                 }}
             >
                 <iframe
