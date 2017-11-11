@@ -10,7 +10,7 @@ export let
     backgroundAttachment = `fixed`
     ,
 
-    categoryId = `12`
+    categoryId = `18`
 
     ,
 
