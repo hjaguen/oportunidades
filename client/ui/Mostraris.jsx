@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LinkContainer } from 'react-router-bootstrap';
+//import { LinkContainer } from 'react-router-bootstrap';
 import Masonry from 'react-masonry-component';
 import * as conf from './config.jsx';
+
+import { Link } from 'react-router-dom';
+
 
 // export class MostrariTOTS extends Component {
 //     constructor(props) {
@@ -146,55 +149,58 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         <li key={i}
                                             style={ conf.estil_fitxetes }
                                         >
-                                            <img
-                                                src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
-                                                alt={v.descripcion}
-                                                title={v.descripcion_long_es}
-                                                style={{
-                                                    position: `relative`,
-                                                    width: `100%`,
-                                                    display: `block`,
-                                                    borderRadius: `.3em`
-                                                }}
-                                            />
-                                            <div
-                                                style={{
-                                                    padding: `.3em`
-                                                }}
-                                            >
-                                                Referencia: {v.referencia} - Nombre: {v.descripcion}
-                                            </div>
-                                            <div
-                                                style={{
-                                                    padding: `.3em`
-                                                }}
-                                            >
-                                                Colores:
-                                                <br />
-                                                {v.galleryColors.map(
-                                                    (v2,i2,a2) => (
-                                                        // <img
-                                                        //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
-                                                        //     style={{
-                                                        //         width: `20px`,
-                                                        //         height: `20px`
-                                                        //     }}
-                                                        // />
-                                                        <span
-                                                            key={i2}
-                                                            style={{
-                                                                background: `${v2.num_color}`,
-                                                                minWidth: `20px`,
-                                                                minHeight: `20px`,
-                                                                border: `1px solid black`,
-                                                                margin: `.1em`,
-                                                                display: `inline-block`
-                                                            }}
-                                                            title={`${v2.label_color}`}
-                                                        />
-                                                    )
-                                                )}
-                                            </div>
+                                            <Link to={`/producto/${v.id}`} >
+
+                                                <img
+                                                    src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
+                                                    alt={v.descripcion}
+                                                    title={v.descripcion_long_es}
+                                                    style={{
+                                                        position: `relative`,
+                                                        width: `100%`,
+                                                        display: `block`,
+                                                        borderRadius: `.3em`
+                                                    }}
+                                                />
+                                                <div
+                                                    style={{
+                                                        padding: `.3em`
+                                                    }}
+                                                >
+                                                    Referencia: {v.referencia} - Nombre: {v.descripcion}
+                                                </div>
+                                                <div
+                                                    style={{
+                                                        padding: `.3em`
+                                                    }}
+                                                >
+                                                    Colores:
+                                                    <br />
+                                                    {v.galleryColors.map(
+                                                        (v,i,a) => (
+                                                            // <img
+                                                            //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                                            //     style={{
+                                                            //         width: `20px`,
+                                                            //         height: `20px`
+                                                            //     }}
+                                                            // />
+                                                            <span
+                                                                key={i}
+                                                                style={{
+                                                                    background: `${v.num_color}`,
+                                                                    minWidth: `20px`,
+                                                                    minHeight: `20px`,
+                                                                    border: `1px solid black`,
+                                                                    margin: `.1em`,
+                                                                    display: `inline-block`
+                                                                }}
+                                                                title={`${v.label_color}`}
+                                                            />
+                                                        )
+                                                    )}
+                                                </div>
+                                            </Link>
                                         </li>
                                     );
                                 }

@@ -19,7 +19,7 @@ export default class NavbarAdaptat extends Component {
         super(props);
     }
 
-    static: propTypes = {
+    static propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
@@ -56,7 +56,7 @@ export default class NavbarAdaptat extends Component {
                                 this.props.data.subcategories.map(
                                     (v,i,a) => {
                                         return (
-                                            <LinkContainer key={i} to={`/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
+                                            <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
                                                 <NavItem
                                                     eventKey={i}
                                                     onClick={this.props.subcategoryIdAlState}
