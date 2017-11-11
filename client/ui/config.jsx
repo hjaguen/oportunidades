@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
 
 export let
+
 // Imagen de fondo y sus opciones
     fonsPrincipal = `background_blue_v0011.jpg`,
     backgroundSize =  `cover`,
@@ -31,23 +32,45 @@ export let
     ,
                                     layoutTemplateArea =
                                         filtres_posicio === `columna`
-                                            ? `"columna content content content"`
+                                            ? `"columna content content content content content"`
                                             : filtres_posicio === `bloque`
-                                                ? `"bloque bloque bloque bloque"
-                                                    "content content content content"`
-                                                : ""
+                                                ? `"bloque bloque bloque bloque bloque bloque"
+                                                    "content content content content content content"`
+                                                : "",
+                                    possibleMaxWidth =
+                                        filtres_posicio === `columna`
+                                            ? `400px`
+                                            : "none"
     ,
     estil_filtres = {
         background: `rgba(255,55,255,.7)`,
         width: `90%`,
-        //maxWidth: `400px`,
+        maxWidth: `${possibleMaxWidth}`,
         margin: `1em 3em`,
         padding: `2em`,
         borderRadius: `1em`
         // ,
         // position: `fixed`
     }
+    ,
 
+    // Estilo del Layout principal
+
+    layoutStyle = {
+        height: `100%`,
+        display: `grid`,
+        gridTemplateColumns: `auto auto auto auto auto auto`,
+        gridTemplateAreas: `
+            "navbar navbar navbar navbar navbar navbar"
+            ${layoutTemplateArea}
+            "present present present present present present"
+            "footer footer footer footer footer footer"
+        `,
+        backgroundImage: `url(${fonsPrincipal})`,
+        backgroundSize: backgroundSize,
+        backgroundRepeat: backgroundRepeat,
+        backgroundAttachment: backgroundAttachment
+    }
     ,
 
     primer_contingut =

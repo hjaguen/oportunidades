@@ -185,7 +185,7 @@ class ColorsSUBCAT extends Component {
         super(props);
     }
 
-    static: propTypes = {
+    static propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
@@ -243,11 +243,129 @@ class MainContentProducte extends Component {
         //this.props.productIdAlState(this.props.productId);
     }
 
+    componentWillReceiveProps() {
+
+    }
+
     render() {
+
+        console.dir(this.props.data);
+
         return (
-            <div>
-                <div>{this.props.productId}</div>
-            </div>
+            [
+                <div
+                    key='columna'
+                    style={{
+                        gridArea: conf.filtres_posicio
+                    }}
+                >
+                    <div
+                        style={{
+                            display: `grid`,
+                            gridTemplateColumns: `1fr 1fr`,
+                            gridTemplateRows: `auto`,
+                            gridAutoFlow: `row dense`,
+                            position: `-webkit-sticky`,
+                            position: `sticky`,
+                            top: `20px`,
+                            margin: `20px`
+                        }}
+                    >
+                        {   this.props.data.producteDETALLS
+                                ? this.props.data.producteDETALLS[0].gallery.map(
+                                        (v,i,a) => {
+                                            return (
+                                                <img
+                                                    key={i}
+                                                    src={`http://images.colombiaespassion.net/${v.imagen_min}`}
+                                                    style={{
+                                                        maxWidth: `110px`
+                                                    }}
+                                                 />
+                                            );
+                                        }
+                                    )
+                                : "Carregant..."
+                        }
+                    </div>
+                    <div
+                        style={{
+                            position: `sticky`,
+                            top: `20px`
+                            // ,
+                            // height: `100%`
+                        }}
+                    >
+
+                        {   this.props.data.producteDETALLS
+                                ? this.props.data.producteDETALLS[0].tallas.map(
+                                        (v,i,a) => {
+                                            return (
+                                                <span
+                                                    key={i}
+                                                    style={{
+                                                        background: `${v.num_color}`,
+                                                        width: `20px`,
+                                                        height: `20px`,
+                                                        border: `1px solid black`,
+                                                        display: `block`
+                                                    }}
+                                                 />
+                                            );
+                                        }
+                                    )
+                                : "Carregant..."
+                        }
+                    </div>
+                </div>
+            ,
+                <div
+                    key='central'
+                    style={{
+                        gridColumnStart: `2`,
+                        gridColumnEnd: `span 2`,
+                        gridRowStart: `2`,
+                        gridRowEnd: `span 1`
+                    }}
+                >
+                    {this.props.data.producteDETALLS
+                        ? <img
+                            src={`http://images.colombiaespassion.net/${this.props.data.producteDETALLS[0].imagen_principal}`}
+                            style={{
+                                width: `100%`,
+                                borderRadius: `1.5vw`,
+                                marginBottom: `20px`
+                            }}
+                          />
+                        : "Carregant..."
+                    }
+                </div>
+            ,
+                <div
+                    key='detall'
+
+                >
+                    {this.props.data.producteDETALLS
+                        ? <div
+                            style={{
+                                padding: `20px`
+                            }}
+                          >
+                            <h2
+                            style={{
+                                //textAlign: `center`,
+                                //margin: `-20px`
+                            }}>
+                                {this.props.data.producteDETALLS[0].descripcion}
+                            </h2>
+                            <div dangerouslySetInnerHTML={{
+                                __html: sanitizeHtml(this.props.data.producteDETALLS[0].descripcion_long_es)
+                            }}/>
+                          </div>
+                        : null
+                    }
+                </div>
+            ]
         );
     }
 }
@@ -265,7 +383,7 @@ export default class App extends Component {
         this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
         this.tallaIdAVariables = this.tallaIdAVariables.bind(this);
         this.colorIdAVariables = this.colorIdAVariables.bind(this);
-        this.productIdAlState = this.productIdAlState.bind(this);
+        //this.productIdAlState = this.productIdAlState.bind(this);
     }
 
     subcategoryIdAlState(ev) {
@@ -302,16 +420,6 @@ export default class App extends Component {
     colorIdAVariables(colorId) {
         let
             variables = Object.assign({}, this.state.variables, {colorId})
-        ;
-
-        this.setState({
-            variables
-        });
-    }
-
-    productIdAlState(productId) {
-        let
-            variables = Object.assign({}, this.state.variables, {productId})
         ;
 
         this.setState({
@@ -376,6 +484,8 @@ export default class App extends Component {
                 }
             })(FootrAdaptat)
         ;
+
+
 
         class BuscadorColumnaSUBCAT extends Component {
             constructor(props) {
@@ -536,6 +646,7 @@ export default class App extends Component {
                     )}/>
 
                     <Route exact path="/producto/:productId" render={({ match }) => {
+
                         let
                             variables = Object.assign({}, this.state.variables, {
                                 productId: match.params.productId
@@ -545,7 +656,8 @@ export default class App extends Component {
                                 options: {
                                     variables
                                 }
-                            })(MainContentProducte);
+                            })(MainContentProducte)
+                        ;
 
                         return (
                             <MainProducteDETALLS

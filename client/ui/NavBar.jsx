@@ -19,7 +19,7 @@ export default class NavbarAdaptat extends Component {
         super(props);
     }
 
-    static: propTypes = {
+    static propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
