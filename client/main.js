@@ -9,6 +9,7 @@ import './ui/bootstrap-theme.min.css';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { graphql, ApolloProvider } from 'react-apollo';
 
+
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({
         uri: `http://blusascolombianas.es:11010/graphql`
@@ -20,6 +21,7 @@ Meteor.startup(() => {
         <ApolloProvider client={client}>
             <App />
         </ApolloProvider>
-    ,
-    document.getElementById('app'));
+        ,
+        document.getElementById('app')
+    );
 });

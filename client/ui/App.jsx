@@ -84,6 +84,12 @@ const NavbarAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
 class MarquesSUBCAT extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectValue: null
+        };
+
+        this.updateValue = this.updateValue.bind(this);
     }
 
     static propTypes = {
@@ -92,6 +98,19 @@ class MarquesSUBCAT extends Component {
             error: PropTypes.object,
             subcategoriaMARQUES: PropTypes.array
         }).isRequired
+    };
+
+    updateValue(nouVal) {
+        this.setState = {
+            selectValue: nouVal
+        };
+        console.log("Selected: ", nouVal);
+
+        return nouVal;
+    }
+
+    focusMarcaSelect() {
+        this.marcaSelect.focus();
     }
 
     render() {
@@ -111,7 +130,7 @@ class MarquesSUBCAT extends Component {
                 arrOpts.push({
                     value: v.marcaId,
                     label: v.nom_marca
-                })
+                });
             }
         )
 
@@ -122,9 +141,15 @@ class MarquesSUBCAT extends Component {
                 }}
             >
                 <Select
+                    autoFocus
+                    id="marca-select"
+                    ref={(marcaSelect) => this.marcaSelect = marcaSelect}
                     options={arrOpts}
-                    onChange={(val) => this.props.marcaIdAVariables(val.value)}
+                    onChange={this.updateValue}
+                    value={this.state.selectValue}
                     placeholder="Filtrar por marca..."
+                    onInputChange={this.updateValue}
+                    searchable
                 />
             </div>
         );
@@ -136,7 +161,7 @@ class TallesSUBCAT extends Component {
         super(props);
     }
 
-    static: propTypes = {
+    static propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
@@ -206,7 +231,10 @@ class ColorsSUBCAT extends Component {
         return (
             <div
                 style={{
-                    marginTop: `3em`
+                    marginTop: `3em`,
+                    display: `flex`,
+                    justifyContent: `center`,
+                    flexWrap: `wrap`
                 }}
             >
                 {
@@ -218,6 +246,7 @@ class ColorsSUBCAT extends Component {
                                     style={{
                                         display: `inline-block`,
                                         border: `1px black solid`,
+                                        borderRadius: `1em`,
                                         width: `20px`,
                                         height: `20px`,
                                         background: `${v.nom_color}`,
@@ -242,6 +271,8 @@ export default class App extends Component {
         this.state = {
             variables
         };
+
+        this.variables = variables;
 
         this.subcategoryIdAlState = this.subcategoryIdAlState.bind(this);
         this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
@@ -301,26 +332,38 @@ export default class App extends Component {
             // })(MostrariTOTS),
 
             MarquesSubCategoria = graphql(SubCategoriaMARQUESQuery, {
-                options: {
-                    variables: this.state.variables
+                options: () => {
+                //    console.dir("thisVars:", this.variables);
+                    return ({
+                        variables: this.variables
+                    });
                 }
             })(MarquesSUBCAT),
 
             TallesSubCategoria = graphql(SubCategoriaTALLESQuery, {
-                options: {
-                    variables: this.state.variables
+                options: () => {
+                    //console.dir("thisVars:", this.variables);
+                    return ({
+                        variables: this.variables
+                    });
                 }
             })(TallesSUBCAT),
 
             ColorsSubCategoria = graphql(SubCategoriaCOLORSQuery, {
-                options: {
-                    variables: this.state.variables
+                options: () => {
+                    //console.dir("thisVars:", this.variables);
+                    return ({
+                        variables: this.variables
+                    });
                 }
             })(ColorsSUBCAT),
 
             MostrariAmbProductes = graphql(ProductesQuery, {
-                options: {
-                    variables: this.state.variables
+                options: () => {
+                    //console.dir("thisVars:", this.variables);
+                    return ({
+                        variables: this.variables
+                    });
                 }
             })(MostrariSubcategoriaPRODUCTES),
 
@@ -365,13 +408,15 @@ export default class App extends Component {
                     >
 
                         <MarquesSubCategoria
-                            marcaIdAVariables={this.props.marcaIdAVariables}
+                            variables={this.props.variables}
                         />
                         <TallesSubCategoria
                             tallaIdAVariables={this.props.tallaIdAVariables}
+                            variables={this.props.variables}
                         />
                         <ColorsSubCategoria
                             colorIdAVariables={this.props.colorIdAVariables}
+                            variables={this.props.variables}
                         />
                     </div>
                 );
@@ -408,6 +453,7 @@ export default class App extends Component {
                                     marcaIdAVariables={this.props.marcaIdAVariables}
                                     tallaIdAVariables={this.props.tallaIdAVariables}
                                     colorIdAVariables={this.props.colorIdAVariables}
+                                    variables={this.props.data.variables}
                                 />
                             </div>
                         </div>
@@ -418,7 +464,7 @@ export default class App extends Component {
                                 gridArea: `content`
                             }}
                         >
-                            <MostrariAmbProductes />
+                            <MostrariAmbProductes variables={this.props.data.variables} />
                         </div>
                     ]
                 );
@@ -520,19 +566,35 @@ export default class App extends Component {
                         </div>
                     )}/>
 
-                    <Route exact path="/categoria/:categoryId" render={({ match }) => (
-                        <MainContentSubCat
-                            marcaIdAVariables={this.marcaIdAVariables}
-                            tallaIdAVariables={this.tallaIdAVariables}
-                            colorIdAVariables={this.colorIdAVariables}
-                        />
-                    )}/>
+                    <Route exact path="/categoria/:subcategoryId" render={({ match }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.subcategoryId.match(/\d+$/)[0]
+                            }),
+
+                            MainContentSUBCAT = graphql(SubCategoriaPRODUCTESQuery, {
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+                            />
+                        );
+                    }}/>
 
                     <Route exact path="/producto/:productId" render={({ match }) => {
 
                         let
                             variables = Object.assign({}, this.state.variables, {
-                                productId: match.params.productId
+                                productId: match.params.productId.match(/\d+$/)[0]
                             }),
 
                             MainProducteDETALLS = graphql(ProducteDETALLSQuery, {

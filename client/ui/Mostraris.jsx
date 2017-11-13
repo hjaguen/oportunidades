@@ -118,7 +118,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
         super(props);
     }
 
-    static: propTypes = {
+    static propTypes = {
         data: PropTypes.shape({
             loading: PropTypes.bool,
             error: PropTypes.object,
@@ -149,7 +149,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         <li key={i}
                                             style={ conf.estil_fitxetes }
                                         >
-                                            <Link to={`/producto/${v.id}`} >
+                                            <Link to={`/producto/${v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${v.id}`} >
 
                                                 <img
                                                     src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
