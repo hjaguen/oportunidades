@@ -68,7 +68,7 @@ export let
             "present present present present present present"
             "footer footer footer footer footer footer"
         `,
-        backgroundImage: `url(${fonsPrincipal})`,
+        backgroundImage: `url(/${fonsPrincipal})`,
         backgroundSize: backgroundSize,
         backgroundRepeat: backgroundRepeat,
         backgroundAttachment: backgroundAttachment

@@ -175,30 +175,47 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                     }}
                                                 >
                                                     Colores:
-                                                    <br />
-                                                    {v.galleryColors.map(
-                                                        (v,i,a) => (
-                                                            // <img
-                                                            //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
-                                                            //     style={{
-                                                            //         width: `20px`,
-                                                            //         height: `20px`
-                                                            //     }}
-                                                            // />
-                                                            <span
-                                                                key={i}
-                                                                style={{
-                                                                    background: `${v.num_color}`,
-                                                                    minWidth: `20px`,
-                                                                    minHeight: `20px`,
-                                                                    border: `1px solid black`,
-                                                                    margin: `.1em`,
-                                                                    display: `inline-block`
-                                                                }}
-                                                                title={`${v.label_color}`}
-                                                            />
-                                                        )
-                                                    )}
+                                                    <div
+                                                        style={{
+                                                            display: `flex`,
+                                                            justifyContent: `center`,
+                                                            flexWrap: `wrap`,
+                                                            alignItems: `center`
+                                                        }}
+                                                    >
+                                                        {v.galleryColors.map(
+                                                            (v,i,a) => (
+                                                                // <img
+                                                                //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                                                //     style={{
+                                                                //         width: `20px`,
+                                                                //         height: `20px`
+                                                                //     }}
+                                                                // />
+                                                                <span
+                                                                    key={i}
+                                                                    style={{
+                                                                        // background: `${v.num_color}`,
+                                                                        // minWidth: `20px`,
+                                                                        // minHeight: `20px`,
+                                                                        // border: `1px solid black`,
+                                                                        // margin: `.1em`,
+                                                                        // display: `inline-block`,
+
+                                                                        display: `inline-block`,
+                                                                        border: `1px black solid`,
+                                                                        borderRadius: `1em`,
+                                                                        width: `20px`,
+                                                                        height: `20px`,
+                                                                        background: `${v.num_color}`,
+                                                                        // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
+                                                                        margin: `.2em`
+                                                                    }}
+                                                                    title={`${v.label_color}`}
+                                                                />
+                                                            )
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </Link>
                                         </li>

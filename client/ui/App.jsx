@@ -504,7 +504,7 @@ export default class App extends Component {
         ;
         return (
             <Router>
-                <Layout>
+                <Layout layoutStyle={this.props.layoutStyle} >
                     <Route path="/"
                         render={() => (
                             <div
