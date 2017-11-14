@@ -30,7 +30,8 @@ import sanitizeHtml from 'sanitize-html-react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import * as conf from './config.jsx';
-import NavbarAdaptat from './NavBar.jsx';
+//import NavbarAdaptat from './NavBar.jsx';
+import NavbarAdaptat from './NavBarExp.jsx';
 import {
     //MostrariTOTS,
     MostrariSubcategoriaPRODUCTES
