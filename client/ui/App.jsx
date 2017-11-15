@@ -87,10 +87,13 @@ class MarquesSUBCAT extends Component {
         super(props);
 
         this.state = {
-            selectValue: null
+            selectValue: null,
+            searchable: this.props.searchable,
+            clearable: true
         };
 
         this.updateValue = this.updateValue.bind(this);
+
     }
 
     static propTypes = {
@@ -101,17 +104,22 @@ class MarquesSUBCAT extends Component {
         }).isRequired
     };
 
-    updateValue(nouVal) {
-        this.setState = {
-            selectValue: nouVal
-        };
-        console.log("Selected: ", nouVal);
-
-        return nouVal;
+    static defaultProps = {
+        ...Component.defaultProps,
+        label: 'Marques:',
+        searchable: true
     }
 
-    focusMarcaSelect() {
-        this.marcaSelect.focus();
+    updateValue(nouVal) {
+        this.setState({
+            selectValue: nouVal
+        });
+        //console.log("Selected: ", nouVal);
+    }
+
+    componentDidUpdate() {
+        console.log("State: ", this.state);
+
     }
 
     render() {
@@ -142,15 +150,14 @@ class MarquesSUBCAT extends Component {
                 }}
             >
                 <Select
-                    autoFocus
                     id="marca-select"
                     ref={(marcaSelect) => this.marcaSelect = marcaSelect}
                     options={arrOpts}
+                    name="selected-marca"
                     onChange={this.updateValue}
                     value={this.state.selectValue}
                     placeholder="Filtrar por marca..."
-                    onInputChange={this.updateValue}
-                    searchable
+                    searchable={this.state.searchable}
                 />
             </div>
         );
@@ -410,6 +417,7 @@ export default class App extends Component {
 
                         <MarquesSubCategoria
                             variables={this.props.variables}
+                            marcaIdAVariables={this.props.marcaIdAVariables}
                         />
                         <TallesSubCategoria
                             tallaIdAVariables={this.props.tallaIdAVariables}
