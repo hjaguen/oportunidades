@@ -230,7 +230,8 @@ class TallesSUBCAT extends Component {
                     ref={(tallaSelect) => this.tallaSelect = tallaSelect}
                     options={arrOpts}
                     name="selected-talla"
-                    onChange={this.state.selectValue}
+                    onChange={this.updateValue}
+                    value={this.state.selectValue}
                     placeholder="Filtrar por talla..."
                     searchable={this.state.searchable}
                 />
@@ -303,7 +304,8 @@ export default class App extends Component {
 
         this.state = {
             variables,
-            filtreMarca: null
+            filtreMarca: null,
+            filtreTalla: null
         };
 
         this.variables = variables;
@@ -316,6 +318,7 @@ export default class App extends Component {
         this.colorIdAVariables = this.colorIdAVariables.bind(this);
         //this.productIdAlState = this.productIdAlState.bind(this);
         this.filtrantMarca = this.filtrantMarca.bind(this);
+        this.filtrantTalla = this.filtrantTalla.bind(this);
     }
 
     subcategoryIdAlState(ev) {
@@ -362,6 +365,12 @@ export default class App extends Component {
     filtrantMarca(marca) {
         this.setState({
             filtreMarca: marca
+        });
+    }
+
+    filtrantTalla(talla) {
+        this.setState({
+            filtreTalla: talla
         });
     }
 
@@ -474,10 +483,6 @@ export default class App extends Component {
         class MainContentSubCat extends Component {
             constructor(props, context) {
                 super(props, context);
-
-                this.state = {
-
-                }
             }
 
             render() {
@@ -520,6 +525,7 @@ export default class App extends Component {
                                 variables={this.props.data.variables}
                                 filtreMarca={this.props.filtreMarca}
                                 filtreTalla={this.props.filtreTalla}
+                                filtreColor={false}
                             />
                         </div>
                     ]
@@ -623,8 +629,12 @@ export default class App extends Component {
                                 marcaIdAVariables={this.marcaIdAVariables}
                                 tallaIdAVariables={this.tallaIdAVariables}
                                 colorIdAVariables={this.colorIdAVariables}
+
                                 filtrantMarca={this.filtrantMarca}
                                 filtreMarca={this.state.filtreMarca}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
                             />
                         );
                     }}/>
