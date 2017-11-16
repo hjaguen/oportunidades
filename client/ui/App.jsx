@@ -167,14 +167,34 @@ class MarquesSUBCAT extends Component {
 class TallesSUBCAT extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectValue: this.props.filtreTalla || null,
+            searchable: this.props.searchable,
+            clearable: true
+        };
+
+        this.updateValue = this.updateValue.bind(this);
     }
 
-    static propTypes = {
-        data: PropTypes.shape({
-            loading: PropTypes.bool,
-            error: PropTypes.object,
-            subcategoriaTALLES: PropTypes.array
-        }).isRequired
+    // static propTypes = {
+    //     data: PropTypes.shape({
+    //         loading: PropTypes.bool,
+    //         error: PropTypes.object,
+    //         subcategoriaTALLES: PropTypes.array
+    //     }).isRequired
+    // }
+
+    updateValue(nouVal) {
+        this.setState({
+            selectValue: nouVal
+        });
+        //console.log("Selected: ", nouVal);
+        this.props.filtrantTalla(nouVal);
+    }
+
+    componentDidUpdate() {
+        console.log("TallaState: ", this.state);
     }
 
     render() {
@@ -205,9 +225,14 @@ class TallesSUBCAT extends Component {
                 }}
             >
                 <Select
+                    id="talla-select"
                     options={arrOpts}
-                    onChange={(val) => this.props.tallaIdAVariables(val.value)}
+                    ref={(tallaSelect) => this.tallaSelect = tallaSelect}
+                    options={arrOpts}
+                    name="selected-talla"
+                    onChange={this.state.selectValue}
                     placeholder="Filtrar por talla..."
+                    searchable={this.state.searchable}
                 />
             </div>
         );
@@ -434,6 +459,8 @@ export default class App extends Component {
                         <TallesSubCategoria
                             tallaIdAVariables={this.props.tallaIdAVariables}
                             variables={this.props.variables}
+                            filtrantTalla={this.props.filtrantTalla}
+                            filtreTalla={this.props.filtreTalla}
                         />
                         <ColorsSubCategoria
                             colorIdAVariables={this.props.colorIdAVariables}
@@ -477,6 +504,8 @@ export default class App extends Component {
                                     variables={this.props.data.variables}
                                     filtrantMarca={this.props.filtrantMarca}
                                     filtreMarca={this.props.filtreMarca}
+                                    filtrantTalla={this.props.filtrantTalla}
+                                    filtreTalla={this.props.filtreTalla}
                                 />
                             </div>
                         </div>
@@ -490,6 +519,7 @@ export default class App extends Component {
                             <MostrariAmbProductes
                                 variables={this.props.data.variables}
                                 filtreMarca={this.props.filtreMarca}
+                                filtreTalla={this.props.filtreTalla}
                             />
                         </div>
                     ]
