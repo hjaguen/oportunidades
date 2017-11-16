@@ -23,14 +23,14 @@ export let
         display: `inline-block`,
         border: `1px rgba(0,0,0,.5) solid`,
         borderRadius: `.3em`,
-        margin: `.3em`,
-        background: `rgba(255,255,55,.8)`
+        margin: `.4em`,
+        background: `rgba(255, 255, 255, 0.25)`
     }
 
     ,
 
 // Estilo para modulo de filtro    
-    filtres_posicio = `bloque` // `columna` | `bloque`
+    filtres_posicio = `columna` // `columna` | `bloque`
     ,
                                     layoutTemplateArea =
                                         filtres_posicio === `columna`
@@ -45,7 +45,7 @@ export let
                                             : "none"
     ,
     estil_filtres = {
-        background: `rgba(255,55,255,.7)`,
+        background: `rgba(255, 255, 255, 0.25)`,
         width: `90%`,
         maxWidth: `${possibleMaxWidth}`,
         margin: `1em 3em`,
