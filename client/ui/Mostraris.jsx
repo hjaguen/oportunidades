@@ -136,15 +136,141 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
+        const
+            fM = this.props.filtreMarca,
+            fT = this.props.filtreTalla,
+            fC = this.props.filtreColor
+        ;
+
         return (
             <div>
                 <Masonry
                     elementType={'ul'}
                 >
-                    {   this.props.filtreMarca
-                        ?   this.props.data.subcategoriaPRODUCTES
-                                .filter(obj => obj.marca === this.props.filtreMarca.value)
-                                .map(
+                    {//    fM ?
+                    //         fT ?
+                    //             fC ?
+                    //                 // 111
+                    //             :   // 110
+                    //         : fC ?
+                    //             // 101
+                    //             :   // 100
+                    //     : fT ?
+                    //         fC ?
+                    //             // 011
+                    //         : // 010
+                    //     : fC ?
+                    //         // 001
+                    //         : // 000
+
+                        fM ?
+                            fT ?
+                                fC ?
+                                    // 111
+                                    alert("111")
+                                :   // 110
+                                    alert("110")
+                            : fC ?
+                                // 101
+                                    alert("101")
+                                :   // 100
+                                    this.props.data.subcategoriaPRODUCTES
+                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                        .map(
+                                            (v,i,a) => {
+                                                //console.log(v);
+                                                if (i < 40000) {
+                                                    return (
+                                                        <li key={i}
+                                                            style={ conf.estil_fitxetes }
+                                                        >
+                                                            <Link to={`/producto/${v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${v.id}`} >
+
+                                                                <img
+                                                                    src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
+                                                                    alt={v.descripcion}
+                                                                    title={v.descripcion_long_es}
+                                                                    style={{
+                                                                        position: `relative`,
+                                                                        width: `100%`,
+                                                                        display: `block`,
+                                                                        borderRadius: `.3em`
+                                                                    }}
+                                                                />
+                                                                <div
+                                                                    style={{
+                                                                        padding: `.3em`
+                                                                    }}
+                                                                >
+                                                                    Referencia: {v.referencia} - Nombre: {v.descripcion}
+                                                                </div>
+                                                                <div
+                                                                    style={{
+                                                                        padding: `.3em`
+                                                                    }}
+                                                                >
+                                                                    Colores:
+                                                                    <div
+                                                                        style={{
+                                                                            display: `flex`,
+                                                                            justifyContent: `center`,
+                                                                            flexWrap: `wrap`,
+                                                                            alignItems: `center`
+                                                                        }}
+                                                                    >
+                                                                        {v.galleryColors.map(
+                                                                            (v,i,a) => (
+                                                                                // <img
+                                                                                //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                                                                //     style={{
+                                                                                //         width: `20px`,
+                                                                                //         height: `20px`
+                                                                                //     }}
+                                                                                // />
+                                                                                <span
+                                                                                    key={i}
+                                                                                    style={{
+                                                                                        // background: `${v.num_color}`,
+                                                                                        // minWidth: `20px`,
+                                                                                        // minHeight: `20px`,
+                                                                                        // border: `1px solid black`,
+                                                                                        // margin: `.1em`,
+                                                                                        // display: `inline-block`,
+
+                                                                                        display: `inline-block`,
+                                                                                        border: `1px black solid`,
+                                                                                        borderRadius: `1em`,
+                                                                                        width: `20px`,
+                                                                                        height: `20px`,
+                                                                                        background: `${v.num_color}`,
+                                                                                        // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
+                                                                                        margin: `.2em`
+                                                                                    }}
+                                                                                    title={`${v.label_color}`}
+                                                                                />
+                                                                            )
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                            </Link>
+                                                        </li>
+                                                    );
+                                                }
+                                                return null;
+                                            }
+                                        )
+                        : fT ?
+                            fC ?
+                                // 011
+                                    alert("011")
+                            : // 010
+                                alert("010")
+                        : fC ?
+                            // 001
+                                alert("001")
+                            :
+                            // 000
+                               this.props.data.subcategoriaPRODUCTES.map(
                                     (v,i,a) => {
                                         //console.log(v);
                                         if (i < 40000) {
@@ -227,89 +353,6 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         return null;
                                     }
                                 )
-                        :   this.props.data.subcategoriaPRODUCTES.map(
-                                (v,i,a) => {
-                                    //console.log(v);
-                                    if (i < 40000) {
-                                        return (
-                                            <li key={i}
-                                                style={ conf.estil_fitxetes }
-                                            >
-                                                <Link to={`/producto/${v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${v.id}`} >
-
-                                                    <img
-                                                        src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
-                                                        alt={v.descripcion}
-                                                        title={v.descripcion_long_es}
-                                                        style={{
-                                                            position: `relative`,
-                                                            width: `100%`,
-                                                            display: `block`,
-                                                            borderRadius: `.3em`
-                                                        }}
-                                                    />
-                                                    <div
-                                                        style={{
-                                                            padding: `.3em`
-                                                        }}
-                                                    >
-                                                        Referencia: {v.referencia} - Nombre: {v.descripcion}
-                                                    </div>
-                                                    <div
-                                                        style={{
-                                                            padding: `.3em`
-                                                        }}
-                                                    >
-                                                        Colores:
-                                                        <div
-                                                            style={{
-                                                                display: `flex`,
-                                                                justifyContent: `center`,
-                                                                flexWrap: `wrap`,
-                                                                alignItems: `center`
-                                                            }}
-                                                        >
-                                                            {v.galleryColors.map(
-                                                                (v,i,a) => (
-                                                                    // <img
-                                                                    //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
-                                                                    //     style={{
-                                                                    //         width: `20px`,
-                                                                    //         height: `20px`
-                                                                    //     }}
-                                                                    // />
-                                                                    <span
-                                                                        key={i}
-                                                                        style={{
-                                                                            // background: `${v.num_color}`,
-                                                                            // minWidth: `20px`,
-                                                                            // minHeight: `20px`,
-                                                                            // border: `1px solid black`,
-                                                                            // margin: `.1em`,
-                                                                            // display: `inline-block`,
-
-                                                                            display: `inline-block`,
-                                                                            border: `1px black solid`,
-                                                                            borderRadius: `1em`,
-                                                                            width: `20px`,
-                                                                            height: `20px`,
-                                                                            background: `${v.num_color}`,
-                                                                            // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
-                                                                            margin: `.2em`
-                                                                        }}
-                                                                        title={`${v.label_color}`}
-                                                                    />
-                                                                )
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </Link>
-                                            </li>
-                                        );
-                                    }
-                                    return null;
-                                }
-                            )
                     }
                 </Masonry>
             </div>
