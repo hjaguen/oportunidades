@@ -43,17 +43,41 @@ export default class NavbarAdaptat extends Component {
         }
 
         return (
-            <nav className="navbar" role="navigation" style={{minHeight: `80px`,backgroundColor: `rgba(255, 255, 255, 0.27)`}}>
+            <nav className="navbar navbar-fixed-top" role="navigation" style={{minHeight: `80px`,backgroundColor: `rgba(255, 255, 255, 0.25)`,transition: `all 1s ease`}}>
                 <div className="container-fluid" style={{margin: `5px`}}>
-                    <div className="navbar-header">
+                    <div className="nav navbar-nav navbar-header col-xs-12">
+                        {/* idea! El H1 se puede configurar desde "config" como title.*/}
+                        <a className="nav navbar-nav navbar-brand" to="#" style={{margin: `0`,height: `80px`,paddingTop: `0`}}><h1 style={{fontSize: `2.5em`,color:`white`,textShadow: `8px 5px 10px #000`,fontFamily: `Comfortaa`,fontWeight:`700`}}>Blusas Colombianas</h1></a>
+                        <ul className="nav navbar-nav navbar-right">
+                            <li>
+                                <Link to="#">Link</Link>
+                            </li>
+                            <li className="dropdown">
+                                <Link to="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown <b className="caret"></b></Link>
+                                <ul className="dropdown-menu">
+                                    <li>
+                                        <Link to="#">Action</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="#">Another action</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="#">Something else here</Link>
+                                    </li>
+                                    <li className="divider"></li>
+                                    <li>
+                                        <Link to="#">Separated link</Link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span className="sr-only">Toggle navigation</span>
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        {/* idea! El H1 se puede configurar desde "config" como title.*/}
-                        <Link to="#"><h1 style={{fontSize: `2.5em`,color:`white`,textShadow: `8px 5px 10px #000`,fontFamily: `helvetica`}}>Blusas Colombianas</h1></Link>
+                        
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav">
@@ -96,29 +120,7 @@ export default class NavbarAdaptat extends Component {
                                 </ul>
                             </li>
                         </ul>
-                        <ul className="nav navbar-nav navbar-right">
-                            <li>
-                                <Link to="#">Link</Link>
-                            </li>
-                            <li className="dropdown">
-                                <Link to="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown <b className="caret"></b></Link>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <Link to="#">Action</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Another action</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Something else here</Link>
-                                    </li>
-                                    <li className="divider"></li>
-                                    <li>
-                                        <Link to="#">Separated link</Link>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        
                     </div>
                 </div>
             </nav>

@@ -473,10 +473,11 @@ export default class App extends Component {
         }
 
         let
-            FCMedia = () =>
+            SubTituloPagina = () =>
                 <FreeContent>
                     <div
                         style={{
+                            marginTop: `200px`,
                             marginLeft: `50px`,
                             color: 'black',
 
@@ -485,7 +486,7 @@ export default class App extends Component {
                               }
                         }}
                     >
-                            <h1>Blusas Colombianas</h1>
+                            <h2>Ropa Colombiana en Europa</h2>
                     </div>
                 </FreeContent>
         ,
@@ -493,8 +494,9 @@ export default class App extends Component {
                 <FreeContent>
                     <div 
                     style={{
+                        margin: `50px`,
                         '@media (max-width: 1000px)': {
-                                margin: '20px'
+                                margin: 'auto'
                               }           
                         }}>
                     {conf.video_latinmoda}
@@ -531,14 +533,14 @@ export default class App extends Component {
 
                             {/*Titulo de la Pagina*/}
                             <StyleRoot>
-                                <FCMedia />
+                                <SubTituloPagina />
                             </StyleRoot>
                                 
                             <StyleRoot>
                                 <FCMediaVideo />
                             </StyleRoot>
 
-                            <FreeContent children={conf.video_latinmoda} /> {/*Asi se comenta en JSX, entre llaves.*/}
+                                {/*<FreeContent children={conf.video_latinmoda} />*/} {/*Asi se comenta en JSX, entre llaves.*/}
 
                             <FreeContent>
                                 {conf.primer_contingut}

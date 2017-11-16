@@ -146,14 +146,14 @@ export let
 
 // Contenido libre de Video en "Home"    
         video_latinmoda =
-            <div
-                style={{
-                    margin: `auto`,
-                    position: `relative`,
-                    paddingBottom: `56.25%`,
-                    height: `0`,
-                    overflow: `hidden`,
-                }}
+            <div className="embedResponsive"
+                //  style={{
+                //  margin: `auto`,
+                //  position: `relative`,
+                //  paddingBottom: `56.25%`,
+                //  height: `0`,
+                //  overflow: `hidden`,
+                //  }}
             >
                 <iframe
                     style={{
