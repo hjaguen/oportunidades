@@ -43,8 +43,8 @@ export default class NavbarAdaptat extends Component {
         }
 
         return (
-            <nav className="navbar" role="navigation" style={{minHeight: `100px`,backgroundColor: `rgba(255, 255, 255, 0.27)`}}>
-                <div className="container-fluid" style={{margin: `15px`}}>
+            <nav className="navbar" role="navigation" style={{minHeight: `80px`,backgroundColor: `rgba(255, 255, 255, 0.27)`}}>
+                <div className="container-fluid" style={{margin: `5px`}}>
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span className="sr-only">Toggle navigation</span>
@@ -52,7 +52,8 @@ export default class NavbarAdaptat extends Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link className="navbar-brand" to="#"><h1>Blusas Colombianas</h1></Link>
+                        {/* idea! El H1 se puede configurar desde "config" como title.*/}
+                        <Link to="#"><h1 style={{fontSize: `2.5em`,color:`white`,textShadow: `8px 5px 10px #000`,fontFamily: `helvetica`}}>Blusas Colombianas</h1></Link>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav">
@@ -61,12 +62,11 @@ export default class NavbarAdaptat extends Component {
                                     (v,i,a) => {
                                         return (
                                             <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
-                                                <NavItem
+                                                <NavItem 
                                                     eventKey={i}
                                                     onClick={this.props.subcategoryIdAlState}
                                                     data-subcategory-id={v.categoriaId}
-                                                >
-                                                    {v.nom_categoria}
+                                                >                   {v.nom_categoria} 
                                                 </NavItem>
                                             </LinkContainer>
                                         )

@@ -1,0 +1,22 @@
+h1 {margin-top: 0;font-size: 2.5em;color: white;text-shadow: 8px 5px 10px black;font-family: helvetica;
+}
+.navbar-brand {height: minHeight;padding-top: 0;
+}
+.navbar {
+height: minHeight;
+background-color: rgba(255, 255, 255, 0.27);
+border-color: transparent;
+}
+body {
+  background-image: url('background_blue_v0011.jpg');
+}
+.container-fluid {
+  margin: 5px;
+padding-top: 10px;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: yellow;
+  background-color: #e7e7e7;
+}

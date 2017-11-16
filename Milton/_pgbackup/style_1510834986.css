@@ -1,0 +1,88 @@
+h1 {
+  margin-top: 0;
+  font-size: 2.5em;
+  color: white;
+  text-shadow: 8px 5px 10px black;
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+}
+@media (min-width:768px) and (max-width:991px) {
+  .navbar-default .navbar-nav > li > a {
+  color: #000;
+  font-size: 1em !important;
+  font-family: 'Comfortaa:700', sans-serif;
+  font-weight: 700;
+  }
+h1 {
+  margin-top: 0;
+  font-size: 1.8em;
+  color: white;
+  text-shadow: 8px 5px 10px black;
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+  }
+}
+@media (min-width:480px) and (max-width:767px) {
+h1 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: white;
+  text-shadow: 8px 5px 10px black;
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+}
+}
+@media (max-width:479px) {
+  h1 {
+    margin-top: 8px;
+    font-size: 1em;
+    color: white;
+    text-shadow: 8px 5px 10px black;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+  }
+  body {
+    background-image:url('canastilla.png') !important;
+    padding-top: 30px;
+  }
+}
+.navbar-brand {
+  height: minHeight;
+  padding-top: 0;
+}
+.navbar {
+  height: minHeight;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: transparent;
+transition: all 1s ease;
+}
+.navbar-prueba {
+  height: minHeight;
+  background-color: black;
+}
+body {
+  background-image: url('background_blue_v0011.jpg');
+background-attachment: fixed;
+padding-top: 130px;
+}
+.container-fluid {
+  margin: 5px;
+  padding-top: 10px;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: rgb(255, 64, 129);
+  background-color: transparent;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+  font-size: 1.5em;
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 700;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: rgb(255, 64, 129);
+  background-color: transparent;
+}
