@@ -19,6 +19,8 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import * as conf from './config.jsx';
 
+import './style.css';
+
 export default class NavbarAdaptat extends Component {
     constructor(props) {
         super(props);
@@ -43,11 +45,11 @@ export default class NavbarAdaptat extends Component {
         }
 
         return (
-            <nav className="navbar navbar-fixed-top" role="navigation" style={{minHeight: `80px`,backgroundColor: `rgba(255, 255, 255, 0.25)`,transition: `all 1s ease`}}>
+            <nav className="navbar" role="navigation" style={{minHeight: `80px`,backgroundColor: `rgba(255, 255, 255, 0.25)`,transition: `all 1s ease`}}>
                 <div className="container-fluid" style={{margin: `5px`}}>
                     <div className="nav navbar-nav navbar-header col-xs-12">
                         {/* idea! El H1 se puede configurar desde "config" como title.*/}
-                        <a className="nav navbar-nav navbar-brand" to="#" style={{margin: `0`,height: `80px`,paddingTop: `0`}}><h1 style={{fontSize: `2.5em`,color:`white`,textShadow: `8px 5px 10px #000`,fontFamily: `Comfortaa`,fontWeight:`700`}}>Blusas Colombianas</h1></a>
+                        <a className="nav navbar-nav navbar-brand" to="#" style={{margin: `0`,height: `80px`,paddingTop: `0`}}><h1 >Blusas Colombianas</h1></a>
                         <ul className="nav navbar-nav navbar-right">
                             <li>
                                 <Link to="#">Link</Link>

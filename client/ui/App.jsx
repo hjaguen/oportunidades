@@ -473,36 +473,32 @@ export default class App extends Component {
         }
 
         let
+            
+            FCMediaVideo = () =>
+                <FreeContent>
+                    <div
+                        style={{
+                                '@media (max-width: 1000px)': {
+                                margin: 'auto'
+                                }           
+                        }}>
+                        {conf.video_latinmoda}
+                    </div>    
+                </FreeContent>
+            ,
+            
             SubTituloPagina = () =>
                 <FreeContent>
                     <div
                         style={{
-                            marginTop: `200px`,
-                            marginLeft: `50px`,
                             color: 'black',
-
-                            '@media (max-width: 900px)': {
+                                '@media (max-width: 900px)': {
                                 color: 'fuchsia'
-                              }
-                        }}
-                    >
-                            <h2>Ropa Colombiana en Europa</h2>
+                                }
+                        }}>
+                        <h2>Ropa Colombiana en Europa</h2>
                     </div>
                 </FreeContent>
-        ,
-            FCMediaVideo = () =>
-                <FreeContent>
-                    <div 
-                    style={{
-                        margin: `50px`,
-                        '@media (max-width: 1000px)': {
-                                margin: 'auto'
-                              }           
-                        }}>
-                    {conf.video_latinmoda}
-                    </div>    
-                </FreeContent>
-        
         
         ;
         return (
@@ -525,7 +521,7 @@ export default class App extends Component {
                     />
 
                     <Route exact path="/" render={() => (
-                        <div
+                        <div className="container"
                             style={{
                                 gridArea: `present`
                             }}
