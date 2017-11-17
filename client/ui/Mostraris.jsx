@@ -136,95 +136,237 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
+        const
+            fM = this.props.filtreMarca,
+            fT = this.props.filtreTalla,
+            fC = this.props.filtreColor,
+            Fitxeta = (props) => (
+                <li key={props.i}
+                    style={ conf.estil_fitxetes }
+                >
+                    <Link to={`/producto/${props.v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${props.v.id}`} >
+
+                        <img
+                            src={`http://cashflow.colombiaespassion.net/productos/${props.v.imagen_principal}`}
+                            alt={props.v.descripcion}
+                            title={props.v.descripcion_long_es}
+                            style={{
+                                position: `relative`,
+                                width: `100%`,
+                                display: `block`,
+                                borderRadius: `.3em`
+                            }}
+                        />
+                        <div
+                            style={{
+                                padding: `.3em`
+                            }}
+                        >
+                            Referencia: {props.v.referencia} - Nombre: {props.v.descripcion}
+                        </div>
+                        <div
+                            style={{
+                                padding: `.3em`
+                            }}
+                        >
+                            Colores:
+                            <div
+                                style={{
+                                    display: `flex`,
+                                    justifyContent: `center`,
+                                    flexWrap: `wrap`,
+                                    alignItems: `center`
+                                }}
+                            >
+                                {props.v.galleryColors.map(
+                                    (v,i,a) => (
+                                        // <img
+                                        //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                        //     style={{
+                                        //         width: `20px`,
+                                        //         height: `20px`
+                                        //     }}
+                                        // />
+                                        <span
+                                            key={i}
+                                            style={{
+                                                // background: `${v.num_color}`,
+                                                // minWidth: `20px`,
+                                                // minHeight: `20px`,
+                                                // border: `1px solid black`,
+                                                // margin: `.1em`,
+                                                // display: `inline-block`,
+
+                                                display: `inline-block`,
+                                                border: `1px black solid`,
+                                                borderRadius: `1em`,
+                                                width: `20px`,
+                                                height: `20px`,
+                                                background: `${v.num_color}`,
+                                                // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
+                                                margin: `.2em`
+                                            }}
+                                            title={`${v.label_color}`}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        </div>
+                    </Link>
+                </li>
+            ),
+            fitxetaMapper = (v,i,a) => {
+                //console.log(v);
+                if (i < 40000) {
+                    return (
+                        <Fitxeta
+                            key={i}
+                            v={v}
+                            i={i}
+                            a={a}
+                        />
+                    );
+                }
+                return null;
+            }
+        ;
+
+        let
+            arrProductesAmbTalles = [],
+            arrProdsColor = []
+        ;
+
         return (
             <div>
                 <Masonry
                     elementType={'ul'}
                 >
-                    {   this.props.data.subcategoriaPRODUCTES.map(
-                            (v,i,a) => {
-                                //console.log(v);
-                                if (i < 40000) {
-                                    return (
-                                        <li key={i}
-                                            style={ conf.estil_fitxetes }
-                                        >
-                                            <Link to={`/producto/${v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${v.id}`} >
+                { fM ?
+                    fT ?
+                        fC ?
+                                // 111
+                                alert("111")
+                            :   // 110
+                                alert("110")
+                        : fC ?
+                            // 101
+                                alert("101")
+                            :   // 100
+                                this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                    .map(fitxetaMapper)
 
-                                                <img
-                                                    src={`http://cashflow.colombiaespassion.net/productos/${v.imagen_principal}`}
-                                                    alt={v.descripcion}
-                                                    title={v.descripcion_long_es}
-                                                    style={{
-                                                        position: `relative`,
-                                                        width: `100%`,
-                                                        display: `block`,
-                                                        borderRadius: `.3em`
-                                                    }}
-                                                />
-                                                <div
-                                                    style={{
-                                                        padding: `.3em`
-                                                    }}
-                                                >
-                                                    Referencia: {v.referencia} - Nombre: {v.descripcion}
-                                                </div>
-                                                <div
-                                                    style={{
-                                                        padding: `.3em`
-                                                    }}
-                                                >
-                                                    Colores:
-                                                    <div
-                                                        style={{
-                                                            display: `flex`,
-                                                            justifyContent: `center`,
-                                                            flexWrap: `wrap`,
-                                                            alignItems: `center`
-                                                        }}
-                                                    >
-                                                        {v.galleryColors.map(
-                                                            (v,i,a) => (
-                                                                // <img
-                                                                //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
-                                                                //     style={{
-                                                                //         width: `20px`,
-                                                                //         height: `20px`
-                                                                //     }}
-                                                                // />
-                                                                <span
-                                                                    key={i}
-                                                                    style={{
-                                                                        // background: `${v.num_color}`,
-                                                                        // minWidth: `20px`,
-                                                                        // minHeight: `20px`,
-                                                                        // border: `1px solid black`,
-                                                                        // margin: `.1em`,
-                                                                        // display: `inline-block`,
+                    : fT ?
+                        fC ?
+                            // 011
+                                alert("011")
+                        : // 010 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!
+                        (() => {
+                            fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)
+                                .then(res => res.json())
+                                .then(res =>
+                                    res.map(
+                                        (v,i,a) => {
+                                          fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
+                                            .then(res => res.json())
+                                            .then(res => {
+                                                arrProductesAmbTalles.push(res);
+                                            })
+                                            .then(res => console.dir(arrProductesAmbTalles))
+                                        }
+                                    )
+                                )
+                                return <h1>010</h1>;
+                        })()
+                            //.then(res => res.map(fitxetaMapper))
 
-                                                                        display: `inline-block`,
-                                                                        border: `1px black solid`,
-                                                                        borderRadius: `1em`,
-                                                                        width: `20px`,
-                                                                        height: `20px`,
-                                                                        background: `${v.num_color}`,
-                                                                        // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
-                                                                        margin: `.2em`
-                                                                    }}
-                                                                    title={`${v.label_color}`}
-                                                                />
-                                                            )
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        </li>
-                                    );
-                                }
-                                return null;
-                            }
-                        )
-                    }
+
+
+                            //.then(res => console.dir(arrProductesAmbTalles))
+
+                                //Promise.all(
+                                //    let array = [];
+
+                                //    this.props.data.subcategoriaPRODUCTES
+                                        // .forEach(
+                                        //     (v,i,a) => {
+                                                // fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
+                                                //     .then(res => res.json())
+                                                //     // .then(res => arrProductesAmbTalles.push(res))
+                                                //     // .then(() =>
+                                                //     //     console.dir("aPT:", arrProductesAmbTalles)
+                                                //     // )
+                                                //     .then(res => console.dir(res))
+
+
+
+                                                    // .then(res => (
+                                                    //     <Fitxeta
+                                                    //         key={i}
+                                                    //         v={v}
+                                                    //         i={i}
+                                                    //         a={a}
+                                                    //     />
+                                                    // ))
+
+                                                    //.then(res => console.dir("array:", arrProductesAmbTalles))
+                                                    //.then(res => console.dir("res:", res))
+                                            //    ;
+                                        //     console.dir(v);
+                                        //     }
+                                        // )
+                            //    )
+                                //.then( res =>
+                                // );
+
+                    : fC ?
+                        // 001
+                            //alert("001")
+                            (() => {
+
+                                this.props.data.subcategoriaPRODUCTES
+                                .forEach(
+                                    (v,i,a) => {
+                                        if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                             arrProdsColor.push(v);
+                                            //console.dir(v);
+                                        }
+                                    }
+                                );
+                                console.dir("arrProdsColor", arrProdsColor);
+                                return arrProdsColor.map(fitxetaMapper);
+                                // return arrProdsColor.map(
+                                //     (v,i,a) => {
+                                //         return <h1>{v.descripcion}</h1>;
+                                //     }
+                                // );
+                                                                                                    //
+                                                                                                    // fetch("http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34")
+                                                                                                    //     .then(res => res.json())
+                                                                                                    //     //.then(res => res.find(obj => obj.galleryColors.colorId ==="4"))
+                                                                                                    //     // .then(res => console.dir(res))
+                                                                                                    //     .then(res => res
+                                                                                                    //         .forEach(
+                                                                                                    //             (v,i,a) => {
+                                                                                                    //               if (v.galleryColors.find((obj) => obj.colorId==="5")) {
+                                                                                                    //                   arrProdsColor.push(v);
+                                                                                                    //               }
+                                                                                                    //             }
+                                                                                                    //         )
+                                                                                                    //     )
+                                                                                                    //     .then(res =>
+                                                                                                    //         //console.dir(arrProdsColor)
+                                                                                                    //         arrProdsColor.map(fitxetaMapper)
+                                                                                                    //     );
+                                    // console.dir("arrProdsColor", arrProdsColor);
+                                    //return null;
+
+                            })()
+                        :
+                        // 000
+                           this.props.data.subcategoriaPRODUCTES
+                                .map(fitxetaMapper)
+                }
                 </Masonry>
             </div>
         );

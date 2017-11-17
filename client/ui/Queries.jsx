@@ -28,27 +28,27 @@ export const
                     imagen_principal
                     tallas {
                       id
-                    barCode
-                    producto
-                    talla
-                    color
-                    existencias
-                    costoPonderado
-                    tallaId
-                    num_color
-                    labelColor
-                    nom_talla
-                    label_talla
-                    orden_talla
-                    publicar_talla
+                        barCode
+                        producto
+                        talla
+                        color
+                        existencias
+                        costoPonderado
+                        tallaId
+                        num_color
+                        labelColor
+                        nom_talla
+                        label_talla
+                        orden_talla
+                        publicar_talla
                     }
                     gallery {
                       id
-                    producto
-                    imagen
-                    imagen_min
-                    type
-                    ppal
+                        producto
+                        imagen
+                        imagen_min
+                        type
+                        ppal
                     }
                 }
     }`,

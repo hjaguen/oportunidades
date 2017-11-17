@@ -87,31 +87,39 @@ class MarquesSUBCAT extends Component {
         super(props);
 
         this.state = {
-            selectValue: null
+            selectValue: this.props.filtreMarca || null,
+            searchable: this.props.searchable,
+            clearable: true
         };
 
         this.updateValue = this.updateValue.bind(this);
+
     }
 
-    static propTypes = {
-        data: PropTypes.shape({
-            loading: PropTypes.bool,
-            error: PropTypes.object,
-            subcategoriaMARQUES: PropTypes.array
-        }).isRequired
-    };
+    // static propTypes = {
+    //     data: PropTypes.shape({
+    //         loading: PropTypes.bool,
+    //         error: PropTypes.object,
+    //         subcategoriaMARQUES: PropTypes.array
+    //     }).isRequired
+    // };
+
+    static defaultProps = {
+        ...Component.defaultProps,
+        label: 'Marques:',
+        searchable: true
+    }
 
     updateValue(nouVal) {
-        this.setState = {
+        this.setState({
             selectValue: nouVal
-        };
-        console.log("Selected: ", nouVal);
-
-        return nouVal;
+        });
+        //console.log("Selected: ", nouVal);
+        this.props.filtrantMarca(nouVal);
     }
 
-    focusMarcaSelect() {
-        this.marcaSelect.focus();
+    componentDidUpdate() {
+        console.log("State: ", this.state);
     }
 
     render() {
@@ -142,15 +150,14 @@ class MarquesSUBCAT extends Component {
                 }}
             >
                 <Select
-                    autoFocus
                     id="marca-select"
                     ref={(marcaSelect) => this.marcaSelect = marcaSelect}
                     options={arrOpts}
+                    name="selected-marca"
                     onChange={this.updateValue}
                     value={this.state.selectValue}
                     placeholder="Filtrar por marca..."
-                    onInputChange={this.updateValue}
-                    searchable
+                    searchable={this.state.searchable}
                 />
             </div>
         );
@@ -160,14 +167,34 @@ class MarquesSUBCAT extends Component {
 class TallesSUBCAT extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectValue: this.props.filtreTalla || null,
+            searchable: this.props.searchable,
+            clearable: true
+        };
+
+        this.updateValue = this.updateValue.bind(this);
     }
 
-    static propTypes = {
-        data: PropTypes.shape({
-            loading: PropTypes.bool,
-            error: PropTypes.object,
-            subcategoriaTALLES: PropTypes.array
-        }).isRequired
+    // static propTypes = {
+    //     data: PropTypes.shape({
+    //         loading: PropTypes.bool,
+    //         error: PropTypes.object,
+    //         subcategoriaTALLES: PropTypes.array
+    //     }).isRequired
+    // }
+
+    updateValue(nouVal) {
+        this.setState({
+            selectValue: nouVal
+        });
+        //console.log("Selected: ", nouVal);
+        this.props.filtrantTalla(nouVal);
+    }
+
+    componentDidUpdate() {
+        console.log("TallaState: ", this.state);
     }
 
     render() {
@@ -198,9 +225,15 @@ class TallesSUBCAT extends Component {
                 }}
             >
                 <Select
+                    id="talla-select"
                     options={arrOpts}
-                    onChange={(val) => this.props.tallaIdAVariables(val.value)}
+                    ref={(tallaSelect) => this.tallaSelect = tallaSelect}
+                    options={arrOpts}
+                    name="selected-talla"
+                    onChange={this.updateValue}
+                    value={this.state.selectValue}
                     placeholder="Filtrar por talla..."
+                    searchable={this.state.searchable}
                 />
             </div>
         );
@@ -253,7 +286,12 @@ class ColorsSUBCAT extends Component {
                                         background: `${v.nom_color}`,
                                         margin: `.2em`
                                     }}
+                                    data-nomcolor={v.nom_color}
+                                    data-labelcolor={v.label_color}
+                                    data-colorid={v.colorId}
+
                                     title={v.label_color}
+                                    onClick={this.props.filtrantColor}
                                 />
                             );
                         }
@@ -270,16 +308,24 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            variables
+            variables,
+            filtreMarca: null,
+            filtreTalla: null,
+            filtreColor: null
         };
 
         this.variables = variables;
+
+        //this.filtreMarca = null;
 
         this.subcategoryIdAlState = this.subcategoryIdAlState.bind(this);
         this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
         this.tallaIdAVariables = this.tallaIdAVariables.bind(this);
         this.colorIdAVariables = this.colorIdAVariables.bind(this);
         //this.productIdAlState = this.productIdAlState.bind(this);
+        this.filtrantMarca = this.filtrantMarca.bind(this);
+        this.filtrantTalla = this.filtrantTalla.bind(this);
+        this.filtrantColor = this.filtrantColor.bind(this);
     }
 
     subcategoryIdAlState(ev) {
@@ -320,6 +366,28 @@ export default class App extends Component {
 
         this.setState({
             variables
+        });
+    }
+
+    filtrantMarca(marca) {
+        this.setState({
+            filtreMarca: marca
+        });
+    }
+
+    filtrantTalla(talla) {
+        this.setState({
+            filtreTalla: talla
+        });
+    }
+
+    filtrantColor(ev) {
+        this.setState({
+            filtreColor: {
+                colorId: ev.target.dataset['colorid'],
+                nom_color: ev.target.dataset['nomcolor'],
+                label_color: ev.target.dataset['labelcolor']
+            }
         });
     }
 
@@ -371,19 +439,19 @@ export default class App extends Component {
 
 // Falta definir les consultes correctes DE FILTRAT, de moment
 // prenem ProductesQuery com a base:
-  ProductesMARCAQuery = ProductesTALLAQuery = ProductesQuery,
+  //ProductesMARCAQuery = ProductesTALLAQuery = ProductesQuery,
 
-            MostrariAmbProductesMARCA = graphql(ProductesMARCAQuery, {
-                options: {
-                    variables: this.state.variables
-                }
-            })(MostrariSubcategoriaPRODUCTES),
-
-            MostrariAmbProductesTALLA = graphql(ProductesTALLAQuery, {
-                options: {
-                    variables: this.state.variables
-                }
-            })(MostrariSubcategoriaPRODUCTES),
+            // MostrariAmbProductesMARCA = graphql(ProductesMARCAQuery, {
+            //     options: {
+            //         variables: this.state.variables
+            //     }
+            // })(MostrariSubcategoriaPRODUCTES),
+            //
+            // MostrariAmbProductesTALLA = graphql(ProductesTALLAQuery, {
+            //     options: {
+            //         variables: this.state.variables
+            //     }
+            // })(MostrariSubcategoriaPRODUCTES),
 
 //>>>>>>>>>>>>>>>>>>>>>>><< FOOTR - Un per a cada tipus de consulta
             FootrAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
@@ -410,14 +478,21 @@ export default class App extends Component {
 
                         <MarquesSubCategoria
                             variables={this.props.variables}
+                            marcaIdAVariables={this.props.marcaIdAVariables}
+                            filtrantMarca={this.props.filtrantMarca}
+                            filtreMarca={this.props.filtreMarca}
                         />
                         <TallesSubCategoria
                             tallaIdAVariables={this.props.tallaIdAVariables}
                             variables={this.props.variables}
+                            filtrantTalla={this.props.filtrantTalla}
+                            filtreTalla={this.props.filtreTalla}
                         />
                         <ColorsSubCategoria
                             colorIdAVariables={this.props.colorIdAVariables}
                             variables={this.props.variables}
+                            filtrantColor={this.props.filtrantColor}
+                            filtreColor={this.props.filtreColor}
                         />
                     </div>
                 );
@@ -427,10 +502,6 @@ export default class App extends Component {
         class MainContentSubCat extends Component {
             constructor(props, context) {
                 super(props, context);
-
-                this.state = {
-
-                }
             }
 
             render() {
@@ -455,6 +526,15 @@ export default class App extends Component {
                                     tallaIdAVariables={this.props.tallaIdAVariables}
                                     colorIdAVariables={this.props.colorIdAVariables}
                                     variables={this.props.data.variables}
+
+                                    filtrantMarca={this.props.filtrantMarca}
+                                    filtreMarca={this.props.filtreMarca}
+
+                                    filtrantTalla={this.props.filtrantTalla}
+                                    filtreTalla={this.props.filtreTalla}
+
+                                    filtrantColor={this.props.filtrantColor}
+                                    filtreColor={this.props.filtreColor}
                                 />
                             </div>
                         </div>
@@ -465,7 +545,12 @@ export default class App extends Component {
                                 gridArea: `content`
                             }}
                         >
-                            <MostrariAmbProductes variables={this.props.data.variables} />
+                            <MostrariAmbProductes
+                                variables={this.props.data.variables}
+                                filtreMarca={this.props.filtreMarca}
+                                filtreTalla={this.props.filtreTalla}
+                                filtreColor={this.props.filtreColor}
+                            />
                         </div>
                     ]
                 );
@@ -585,6 +670,15 @@ export default class App extends Component {
                                 marcaIdAVariables={this.marcaIdAVariables}
                                 tallaIdAVariables={this.tallaIdAVariables}
                                 colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={this.state.filtreMarca}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
                             />
                         );
                     }}/>
