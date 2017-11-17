@@ -286,7 +286,12 @@ class ColorsSUBCAT extends Component {
                                         background: `${v.nom_color}`,
                                         margin: `.2em`
                                     }}
+                                    data-nomcolor={v.nom_color}
+                                    data-labelcolor={v.label_color}
+                                    data-colorid={v.colorId}
+
                                     title={v.label_color}
+                                    onClick={this.props.filtrantColor}
                                 />
                             );
                         }
@@ -305,7 +310,8 @@ export default class App extends Component {
         this.state = {
             variables,
             filtreMarca: null,
-            filtreTalla: null
+            filtreTalla: null,
+            filtreColor: null
         };
 
         this.variables = variables;
@@ -319,6 +325,7 @@ export default class App extends Component {
         //this.productIdAlState = this.productIdAlState.bind(this);
         this.filtrantMarca = this.filtrantMarca.bind(this);
         this.filtrantTalla = this.filtrantTalla.bind(this);
+        this.filtrantColor = this.filtrantColor.bind(this);
     }
 
     subcategoryIdAlState(ev) {
@@ -371,6 +378,16 @@ export default class App extends Component {
     filtrantTalla(talla) {
         this.setState({
             filtreTalla: talla
+        });
+    }
+
+    filtrantColor(ev) {
+        this.setState({
+            filtreColor: {
+                colorId: ev.target.dataset['colorid'],
+                nom_color: ev.target.dataset['nomcolor'],
+                label_color: ev.target.dataset['labelcolor']
+            }
         });
     }
 
@@ -474,6 +491,8 @@ export default class App extends Component {
                         <ColorsSubCategoria
                             colorIdAVariables={this.props.colorIdAVariables}
                             variables={this.props.variables}
+                            filtrantColor={this.props.filtrantColor}
+                            filtreColor={this.props.filtreColor}
                         />
                     </div>
                 );
@@ -507,10 +526,15 @@ export default class App extends Component {
                                     tallaIdAVariables={this.props.tallaIdAVariables}
                                     colorIdAVariables={this.props.colorIdAVariables}
                                     variables={this.props.data.variables}
+
                                     filtrantMarca={this.props.filtrantMarca}
                                     filtreMarca={this.props.filtreMarca}
+
                                     filtrantTalla={this.props.filtrantTalla}
                                     filtreTalla={this.props.filtreTalla}
+
+                                    filtrantColor={this.props.filtrantColor}
+                                    filtreColor={this.props.filtreColor}
                                 />
                             </div>
                         </div>
@@ -525,7 +549,7 @@ export default class App extends Component {
                                 variables={this.props.data.variables}
                                 filtreMarca={this.props.filtreMarca}
                                 filtreTalla={this.props.filtreTalla}
-                                filtreColor={false}
+                                filtreColor={this.props.filtreColor}
                             />
                         </div>
                     ]
@@ -635,6 +659,9 @@ export default class App extends Component {
 
                                 filtrantTalla={this.filtrantTalla}
                                 filtreTalla={this.state.filtreTalla}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
                             />
                         );
                     }}/>

@@ -23,3 +23,7 @@ body {
 #graphiql {
     height: 100vh;
 }
+
+ul {
+    list-style: none;
+}

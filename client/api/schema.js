@@ -206,6 +206,180 @@ const
                 type: new GraphQLList(galleryColorType)
             }
         })
+    }),
+
+//Més afegitons per un disseny qúestionable de l'API...
+    TallaProdAfegType = new GraphQLObjectType({
+        name: `TallaProdAfeg`,
+        description: `TallaProdAfeg... `,
+        fields: () => ({
+            id: {
+                type: GraphQLString
+            },
+            barCode: {
+                type: GraphQLString
+            },
+            producto: {
+                type: GraphQLString
+            },
+            talla: {
+                type: GraphQLString
+            },
+            color: {
+                type: GraphQLString
+            },
+            existencias: {
+                type: GraphQLString
+            },
+            costoPonderado: {
+                type: GraphQLString
+            },
+            tallaId: {
+                type: GraphQLString
+            },
+            num_color: {
+                type: GraphQLString
+            },
+            labelColor: {
+                type: GraphQLString
+            },
+            nom_talla: {
+                type: GraphQLString
+            },
+            label_talla: {
+                type: GraphQLString
+            },
+            orden_talla: {
+                type: GraphQLString
+            },
+            publicar_talla: {
+                type: GraphQLString
+            }
+        })
+    }),
+
+    ProductAfegType = new GraphQLObjectType({
+        name: `ProductoAfeg`,
+        description: `ProductoAfeg de ropa`,
+        fields: () => ({
+            id: {
+                type: GraphQLString
+            },
+            referencia: {
+                type: GraphQLString
+            },
+            descripcion: {
+                type: GraphQLString
+            },
+            categoria: {
+                type: GraphQLString
+            },
+            marca: {
+                type: GraphQLString
+            },
+            precioBase: {
+                type: GraphQLString
+            },
+            precio2: {
+                type: GraphQLString
+            },
+            precio3: {
+                type: GraphQLString
+            },
+            precio4: {
+                type: GraphQLString
+            },
+            precioMiscelaneo: {
+                type: GraphQLString
+            },
+            proveedor: {
+                type: GraphQLString
+            },
+            descripcion_long_es: {
+                type: GraphQLString
+            },
+            nom_marca: {
+                type: GraphQLString
+            },
+            logo_marca: {
+                type: GraphQLString
+            },
+            nom_categoria: {
+                type: GraphQLString
+            },
+            imagen_principal: {
+                type: GraphQLString
+            },
+            tallas: {
+                type: new GraphQLList(TallaProdAfegType)
+            },
+            gallery: {
+                type: new GraphQLList(ImageType)
+            },
+            galleryColors: {
+                type: new GraphQLList(galleryColorType)
+            }
+        })
+    })
+    ProductExtendedType = new GraphQLObjectType({
+        name: `Producto`,
+        description: `Producto de ropa`,
+        fields: () => ({
+            id: {
+                type: GraphQLString
+            },
+            referencia: {
+                type: GraphQLString
+            },
+            descripcion: {
+                type: GraphQLString
+            },
+            categoria: {
+                type: GraphQLString
+            },
+            marca: {
+                type: GraphQLString
+            },
+            precioBase: {
+                type: GraphQLString
+            },
+            precio2: {
+                type: GraphQLString
+            },
+            precio3: {
+                type: GraphQLString
+            },
+            precio4: {
+                type: GraphQLString
+            },
+            precioMiscelaneo: {
+                type: GraphQLString
+            },
+            proveedor: {
+                type: GraphQLString
+            },
+            descripcion_long_es: {
+                type: GraphQLString
+            },
+            nom_marca: {
+                type: GraphQLString
+            },
+            logo_marca: {
+                type: GraphQLString
+            },
+            nom_categoria: {
+                type: GraphQLString
+            },
+            imagen_principal: {
+                type: GraphQLString
+            },
+            gallery: {
+                type: new GraphQLList(ImageType)
+            },
+            galleryColors: {
+                type: new GraphQLList(galleryColorType)
+            }
+        })
     })
 ;
 
@@ -229,6 +403,11 @@ function MARCA(relativeUrl) {
 }
 function COLOR(relativeUrl) {
     return fetch(`${apiUrl}/jcolors/data/${relativeUrl}`)
+        .then(res => res.json());
+}
+//Aquest afegitó és per culpa del filtre de Talles, per no haver inclòs la info en l'objecte de la consulta en Subcategories...
+function PRODUCTE(relativeUrl) {
+    return fetch(`${apiUrl}/jgeneral/data/${relativeUrl}`)
         .then(res => res.json());
 }
 
@@ -342,6 +521,19 @@ const QueryType = new GraphQLObjectType({
                     SUBCATEGORIA(`colors/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
         },
         subcategoriaPRODUCTES: {
+            type: new GraphQLList(ProductType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    SUBCATEGORIA(`products/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
+        },
+
+        subcategoriaPRODUCTESExtended: {
             type: new GraphQLList(ProductType),
             args: {
                 apiUrl: { type: GraphQLString },
