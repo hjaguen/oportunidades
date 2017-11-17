@@ -610,7 +610,7 @@ export default class App extends Component {
                     <Route path="/botones"
                         render={() => (
                             <div>
-                                <Stylo.Button>
+                                <Stylo.Button className="btn btn-danger">
                                     flyeslkjflaksj
                                 </Stylo.Button>
 

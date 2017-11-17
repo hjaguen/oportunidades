@@ -3,6 +3,15 @@ import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } f
 
 export let
 
+    categoryId = `2`
+    ,
+    tituloPagina = 'Blusas Colombianas'
+    ,
+    telContacto = `(+34) 777-7777`
+    ,
+    emailContacto = `ejemplo@duckduckgo.com`
+    ,
+
 // Imagen de fondo y sus opciones
     fonsPrincipal = `background_blue_v0011.jpg`,
     backgroundSize =  `cover`,
@@ -10,11 +19,7 @@ export let
     backgroundAttachment = `fixed`
     ,
 
-    categoryId = `2`
-
-    ,
-
-// Tamaño de columna y estilo para las fotos de producto    
+// Tamaño de columna y estilo para las fotos de producto
     amplaria_fitxetes_subcategoria = `220px`
     ,
     estil_fitxetes = {
@@ -29,7 +34,7 @@ export let
 
     ,
 
-// Estilo para modulo de filtro    
+// Estilo para modulo de filtro
     filtres_posicio = `columna` // `columna` | `bloque`
     ,
                                     layoutTemplateArea =
@@ -75,7 +80,7 @@ export let
     }
     ,
 
-// 1er Contenido libre em "Home"    
+// 1er Contenido libre em "Home"
     primer_contingut =
         <div style={{
             margin: `50px`
@@ -100,7 +105,7 @@ export let
         </div>
     ,
 
-// 2do Contendido libre en "Home"    
+// 2do Contendido libre en "Home"
     segon_lliure =
         <Grid
             style={{
@@ -142,12 +147,12 @@ export let
         </Grid>
 
     ,
-    
 
-// Contenido libre de Video en "Home"    
+
+// Contenido libre de Video en "Home"
         video_latinmoda =
     <div className="container">
-    <div className="row" >      
+    <div className="row" >
         <div className="embed-responsive embed-responsive-16by9"
                   //style={{
                   //margin: `auto`,
@@ -157,7 +162,7 @@ export let
                   //overflow: `hidden`,
                   //}}
             >
-                <iframe 
+                <iframe
                         //style={{
                         //position: `absolute`,
                         //top: `0`,
@@ -173,7 +178,7 @@ export let
                         //allowFullScreen
                 ></iframe>
             </div>
-        </div> 
+        </div>
 </div>
         ,
 

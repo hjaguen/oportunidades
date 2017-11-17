@@ -52,7 +52,7 @@ export default class NavbarAdaptat extends Component {
                         <a className="nav navbar-nav navbar-brand" to="#" style={{margin: `0`,height: `80px`,paddingTop: `0`}}><h1 >Blusas Colombianas</h1></a>
                         <ul className="nav navbar-nav navbar-right">
                             <li>
-                                <Link to="#">Link</Link>
+                                <Link to="#">{conf.telContacto}</Link>
                             </li>
                             <li className="dropdown">
                                 <Link to="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown <b className="caret"></b></Link>
@@ -79,7 +79,7 @@ export default class NavbarAdaptat extends Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        
+
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav">
@@ -88,11 +88,11 @@ export default class NavbarAdaptat extends Component {
                                     (v,i,a) => {
                                         return (
                                             <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
-                                                <NavItem 
+                                                <NavItem
                                                     eventKey={i}
                                                     onClick={this.props.subcategoryIdAlState}
                                                     data-subcategory-id={v.categoriaId}
-                                                >                   {v.nom_categoria} 
+                                                >                   {v.nom_categoria}
                                                 </NavItem>
                                             </LinkContainer>
                                         )
@@ -122,7 +122,7 @@ export default class NavbarAdaptat extends Component {
                                 </ul>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
             </nav>
