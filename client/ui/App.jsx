@@ -58,6 +58,8 @@ import Radium, { StyleRoot } from 'radium';
 import Layout from './Layout.jsx';
 import MainContentProducte from './DetallProducte.jsx';
 
+import * as Stylo from './StyledComponents.jsx';
+
 FreeContent = Radium(FreeContent);
 
 
@@ -558,20 +560,20 @@ export default class App extends Component {
         }
 
         let
-            
+
             FCMediaVideo = () =>
                 <FreeContent>
                     <div
                         style={{
                                 '@media (max-width: 1000px)': {
                                 margin: 'auto'
-                                }           
+                                }
                         }}>
                         {conf.video_latinmoda}
-                    </div>    
+                    </div>
                 </FreeContent>
             ,
-            
+
             SubTituloPagina = () =>
                 <FreeContent>
                     <div
@@ -584,7 +586,7 @@ export default class App extends Component {
                         <h2>Ropa Colombiana en Europa</h2>
                     </div>
                 </FreeContent>
-        
+
         ;
         return (
             <Router>
@@ -605,6 +607,20 @@ export default class App extends Component {
                         )}
                     />
 
+                    <Route path="/botones"
+                        render={() => (
+                            <div>
+                                <Stylo.Button>
+                                    flyeslkjflaksj
+                                </Stylo.Button>
+
+                                <Stylo.TomatoButton>
+                                    AGILLLL
+                                </Stylo.TomatoButton>
+                            </div>
+                        )}
+                    />
+
                     <Route exact path="/" render={() => (
                         <div className="container"
                             style={{
@@ -616,7 +632,7 @@ export default class App extends Component {
                             <StyleRoot>
                                 <SubTituloPagina />
                             </StyleRoot>
-                                
+
                             <StyleRoot>
                                 <FCMediaVideo />
                             </StyleRoot>
