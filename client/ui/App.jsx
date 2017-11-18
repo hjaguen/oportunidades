@@ -484,12 +484,13 @@ export default class App extends Component {
                             filtrantMarca={this.props.filtrantMarca}
                             filtreMarca={this.props.filtreMarca}
                         />
-                        <TallesSubCategoria
-                            tallaIdAVariables={this.props.tallaIdAVariables}
-                            variables={this.props.variables}
-                            filtrantTalla={this.props.filtrantTalla}
-                            filtreTalla={this.props.filtreTalla}
+                {/*        <TallesSubCategoria
+                            tallaIdAVariables= this.props.tallaIdAVariables}
+                            variables= this.props.variables}
+                            filtrantTalla= this.props.filtrantTalla}
+                            filtreTalla= this.props.filtreTalla}
                         />
+                // */}
                         <ColorsSubCategoria
                             colorIdAVariables={this.props.colorIdAVariables}
                             variables={this.props.variables}
