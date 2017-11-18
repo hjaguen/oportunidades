@@ -55,7 +55,6 @@ import {
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
 import Radium, { StyleRoot } from 'radium';
-import Layout from './Layout.jsx';
 import MainContentProducte from './DetallProducte.jsx';
 
 import * as Stylo from './StyledComponents.jsx';
@@ -588,6 +587,9 @@ export default class App extends Component {
                 </FreeContent>
 
         ;
+
+//////////// index ////////////
+
         return (
             <Router>
                 <Stylo.MainLayout>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Layout from './Layout.jsx';
 import * as conf from './config.jsx';
 
 export const
@@ -18,7 +17,7 @@ export const
       background: tomato;
     `,
 
-    MainLayout = styled(Layout)`
+    MainLayout = styled.div`
       height: 100%;
       display: grid;
       grid-template-columns: auto auto auto auto auto auto;
