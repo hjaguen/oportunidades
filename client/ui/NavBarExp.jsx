@@ -52,6 +52,9 @@ export default class NavbarAdaptat extends Component {
                         <a className="nav navbar-nav navbar-brand" to="#" style={{margin: `0`,height: `80px`,paddingTop: `0`}}><h1 >Blusas Colombianas</h1></a>
                         <ul className="nav navbar-nav navbar-right">
                             <li>
+                                {conf.emailContacto}
+                            </li>
+                            <li>
                                 <Link to="#">{conf.telContacto}</Link>
                             </li>
                             <li className="dropdown">

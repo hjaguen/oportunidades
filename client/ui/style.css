@@ -62,11 +62,6 @@ transition: all 1s ease;
   height: minHeight;
   background-color: black;
 }
-body {
-  background-image: url('background_blue_v0011.jpg');
-background-attachment: fixed;
-padding-top: 130px;
-}
 .container-fluid {
   margin: 5px;
   padding-top: 10px;
