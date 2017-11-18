@@ -63,22 +63,10 @@ export let
 
     // Estilo del Layout principal
 
-    layoutStyle = {
-        height: `100%`,
-        display: `grid`,
-        gridTemplateColumns: `auto auto auto auto auto auto`,
-        gridTemplateAreas: `
-            "navbar navbar navbar navbar navbar navbar"
-            ${layoutTemplateArea}
-            "present present present present present present"
-            "footer footer footer footer footer footer"
-        `,
-        backgroundImage: `url(/${fonsPrincipal})`,
-        backgroundSize: backgroundSize,
-        backgroundRepeat: backgroundRepeat,
-        backgroundAttachment: backgroundAttachment
+/*    layoutStyle = {
+        
     }
-    ,
+    ,*/
 
 // 1er Contenido libre em "Home"
     primer_contingut =

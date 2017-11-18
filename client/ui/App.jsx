@@ -590,7 +590,7 @@ export default class App extends Component {
         ;
         return (
             <Router>
-                <Layout layoutStyle={this.props.layoutStyle} >
+                <Stylo.MainLayout>
                     <Route path="/"
                         render={() => (
                             <div
@@ -733,7 +733,7 @@ export default class App extends Component {
                             />
                         </div>
                     )}/>
-                </Layout>
+                </Stylo.MainLayout>
             </Router>
         );
     }
