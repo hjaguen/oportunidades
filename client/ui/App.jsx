@@ -602,6 +602,7 @@ export default class App extends Component {
                                 }}
                             >
                                 <NavbarAdaptatAmbSubcategories
+                                    filtrantMarca={this.filtrantMarca}
                                     subcategoryIdAlState={this.subcategoryIdAlState}
                                     fluid
                                     inverse

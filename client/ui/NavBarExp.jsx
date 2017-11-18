@@ -24,14 +24,29 @@ import './style.css';
 export default class NavbarAdaptat extends Component {
     constructor(props) {
         super(props);
+
+        this.canviaSubcat = this.canviaSubcat.bind(this);
     }
 
-    static propTypes = {
-        data: PropTypes.shape({
-            loading: PropTypes.bool,
-            error: PropTypes.object,
-            subcategories: PropTypes.array
-        }).isRequired
+    // static propTypes = {
+    //     data PropTypes.shape({
+    //         loading: PropTypes.bool,
+    //         error: PropTypes.object,
+    //         subcategories: PropTypes.array
+    //     }).isRequired
+    // }
+
+    canviaSubcat() {
+        //this.props.subcategoryIdAlState();
+        this.props.filtrantMarca(null);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps === this.props) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     render() {
@@ -93,7 +108,7 @@ export default class NavbarAdaptat extends Component {
                                             <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
                                                 <NavItem
                                                     eventKey={i}
-                                                    onClick={this.props.subcategoryIdAlState}
+                                                    onClick={this.canviaSubcat}
                                                     data-subcategory-id={v.categoriaId}
                                                 >                   {v.nom_categoria}
                                                 </NavItem>
