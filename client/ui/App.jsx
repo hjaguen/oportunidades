@@ -96,10 +96,36 @@ class MarquesSUBCAT extends Component {
         searchable: true
     }
 
+    // componentWillReceiveProps(nextProps) {
+    //     const locationChanged = nextProps.location !== this.props.location
+    // }
+
     updateValue(nouVal) {
-        this.setState({
-            selectValue: nouVal
-        });
+        // this.props.history.push(`${location.pathname}/marca/${this.state.selectValue.label.trim().replace(" ", ".").toLowerCase()}.${this.state.selectValue.value}`, {
+        //     selectValue: nouVal
+        // });
+
+        if (!location.pathname.includes("/marca/")) {
+            (this.props.filtreMarca)
+            ?
+            this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
+                selectValue: nouVal
+            })
+            :
+            this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                selectValue: nouVal
+            })
+
+            // this.setState({
+            //     selectValue: nouVal
+            // })
+            ;
+        } else {
+            this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                selectValue: nouVal
+            })
+        }
+
         //console.log("Selected: ", nouVal);
         this.props.filtrantMarca(nouVal);
     }
@@ -269,31 +295,56 @@ class ColorsSUBCAT extends Component {
                     (() => [
                                 this.props.data[this.props.data.variables.queryVariant].map(
                                     (v,i,a) => {
-                                        return (
-                                            <span
-                                                key={i}
-                                                style={{
-                                                    display: `inline-block`,
-                                                    border: `1px black solid`,
-                                                    borderRadius: `1em`,
-                                                    width: `20px`,
-                                                    height: `20px`,
-                                                    background: `${v.nom_color}`,
-                                                    margin: `.2em`
-                                                }}
-                                                data-nomcolor={v.nom_color}
-                                                data-labelcolor={v.label_color}
-                                                data-colorid={v.colorId}
+                                        return [
+                                            [
 
-                                                title={v.label_color}
-                                                onClick={this.filtraPerColor}
-                                            />
-                                        );
+                                                (this.props.filtreColor)
+                                                    ?   <Route
+                                                            key={i}
+                                                            path={`${location.pathname}/color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`}
+                                                            render={({ match }) => {
+                                                                <h1>COLOR!</h1>
+                                                            }}
+                                                        />
+                                                    :   <Route
+                                                            key={i}
+                                                            path={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                            render={({ match }) => {
+                                                                <h1>COLOR!</h1>
+                                                            }}
+                                                        />
+                                            ,
+                                                <Link
+                                                    key={i+4000}
+                                                    to={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                >
+                                                    <span
+                                                        key={i}
+                                                        style={{
+                                                            display: `inline-block`,
+                                                            border: `1px black solid`,
+                                                            borderRadius: `1em`,
+                                                            width: `20px`,
+                                                            height: `20px`,
+                                                            background: `${v.nom_color}`,
+                                                            margin: `.2em`
+                                                        }}
+                                                        data-nomcolor={v.nom_color}
+                                                        data-labelcolor={v.label_color}
+                                                        data-colorid={v.colorId}
+
+                                                        title={v.label_color}
+                                                        onClick={this.filtraPerColor}
+                                                    />
+                                                </Link>
+                                            ]
+                                        ];
                                     }
                                 )
                             ,
 
                              <span
+                                key="x"
                                 style={{
                                     display: `flex`,
                                     border: `4px fuchsia solid`,
@@ -519,8 +570,17 @@ export default class App extends Component {
                         <MarquesSubCategoria
                             variables={this.props.variables}
                             marcaIdAVariables={this.props.marcaIdAVariables}
+
                             filtrantMarca={this.props.filtrantMarca}
                             filtreMarca={this.props.filtreMarca}
+
+                            filtrantTalla={this.props.filtrantTalla}
+                            filtreTalla={this.props.filtreTalla}
+
+                            filtrantColor={this.props.filtrantColor}
+                            filtreColor={this.props.filtreColor}
+
+                            {...this.props}
                         />
                 {/*        <TallesSubCategoria
                             tallaIdAVariables= this.props.tallaIdAVariables}
@@ -598,6 +658,8 @@ export default class App extends Component {
 
                                     filtrantColor={this.props.filtrantColor}
                                     filtreColor={this.props.filtreColor}
+
+                                    {...this.props}
                                 />
                             </div>
                         </div>
@@ -731,7 +793,7 @@ export default class App extends Component {
                         </div>
                     )}/>
 
-                    <Route exact path="/categoria/:subcategoryId" render={({ match }) => {
+                    <Route path="/categoria/:subcategoryId" render={({ match, history, location }) => {
                         let
                             variables = Object.assign({}, this.state.variables, {
                                 subcategoryId: match.params.subcategoryId.match(/\d+$/)[0]
@@ -760,6 +822,10 @@ export default class App extends Component {
 
                                 filtrantColor={this.filtrantColor}
                                 filtreColor={this.state.filtreColor}
+
+                                match={match}
+                                history={history}
+                                location={location}
                             />
                         );
                     }}/>

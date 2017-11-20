@@ -149,7 +149,6 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                         <img
                             src={`http://cashflow.colombiaespassion.net/productos/${props.v.imagen_principal}`}
                             alt={props.v.descripcion}
-                            title={props.v.descripcion_long_es}
                             style={{
                                 position: `relative`,
                                 width: `100%`,
