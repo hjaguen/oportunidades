@@ -233,7 +233,8 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
 
         let
             arrProductesAmbTalles = [],
-            arrProdsColor = []
+            arrProdsColor = [],
+            arrResultatFiltres = []
         ;
 
         return (
@@ -250,7 +251,27 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                 alert("110")
                         : fC ?
                             // 101
-                                alert("101")
+                            //    alert("101")
+                                (() => {
+                                    this.props.data.subcategoriaPRODUCTES
+                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                        //.map(fitxetaMapper)
+                                        .forEach(
+                                            (v,i,a) => {
+                                                if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                                     arrResultatFiltres.push(v);
+                                                    //console.dir(v);
+                                                }
+                                            }
+                                        )
+                                    ;
+                                    //console.dir("arrResultatFiltres", arrResultatFiltres);
+                                    if (arrResultatFiltres.length > 1) {
+                                        return arrResultatFiltres.map(fitxetaMapper);
+                                    } else {
+                                        return <h3>Sin resultados</h3>;
+                                    }
+                                })()
                             :   // 100
                                 this.props.data.subcategoriaPRODUCTES
                                     .filter(obj => obj.marca === this.props.filtreMarca.value)

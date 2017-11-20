@@ -1,6 +1,35 @@
 import gql from 'graphql-tag';
 
 export const
+
+    MarcaSubcategoriaCOLORSQuery = gql`
+        query ProductesQuery(
+                    $apiUrl: String,
+                    $pageId: String,
+                    $categoryId: String,
+                    $subcategoryId: String,
+                    $sizeId: String,
+                    $brandId: String,
+                    $colorId: String
+
+            ) {
+            marcaSubcategoriaCOLORS
+                    (
+                        apiUrl: $apiUrl,
+                        pageId: $pageId,
+                        categoryId: $categoryId,
+                        subcategoryId: $subcategoryId,
+                        colorId: $colorId,
+                        brandId: $brandId,
+                        sizeId: $sizeId
+                    ) {
+              colorId
+              nom_color
+              label_color
+            }
+        }`
+    ,
+
     ProducteDETALLSQuery = gql`
         query ProducteDETALLSQuery(
                 $apiUrl: String,

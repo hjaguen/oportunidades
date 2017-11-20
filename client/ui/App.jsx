@@ -36,22 +36,7 @@ import {
     //MostrariTOTS,
     MostrariSubcategoriaPRODUCTES
 } from './Mostraris.jsx';
-import {
-    ProducteDETALLSQuery,
-    SubCategoriaMARQUESQuery,
-    SubCategoriaTALLESQuery,
-    SubCategoriaCOLORSQuery,
-    SubCategoriaPRODUCTESQuery,
-    CategoriaMARQUESQuery,
-    CategoriaTALLESQuery,
-    CategoriaCOLORSQuery,
-    CategoriaPRODUCTESQuery,
-    TallesQuery,
-    ColorsQuery,
-    MarquesQuery,
-    ProductesQuery,
-    SubcategoriesQuery
-} from './Queries.jsx';
+import * as Qs from './Queries.jsx';
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
 import Radium, { StyleRoot } from 'radium';
@@ -75,7 +60,7 @@ let variables = {
 
 
 
-const NavbarAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
+const NavbarAdaptatAmbSubcategories = graphql(Qs.SubcategoriesQuery, {
     options: {
         variables
     }
@@ -159,6 +144,7 @@ class MarquesSUBCAT extends Component {
                     value={this.state.selectValue}
                     placeholder="Filtrar por marca..."
                     searchable={this.state.searchable}
+                    clearValueText="Desactivar el filtro"
                 />
             </div>
         );
@@ -244,14 +230,21 @@ class TallesSUBCAT extends Component {
 class ColorsSUBCAT extends Component {
     constructor(props) {
         super(props);
+
+        this.filtraPerColor = this.filtraPerColor.bind(this);
     }
 
-    static propTypes = {
-        data: PropTypes.shape({
-            loading: PropTypes.bool,
-            error: PropTypes.object,
-            subcategoriaCOLORS: PropTypes.array
-        }).isRequired
+    // static propTypes = {
+    //     data: PropTypes.shape({
+    //         loading: PropTypes.bool,
+    //         error: PropTypes.object,
+    //         subcategoriaCOLORS: PropTypes.array
+    //     }).isRequired
+    // }
+
+    filtraPerColor(ev) {
+        ev.target.style.border = "3px solid fuchsia";
+        this.props.filtrantColor(ev);
     }
 
     render() {
@@ -273,30 +266,63 @@ class ColorsSUBCAT extends Component {
                 }}
             >
                 {
-                    this.props.data.subcategoriaCOLORS.map(
-                        (v,i,a) => {
-                            return (
-                                <span
-                                    key={i}
-                                    style={{
-                                        display: `inline-block`,
-                                        border: `1px black solid`,
-                                        borderRadius: `1em`,
-                                        width: `20px`,
-                                        height: `20px`,
-                                        background: `${v.nom_color}`,
-                                        margin: `.2em`
-                                    }}
-                                    data-nomcolor={v.nom_color}
-                                    data-labelcolor={v.label_color}
-                                    data-colorid={v.colorId}
+                    (() => [
+                                this.props.data[this.props.data.variables.queryVariant].map(
+                                    (v,i,a) => {
+                                        return (
+                                            <span
+                                                key={i}
+                                                style={{
+                                                    display: `inline-block`,
+                                                    border: `1px black solid`,
+                                                    borderRadius: `1em`,
+                                                    width: `20px`,
+                                                    height: `20px`,
+                                                    background: `${v.nom_color}`,
+                                                    margin: `.2em`
+                                                }}
+                                                data-nomcolor={v.nom_color}
+                                                data-labelcolor={v.label_color}
+                                                data-colorid={v.colorId}
 
-                                    title={v.label_color}
-                                    onClick={this.props.filtrantColor}
-                                />
-                            );
-                        }
-                    )
+                                                title={v.label_color}
+                                                onClick={this.filtraPerColor}
+                                            />
+                                        );
+                                    }
+                                )
+                            ,
+
+                             <span
+                                style={{
+                                    display: `flex`,
+                                    border: `4px fuchsia solid`,
+                                    borderRadius: `1em`,
+                                    minWidth: `20px`,
+                                    height: `20px`,
+                                    background: `white`,
+                                    margin: `.2em`,
+                                    alignItems: `center`,
+                                    padding: `8px`,
+                                    color: `fuchsia`
+                                }}
+                                data-nomcolor=""
+                                data-labelcolor=""
+                                data-colorid=""
+
+                                title=""
+                                onClick={()=>{}}
+                            >Filtrar
+                            </span>
+                        ]
+                        // ()
+                        //     ?
+
+                        //return arrayColors;
+                        //     :
+                        // ;
+
+                    )()
                 }
 
             </div>
@@ -371,6 +397,7 @@ export default class App extends Component {
     }
 
     filtrantMarca(marca) {
+        marca ? this.marcaIdAVariables(marca.value) : null;
         this.setState({
             filtreMarca: marca
         });
@@ -393,7 +420,6 @@ export default class App extends Component {
     }
 
     render() {
-
         let
             // MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
             //     options: {
@@ -401,7 +427,7 @@ export default class App extends Component {
             //     }
             // })(MostrariTOTS),
 
-            MarquesSubCategoria = graphql(SubCategoriaMARQUESQuery, {
+            MarquesSubCategoria = graphql(Qs.SubCategoriaMARQUESQuery, {
                 options: () => {
                 //    console.dir("thisVars:", this.variables);
                     return ({
@@ -410,7 +436,7 @@ export default class App extends Component {
                 }
             })(MarquesSUBCAT),
 
-            TallesSubCategoria = graphql(SubCategoriaTALLESQuery, {
+            TallesSubCategoria = graphql(Qs.SubCategoriaTALLESQuery, {
                 options: () => {
                     //console.dir("thisVars:", this.variables);
                     return ({
@@ -419,16 +445,29 @@ export default class App extends Component {
                 }
             })(TallesSUBCAT),
 
-            ColorsSubCategoria = graphql(SubCategoriaCOLORSQuery, {
+            ColorsSubCategoriaTOTS = graphql(Qs.SubCategoriaCOLORSQuery, {
                 options: () => {
                     //console.dir("thisVars:", this.variables);
+                    let
+                        variables = Object.assign(this.variables, {queryVariant: "subcategoriaCOLORS"});
                     return ({
                         variables: this.variables
                     });
                 }
             })(ColorsSUBCAT),
 
-            MostrariAmbProductes = graphql(ProductesQuery, {
+            ColorsSubCategoriaMARCA = graphql(Qs.MarcaSubcategoriaCOLORSQuery, {
+                options: () => {
+                    //console.dir("thisVars:", this.variables);
+                    let
+                        variables = Object.assign(this.variables, {queryVariant: "marcaSubcategoriaCOLORS"});
+                    return ({
+                        variables: this.variables
+                    });
+                }
+            })(ColorsSUBCAT),
+
+            MostrariAmbProductes = graphql(Qs.ProductesQuery, {
                 options: () => {
                     //console.dir("thisVars:", this.variables);
                     return ({
@@ -455,7 +494,7 @@ export default class App extends Component {
             // })(MostrariSubcategoriaPRODUCTES),
 
 //>>>>>>>>>>>>>>>>>>>>>>><< FOOTR - Un per a cada tipus de consulta
-            FootrAdaptatAmbSubcategories = graphql(SubcategoriesQuery, {
+            FootrAdaptatAmbSubcategories = graphql(Qs.SubcategoriesQuery, {
                 options: {
                     variables
                 }
@@ -490,12 +529,34 @@ export default class App extends Component {
                             filtreTalla= this.props.filtreTalla}
                         />
                 // */}
-                        <ColorsSubCategoria
-                            colorIdAVariables={this.props.colorIdAVariables}
-                            variables={this.props.variables}
-                            filtrantColor={this.props.filtrantColor}
-                            filtreColor={this.props.filtreColor}
-                        />
+                    {   (this.props.filtreMarca)
+                        ?   <ColorsSubCategoriaMARCA
+                                colorIdAVariables={this.props.colorIdAVariables}
+                                variables={this.props.variables}
+
+                                filtrantMarca={this.props.filtrantMarca}
+                                filtreMarca={this.props.filtreMarca}
+
+                                filtrantTalla={this.props.filtrantTalla}
+                                filtreTalla={this.props.filtreTalla}
+
+                                filtrantColor={this.props.filtrantColor}
+                                filtreColor={this.props.filtreColor}
+                            />
+                        :   <ColorsSubCategoriaTOTS
+                                colorIdAVariables={this.props.colorIdAVariables}
+                                variables={this.props.variables}
+
+                                filtrantMarca={this.props.filtrantMarca}
+                                filtreMarca={this.props.filtreMarca}
+
+                                filtrantTalla={this.props.filtrantTalla}
+                                filtreTalla={this.props.filtreTalla}
+
+                                filtrantColor={this.props.filtrantColor}
+                                filtreColor={this.props.filtreColor}
+                            />
+                    }
                     </div>
                 );
             }
@@ -676,7 +737,7 @@ export default class App extends Component {
                                 subcategoryId: match.params.subcategoryId.match(/\d+$/)[0]
                             }),
 
-                            MainContentSUBCAT = graphql(SubCategoriaPRODUCTESQuery, {
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
                                 options: {
                                     variables
                                 }
