@@ -121,9 +121,11 @@ class MarquesSUBCAT extends Component {
             // })
             ;
         } else {
-            this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
-                selectValue: nouVal
-            })
+            (nouVal)
+                ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                })
+                : this.props.history.push(location.pathname);
         }
 
         //console.log("Selected: ", nouVal);
