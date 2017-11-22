@@ -275,7 +275,7 @@ class ColorsSUBCAT extends Component {
                                 if (!location.pathname.includes("/color/")) {
                                     (this.props.filtreColor)
                                     ?
-                                    this.props.history.push(`${location.pathname}/color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                                    this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
                                         filtreColor: {
                                             colorId: ev.target.dataset['colorid'],
                                             nom_color: ev.target.dataset['nomcolor'],
@@ -362,30 +362,59 @@ class ColorsSUBCAT extends Component {
                                                         onClick={this.filtraPerColor}
                                                     />
                                                 </Link>
-                                            :   <Link
-                                                    key={i}
-                                                    to={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
-                                                >
-                                                    <span
+                                            :
+                                                (this.props.filtreColor)
+                                                ?
+                                                    // (()=>{
+                                                        //alert("location");
+                                                        <Link
+                                                            key={i}
+                                                            to={`../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                        >
+                                                            <span
+                                                                key={i}
+                                                                style={{
+                                                                    display: `inline-block`,
+                                                                    border: `1px black solid`,
+                                                                    borderRadius: `1em`,
+                                                                    width: `20px`,
+                                                                    height: `20px`,
+                                                                    background: `${v.nom_color}`,
+                                                                    margin: `.2em`
+                                                                }}
+                                                                data-nomcolor={v.nom_color}
+                                                                data-labelcolor={v.label_color}
+                                                                data-colorid={v.colorId}
+
+                                                                title={v.label_color}
+                                                                onClick={this.filtraPerColor}
+                                                            />
+                                                        </Link>
+                                                    // })()
+                                                :
+                                                    <Link
                                                         key={i}
-                                                        style={{
-                                                            display: `inline-block`,
-                                                            border: `1px black solid`,
-                                                            borderRadius: `1em`,
-                                                            width: `20px`,
-                                                            height: `20px`,
-                                                            background: `${v.nom_color}`,
-                                                            margin: `.2em`
-                                                        }}
-                                                        data-nomcolor={v.nom_color}
-                                                        data-labelcolor={v.label_color}
-                                                        data-colorid={v.colorId}
+                                                        to={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                    >
+                                                        <span
+                                                            key={i}
+                                                            style={{
+                                                                display: `inline-block`,
+                                                                border: `1px black solid`,
+                                                                borderRadius: `1em`,
+                                                                width: `20px`,
+                                                                height: `20px`,
+                                                                background: `${v.nom_color}`,
+                                                                margin: `.2em`
+                                                            }}
+                                                            data-nomcolor={v.nom_color}
+                                                            data-labelcolor={v.label_color}
+                                                            data-colorid={v.colorId}
 
-                                                        title={v.label_color}
-                                                        onClick={this.filtraPerColor}
-                                                    />
-                                                </Link>
-
+                                                            title={v.label_color}
+                                                            onClick={this.filtraPerColor}
+                                                        />
+                                                    </Link>
                                         );
                                     }
                                 )
