@@ -19,7 +19,7 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 import * as conf from './config.jsx';
 
-import './style.css';
+//import './style.css';
 
 export default class NavbarAdaptat extends Component {
     constructor(props) {
@@ -60,7 +60,7 @@ export default class NavbarAdaptat extends Component {
         }
 
         return (
-            <nav className="navbar" role="navigation" style={{minHeight: `80px`,backgroundColor: `rgba(255, 255, 255, 0.25)`,transition: `all 1s ease`}}>
+            <nav className="navbar blacker" role="navigation">
                 <div className="container-fluid" style={{margin: `5px`}}>
                     <div className="nav navbar-nav navbar-header col-xs-12">
                         {/* idea! El H1 se puede configurar desde "config" como title.*/}
