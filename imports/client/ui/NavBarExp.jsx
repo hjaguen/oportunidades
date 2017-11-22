@@ -39,6 +39,8 @@ export default class NavbarAdaptat extends Component {
     canviaSubcat() {
         //this.props.subcategoryIdAlState();
         this.props.filtrantMarca(null);
+        this.props.filtrantColor(null);
+        this.props.filtrantTalla(null);
     }
 
     shouldComponentUpdate(nextProps, nextState) {

@@ -141,30 +141,34 @@ export let
         video_latinmoda =
     <div className="container">
     <div className="row" >
-        <div className="embed-responsive embed-responsive-16by9"
-                  //style={{
-                  //margin: `auto`,
-                  //position: `relative`,
-                  //paddingBottom: `56.25%`,
-                  //height: `0`,
-                  //overflow: `hidden`,
-                  //}}
-            >
+
+        <div className="embed-responsive embed-responsive-16by9">
+            {/*  //style=
+                //margin: `auto`,
+                //position: `relative`,
+                //paddingBottom: `56.25%`,
+                //height: `0`,
+                //overflow: `hidden`,
+                //}}
+                */
+            }
                 <iframe
-                        //style={{
-                        //position: `absolute`,
-                        //top: `0`,
-                        //left: `0`,
-                        //width: `100%`,
-                        //height: `100%`
-                        //}}
-                        className="embed-responsive-item"
-                        //width="800"
-                        //height="450"
-                        src="https://player.vimeo.com/video/240463716"
-                        //frameBorder="0"
-                        //allowFullScreen
+                    className="embed-responsive-item"
+                    src="https://player.vimeo.com/video/240463716"
                 ></iframe>
+                {//style=
+                //width="800"
+                //height="450"
+                //frameBorder="0"
+                //allowFullScreen
+
+                //position: `absolute`,
+                //top: `0`,
+                //left: `0`,
+                //width: `100%`,
+                //height: `100%`
+                //
+                }
             </div>
         </div>
 </div>

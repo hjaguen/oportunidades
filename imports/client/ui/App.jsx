@@ -271,6 +271,45 @@ class ColorsSUBCAT extends Component {
     // }
 
     filtraPerColor(ev) {
+
+                                if (!location.pathname.includes("/color/")) {
+                                    (this.props.filtreColor)
+                                    ?
+                                    this.props.history.push(`${location.pathname}/color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                                        filtreColor: {
+                                            colorId: ev.target.dataset['colorid'],
+                                            nom_color: ev.target.dataset['nomcolor'],
+                                            label_color: ev.target.dataset['labelcolor']
+                                        }
+                                    })
+                                    :
+                                    this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
+                                        filtreColor: {
+                                            colorId: ev.target.dataset['colorid'],
+                                            nom_color: ev.target.dataset['nomcolor'],
+                                            label_color: ev.target.dataset['labelcolor']
+                                    }})
+
+                                    // this.setState({
+                                    //     selectValue: nouVal
+                                    // })
+                                    ;
+                                } else {
+                                    (ev.target.dataset['colorid'])
+                                        ? this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
+                                            filtreColor: {
+                                                colorId: ev.target.dataset['colorid'],
+                                                nom_color: ev.target.dataset['nomcolor'],
+                                                label_color: ev.target.dataset['labelcolor']
+                                        }})
+                                        : this.props.history.push(location.pathname);
+                                }
+
+                                //console.log("Selected: ", nouVal);
+            //    this.props.filtrantMarca(nouVal);
+
+
+
         ev.target.style.border = "3px solid fuchsia";
         this.props.filtrantColor(ev);
     }
@@ -297,27 +336,34 @@ class ColorsSUBCAT extends Component {
                     (() => [
                                 this.props.data[this.props.data.variables.queryVariant].map(
                                     (v,i,a) => {
-                                        return [
-                                            [
+                                        return (
+                                            (this.props.filtreColor && this.props.filtreColor.colorId === v.colorId)
+                                            ?   <Link
+                                                    key={i}
+                                                    to={`../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                >
+                                                    <span
+                                                        key={i}
+                                                        style={{
+                                                            display: `inline-block`,
+                                                            border: `4px fuchsia solid`,
+                                                            borderRadius: `1em`,
+                                                            width: `20px`,
+                                                            height: `20px`,
+                                                            background: `${v.nom_color}`,
+                                                            margin: `.2em`,
+                                                            transform: `scale(1.4)`
+                                                        }}
+                                                        data-nomcolor={v.nom_color}
+                                                        data-labelcolor={v.label_color}
+                                                        data-colorid={v.colorId}
 
-                                                (this.props.filtreColor)
-                                                    ?   <Route
-                                                            key={i}
-                                                            path={`${location.pathname}/color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`}
-                                                            render={({ match }) => {
-                                                                <h1>COLOR!</h1>
-                                                            }}
-                                                        />
-                                                    :   <Route
-                                                            key={i}
-                                                            path={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
-                                                            render={({ match }) => {
-                                                                <h1>COLOR!</h1>
-                                                            }}
-                                                        />
-                                            ,
-                                                <Link
-                                                    key={i+4000}
+                                                        title={v.label_color}
+                                                        onClick={this.filtraPerColor}
+                                                    />
+                                                </Link>
+                                            :   <Link
+                                                    key={i}
                                                     to={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
                                                 >
                                                     <span
@@ -339,8 +385,8 @@ class ColorsSUBCAT extends Component {
                                                         onClick={this.filtraPerColor}
                                                     />
                                                 </Link>
-                                            ]
-                                        ];
+
+                                        );
                                     }
                                 )
                             ,
@@ -365,7 +411,7 @@ class ColorsSUBCAT extends Component {
 
                                 title=""
                                 onClick={()=>{}}
-                            >Filtrar
+                            >&times;
                             </span>
                         ]
                         // ()
@@ -457,19 +503,27 @@ export default class App extends Component {
     }
 
     filtrantTalla(talla) {
+        talla ? this.tallaIdAVariables(talla.value) : null;
         this.setState({
             filtreTalla: talla
         });
     }
 
     filtrantColor(ev) {
-        this.setState({
-            filtreColor: {
-                colorId: ev.target.dataset['colorid'],
-                nom_color: ev.target.dataset['nomcolor'],
-                label_color: ev.target.dataset['labelcolor']
-            }
-        });
+        ev && ev.target.dataset['colorid']
+            ?  (()=>{
+                    this.colorIdAVariables(ev.target.dataset['colorid']);
+                    this.setState({
+                        filtreColor: {
+                            colorId: ev.target.dataset['colorid'],
+                            nom_color: ev.target.dataset['nomcolor'],
+                            label_color: ev.target.dataset['labelcolor']
+                        }
+                    });
+                })()
+            : this.setState({
+                filtreColor: null
+            });
     }
 
     render() {
@@ -604,6 +658,8 @@ export default class App extends Component {
 
                                 filtrantColor={this.props.filtrantColor}
                                 filtreColor={this.props.filtreColor}
+
+                                {...this.props}
                             />
                         :   <ColorsSubCategoriaTOTS
                                 colorIdAVariables={this.props.colorIdAVariables}
@@ -617,6 +673,8 @@ export default class App extends Component {
 
                                 filtrantColor={this.props.filtrantColor}
                                 filtreColor={this.props.filtreColor}
+
+                                {...this.props}
                             />
                     }
                     </div>
@@ -727,10 +785,18 @@ export default class App extends Component {
                                 }}
                             >
                                 <NavbarAdaptatAmbSubcategories
-                                    filtrantMarca={this.filtrantMarca}
                                     subcategoryIdAlState={this.subcategoryIdAlState}
                                     fluid
                                     inverse
+
+                                    filtrantMarca={this.filtrantMarca}
+                                    filtreMarca={this.state.filtreMarca}
+
+                                    filtrantTalla={this.filtrantTalla}
+                                    filtreTalla={this.state.filtreTalla}
+
+                                    filtrantColor={this.filtrantColor}
+                                    filtreColor={this.state.filtreColor}
                                 />
                             </div>
                         )}
