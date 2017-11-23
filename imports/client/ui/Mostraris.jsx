@@ -282,21 +282,24 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                 alert("011")
                         : // 010 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!
                         (() => {
-                            fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)
-                                .then(res => res.json())
-                                .then(res =>
-                                    res.map(
-                                        (v,i,a) => {
-                                          fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
-                                            .then(res => res.json())
-                                            .then(res => {
-                                                arrProductesAmbTalles.push(res);
-                                            })
-                                            .then(res => console.dir(arrProductesAmbTalles))
-                                        }
-                                    )
-                                )
-                                return <h1>010</h1>;
+                            // fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)
+                            //     .then(res => res.json())
+                            //     .then(res =>
+                            //         res.map(
+                            //             (v,i,a) => {
+                            //               fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
+                            //                 .then(res => res.json())
+                            //                 .then(res => {
+                            //                     arrProductesAmbTalles.push(res);
+                            //                 })
+                            //                 .then(res => console.dir(arrProductesAmbTalles))
+                            //             }
+                            //         )
+                            //     )
+                            //     return <h1>010</h1>;
+                            this.props.data.subcategoriaPRODUCTES
+                                .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                .map(fitxetaMapper)
                         })()
                             //.then(res => res.map(fitxetaMapper))
 

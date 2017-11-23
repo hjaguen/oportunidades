@@ -205,6 +205,15 @@ export const
                   label_color
                   imagen_min
                 }
+                sizes {
+                    id
+                    tallaId
+                    existencia_talla
+                    nom_talla
+                    label_talla
+                    orden_talla
+                    publicar_talla
+                }
              }
     }`,
 
