@@ -11,31 +11,15 @@ const fetch = require('isomorphic-fetch');
 //fetchTenda({}): `${URL_API}/jpages/data/general/?pageId=${tendaId}`
 
 let
-    apiUrl = `http://api.colombiaespassion.net`;
-/*,
+    apiUrl = `http://api.colombiaespassion.net`,
     pageId = `1`,
     categoryId = `2`
 ;
- */
+
 
 
 
 const
-    SuperCategoriaType = new GraphQLObjectType({
-        name: `SuperCategoria`,
-        description: `SuperCategoria de ropa`,
-        fields: () => ({
-            id: { type: GraphQLString },
-            categoria: { type: GraphQLString },
-            categoria_en: { type: GraphQLString },
-            image: { type: GraphQLString },
-            pageId: { type: GraphQLString },
-            orden: { type: GraphQLString },
-            menu: { type: GraphQLString },
-            qty_productos: { type: GraphQLString }
-        })
-    }),
-
     CategoriaType = new GraphQLObjectType({
         name: `Categoria`,
         description: `Categoria de ropa`,
@@ -75,28 +59,6 @@ const
         })
     }),
 
-    TallaType = new GraphQLObjectType({
-        name: `Talla`,
-        description: `Talla de ropa`,
-        fields: () => ({
-            tallaId: {
-                type: GraphQLString
-            },
-            nom_talla: {
-                type: GraphQLString
-            },
-            label_talla: {
-                type: GraphQLString
-            },
-            orden_talla: {
-                type: GraphQLString
-            },
-            publicar_talla: {
-                type: GraphQLString
-            }
-        })
-    }),
-
     NewTallaType = new GraphQLObjectType({
         name: `NewTalla`,
         description: `Nueva talla de ropa`,
@@ -125,38 +87,11 @@ const
         })
     }),
 
-    GENERALTallaType = new GraphQLObjectType({
-        name: `GENERALTalla`,
-        description: `Talla de ropa con detalles del producto (?)`,
+    TallaType = new GraphQLObjectType({
+        name: `Talla`,
+        description: `Talla de ropa`,
         fields: () => ({
-            id: {
-                type: GraphQLString
-            },
-            barCode: {
-                type: GraphQLString
-            },
-            producto: {
-                type: GraphQLString
-            },
-            talla: {
-                type: GraphQLString
-            },
-            color: {
-                type: GraphQLString
-            },
-            existencias: {
-                type: GraphQLString
-            },
-            costoPonderado: {
-                type: GraphQLString
-            },
             tallaId: {
-                type: GraphQLString
-            },
-            num_color: {
-                type: GraphQLString
-            },
-            labelColor: {
                 type: GraphQLString
             },
             nom_talla: {
@@ -256,27 +191,6 @@ const
             categoria: {
                 type: GraphQLString
             },
-            /* categoriaObj: {
-                type: CategoriaType,
-                args: {
-                    apiUrl: { type: GraphQLString },
-                    pageId: { type: GraphQLString },
-                    categoryId: { type: GraphQLString },
-                    subcategoryId: { type: GraphQLString },
-                    sizeId: { type: GraphQLString },
-                    brandId: { type: GraphQLString },
-                    colorId: { type: GraphQLString }
-                },
-                resolve: (root, args) => {
-                    return CATEGORIA(`subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
-                        .then( resp => {
-                            //resp.filter(cat => cat.categoriaId === args.categoryId)
-                                console.dir("resp: ", resp);
-                            }
-                        )
-                    ;
-                }
-            }, */
             marca: {
                 type: GraphQLString
             },
@@ -325,9 +239,59 @@ const
         })
     }),
 
-    GENERALProductType = new GraphQLObjectType({
-        name: `ProductoGeneral`,
-        description: `Producto de ropa y propiedades en general (?)`,
+//Més afegitons per un disseny qúestionable de l'API...
+    TallaProdAfegType = new GraphQLObjectType({
+        name: `TallaProdAfeg`,
+        description: `TallaProdAfeg... `,
+        fields: () => ({
+            id: {
+                type: GraphQLString
+            },
+            barCode: {
+                type: GraphQLString
+            },
+            producto: {
+                type: GraphQLString
+            },
+            talla: {
+                type: GraphQLString
+            },
+            color: {
+                type: GraphQLString
+            },
+            existencias: {
+                type: GraphQLString
+            },
+            costoPonderado: {
+                type: GraphQLString
+            },
+            tallaId: {
+                type: GraphQLString
+            },
+            num_color: {
+                type: GraphQLString
+            },
+            labelColor: {
+                type: GraphQLString
+            },
+            nom_talla: {
+                type: GraphQLString
+            },
+            label_talla: {
+                type: GraphQLString
+            },
+            orden_talla: {
+                type: GraphQLString
+            },
+            publicar_talla: {
+                type: GraphQLString
+            }
+        })
+    }),
+
+    ProductAfegType = new GraphQLObjectType({
+        name: `ProductoAfeg`,
+        description: `ProductoAfeg de ropa`,
         fields: () => ({
             id: {
                 type: GraphQLString
@@ -341,27 +305,6 @@ const
             categoria: {
                 type: GraphQLString
             },
-            /* categoriaObj: {
-                type: CategoriaType,
-                args: {
-                    apiUrl: { type: GraphQLString },
-                    pageId: { type: GraphQLString },
-                    categoryId: { type: GraphQLString },
-                    subcategoryId: { type: GraphQLString },
-                    sizeId: { type: GraphQLString },
-                    brandId: { type: GraphQLString },
-                    colorId: { type: GraphQLString }
-                },
-                resolve: (root, args) => {
-                    return CATEGORIA(`subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
-                        .then( resp => {
-                            //resp.filter(cat => cat.categoriaId === args.categoryId)
-                                console.dir("resp: ", resp);
-                            }
-                        )
-                    ;
-                }
-            }, */
             marca: {
                 type: GraphQLString
             },
@@ -399,10 +342,73 @@ const
                 type: GraphQLString
             },
             tallas: {
-                type: new GraphQLList(GENERALTallaType)
+                type: new GraphQLList(TallaProdAfegType)
             },
             gallery: {
                 type: new GraphQLList(ImageType)
+            },
+            galleryColors: {
+                type: new GraphQLList(galleryColorType)
+            }
+        })
+    })
+    ProductExtendedType = new GraphQLObjectType({
+        name: `Producto`,
+        description: `Producto de ropa`,
+        fields: () => ({
+            id: {
+                type: GraphQLString
+            },
+            referencia: {
+                type: GraphQLString
+            },
+            descripcion: {
+                type: GraphQLString
+            },
+            categoria: {
+                type: GraphQLString
+            },
+            marca: {
+                type: GraphQLString
+            },
+            precioBase: {
+                type: GraphQLString
+            },
+            precio2: {
+                type: GraphQLString
+            },
+            precio3: {
+                type: GraphQLString
+            },
+            precio4: {
+                type: GraphQLString
+            },
+            precioMiscelaneo: {
+                type: GraphQLString
+            },
+            proveedor: {
+                type: GraphQLString
+            },
+            descripcion_long_es: {
+                type: GraphQLString
+            },
+            nom_marca: {
+                type: GraphQLString
+            },
+            logo_marca: {
+                type: GraphQLString
+            },
+            nom_categoria: {
+                type: GraphQLString
+            },
+            imagen_principal: {
+                type: GraphQLString
+            },
+            gallery: {
+                type: new GraphQLList(ImageType)
+            },
+            galleryColors: {
+                type: new GraphQLList(galleryColorType)
             }
         })
     })
@@ -430,6 +436,7 @@ function COLOR(relativeUrl) {
     return fetch(`${apiUrl}/jcolors/data/${relativeUrl}`)
         .then(res => res.json());
 }
+//Aquest afegitó és per culpa del filtre de Talles, per no haver inclòs la info en l'objecte de la consulta en Subcategories...
 function PRODUCTE(relativeUrl) {
     return fetch(`${apiUrl}/jgeneral/data/${relativeUrl}`)
         .then(res => res.json());
@@ -440,97 +447,12 @@ const QueryType = new GraphQLObjectType({
     description: `The root of all... queries.`,
     fields: () => ({
 
-        producteDETALLS: {
-            type: new GraphQLList(GENERALProductType),
-            args: {
-                apiUrl: { type: GraphQLString },
-                pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString },
-                productId: { type: GraphQLString }
-            },
-            resolve:
-                (root, args) =>
-                    PRODUCTE(`products/?productId=${args.productId}`)
-        },
-
-        subcategoriaTALLES: {
-            type: new GraphQLList(TallaType),
-            args: {
-                apiUrl: { type: GraphQLString },
-                pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
-            },
-            resolve:
-                (root, args) =>
-                    SUBCATEGORIA(`sizes/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
-        },
-
-        subcategoriaCOLORS: {
-            type: new GraphQLList(ColorType),
-            args: {
-                apiUrl: { type: GraphQLString },
-                pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
-            },
-            resolve:
-                (root, args) =>
-                    SUBCATEGORIA(`colors/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
-        },
-
-        subcategoriaMARQUES: {
-            type: new GraphQLList(MarcaType),
-            args: {
-                apiUrl: { type: GraphQLString },
-                pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
-            },
-            resolve:
-                (root, args) =>
-                    SUBCATEGORIA(`brands/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
-        },
-
-        subcategoriaPRODUCTES: {
-            type: new GraphQLList(ProductType),
-            args: {
-                apiUrl: { type: GraphQLString },
-                pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
-            },
-            resolve:
-                (root, args) =>
-                    SUBCATEGORIA(`products/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
-        },
-
         categoriaTALLES: {
             type: new GraphQLList(TallaType),
             args: {
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                categoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -574,11 +496,7 @@ const QueryType = new GraphQLObjectType({
             args: {
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                categoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -590,31 +508,11 @@ const QueryType = new GraphQLObjectType({
             args: {
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                categoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
                     CATEGORIA(`subcategories/?pageId=${args.pageId}&categoryId=${args.categoryId}`)
-        },
-
-        llista: {
-            type: new GraphQLList(SuperCategoriaType),
-            args: {
-                apiUrl: { type: GraphQLString },
-                pageId: { type: GraphQLString },
-                categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
-            },
-            resolve:
-                (root, args) =>
-                    CATEGORIA(`list/?pageId=${args.pageId}`)
         },
 
         subcategoriaTALLES: {
@@ -623,10 +521,7 @@ const QueryType = new GraphQLObjectType({
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                subcategoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -638,10 +533,7 @@ const QueryType = new GraphQLObjectType({
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                subcategoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -653,10 +545,7 @@ const QueryType = new GraphQLObjectType({
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                subcategoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -668,10 +557,20 @@ const QueryType = new GraphQLObjectType({
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                subcategoryId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    SUBCATEGORIA(`products/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}`)
+        },
+
+        subcategoriaPRODUCTESExtended: {
+            type: new GraphQLList(ProductType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -685,9 +584,7 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                sizeId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -700,9 +597,7 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                sizeId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -716,8 +611,7 @@ const QueryType = new GraphQLObjectType({
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
                 sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                brandId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -731,9 +625,7 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                brandId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -746,9 +638,7 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                brandId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>
@@ -761,9 +651,6 @@ const QueryType = new GraphQLObjectType({
                 apiUrl: { type: GraphQLString },
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
-                subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
                 colorId: { type: GraphQLString }
             },
             resolve:
@@ -777,8 +664,6 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
                 colorId: { type: GraphQLString }
             },
             resolve:
@@ -792,8 +677,6 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
                 colorId: { type: GraphQLString }
             },
             resolve:
@@ -807,9 +690,8 @@ const QueryType = new GraphQLObjectType({
                 pageId: { type: GraphQLString },
                 categoryId: { type: GraphQLString },
                 subcategoryId: { type: GraphQLString },
-                sizeId: { type: GraphQLString },
-                brandId: { type: GraphQLString },
-                colorId: { type: GraphQLString }
+                colorId: { type: GraphQLString },
+                brandId: { type: GraphQLString }
             },
             resolve:
                 (root, args) =>

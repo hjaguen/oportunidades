@@ -107,14 +107,14 @@ class MarquesSUBCAT extends Component {
 
         if (!location.pathname.includes("/marca/")) {
             (this.props.filtreMarca)
-            ?
-            this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
-                selectValue: nouVal
-            })
-            :
-            this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
-                selectValue: nouVal
-            })
+                ?
+                    this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
+                        selectValue: nouVal
+                    })
+                :
+                    this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                        selectValue: nouVal
+                    })
 
             // this.setState({
             //     selectValue: nouVal
@@ -125,7 +125,10 @@ class MarquesSUBCAT extends Component {
                 ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 })
-                : this.props.history.push(location.pathname);
+                : (() => {
+                    this.props.history.push(`..`);
+                    this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                  })()
         }
 
         //console.log("Selected: ", nouVal);
@@ -200,10 +203,43 @@ class TallesSUBCAT extends Component {
     //     }).isRequired
     // }
 
+    static defaultProps = {
+        ...Component.defaultProps,
+        label: 'Talles:',
+        searchable: true
+    }
+
+
     updateValue(nouVal) {
-        this.setState({
-            selectValue: nouVal
-        });
+
+        if (!location.pathname.includes("/talla/")) {
+            (this.props.filtreTalla)
+                ?
+                    this.props.history.push(`${location.pathname}/talla/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}`, {
+                        selectValue: nouVal
+                    })
+                :
+                    this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                        selectValue: nouVal
+                    })
+
+            // this.setState({
+            //     selectValue: nouVal
+            // })
+            ;
+        } else {
+            (nouVal)
+                ? this.props.history.push(`../talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                })
+                : (() => {
+                    this.props.history.push(`..`);
+                    this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                  })()
+        }
+                    // this.setState({
+                    //     selectValue: nouVal
+                    // });
         //console.log("Selected: ", nouVal);
         this.props.filtrantTalla(nouVal);
     }
@@ -419,29 +455,44 @@ class ColorsSUBCAT extends Component {
                                     }
                                 )
                             ,
+                                (this.props.filtreColor)
+                                    ?
+                                         <span
+                                            key="x"
+                                            style={{
+                                                display: `flex`,
+                                                border: `4px white solid`,
+                                                borderRadius: `1em`,
+                                                minWidth: `20px`,
+                                                height: `20px`,
+                                                background: `fuchsia`,
+                                                alignItems: `center`,
+                                                padding: `12px 1px`,
+                                                paddingRight: `0px`,
+                                                color: `white`,
+                                                fontWeight: `bold`,
+                                                fontSize: `2em`,
+                                                fontFamily: `initial`,
+                                                margin: `auto 2px`,
+                                                cursor: `pointer`
+                                            }}
+                                            data-nomcolor=""
+                                            data-labelcolor=""
+                                            data-colorid=""
 
-                             <span
-                                key="x"
-                                style={{
-                                    display: `flex`,
-                                    border: `4px fuchsia solid`,
-                                    borderRadius: `1em`,
-                                    minWidth: `20px`,
-                                    height: `20px`,
-                                    background: `white`,
-                                    margin: `.2em`,
-                                    alignItems: `center`,
-                                    padding: `8px`,
-                                    color: `fuchsia`
-                                }}
-                                data-nomcolor=""
-                                data-labelcolor=""
-                                data-colorid=""
-
-                                title=""
-                                onClick={()=>{}}
-                            >&times;
-                            </span>
+                                            title="Desactivar el filtro"
+                                            onClick={() => {
+                                                this.props.history.push(`..`);
+                                                //alert(location.pathname.substring(0,location.pathname.length-1));
+                                                this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                                                //alert(location.pathname.substr(location.pathname.length - 1, 1));
+                                                // this.props.history.replace(`${location.pathname}/..`.substr(`${location.pathname}/..`.length - 1, 1));
+                                                this.props.colorIdAVariables(null);
+                                            }}
+                                        >&times;
+                                        </span>
+                                    :
+                                        null
                         ]
                         // ()
                         //     ?
@@ -514,12 +565,12 @@ export default class App extends Component {
         });
     }
 
-    colorIdAVariables(colorId) {
+    colorIdAVariables(color) {
         let
-            variables = Object.assign({}, this.state.variables, {colorId})
+            variables = Object.assign({}, this.state.variables, {color})
         ;
-
         this.setState({
+            filtreColor: color,
             variables
         });
     }
@@ -667,45 +718,54 @@ export default class App extends Component {
 
                             {...this.props}
                         />
-                {/*        <TallesSubCategoria
-                            tallaIdAVariables= this.props.tallaIdAVariables}
-                            variables= this.props.variables}
-                            filtrantTalla= this.props.filtrantTalla}
-                            filtreTalla= this.props.filtreTalla}
+                        <TallesSubCategoria
+                            tallaIdAVariables={this.props.tallaIdAVariables}
+                            variables={this.props.variables}
+
+                            filtrantMarca={this.props.filtrantMarca}
+                            filtreMarca={this.props.filtreMarca}
+
+                            filtrantTalla={this.props.filtrantTalla}
+                            filtreTalla={this.props.filtreTalla}
+
+                            filtrantColor={this.props.filtrantColor}
+                            filtreColor={this.props.filtreColor}
+
+                            {...this.props}
                         />
-                // */}
-                    {   (this.props.filtreMarca)
-                        ?   <ColorsSubCategoriaMARCA
-                                colorIdAVariables={this.props.colorIdAVariables}
-                                variables={this.props.variables}
 
-                                filtrantMarca={this.props.filtrantMarca}
-                                filtreMarca={this.props.filtreMarca}
+                        {   (this.props.filtreMarca)
+                            ?   <ColorsSubCategoriaMARCA
+                                    colorIdAVariables={this.props.colorIdAVariables}
+                                    variables={this.props.variables}
 
-                                filtrantTalla={this.props.filtrantTalla}
-                                filtreTalla={this.props.filtreTalla}
+                                    filtrantMarca={this.props.filtrantMarca}
+                                    filtreMarca={this.props.filtreMarca}
 
-                                filtrantColor={this.props.filtrantColor}
-                                filtreColor={this.props.filtreColor}
+                                    filtrantTalla={this.props.filtrantTalla}
+                                    filtreTalla={this.props.filtreTalla}
 
-                                {...this.props}
-                            />
-                        :   <ColorsSubCategoriaTOTS
-                                colorIdAVariables={this.props.colorIdAVariables}
-                                variables={this.props.variables}
+                                    filtrantColor={this.props.filtrantColor}
+                                    filtreColor={this.props.filtreColor}
 
-                                filtrantMarca={this.props.filtrantMarca}
-                                filtreMarca={this.props.filtreMarca}
+                                    {...this.props}
+                                />
+                            :   <ColorsSubCategoriaTOTS
+                                    colorIdAVariables={this.props.colorIdAVariables}
+                                    variables={this.props.variables}
 
-                                filtrantTalla={this.props.filtrantTalla}
-                                filtreTalla={this.props.filtreTalla}
+                                    filtrantMarca={this.props.filtrantMarca}
+                                    filtreMarca={this.props.filtreMarca}
 
-                                filtrantColor={this.props.filtrantColor}
-                                filtreColor={this.props.filtreColor}
+                                    filtrantTalla={this.props.filtrantTalla}
+                                    filtreTalla={this.props.filtreTalla}
 
-                                {...this.props}
-                            />
-                    }
+                                    filtrantColor={this.props.filtrantColor}
+                                    filtreColor={this.props.filtreColor}
+
+                                    {...this.props}
+                                />
+                        }
                     </div>
                 );
             }
