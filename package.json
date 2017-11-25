@@ -2,7 +2,8 @@
   "name": "bare-graph2",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "flow": "flow"
   },
   "dependencies": {
     "apollo-client": "^1.9.3",
@@ -28,5 +29,6 @@
     "sanitize-html-react": "^1.13.0",
     "styled-components": "^2.2.3",
     "xhr-promise": "^2.0.0"
-  }
+  },
+  "devDependencies": {}
 }

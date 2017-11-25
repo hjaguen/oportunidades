@@ -105,6 +105,49 @@ class MarquesSUBCAT extends Component {
         //     selectValue: nouVal
         // });
 
+        const
+            fM = this.props.filtreMarca ? "1" : "0",
+            fT = this.props.filtreTalla ? "1" : "0",
+            fC = this.props.filtreColor ? "1" : "0"
+        ;
+
+        switch (`${fM}${fT}${fC}`) {
+            case "111": {
+                alert("M111");
+                break;
+            }
+            case "110": {
+                alert("M110");
+                break;
+            }
+            case "101": {
+                alert("M101");
+                break;
+            }
+            case "100": {
+                alert("M100");
+                break;
+            }
+            case "011": {
+                alert("M011");
+                break;
+            }
+            case "010": {
+                alert("M010");
+                break;
+            }
+            case "001": {
+                alert("M001");
+                break;
+            }
+            case "000": {
+                alert("M000");
+                break;
+            }
+        }
+
+
+
         if (!location.pathname.includes("/marca/")) {
             (this.props.filtreMarca)
                 ?
@@ -211,6 +254,46 @@ class TallesSUBCAT extends Component {
 
 
     updateValue(nouVal) {
+        const
+            fM = this.props.filtreMarca ? "1" : "0",
+            fT = this.props.filtreTalla ? "1" : "0",
+            fC = this.props.filtreColor ? "1" : "0"
+        ;
+
+        switch (`${fM}${fT}${fC}`) {
+            case "111": {
+                alert("T111");
+                break;
+            }
+            case "110": {
+                alert("T110");
+                break;
+            }
+            case "101": {
+                alert("T101");
+                break;
+            }
+            case "100": {
+                alert("T100");
+                break;
+            }
+            case "011": {
+                alert("T011");
+                break;
+            }
+            case "010": {
+                alert("T010");
+                break;
+            }
+            case "001": {
+                alert("T001");
+                break;
+            }
+            case "000": {
+                alert("T000");
+                break;
+            }
+        }
 
         if (!location.pathname.includes("/talla/")) {
             (this.props.filtreTalla)
@@ -308,6 +391,47 @@ class ColorsSUBCAT extends Component {
 
     filtraPerColor(ev) {
 
+        const
+            fM = this.props.filtreMarca ? "1" : "0",
+            fT = this.props.filtreTalla ? "1" : "0",
+            fC = this.props.filtreColor ? "1" : "0"
+        ;
+
+        switch (`${fM}${fT}${fC}`) {
+            case "111": {
+                alert("C111");
+                break;
+            }
+            case "110": {
+                alert("C110");
+                break;
+            }
+            case "101": {
+                alert("C101");
+                break;
+            }
+            case "100": {
+                alert("C100");
+                break;
+            }
+            case "011": {
+                alert("C011");
+                break;
+            }
+            case "010": {
+                alert("C010");
+                break;
+            }
+            case "001": {
+                alert("C001");
+                break;
+            }
+            case "000": {
+                alert("C000");
+                break;
+            }
+        }
+
                                 if (!location.pathname.includes("/color/")) {
                                     (this.props.filtreColor)
                                     ?
@@ -359,7 +483,52 @@ class ColorsSUBCAT extends Component {
            /* console.log(this.props.data.error)*/
             return (<div>Ocurrió un error inesperado.</div>);
         }
-        return (
+        return [
+            (this.props.filtreColor)
+                ?
+                     <span
+                         style={{
+                             top: `.5em`,
+                             right: `0`,
+                             position: ``,
+                             border: `1px white solid`,
+                             borderRadius: `1em`,
+                             width: `20px`,
+                             height: `20px`,
+                             background: `fuchsia`,
+                             color: `white`,
+                             margin: `.2em`,
+                             textAlign: `center`,
+                             display: `grid`,
+                             alignItems: `center`,
+                             fontFamily: `v`,
+                             cursor: `pointer`,
+                             float: `right`,
+                             marginTop: `-.8em`,
+                             marginRight: `-.7em`,
+                             marginBottom: `.4em`
+                         }}
+                        key="x"
+                        data-nomcolor=""
+                        data-labelcolor=""
+                        data-colorid=""
+
+                        title="Desactivar el filtro"
+                        onClick={() => {
+                            this.props.history.push(`..`);
+                            //alert(location.pathname.substring(0,location.pathname.length-1));
+                            this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                            //alert(location.pathname.substr(location.pathname.length - 1, 1));
+                            // this.props.history.replace(`${location.pathname}/..`.substr(`${location.pathname}/..`.length - 1, 1));
+                            this.props.colorIdAVariables(null);
+                        }}
+                    >&times;
+                    </span>
+                :
+                    null
+
+            ,
+
             <div
                 style={{
                     marginTop: `3em`,
@@ -454,46 +623,6 @@ class ColorsSUBCAT extends Component {
                                         );
                                     }
                                 )
-                            ,
-                                (this.props.filtreColor)
-                                    ?
-                                         <span
-                                            key="x"
-                                            style={{
-                                                display: `flex`,
-                                                border: `4px white solid`,
-                                                borderRadius: `1em`,
-                                                minWidth: `20px`,
-                                                height: `20px`,
-                                                background: `fuchsia`,
-                                                alignItems: `center`,
-                                                padding: `12px 1px`,
-                                                paddingRight: `0px`,
-                                                color: `white`,
-                                                fontWeight: `bold`,
-                                                fontSize: `2em`,
-                                                fontFamily: `initial`,
-                                                margin: `auto 2px`,
-                                                cursor: `pointer`,
-                                                marginTop: `-3px`
-                                            }}
-                                            data-nomcolor=""
-                                            data-labelcolor=""
-                                            data-colorid=""
-
-                                            title="Desactivar el filtro"
-                                            onClick={() => {
-                                                this.props.history.push(`..`);
-                                                //alert(location.pathname.substring(0,location.pathname.length-1));
-                                                this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
-                                                //alert(location.pathname.substr(location.pathname.length - 1, 1));
-                                                // this.props.history.replace(`${location.pathname}/..`.substr(`${location.pathname}/..`.length - 1, 1));
-                                                this.props.colorIdAVariables(null);
-                                            }}
-                                        >&times;
-                                        </span>
-                                    :
-                                        null
                         ]
                         // ()
                         //     ?
@@ -503,10 +632,28 @@ class ColorsSUBCAT extends Component {
                         // ;
 
                     )()
+                    // style={{
+                    //     display: `flex`,
+                    //     border: `4px white solid`,
+                    //     borderRadius: `1em`,
+                    //     minWidth: `20px`,
+                    //     height: `20px`,
+                    //     background: `fuchsia`,
+                    //     alignItems: `center`,
+                    //     padding: `12px 1px`,
+                    //     paddingRight: `0px`,
+                    //     color: `white`,
+                    //     fontWeight: `bold`,
+                    //     fontSize: `2em`,
+                    //     fontFamily: `initial`,
+                    //     margin: `auto 2px`,
+                    //     cursor: `pointer`,
+                    //     marginTop: `-3px`
+                    // }}
                 }
 
             </div>
-        );
+        ];
     }
 }
 
@@ -769,16 +916,18 @@ export default class App extends Component {
                                         float: `right`,
                                         marginTop: `-.8em`,
                                         marginRight: `-.7em`,
-                                        marginBottom: `.4em`
+                                        marginBottom: `.4em`,
+                                        transform: `scale(1.2)`
                                     }}
-                                    title="Desactivar filtros"
+                                    title="Desactivar todos los filtros"
                                     onClick={this.props.desactivaFiltres}
                                 >&times;
                                 </span>
                             : null
                     }
                         <MarquesSubCategoria {...this.props} />
-                        {   (this.props.filtreMarca)
+                        {   // AUTOFILTRES
+                            (this.props.filtreMarca)
                                 ?   <TallesSubCategoriaMARCA {...this.props} />
                                 :   <TallesSubCategoriaTOTS {...this.props} />
                         }
