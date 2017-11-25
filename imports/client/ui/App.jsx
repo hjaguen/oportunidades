@@ -753,7 +753,7 @@ export default class App extends Component {
                                     style={{
                                         top: `.5em`,
                                         right: `0`,
-                                        position: `absolute`,
+                                        position: ``,
                                         border: `1px white solid`,
                                         borderRadius: `1em`,
                                         width: `20px`,
@@ -765,7 +765,11 @@ export default class App extends Component {
                                         display: `grid`,
                                         alignItems: `center`,
                                         fontFamily: `v`,
-                                        cursor: `pointer`
+                                        cursor: `pointer`,
+                                        float: `right`,
+                                        marginTop: `-.8em`,
+                                        marginRight: `-.7em`,
+                                        marginBottom: `.4em`
                                     }}
                                     title="Desactivar filtros"
                                     onClick={this.props.desactivaFiltres}
