@@ -3,7 +3,7 @@ import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } f
 
 export let
 
-    categoryId = `2`
+    categoryId = `12`
     ,
     tituloPagina = 'Blusas Colombianas'
     ,

@@ -457,6 +457,22 @@ const QueryType = new GraphQLObjectType({
                     PRODUCTE(`products/?productId=${args.productId}`)
         },
 
+        marcaSubcategoriaTALLES: {
+            type: new GraphQLList(TallaType),
+            args: {
+                apiUrl: { type: GraphQLString },
+                pageId: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
+                subcategoryId: { type: GraphQLString },
+                sizeId: { type: GraphQLString },
+                brandId: { type: GraphQLString },
+                colorId: { type: GraphQLString }
+            },
+            resolve:
+                (root, args) =>
+                    MARCA(`sizes/?pageId=${args.pageId}&categoryId=${args.categoryId}&subcategoryId=${args.subcategoryId}&brandId=${args.brandId}`)
+        },
+
         subcategoriaTALLES: {
             type: new GraphQLList(TallaType),
             args: {

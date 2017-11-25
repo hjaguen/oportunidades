@@ -180,8 +180,9 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                 {
                                     (() => {
                                         let
-                                            arrColors =
-                                                props.v.galleryColors.map(
+                                            arrColors = props.v.galleryColors.map(
+
+                                    //    arrColorsSort.sort((a,b)=>Number(`0x${a.num_color.substring(1)}`)-Number(`0x${b.num_color.substring(1)}`))
                                                     (v,i,a) => (
                                                         // <img
                                                         //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
@@ -233,6 +234,8 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                 />
                                             )
                                         ));
+
+                                        //arrColors.sort((a,b)=>Number(`0x${a}`)-Number(`0x${b}`))
 
                                     })()
                                 }
@@ -304,7 +307,23 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                     fT ?
                         fC ?
                                 // 111
-                                alert("111")
+                                // alert("111")
+                                (() => {
+                                    this.props.data.subcategoriaPRODUCTES
+                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                        //.map(fitxetaMapper)
+                                        .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
+                                        .forEach(
+                                            (v,i,a) => {
+                                                if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                                     arrProdsColor.push(v);
+                                                    //console.dir(v);
+                                                }
+                                            }
+                                        );
+                                        //console.dir("arrProdsColor", arrProdsColor);
+                                        return arrProdsColor.map(fitxetaMapper);
+                                })()
                             :   // 110
                                 //alert("110")
                             //    (() => {
@@ -352,7 +371,21 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                     : fT ?
                         fC ?
                             // 011
-                                alert("011")
+                                //alert("011")
+                            (() => {
+                                this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
+                                    .forEach(
+                                        (v,i,a) => {
+                                            if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                                 arrProdsColor.push(v);
+                                                //console.dir(v);
+                                            }
+                                        }
+                                    );
+                                    //console.dir("arrProdsColor", arrProdsColor);
+                                    return arrProdsColor.map(fitxetaMapper);
+                                })()
                         : // 010 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!
                     //    (() => {
                             // fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)

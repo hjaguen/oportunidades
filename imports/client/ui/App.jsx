@@ -260,7 +260,7 @@ class TallesSUBCAT extends Component {
 
         let arrOpts = [];
 
-        this.props.data.subcategoriaTALLES.map(
+        this.props.data[this.props.data.variables.queryVariant].map(
             (v,i,a) => {
                 arrOpts.push({
                     value: v.tallaId,
@@ -474,7 +474,8 @@ class ColorsSUBCAT extends Component {
                                                 fontSize: `2em`,
                                                 fontFamily: `initial`,
                                                 margin: `auto 2px`,
-                                                cursor: `pointer`
+                                                cursor: `pointer`,
+                                                marginTop: `-3px`
                                             }}
                                             data-nomcolor=""
                                             data-labelcolor=""
@@ -532,6 +533,7 @@ export default class App extends Component {
         this.filtrantMarca = this.filtrantMarca.bind(this);
         this.filtrantTalla = this.filtrantTalla.bind(this);
         this.filtrantColor = this.filtrantColor.bind(this);
+        this.desactivaFiltres = this.desactivaFiltres.bind(this);
     }
 
     marcaTallaUpdate(m, t) {
@@ -628,6 +630,14 @@ export default class App extends Component {
             });
     }
 
+    desactivaFiltres() {
+        this.setState({
+            filtreColor: null,
+            filtreTalla: null,
+            filtreMarca: null
+        })
+    }
+
     render() {
         let
             // MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
@@ -645,14 +655,27 @@ export default class App extends Component {
                 }
             })(MarquesSUBCAT),
 
-            TallesSubCategoria = graphql(Qs.SubCategoriaTALLESQuery, {
+            TallesSubCategoriaTOTS = graphql(Qs.SubCategoriaTALLESQuery, {
                 options: () => {
                     //console.dir("thisVars:", this.variables);
+                    let
+                        variables = Object.assign(this.variables, {queryVariant: "subcategoriaTALLES"});
                     return ({
                         variables: this.variables
                     });
                 }
             })(TallesSUBCAT),
+
+            TallesSubCategoriaMARCA = graphql(Qs.MarcaSubCategoriaTALLESQuery, {
+                options: () => {
+                    //console.dir("thisVars:", this.variables);
+                    let
+                        variables = Object.assign(this.variables, {queryVariant: "marcaSubcategoriaTALLES"});
+                    return ({
+                        variables: this.variables
+                    });
+                }
+            })(TallesSUBCAT)
 
             ColorsSubCategoriaTOTS = graphql(Qs.SubCategoriaCOLORSQuery, {
                 options: () => {
@@ -724,69 +747,40 @@ export default class App extends Component {
                     <div
                         style={conf.estil_filtres}
                     >
-
-                        <MarquesSubCategoria
-                            variables={this.props.variables}
-                            marcaIdAVariables={this.props.marcaIdAVariables}
-
-                            filtrantMarca={this.props.filtrantMarca}
-                            filtreMarca={this.props.filtreMarca}
-
-                            filtrantTalla={this.props.filtrantTalla}
-                            filtreTalla={this.props.filtreTalla}
-
-                            filtrantColor={this.props.filtrantColor}
-                            filtreColor={this.props.filtreColor}
-
-                            {...this.props}
-                        />
-                        <TallesSubCategoria
-                            tallaIdAVariables={this.props.tallaIdAVariables}
-                            variables={this.props.variables}
-
-                            filtrantMarca={this.props.filtrantMarca}
-                            filtreMarca={this.props.filtreMarca}
-
-                            filtrantTalla={this.props.filtrantTalla}
-                            filtreTalla={this.props.filtreTalla}
-
-                            filtrantColor={this.props.filtrantColor}
-                            filtreColor={this.props.filtreColor}
-
-                            {...this.props}
-                        />
-
+                    {
+                        (this.props.filtreTalla || this.props.filtreMarca || this.props.filtreColor)
+                            ?   <span
+                                    style={{
+                                        top: `.5em`,
+                                        right: `0`,
+                                        position: `absolute`,
+                                        border: `1px white solid`,
+                                        borderRadius: `1em`,
+                                        width: `20px`,
+                                        height: `20px`,
+                                        background: `fuchsia`,
+                                        color: `white`,
+                                        margin: `.2em`,
+                                        textAlign: `center`,
+                                        display: `grid`,
+                                        alignItems: `center`,
+                                        fontFamily: `v`,
+                                        cursor: `pointer`
+                                    }}
+                                    title="Desactivar filtros"
+                                    onClick={this.props.desactivaFiltres}
+                                >&times;
+                                </span>
+                            : null
+                    }
+                        <MarquesSubCategoria {...this.props} />
                         {   (this.props.filtreMarca)
-                            ?   <ColorsSubCategoriaMARCA
-                                    colorIdAVariables={this.props.colorIdAVariables}
-                                    variables={this.props.variables}
-
-                                    filtrantMarca={this.props.filtrantMarca}
-                                    filtreMarca={this.props.filtreMarca}
-
-                                    filtrantTalla={this.props.filtrantTalla}
-                                    filtreTalla={this.props.filtreTalla}
-
-                                    filtrantColor={this.props.filtrantColor}
-                                    filtreColor={this.props.filtreColor}
-
-                                    {...this.props}
-                                />
-                            :   <ColorsSubCategoriaTOTS
-                                    colorIdAVariables={this.props.colorIdAVariables}
-                                    variables={this.props.variables}
-
-                                    filtrantMarca={this.props.filtrantMarca}
-                                    filtreMarca={this.props.filtreMarca}
-
-                                    filtrantTalla={this.props.filtrantTalla}
-                                    filtreTalla={this.props.filtreTalla}
-
-                                    filtrantColor={this.props.filtrantColor}
-                                    filtreColor={this.props.filtreColor}
-
-                                    {...this.props}
-                                />
+                                ?   <TallesSubCategoriaMARCA {...this.props} />
+                                :   <TallesSubCategoriaTOTS {...this.props} />
+                        }
+                        {   (this.props.filtreMarca)
+                                ?   <ColorsSubCategoriaMARCA {...this.props} />
+                                :   <ColorsSubCategoriaTOTS {...this.props} />
                         }
                     </div>
                 );
@@ -815,23 +809,7 @@ export default class App extends Component {
                                     top: `20px`
                                 }}
                             >
-                                <BuscadorColumnaSUBCAT
-                                    marcaIdAVariables={this.props.marcaIdAVariables}
-                                    tallaIdAVariables={this.props.tallaIdAVariables}
-                                    colorIdAVariables={this.props.colorIdAVariables}
-                                    variables={this.props.data.variables}
-
-                                    filtrantMarca={this.props.filtrantMarca}
-                                    filtreMarca={this.props.filtreMarca}
-
-                                    filtrantTalla={this.props.filtrantTalla}
-                                    filtreTalla={this.props.filtreTalla}
-
-                                    filtrantColor={this.props.filtrantColor}
-                                    filtreColor={this.props.filtreColor}
-
-                                    {...this.props}
-                                />
+                                <BuscadorColumnaSUBCAT {...this.props} />
                             </div>
                         </div>
                     ,
@@ -841,23 +819,7 @@ export default class App extends Component {
                                 gridArea: `content`
                             }}
                         >
-                            <MostrariAmbProductes
-                                marcaIdAVariables={this.props.marcaIdAVariables}
-                                tallaIdAVariables={this.props.tallaIdAVariables}
-                                colorIdAVariables={this.props.colorIdAVariables}
-                                variables={this.props.data.variables}
-
-                                filtrantMarca={this.props.filtrantMarca}
-                                filtreMarca={this.props.filtreMarca}
-
-                                filtrantTalla={this.props.filtrantTalla}
-                                filtreTalla={this.props.filtreTalla}
-
-                                filtrantColor={this.props.filtrantColor}
-                                filtreColor={this.props.filtreColor}
-
-                                {...this.props}
-                            />
+                            <MostrariAmbProductes {...this.props} />
                         </div>
                     ]
                 );
@@ -1016,6 +978,8 @@ export default class App extends Component {
                                 match={match}
                                 history={history}
                                 location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
                             />
                         );
                     }}/>

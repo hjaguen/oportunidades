@@ -133,6 +133,33 @@ export const
              }
     }`,
 
+    MarcaSubCategoriaTALLESQuery = gql`
+        query (
+            $apiUrl: String,
+            $pageId: String,
+            $categoryId: String,
+            $subcategoryId: String,
+            $sizeId: String,
+            $brandId: String,
+            $colorId: String
+        ) {
+            marcaSubcategoriaTALLES(
+                apiUrl: $apiUrl,
+                pageId: $pageId,
+                categoryId: $categoryId,
+                subcategoryId: $subcategoryId,
+                colorId: $colorId,
+                brandId: $brandId,
+                sizeId: $sizeId
+            ){
+                tallaId
+                nom_talla
+                label_talla
+                orden_talla
+                publicar_talla
+             }
+    }`,
+
     SubCategoriaCOLORSQuery = gql`
         query (
             $apiUrl: String,
