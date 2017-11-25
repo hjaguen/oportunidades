@@ -214,6 +214,12 @@ export const
                     orden_talla
                     publicar_talla
                 }
+                othersColors {
+                    color
+                    existencia_color
+                    num_color
+                    nom_color
+                }
              }
     }`,
 

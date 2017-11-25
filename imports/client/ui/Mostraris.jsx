@@ -118,13 +118,13 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
         super(props);
     }
 
-    static propTypes = {
-        data: PropTypes.shape({
-            loading: PropTypes.bool,
-            error: PropTypes.object,
-            subcategoriaPRODUCTES: PropTypes.array
-        }).isRequired
-    }
+    // static propTypes = {
+    //     data: PropTypes.shape({
+    //         loading: PropTypes.bool,
+    //         error: PropTypes.object,
+    //         subcategoriaPRODUCTES: PropTypes.array
+    //     }).isRequired
+    // }
 
     render() {
         if (this.props.data.loading) {
@@ -177,15 +177,70 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                     alignItems: `center`
                                 }}
                             >
-                                {props.v.galleryColors.map(
+                                {
+                                    (() => {
+                                        let
+                                            arrColors =
+                                                props.v.galleryColors.map(
+                                                    (v,i,a) => (
+                                                        // <img
+                                                        //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
+                                                        //     style={{
+                                                        //         width: `20px`,
+                                                        //         height: `20px`
+                                                        //     }}
+                                                        // />
+                                                        <span
+                                                            key={i}
+                                                            style={{
+                                                                // background: `${v.num_color}`,
+                                                                // minWidth: `20px`,
+                                                                // minHeight: `20px`,
+                                                                // border: `1px solid black`,
+                                                                // margin: `.1em`,
+                                                                // display: `inline-block`,
+
+                                                                display: `inline-block`,
+                                                                border: `1px black solid`,
+                                                                borderRadius: `1em`,
+                                                                width: `20px`,
+                                                                height: `20px`,
+                                                                background: `${v.num_color}`,
+                                                                // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
+                                                                margin: `.2em`
+                                                            }}
+                                                            title={`${v.label_color}`}
+                                                        />
+                                                    )
+                                                )
+                                        ;
+
+                                        return arrColors.concat(props.v.othersColors.map(
+                                            (v,i,a) => (
+                                                <span
+                                                    key={i}
+                                                    style={{
+                                                        display: `inline-block`,
+                                                        border: `1px black solid`,
+                                                        borderRadius: `0em`,
+                                                        width: `18px`,
+                                                        height: `18px`,
+                                                        background: `${v.num_color}`,
+                                                        margin: `.3em`,
+                                                        transform: `rotate(45deg)`
+                                                    }}
+                                                    title={`${v.nom_color}`}
+                                                />
+                                            )
+                                        ));
+
+                                    })()
+                                }
+                            </div>
+                            Tallas:
+                            <div>
+                                {props.v.sizes.map(
                                     (v,i,a) => (
-                                        // <img
-                                        //     src={`http://cashflow.colombiaespassion.net/productos/${v2.imagen_min}`}
-                                        //     style={{
-                                        //         width: `20px`,
-                                        //         height: `20px`
-                                        //     }}
-                                        // />
                                         <span
                                             key={i}
                                             style={{
@@ -196,17 +251,21 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                 // margin: `.1em`,
                                                 // display: `inline-block`,
 
-                                                display: `inline-block`,
+                                                display: `grid`,
                                                 border: `1px black solid`,
                                                 borderRadius: `1em`,
-                                                width: `20px`,
                                                 height: `20px`,
-                                                background: `${v.num_color}`,
+                                                background: `white`,
+                                                padding: `1em`,
+                                                alignContent: `center`,
                                                 // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
-                                                margin: `.2em`
+                                                margin: `.2em`,
+                                                textAlign: `center`
                                             }}
-                                            title={`${v.label_color}`}
-                                        />
+                                        >{`${v.label_talla}: ${Number(v.existencia_talla)}`}
+
+                                        </span>
+
                                     )
                                 )}
                             </div>
@@ -247,7 +306,21 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                 // 111
                                 alert("111")
                             :   // 110
-                                alert("110")
+                                //alert("110")
+                            //    (() => {
+                                    this.props.data.subcategoriaPRODUCTES
+                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                        //.map(fitxetaMapper)
+                                        .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
+                                        .map(fitxetaMapper)
+                        //            ;
+                                    // //console.dir("arrResultatFiltres", arrResultatFiltres);
+                                    // if (arrResultatFiltres.length > 0) {
+                                    //     return arrResultatFiltres.map(fitxetaMapper);
+                                    // } else {
+                                    //     return <h3>Sin resultados</h3>;
+                                    // }
+                        //        })()
                         : fC ?
                             // 101
                             //    alert("101")
@@ -265,7 +338,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         )
                                     ;
                                     //console.dir("arrResultatFiltres", arrResultatFiltres);
-                                    if (arrResultatFiltres.length > 1) {
+                                    if (arrResultatFiltres.length > 0) {
                                         return arrResultatFiltres.map(fitxetaMapper);
                                     } else {
                                         return <h3>Sin resultados</h3>;
@@ -281,7 +354,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                             // 011
                                 alert("011")
                         : // 010 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!
-                        (() => {
+                    //    (() => {
                             // fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)
                             //     .then(res => res.json())
                             //     .then(res =>
@@ -297,10 +370,16 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                             //         )
                             //     )
                             //     return <h1>010</h1>;
-                            this.props.data.subcategoriaPRODUCTES
-                                .filter(obj => obj.marca === this.props.filtreMarca.value)
-                                .map(fitxetaMapper)
-                        })()
+                        //let filtratsPerTalla = new Promise((resolve, reject) => {
+                                //resolve(
+                                this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
+                                    .map(fitxetaMapper)
+                                //);
+                        //     });
+                        //
+                        //     filtratsPerTalla.then(result => result.map(fitxetaMapper));
+                        // })()
                             //.then(res => res.map(fitxetaMapper))
 
 

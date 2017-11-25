@@ -534,6 +534,28 @@ export default class App extends Component {
         this.filtrantColor = this.filtrantColor.bind(this);
     }
 
+    marcaTallaUpdate(m, t) {
+        this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
+    }
+
+    marcaColorUpdate(m, c) {
+
+    }
+
+    tallaColorUpdate(t, c) {
+
+    }
+
+
+
+
+    marcaTallaColorUpdate(m, t, c) {
+
+    }
+
+
+
+
     subcategoryIdAlState(ev) {
         console.dir(ev.target.dataset);
         let
@@ -654,7 +676,7 @@ export default class App extends Component {
                 }
             })(ColorsSUBCAT),
 
-            MostrariAmbProductes = graphql(Qs.ProductesQuery, {
+            MostrariAmbProductes = graphql(Qs.SubCategoriaPRODUCTESQuery, {
                 options: () => {
                     //console.dir("thisVars:", this.variables);
                     return ({
@@ -820,10 +842,21 @@ export default class App extends Component {
                             }}
                         >
                             <MostrariAmbProductes
+                                marcaIdAVariables={this.props.marcaIdAVariables}
+                                tallaIdAVariables={this.props.tallaIdAVariables}
+                                colorIdAVariables={this.props.colorIdAVariables}
                                 variables={this.props.data.variables}
+
+                                filtrantMarca={this.props.filtrantMarca}
                                 filtreMarca={this.props.filtreMarca}
+
+                                filtrantTalla={this.props.filtrantTalla}
                                 filtreTalla={this.props.filtreTalla}
+
+                                filtrantColor={this.props.filtrantColor}
                                 filtreColor={this.props.filtreColor}
+
+                                {...this.props}
                             />
                         </div>
                     ]
