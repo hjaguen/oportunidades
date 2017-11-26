@@ -125,7 +125,15 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "100": {
-                alert("M100");
+                //alert("M100");
+                (nouVal)
+                    ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                        selectValue: nouVal
+                    })
+                    : (() => {
+                        this.props.history.push(`..`);
+                        this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                      })()
                 break;
             }
             case "011": {
@@ -141,38 +149,35 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "000": {
-                alert("M000");
+                //alert("M000");
+                // Cap filtre previ. Afegim /marca/x.Id a la URL i apliquem el filtre de la Marca.
+                this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                })
                 break;
             }
         }
 
+        // this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
+        //     selectValue: nouVal
+        // })
 
+        // if (!location.pathname.includes("/marca/")) {
+        //     (this.props.filtreMarca)
+        //          ?
+        //
+        //
+        //          : null // this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+        //             //     selectValue: nouVal
+        //             // })
+        //
+        //     // this.setState({
+        //     //     selectValue: nouVal
+        //     // })
+        //     ;
+    //    } else {
 
-        if (!location.pathname.includes("/marca/")) {
-            (this.props.filtreMarca)
-                ?
-                    this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
-                        selectValue: nouVal
-                    })
-                :
-                    this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
-                        selectValue: nouVal
-                    })
-
-            // this.setState({
-            //     selectValue: nouVal
-            // })
-            ;
-        } else {
-            (nouVal)
-                ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
-                    selectValue: nouVal
-                })
-                : (() => {
-                    this.props.history.push(`..`);
-                    this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
-                  })()
-        }
+    //    }
 
         //console.log("Selected: ", nouVal);
         this.props.filtrantMarca(nouVal);
@@ -290,7 +295,10 @@ class TallesSUBCAT extends Component {
                 break;
             }
             case "000": {
-                alert("T000");
+                //alert("T000");
+                this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                })
                 break;
             }
         }
@@ -782,7 +790,7 @@ export default class App extends Component {
             filtreColor: null,
             filtreTalla: null,
             filtreMarca: null
-        })
+        });
     }
 
     render() {
@@ -886,7 +894,13 @@ export default class App extends Component {
             constructor(props) {
                 super(props);
 
+                this.desactivaFiltres = this.desactivaFiltres.bind(this);
+            }
 
+            desactivaFiltres() {
+                this.props.history.push(`..`);
+                this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                this.props.desactivaFiltres();
             }
 
             render() {
@@ -920,7 +934,7 @@ export default class App extends Component {
                                         transform: `scale(1.2)`
                                     }}
                                     title="Desactivar todos los filtros"
-                                    onClick={this.props.desactivaFiltres}
+                                    onClick={this.desactivaFiltres}
                                 >&times;
                                 </span>
                             : null
@@ -1106,6 +1120,7 @@ export default class App extends Component {
 
                             MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
                                 options: {
+                                    ...this.props,
                                     variables
                                 }
                             })(MainContentSubCat)
