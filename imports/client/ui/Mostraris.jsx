@@ -137,9 +137,6 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
         }
 
         const
-            fM = this.props.filtreMarca,
-            fT = this.props.filtreTalla,
-            fC = this.props.filtreColor,
             Fitxeta = (props) => (
                 <li key={props.i}
                     style={ conf.estil_fitxetes }
@@ -303,76 +300,74 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                 <Masonry
                     elementType={'ul'}
                 >
-                { fM ?
-                    fT ?
-                        fC ?
-                                // 111
-                                // alert("111")
-                                (() => {
-                                    this.props.data.subcategoriaPRODUCTES
-                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
-                                        //.map(fitxetaMapper)
-                                        .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
-                                        .forEach(
-                                            (v,i,a) => {
-                                                if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
-                                                     arrProdsColor.push(v);
-                                                    //console.dir(v);
-                                                }
-                                            }
-                                        );
-                                        //console.dir("arrProdsColor", arrProdsColor);
-                                        return arrProdsColor.map(fitxetaMapper);
-                                })()
-                            :   // 110
-                                //alert("110")
-                            //    (() => {
-                                    this.props.data.subcategoriaPRODUCTES
-                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
-                                        //.map(fitxetaMapper)
-                                        .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
-                                        .map(fitxetaMapper)
-                        //            ;
-                                    // //console.dir("arrResultatFiltres", arrResultatFiltres);
-                                    // if (arrResultatFiltres.length > 0) {
-                                    //     return arrResultatFiltres.map(fitxetaMapper);
-                                    // } else {
-                                    //     return <h3>Sin resultados</h3>;
-                                    // }
-                        //        })()
-                        : fC ?
-                            // 101
-                            //    alert("101")
-                                (() => {
-                                    this.props.data.subcategoriaPRODUCTES
-                                        .filter(obj => obj.marca === this.props.filtreMarca.value)
-                                        //.map(fitxetaMapper)
-                                        .forEach(
-                                            (v,i,a) => {
-                                                if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
-                                                     arrResultatFiltres.push(v);
-                                                    //console.dir(v);
-                                                }
-                                            }
-                                        )
-                                    ;
-                                    //console.dir("arrResultatFiltres", arrResultatFiltres);
-                                    if (arrResultatFiltres.length > 0) {
-                                        return arrResultatFiltres.map(fitxetaMapper);
-                                    } else {
-                                        return <h3>Sin resultados</h3>;
-                                    }
-                                })()
-                            :   // 100
+                {
+                    (() => {
+
+                        const
+                            fM = this.props.filtreMarca ? "1" : "0",
+                            fT = this.props.filtreTalla ? "1" : "0",
+                            fC = this.props.filtreColor ? "1" : "0"
+                        ;
+
+                        switch (`${fM}${fT}${fC}`) {
+                            case "111": {
+                                //alert("111");
                                 this.props.data.subcategoriaPRODUCTES
                                     .filter(obj => obj.marca === this.props.filtreMarca.value)
-                                    .map(fitxetaMapper)
-
-                    : fT ?
-                        fC ?
-                            // 011
-                                //alert("011")
-                            (() => {
+                                    //.map(fitxetaMapper)
+                                    .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
+                                    .forEach(
+                                        (v,i,a) => {
+                                            if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                                 arrProdsColor.push(v);
+                                                //console.dir(v);
+                                            }
+                                        }
+                                    );
+                                    //console.dir("arrProdsColor", arrProdsColor);
+                                    return arrProdsColor.map(fitxetaMapper);
+                                break;
+                            }
+                            case "110": {
+                                //alert("110");
+                                return this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                    //.map(fitxetaMapper)
+                                    .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
+                                    .map(fitxetaMapper);
+                                break;
+                            }
+                            case "101": {
+                                //alert("101");
+                                this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                    //.map(fitxetaMapper)
+                                    .forEach(
+                                        (v,i,a) => {
+                                            if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                                 arrResultatFiltres.push(v);
+                                                //console.dir(v);
+                                            }
+                                        }
+                                    )
+                                ;
+                                //console.dir("arrResultatFiltres", arrResultatFiltres);
+                                if (arrResultatFiltres.length > 0) {
+                                    return arrResultatFiltres.map(fitxetaMapper);
+                                } else {
+                                    return <h3>Sin resultados</h3>;
+                                }
+                                break;
+                            }
+                            case "100": {
+                                //alert("100");
+                                return this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.marca === this.props.filtreMarca.value)
+                                    .map(fitxetaMapper);
+                                break;
+                            }
+                            case "011": {
+                                //alert("011");
                                 this.props.data.subcategoriaPRODUCTES
                                     .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
                                     .forEach(
@@ -384,123 +379,243 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         }
                                     );
                                     //console.dir("arrProdsColor", arrProdsColor);
-                                    return arrProdsColor.map(fitxetaMapper);
-                                })()
-                        : // 010 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!
-                    //    (() => {
-                            // fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)
-                            //     .then(res => res.json())
-                            //     .then(res =>
-                            //         res.map(
-                            //             (v,i,a) => {
-                            //               fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
-                            //                 .then(res => res.json())
-                            //                 .then(res => {
-                            //                     arrProductesAmbTalles.push(res);
-                            //                 })
-                            //                 .then(res => console.dir(arrProductesAmbTalles))
-                            //             }
-                            //         )
-                            //     )
-                            //     return <h1>010</h1>;
-                        //let filtratsPerTalla = new Promise((resolve, reject) => {
-                                //resolve(
-                                this.props.data.subcategoriaPRODUCTES
-                                    .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
-                                    .map(fitxetaMapper)
-                                //);
-                        //     });
-                        //
-                        //     filtratsPerTalla.then(result => result.map(fitxetaMapper));
-                        // })()
-                            //.then(res => res.map(fitxetaMapper))
-
-
-
-                            //.then(res => console.dir(arrProductesAmbTalles))
-
-                                //Promise.all(
-                                //    let array = [];
-
-                                //    this.props.data.subcategoriaPRODUCTES
-                                        // .forEach(
-                                        //     (v,i,a) => {
-                                                // fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
-                                                //     .then(res => res.json())
-                                                //     // .then(res => arrProductesAmbTalles.push(res))
-                                                //     // .then(() =>
-                                                //     //     console.dir("aPT:", arrProductesAmbTalles)
-                                                //     // )
-                                                //     .then(res => console.dir(res))
-
-
-
-                                                    // .then(res => (
-                                                    //     <Fitxeta
-                                                    //         key={i}
-                                                    //         v={v}
-                                                    //         i={i}
-                                                    //         a={a}
-                                                    //     />
-                                                    // ))
-
-                                                    //.then(res => console.dir("array:", arrProductesAmbTalles))
-                                                    //.then(res => console.dir("res:", res))
-                                            //    ;
-                                        //     console.dir(v);
-                                        //     }
-                                        // )
-                            //    )
-                                //.then( res =>
-                                // );
-
-                    : fC ?
-                        // 001
-                            //alert("001")
-                            (() => {
-
-                                this.props.data.subcategoriaPRODUCTES
-                                .forEach(
-                                    (v,i,a) => {
-                                        if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
-                                             arrProdsColor.push(v);
-                                            //console.dir(v);
-                                        }
-                                    }
-                                );
-                                console.dir("arrProdsColor", arrProdsColor);
                                 return arrProdsColor.map(fitxetaMapper);
-                                // return arrProdsColor.map(
-                                //     (v,i,a) => {
-                                //         return <h1>{v.descripcion}</h1>;
-                                //     }
-                                // );
-                                                                                                    //
-                                                                                                    // fetch("http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34")
-                                                                                                    //     .then(res => res.json())
-                                                                                                    //     //.then(res => res.find(obj => obj.galleryColors.colorId ==="4"))
-                                                                                                    //     // .then(res => console.dir(res))
-                                                                                                    //     .then(res => res
-                                                                                                    //         .forEach(
-                                                                                                    //             (v,i,a) => {
-                                                                                                    //               if (v.galleryColors.find((obj) => obj.colorId==="5")) {
-                                                                                                    //                   arrProdsColor.push(v);
-                                                                                                    //               }
-                                                                                                    //             }
-                                                                                                    //         )
-                                                                                                    //     )
-                                                                                                    //     .then(res =>
-                                                                                                    //         //console.dir(arrProdsColor)
-                                                                                                    //         arrProdsColor.map(fitxetaMapper)
-                                                                                                    //     );
-                                    // console.dir("arrProdsColor", arrProdsColor);
-                                    //return null;
+                                break;
+                            }
+                            case "010": {
+                                //alert("010");
+                                return this.props.data.subcategoriaPRODUCTES
+                                    .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
+                                    .map(fitxetaMapper);
+                                break;
+                            }
+                            case "001": {
+                                //alert("001");
+                                this.props.data.subcategoriaPRODUCTES
+                                    .forEach(
+                                        (v,i,a) => {
+                                            if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                                                 arrProdsColor.push(v);
+                                                //console.dir(v);
+                                            }
+                                        }
+                                    );
+                                //console.dir("arrProdsColor", arrProdsColor);
+                                return arrProdsColor.map(fitxetaMapper);
+                                break;
+                            }
+                            case "000": {
+                                //alert("000");
+                                return this.props.data.subcategoriaPRODUCTES
+                                     .map(fitxetaMapper);
+                                break;
+                            }
+                        }
 
-                            })()
-                        :
-                        // 000
-                           this.props.data.subcategoriaPRODUCTES
-                                .map(fitxetaMapper)
+
+
+                    })()
+
+
+                    //
+                    // fM ?
+                    // fT ?
+                    //     fC ?
+                    //             // 111
+                    //             // alert("111")
+                    //             (() => {
+                    //                 this.props.data.subcategoriaPRODUCTES
+                    //                     .filter(obj => obj.marca === this.props.filtreMarca.value)
+                    //                     //.map(fitxetaMapper)
+                    //                     .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
+                    //                     .forEach(
+                    //                         (v,i,a) => {
+                    //                             if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                    //                                  arrProdsColor.push(v);
+                    //                                 //console.dir(v);
+                    //                             }
+                    //                         }
+                    //                     );
+                    //                     //console.dir("arrProdsColor", arrProdsColor);
+                    //                     return arrProdsColor.map(fitxetaMapper);
+                    //             })()
+                    //         :   // 110
+                    //             //alert("110")
+                    //         //    (() => {
+                    //                 this.props.data.subcategoriaPRODUCTES
+                    //                     .filter(obj => obj.marca === this.props.filtreMarca.value)
+                    //                     //.map(fitxetaMapper)
+                    //                     .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla) > 0)))
+                    //                     .map(fitxetaMapper)
+                    //     //            ;
+                    //                 // //console.dir("arrResultatFiltres", arrResultatFiltres);
+                    //                 // if (arrResultatFiltres.length > 0) {
+                    //                 //     return arrResultatFiltres.map(fitxetaMapper);
+                    //                 // } else {
+                    //                 //     return <h3>Sin resultados</h3>;
+                    //                 // }
+                    //     //        })()
+                    //     : fC ?
+                    //         // 101
+                    //         //    alert("101")
+                    //             (() => {
+                    //                 this.props.data.subcategoriaPRODUCTES
+                    //                     .filter(obj => obj.marca === this.props.filtreMarca.value)
+                    //                     //.map(fitxetaMapper)
+                    //                     .forEach(
+                    //                         (v,i,a) => {
+                    //                             if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                    //                                  arrResultatFiltres.push(v);
+                    //                                 //console.dir(v);
+                    //                             }
+                    //                         }
+                    //                     )
+                    //                 ;
+                    //                 //console.dir("arrResultatFiltres", arrResultatFiltres);
+                    //                 if (arrResultatFiltres.length > 0) {
+                    //                     return arrResultatFiltres.map(fitxetaMapper);
+                    //                 } else {
+                    //                     return <h3>Sin resultados</h3>;
+                    //                 }
+                    //             })()
+                    //         :   // 100
+                    //             this.props.data.subcategoriaPRODUCTES
+                    //                 .filter(obj => obj.marca === this.props.filtreMarca.value)
+                    //                 .map(fitxetaMapper)
+                    //
+                    // : fT ?
+                    //     fC ?
+                    //         // 011
+                    //             //alert("011")
+                    //         (() => {
+                    //             this.props.data.subcategoriaPRODUCTES
+                    //                 .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
+                    //                 .forEach(
+                    //                     (v,i,a) => {
+                    //                         if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                    //                              arrProdsColor.push(v);
+                    //                             //console.dir(v);
+                    //                         }
+                    //                     }
+                    //                 );
+                    //                 //console.dir("arrProdsColor", arrProdsColor);
+                    //                 return arrProdsColor.map(fitxetaMapper);
+                    //             })()
+                    //     : // 010 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< !!!!!!!!!!!!!!
+                    // //    (() => {
+                    //         // fetch(`http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34`)
+                    //         //     .then(res => res.json())
+                    //         //     .then(res =>
+                    //         //         res.map(
+                    //         //             (v,i,a) => {
+                    //         //               fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
+                    //         //                 .then(res => res.json())
+                    //         //                 .then(res => {
+                    //         //                     arrProductesAmbTalles.push(res);
+                    //         //                 })
+                    //         //                 .then(res => console.dir(arrProductesAmbTalles))
+                    //         //             }
+                    //         //         )
+                    //         //     )
+                    //         //     return <h1>010</h1>;
+                    //     //let filtratsPerTalla = new Promise((resolve, reject) => {
+                    //             //resolve(
+                    //             this.props.data.subcategoriaPRODUCTES
+                    //                 .filter(obj => obj.sizes.find((v,i,a) => (v.tallaId === this.props.filtreTalla.value) && (Number(v.existencia_talla)>0)))
+                    //                 .map(fitxetaMapper)
+                    //             //);
+                    //     //     });
+                    //     //
+                    //     //     filtratsPerTalla.then(result => result.map(fitxetaMapper));
+                    //     // })()
+                    //         //.then(res => res.map(fitxetaMapper))
+                    //
+                    //
+                    //
+                    //         //.then(res => console.dir(arrProductesAmbTalles))
+                    //
+                    //             //Promise.all(
+                    //             //    let array = [];
+                    //
+                    //             //    this.props.data.subcategoriaPRODUCTES
+                    //                     // .forEach(
+                    //                     //     (v,i,a) => {
+                    //                             // fetch(`http://api.colombiaespassion.net/jgeneral/data/products/?productId=${v.id}`)
+                    //                             //     .then(res => res.json())
+                    //                             //     // .then(res => arrProductesAmbTalles.push(res))
+                    //                             //     // .then(() =>
+                    //                             //     //     console.dir("aPT:", arrProductesAmbTalles)
+                    //                             //     // )
+                    //                             //     .then(res => console.dir(res))
+                    //
+                    //
+                    //
+                    //                                 // .then(res => (
+                    //                                 //     <Fitxeta
+                    //                                 //         key={i}
+                    //                                 //         v={v}
+                    //                                 //         i={i}
+                    //                                 //         a={a}
+                    //                                 //     />
+                    //                                 // ))
+                    //
+                    //                                 //.then(res => console.dir("array:", arrProductesAmbTalles))
+                    //                                 //.then(res => console.dir("res:", res))
+                    //                         //    ;
+                    //                     //     console.dir(v);
+                    //                     //     }
+                    //                     // )
+                    //         //    )
+                    //             //.then( res =>
+                    //             // );
+                    //
+                    // : fC ?
+                    //     // 001
+                    //         //alert("001")
+                    //         (() => {
+                    //
+                    //             this.props.data.subcategoriaPRODUCTES
+                    //             .forEach(
+                    //                 (v,i,a) => {
+                    //                     if (v.galleryColors.find((obj) => obj.colorId === this.props.filtreColor.colorId)) {
+                    //                          arrProdsColor.push(v);
+                    //                         //console.dir(v);
+                    //                     }
+                    //                 }
+                    //             );
+                    //             console.dir("arrProdsColor", arrProdsColor);
+                    //             return arrProdsColor.map(fitxetaMapper);
+                    //             // return arrProdsColor.map(
+                    //             //     (v,i,a) => {
+                    //             //         return <h1>{v.descripcion}</h1>;
+                    //             //     }
+                    //             // );
+                    //                                                                                 //
+                    //                                                                                 // fetch("http://api.colombiaespassion.net/jsubcategories/data/products/?pageId=1&categoryId=2&subcategoryId=34")
+                    //                                                                                 //     .then(res => res.json())
+                    //                                                                                 //     //.then(res => res.find(obj => obj.galleryColors.colorId ==="4"))
+                    //                                                                                 //     // .then(res => console.dir(res))
+                    //                                                                                 //     .then(res => res
+                    //                                                                                 //         .forEach(
+                    //                                                                                 //             (v,i,a) => {
+                    //                                                                                 //               if (v.galleryColors.find((obj) => obj.colorId==="5")) {
+                    //                                                                                 //                   arrProdsColor.push(v);
+                    //                                                                                 //               }
+                    //                                                                                 //             }
+                    //                                                                                 //         )
+                    //                                                                                 //     )
+                    //                                                                                 //     .then(res =>
+                    //                                                                                 //         //console.dir(arrProdsColor)
+                    //                                                                                 //         arrProdsColor.map(fitxetaMapper)
+                    //                                                                                 //     );
+                    //                 // console.dir("arrProdsColor", arrProdsColor);
+                    //                 //return null;
+                    //
+                    //         })()
+                    //     :
+                    //     // 000
+                    //        this.props.data.subcategoriaPRODUCTES
+                    //             .map(fitxetaMapper)
                 }
                 </Masonry>
             </div>

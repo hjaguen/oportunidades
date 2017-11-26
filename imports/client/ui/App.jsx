@@ -132,7 +132,11 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "101": {
-                alert("M101");
+                //alert("M101");
+                this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                });
+                this.props.filtrantColor(null);
                 break;
             }
             case "100": {
@@ -434,58 +438,58 @@ class ColorsSUBCAT extends Component {
 
     filtraPerColor(ev) {
 
-        const
-            fM = this.props.filtreMarca ? "1" : "0",
-            fT = this.props.filtreTalla ? "1" : "0",
-            fC = this.props.filtreColor ? "1" : "0"
-        ;
-
-        switch (`${fM}${fT}${fC}`) {
-            case "111": {
-                alert("C111");
-                break;
-            }
-            case "110": {
-                alert("C110");
-                break;
-            }
-            case "101": {
-                alert("C101");
-                break;
-            }
-            case "100": {
-                //alert("C100");
-                this.props.history.push(`../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${ev.target.dataset['colorid']}`, {
-                    filtreColor: {
-                        colorId: ev.target.dataset['colorid'],
-                        nom_color: ev.target.dataset['nomcolor'],
-                        label_color: ev.target.dataset['labelcolor']
-                }})
-                break;
-            }
-            case "011": {
-                alert("C011");
-                break;
-            }
-            case "010": {
-                alert("C010");
-                break;
-            }
-            case "001": {
-            //    alert("C001");
-                break;
-            }
-            case "000": {
-            //    alert("C000");
-                this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
-                    filtreColor: {
-                        colorId: ev.target.dataset['colorid'],
-                        nom_color: ev.target.dataset['nomcolor'],
-                        label_color: ev.target.dataset['labelcolor']
-                }})
-                break;
-            }
-        }
+        // const
+        //     fM = this.props.filtreMarca ? "1" : "0",
+        //     fT = this.props.filtreTalla ? "1" : "0",
+        //     fC = this.props.filtreColor ? "1" : "0"
+        // ;
+        //
+        // switch (`${fM}${fT}${fC}`) {
+        //     case "111": {
+        //         alert("C111");
+        //         break;
+        //     }
+        //     case "110": {
+        //         alert("C110");
+        //         break;
+        //     }
+        //     case "101": {
+        //         alert("C101");
+        //         break;
+        //     }
+        //     case "100": {
+        //         //alert("C100");
+        //         this.props.history.push(`../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${ev.target.dataset['colorid']}`, {
+        //             filtreColor: {
+        //                 colorId: ev.target.dataset['colorid'],
+        //                 nom_color: ev.target.dataset['nomcolor'],
+        //                 label_color: ev.target.dataset['labelcolor']
+        //         }});
+        //         break;
+        //     }
+        //     case "011": {
+        //         alert("C011");
+        //         break;
+        //     }
+        //     case "010": {
+        //         alert("C010");
+        //         break;
+        //     }
+        //     case "001": {
+        //     //    alert("C001");
+        //         break;
+        //     }
+        //     case "000": {
+        //     //    alert("C000");
+        //         this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
+        //             filtreColor: {
+        //                 colorId: ev.target.dataset['colorid'],
+        //                 nom_color: ev.target.dataset['nomcolor'],
+        //                 label_color: ev.target.dataset['labelcolor']
+        //         }})
+        //         break;
+        //     }
+        // }
 
                         //         if (!location.pathname.includes("/color/")) {
                         // //             (this.props.filtreColor)
@@ -538,6 +542,16 @@ class ColorsSUBCAT extends Component {
            /* console.log(this.props.data.error)*/
             return (<div>Ocurrió un error inesperado.</div>);
         }
+
+        let
+            linkTo //= ({v,i,a}) => `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
+        ;
+        const
+            fM = this.props.filtreMarca ? "1" : "0",
+            fT = this.props.filtreTalla ? "1" : "0",
+            fC = this.props.filtreColor ? "1" : "0"
+        ;
+
         return [
             (this.props.filtreColor)
                 ?
@@ -596,11 +610,68 @@ class ColorsSUBCAT extends Component {
                     (() => [
                                 this.props.data[this.props.data.variables.queryVariant].map(
                                     (v,i,a) => {
+
+
+                                        switch (`${fM}${fT}${fC}`) {
+                                            case "111": {
+                                                // alert("C111");
+                                                linkTo = `.`;
+                                                break;
+                                            }
+                                            case "110": {
+                                                // alert("C110");
+                                                linkTo = `.`;
+                                                break;
+                                            }
+                                            case "101": {
+                                                // alert("C101");
+                                                linkTo = `.`;
+                                                break;
+                                            }
+                                            case "100": {
+                                                //alert("C100");
+                                                linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
+                    // {
+                    //     filtreColor: {
+                    //         colorId: ev.target.dataset['colorid'],
+                    //         nom_color: ev.target.dataset['nomcolor'],
+                    //         label_color: ev.target.dataset['labelcolor']
+                    // }};
+                                                break;
+                                            }
+                                            case "011": {
+                                                // alert("C011");
+                                                linkTo = `.`;
+                                                break;
+                                            }
+                                            case "010": {
+                                                // alert("C010");
+                                                linkTo = `.`;
+                                                break;
+                                            }
+                                            case "001": {
+                                            //    alert("C001");
+                                            linkTo = `.`;
+                                                break;
+                                            }
+                                            case "000": {
+                                            //    alert("C000");
+                                                linkTo = `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`;
+                        // {
+                        //     filtreColor: {
+                        //         colorId: ev.target.dataset['colorid'],
+                        //         nom_color: ev.target.dataset['nomcolor'],
+                        //         label_color: ev.target.dataset['labelcolor']
+                        // }};
+                                                break;
+                                            }
+                                        }
+
                                         return (
                                             (this.props.filtreColor && this.props.filtreColor.colorId === v.colorId)
                                             ?   <Link
                                                     key={i}
-                                                    to={`../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                    to={linkTo}
                                                 >
                                                     <span
                                                         key={i}
@@ -654,7 +725,7 @@ class ColorsSUBCAT extends Component {
                                                 :
                                                     <Link
                                                         key={i}
-                                                        to={`${location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                        to={`${this.props.location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
                                                     >
                                                         <span
                                                             key={i}
@@ -1166,8 +1237,8 @@ export default class App extends Component {
                             }),
 
                             MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
                                 options: {
-                                    ...this.props,
                                     variables
                                 }
                             })(MainContentSubCat)
