@@ -114,14 +114,29 @@ class MarquesSUBCAT extends Component {
         switch (`${fM}${fT}${fC}`) {
             case "111": {
                 alert("M111");
+                 (nouVal)
+                    ? (() => {
+                            this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                            selectValue: nouVal
+                            });
+                            this.props.filtrantTalla(null);
+                            this.props.filtrantColor(null);
+                        }
+                    )()
+                    : this.props.history.push(`../../../talla/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}/color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                            selectValue: null
+                        })
                 break;
             }
             case "110": {
-                //alert("M110");
+                alert("M110");
                 (nouVal)
-                   ?   this.props.history.push(`../marca-talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}.${nouVal.value}`, {
+                   ?   (() => {
+                       this.props.history.push(`../marca-talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}.${nouVal.value}`, {
                            selectValue: nouVal
-                       })
+                       });
+                       //this.props.filtrantTalla(null);
+                   })()
                    : (() => {
                        // this.props.history.push(`..`);
                        // this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
@@ -132,7 +147,7 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "101": {
-                //alert("M101");
+                alert("M101");
                 this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
@@ -140,7 +155,7 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "100": {
-                //alert("M100");
+                alert("M100");
                 (nouVal)
                     ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
                         selectValue: nouVal
@@ -153,18 +168,31 @@ class MarquesSUBCAT extends Component {
             }
             case "011": {
                 alert("M011");
+                this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                });
+                this.props.filtrantTalla(null);
+                this.props.filtrantColor(null);
                 break;
             }
             case "010": {
                 alert("M010");
+                this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                });
+                this.props.filtrantTalla(null);
                 break;
             }
             case "001": {
                 alert("M001");
+                this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    selectValue: nouVal
+                });
+                this.props.filtrantColor(null);
                 break;
             }
             case "000": {
-                //alert("M000");
+                alert("M000");
                 // Cap filtre previ. Afegim /marca/x.Id a la URL i apliquem el filtre de la Marca.
                 this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
