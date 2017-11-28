@@ -340,7 +340,16 @@ class TallesSUBCAT extends Component {
                 break;
             }
             case "011": {
-                alert("T011");
+                //alert("T011");
+                (nouVal)
+                   ?
+                    this.props.history.push(`../talla-color/${nouVal.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}.${this.props.filtreColor.colorId}`, {
+                        selectValue: nouVal
+                    })
+                    :
+                    this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                        selectValue: null
+                    });
                 break;
             }
             case "010": {
