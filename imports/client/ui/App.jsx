@@ -130,20 +130,16 @@ class MarquesSUBCAT extends Component {
             }
             case "110": {
                 alert("M110");
-                (nouVal)
-                   ?   (() => {
-                       this.props.history.push(`../marca-talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}.${nouVal.value}`, {
+                   (nouVal)
+                       ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
                            selectValue: nouVal
-                       });
-                       //this.props.filtrantTalla(null);
-                   })()
-                   : (() => {
-                       // this.props.history.push(`..`);
-                       // this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
-                       this.props.history.push(`../talla/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}`, {
-                               selectValue: null
-                           })
-                   })();
+                       })
+                       : (() => {
+                           this.props.history.push(`..`);
+                           this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                       })();
+
+                       this.props.filtrantTalla(null);
                 break;
             }
             case "101": {
@@ -464,6 +460,10 @@ class ColorsSUBCAT extends Component {
     //     }).isRequired
     // }
 
+    componentWillReceiveProps(nextProps) {
+//        alert(`fM: ${nextProps.filtreMarca} \n fT: ${nextProps.filtreTalla} \n fC: ${nextProps.filtreColor}`);
+    }
+
     filtraPerColor(ev) {
 
         // const
@@ -573,8 +573,7 @@ class ColorsSUBCAT extends Component {
 
         let
             linkTo //= ({v,i,a}) => `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
-        ;
-        const
+        ,
             fM = this.props.filtreMarca ? "1" : "0",
             fT = this.props.filtreTalla ? "1" : "0",
             fC = this.props.filtreColor ? "1" : "0"
@@ -612,12 +611,69 @@ class ColorsSUBCAT extends Component {
 
                         title="Desactivar el filtro"
                         onClick={() => {
-                            this.props.history.push(`..`);
-                            //alert(location.pathname.substring(0,location.pathname.length-1));
-                            this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
-                            //alert(location.pathname.substr(location.pathname.length - 1, 1));
-                            // this.props.history.replace(`${location.pathname}/..`.substr(`${location.pathname}/..`.length - 1, 1));
-                            this.props.colorIdAVariables(null);
+                            switch (`${fM}${fT}${fC}`) {
+                                case "111": {
+                                    // alert("C111");
+                                    // linkTo = `.`;
+                                    break;
+                                }
+                                case "110": {
+                                    // alert("C110");
+                                    // linkTo = `.`;
+                                    break;
+                                }
+                                case "101": {
+                                     alert("C101");
+                                    // linkTo = `.`;
+                                    this.props.history.push(`../marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`);
+
+                                    this.props.filtrantColor(null);
+                                    break;
+                                }
+                                case "100": {
+                                    // alert("C100");
+                                    // linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
+                    // {
+                    //     filtreColor: {
+                    //         colorId: ev.target.dataset['colorid'],
+                    //         nom_color: ev.target.dataset['nomcolor'],
+                    //         label_color: ev.target.dataset['labelcolor']
+                    // }};
+                                    break;
+                                }
+                                case "011": {
+                                    // alert("C011");
+                                    // linkTo = `.`;
+                                    break;
+                                }
+                                case "010": {
+                                    // alert("C010");
+                                    // linkTo = `.`;
+                                    break;
+                                }
+                                case "001": {
+                                // alert("C001");
+                                // linkTo = `.`;
+                                    break;
+                                }
+                                case "000": {
+                                // alert("C000");
+                                    // linkTo = `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`;
+                    // {
+                    //     filtreColor: {
+                    //         colorId: ev.target.dataset['colorid'],
+                    //         nom_color: ev.target.dataset['nomcolor'],
+                    //         label_color: ev.target.dataset['labelcolor']
+                    // }};
+                                    break;
+                                }
+                            }
+            // this.props.history.push(`..`);
+            // //alert(location.pathname.substring(0,location.pathname.length-1));
+            // this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+            // //alert(location.pathname.substr(location.pathname.length - 1, 1));
+            // // this.props.history.replace(`${location.pathname}/..`.substr(`${location.pathname}/..`.length - 1, 1));
+            // this.props.colorIdAVariables(null);
                         }}
                     >&times;
                     </span>
@@ -653,11 +709,11 @@ class ColorsSUBCAT extends Component {
                                             }
                                             case "101": {
                                                 // alert("C101");
-                                                linkTo = `.`;
+                                                linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "100": {
-                                                //alert("C100");
+                                                // alert("C100");
                                                 linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
                     // {
                     //     filtreColor: {
@@ -668,22 +724,22 @@ class ColorsSUBCAT extends Component {
                                                 break;
                                             }
                                             case "011": {
-                                                // alert("C011");
-                                                linkTo = `.`;
+                                                //alert("C011");
+                                                linkTo = '.';
                                                 break;
                                             }
                                             case "010": {
                                                 // alert("C010");
-                                                linkTo = `.`;
+                                                linkTo = `../talla-color/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "001": {
-                                            //    alert("C001");
+                                            // alert("C001");
                                             linkTo = `.`;
                                                 break;
                                             }
                                             case "000": {
-                                            //    alert("C000");
+                                            // alert("C000");
                                                 linkTo = `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`;
                         // {
                         //     filtreColor: {
@@ -728,7 +784,7 @@ class ColorsSUBCAT extends Component {
                                                         //alert("location");
                                                         <Link
                                                             key={i}
-                                                            to={`../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                            to={linkTo}
                                                         >
                                                             <span
                                                                 key={i}
@@ -753,7 +809,7 @@ class ColorsSUBCAT extends Component {
                                                 :
                                                     <Link
                                                         key={i}
-                                                        to={`${this.props.location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`}
+                                                        to={linkTo}
                                                     >
                                                         <span
                                                             key={i}
@@ -778,6 +834,8 @@ class ColorsSUBCAT extends Component {
                                     }
                                 )
                         ]
+        //Penúltim link to: `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
+        //Últim link to: `${this.props.location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
                         // ()
                         //     ?
 
@@ -1318,8 +1376,7 @@ export default class App extends Component {
                                 productIdAlState={this.productIdAlState}
                             />
                         );
-                    }
-                }/>
+                    }}/>
 
                     <Route path="/" render={() => (
                         <div
