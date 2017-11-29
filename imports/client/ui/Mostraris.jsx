@@ -325,7 +325,12 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         }
                                     );
                                     //console.dir("arrProdsColor", arrProdsColor);
-                                    return arrProdsColor.map(fitxetaMapper);
+                                //    return arrProdsColor.map(fitxetaMapper);
+                                    if (arrProdsColor.length > 0) {
+                                        return arrProdsColor.map(fitxetaMapper);
+                                    } else {
+                                        return <h3>Sin resultados</h3>;
+                                    }
                                 break;
                             }
                             case "110": {
@@ -379,7 +384,12 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         }
                                     );
                                     //console.dir("arrProdsColor", arrProdsColor);
-                                return arrProdsColor.map(fitxetaMapper);
+                                //return arrProdsColor.map(fitxetaMapper);
+                                if (arrProdsColor.length > 0) {
+                                    return arrProdsColor.map(fitxetaMapper);
+                                } else {
+                                    return <h3>Sin resultados</h3>;
+                                }
                                 break;
                             }
                             case "010": {
@@ -401,7 +411,12 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         }
                                     );
                                 //console.dir("arrProdsColor", arrProdsColor);
-                                return arrProdsColor.map(fitxetaMapper);
+                                //return arrProdsColor.map(fitxetaMapper);
+                                if (arrProdsColor.length > 0) {
+                                    return arrProdsColor.map(fitxetaMapper);
+                                } else {
+                                    return <h3>Sin resultados</h3>;
+                                }
                                 break;
                             }
                             case "000": {

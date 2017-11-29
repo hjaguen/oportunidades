@@ -116,7 +116,7 @@ class MarquesSUBCAT extends Component {
                 // alert("M111");
                  (nouVal)
                     ? (() => {
-                            this.props.history.push(`../../../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
+                            this.props.history.push(`../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                             selectValue: nouVal
                             });
                             this.props.filtrantTalla(null);
@@ -1393,7 +1393,7 @@ export default class App extends Component {
                                 match={match}
                                 history={history}
                                 location={location}
-
+d
                                 desactivaFiltres={this.desactivaFiltres}
                             />
                         );
