@@ -101,7 +101,7 @@ class MarquesSUBCAT extends Component {
     // }
 
     updateValue(nouVal) {
-        // this.props.history.push(`${location.pathname}/marca/${this.state.selectValue.label.trim().replace(" ", ".").toLowerCase()}.${this.state.selectValue.value}`, {
+        // this.props.history.push(`${location.pathname}/marca/${this.state.selectValue.label.trim().replace(/ /g, ".").toLowerCase()}.${this.state.selectValue.value}`, {
         //     selectValue: nouVal
         // });
 
@@ -113,25 +113,25 @@ class MarquesSUBCAT extends Component {
 
         switch (`${fM}${fT}${fC}`) {
             case "111": {
-                alert("M111");
+                // alert("M111");
                  (nouVal)
                     ? (() => {
-                            this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                            this.props.history.push(`../../../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                             selectValue: nouVal
                             });
                             this.props.filtrantTalla(null);
                             this.props.filtrantColor(null);
                         }
                     )()
-                    : this.props.history.push(`../../../talla/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}/color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                    : this.props.history.push(`../../../talla/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}/color/${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
                             selectValue: null
                         })
                 break;
             }
             case "110": {
-                alert("M110");
+                // alert("M110");
                    (nouVal)
-                       ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                       ? this.props.history.push(`../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                            selectValue: nouVal
                        })
                        : (() => {
@@ -143,17 +143,23 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "101": {
-                alert("M101");
-                this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
-                    selectValue: nouVal
-                });
-                this.props.filtrantColor(null);
+                // alert("M101");
+                (nouVal)
+                    ?
+                        this.props.history.push(`../marca-color/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}.${this.props.filtreColor.colorId}`, {
+                            selectValue: nouVal
+                        })
+                    :
+                    //    this.props.filtrantColor(null);
+                        this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreColor.colorId}`)
+                    ;
+                this.props.filtrantMarca(null);
                 break;
             }
             case "100": {
-                alert("M100");
+                // alert("M100");
                 (nouVal)
-                    ? this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                    ? this.props.history.push(`../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                         selectValue: nouVal
                     })
                     : (() => {
@@ -163,8 +169,8 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "011": {
-                alert("M011");
-                this.props.history.push(`../../../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                // alert("M011");
+                this.props.history.push(`../../../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
                 this.props.filtrantTalla(null);
@@ -172,32 +178,32 @@ class MarquesSUBCAT extends Component {
                 break;
             }
             case "010": {
-                alert("M010");
-                this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                // alert("M010");
+                this.props.history.push(`../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
                 this.props.filtrantTalla(null);
                 break;
             }
             case "001": {
-                alert("M001");
-                this.props.history.push(`../marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                // alert("M001");
+                this.props.history.push(`../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
                 this.props.filtrantColor(null);
                 break;
             }
             case "000": {
-                alert("M000");
+                // alert("M000");
                 // Cap filtre previ. Afegim /marca/x.Id a la URL i apliquem el filtre de la Marca.
-                this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
                 break;
             }
         }
 
-        // this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
+        // this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
         //     selectValue: nouVal
         // })
 
@@ -206,7 +212,7 @@ class MarquesSUBCAT extends Component {
         //          ?
         //
         //
-        //          : null // this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+        //          : null // this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
         //             //     selectValue: nouVal
         //             // })
         //
@@ -306,31 +312,44 @@ class TallesSUBCAT extends Component {
 
         switch (`${fM}${fT}${fC}`) {
             case "111": {
-                alert("T111");
+                (nouVal)
+                   ?
+                   this.props.history.push(`../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}.${this.props.filtreColor.colorId}`,
+                           {
+                               selectValue: nouVal
+                           })
+                    :
+                    this.props.history.push(`../marca-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreColor.colorId}`, {
+                        selectValue: null
+                    });
                 break;
             }
             case "110": {
                 (nouVal)
-                   ?   this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}`, {
+                   ?   this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}`, {
                            selectValue: nouVal
                        })
                    : (() => {
                        // this.props.history.push(`..`);
                        // this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
-                       this.props.history.push(`../marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
+                       this.props.history.push(`../marca/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
                                selectValue: null
                            })
                    })();
                 break;
             }
             case "101": {
-                alert("T101");
+                //alert("T101");
+                this.props.history.push(`../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}.${this.props.filtreColor.colorId}`,
+                        {
+                            selectValue: nouVal
+                        });
                 break;
             }
             case "100": {
                 //alert("T100");
                 (nouVal)
-                   ?   this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}`, {
+                   ?   this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}`, {
                            selectValue: nouVal
                        })
                    : (() => {
@@ -343,11 +362,11 @@ class TallesSUBCAT extends Component {
                 //alert("T011");
                 (nouVal)
                    ?
-                    this.props.history.push(`../talla-color/${nouVal.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}.${this.props.filtreColor.colorId}`, {
+                    this.props.history.push(`../talla-color/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}.${this.props.filtreColor.colorId}`, {
                         selectValue: nouVal
                     })
                     :
-                    this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                    this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
                         selectValue: null
                     });
                 break;
@@ -355,7 +374,7 @@ class TallesSUBCAT extends Component {
             case "010": {
             //    alert("T010");
                 (nouVal)
-                   ?   this.props.history.push(`../talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                   ?   this.props.history.push(`../talla/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                            selectValue: nouVal
                        })
                    : (() => {
@@ -365,12 +384,15 @@ class TallesSUBCAT extends Component {
                 break;
             }
             case "001": {
-                alert("T001");
+                //alert("T001");
+                this.props.history.push(`../talla-color/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}.${this.props.filtreColor.colorId}`, {
+                    selectValue: nouVal
+                })
                 break;
             }
             case "000": {
                 //alert("T000");
-                this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+                this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
                 break;
@@ -380,11 +402,11 @@ class TallesSUBCAT extends Component {
 // if (!location.pathname.includes("/talla/")) {
 //     (this.props.filtreTalla)
 //         ?
-//             this.props.history.push(`${location.pathname}/talla/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}`, {
+//             this.props.history.push(`${location.pathname}/talla/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}`, {
 //                 selectValue: nouVal
 //             })
 //         :
-//             this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(" ", ".").toLowerCase()}.${nouVal.value}`, {
+//             this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
 //                 selectValue: nouVal
 //             })
 //
@@ -496,7 +518,7 @@ class ColorsSUBCAT extends Component {
         //     }
         //     case "100": {
         //         //alert("C100");
-        //         this.props.history.push(`../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${ev.target.dataset['colorid']}`, {
+        //         this.props.history.push(`../marca-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${ev.target.dataset['colorid']}`, {
         //             filtreColor: {
         //                 colorId: ev.target.dataset['colorid'],
         //                 nom_color: ev.target.dataset['nomcolor'],
@@ -518,7 +540,7 @@ class ColorsSUBCAT extends Component {
         //     }
         //     case "000": {
         //     //    alert("C000");
-        //         this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
+        //         this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
         //             filtreColor: {
         //                 colorId: ev.target.dataset['colorid'],
         //                 nom_color: ev.target.dataset['nomcolor'],
@@ -531,7 +553,7 @@ class ColorsSUBCAT extends Component {
                         //         if (!location.pathname.includes("/color/")) {
                         // //             (this.props.filtreColor)
                         // //             ?
-                        // //             this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                        // //             this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
                         // //                 filtreColor: {
                         // //                     colorId: ev.target.dataset['colorid'],
                         // //                     nom_color: ev.target.dataset['nomcolor'],
@@ -539,7 +561,7 @@ class ColorsSUBCAT extends Component {
                         // //                 }
                         // //             })
                         // //             : null
-                        // // // this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
+                        // // // this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
                         // // //     filtreColor: {
                         // // //         colorId: ev.target.dataset['colorid'],
                         // // //         nom_color: ev.target.dataset['nomcolor'],
@@ -552,7 +574,7 @@ class ColorsSUBCAT extends Component {
                         // //             ;
                         //         } else {
                         //             (ev.target.dataset['colorid'])
-                        //                 ? this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(" ", ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
+                        //                 ? this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
                         //                     filtreColor: {
                         //                         colorId: ev.target.dataset['colorid'],
                         //                         nom_color: ev.target.dataset['nomcolor'],
@@ -581,7 +603,7 @@ class ColorsSUBCAT extends Component {
         }
 
         let
-            linkTo //= ({v,i,a}) => `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
+            linkTo //= ({v,i,a}) => `../color/${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${v.colorId}`
         ,
             fM = this.props.filtreMarca ? "1" : "0",
             fT = this.props.filtreTalla ? "1" : "0",
@@ -623,25 +645,30 @@ class ColorsSUBCAT extends Component {
                             switch (`${fM}${fT}${fC}`) {
                                 case "111": {
                                     // alert("C111");
-                                    // linkTo = `.`;
+                                    this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtraTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
+                                    this.props.filtrantColor(null);
                                     break;
                                 }
                                 case "110": {
                                     // alert("C110");
                                     // linkTo = `.`;
+                                // this.props.history.push(`../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${nouVal.value}.${this.props.filtreColor.colorId}`,
+                                //         {
+                                //             selectValue: nouVal
+                                //         });
                                     break;
                                 }
                                 case "101": {
-                                     alert("C101");
-                                    // linkTo = `.`;
-                                    this.props.history.push(`../marca/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}`);
+                //  alert("C101");
+                // // linkTo = `.`;
+                                    this.props.history.push(`../marca/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}`);
 
                                     this.props.filtrantColor(null);
                                     break;
                                 }
                                 case "100": {
                                     // alert("C100");
-                                    // linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
+                                    // linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
                     // {
                     //     filtreColor: {
                     //         colorId: ev.target.dataset['colorid'],
@@ -651,23 +678,30 @@ class ColorsSUBCAT extends Component {
                                     break;
                                 }
                                 case "011": {
-                                    // alert("C011");
-                                    // linkTo = `.`;
+                // alert("C011");
+                // // linkTo = `.`;
+                                    this.props.history.push(`../talla/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}`);
+
+                                    this.props.filtrantColor(null);
                                     break;
                                 }
                                 case "010": {
                                     // alert("C010");
                                     // linkTo = `.`;
+
                                     break;
                                 }
                                 case "001": {
                                 // alert("C001");
-                                // linkTo = `.`;
+        // // linkTo = `.`;
+                                    this.props.history.push(`..`);
+                                    this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
+                                    this.props.filtrantColor(null);
                                     break;
                                 }
                                 case "000": {
                                 // alert("C000");
-                                    // linkTo = `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`;
+                                    // linkTo = `../color/${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${v.colorId}`;
                     // {
                     //     filtreColor: {
                     //         colorId: ev.target.dataset['colorid'],
@@ -708,22 +742,22 @@ class ColorsSUBCAT extends Component {
                                         switch (`${fM}${fT}${fC}`) {
                                             case "111": {
                                                 // alert("C111");
-                                                linkTo = `.`;
+                                                linkTo = `../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreMarca.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "110": {
                                                 // alert("C110");
-                                                linkTo = `.`;
+                                                linkTo = `../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreMarca.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "101": {
                                                 // alert("C101");
-                                                linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
+                                                linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "100": {
                                                 // alert("C100");
-                                                linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
+                                                linkTo = `../marca-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${v.colorId}`;
                     // {
                     //     filtreColor: {
                     //         colorId: ev.target.dataset['colorid'],
@@ -734,22 +768,22 @@ class ColorsSUBCAT extends Component {
                                             }
                                             case "011": {
                                                 //alert("C011");
-                                                linkTo = '.';
+                                                linkTo = `../talla-color/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "010": {
                                                 // alert("C010");
-                                                linkTo = `../talla-color/${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}-${v.label_color.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreTalla.value}.${v.colorId}`;
+                                                linkTo = `../talla-color/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "001": {
                                             // alert("C001");
-                                            linkTo = `.`;
+                                            linkTo = `../color/${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${v.colorId}`;
                                                 break;
                                             }
                                             case "000": {
                                             // alert("C000");
-                                                linkTo = `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`;
+                                                linkTo = `${location.pathname}/color/${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${v.colorId}`;
                         // {
                         //     filtreColor: {
                         //         colorId: ev.target.dataset['colorid'],
@@ -843,8 +877,8 @@ class ColorsSUBCAT extends Component {
                                     }
                                 )
                         ]
-        //Penúltim link to: `../color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
-        //Últim link to: `${this.props.location.pathname}/color/${v.label_color.trim().replace(" ", ".").toLowerCase()}.${v.colorId}`
+        //Penúltim link to: `../color/${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${v.colorId}`
+        //Últim link to: `${this.props.location.pathname}/color/${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${v.colorId}`
                         // ()
                         //     ?
 
@@ -905,7 +939,7 @@ export default class App extends Component {
     }
 
     marcaTallaUpdate(m, t) {
-        this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(" ", ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(" ", ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
+        this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
     }
 
     marcaColorUpdate(m, c) {
