@@ -123,9 +123,12 @@ class MarquesSUBCAT extends Component {
                             this.props.filtrantColor(null);
                         }
                     )()
-                    : this.props.history.push(`../../../talla/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}/color/${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
+                    : (() => {
+                        this.props.history.push(`../talla-color/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}.${this.props.filtreColor.colorId}`, {
                             selectValue: null
-                        })
+                        });
+                        this.props.filtrantMarca(null);
+                    })()
                 break;
             }
             case "110": {
@@ -170,7 +173,7 @@ class MarquesSUBCAT extends Component {
             }
             case "011": {
                 // alert("M011");
-                this.props.history.push(`../../../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
+                this.props.history.push(`../marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
                     selectValue: nouVal
                 });
                 this.props.filtrantTalla(null);
@@ -645,7 +648,7 @@ class ColorsSUBCAT extends Component {
                             switch (`${fM}${fT}${fC}`) {
                                 case "111": {
                                     // alert("C111");
-                                    this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtraTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
+                                    this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
                                     this.props.filtrantColor(null);
                                     break;
                                 }
@@ -1300,20 +1303,6 @@ export default class App extends Component {
                         )}
                     />
 
-                    <Route path="/botones"
-                        render={() => (
-                            <div>
-                                <Stylo.Button className="btn btn-danger">
-                                    flyeslkjflaksj
-                                </Stylo.Button>
-
-                                <Stylo.TomatoButton>
-                                    AGILLLL
-                                </Stylo.TomatoButton>
-                            </div>
-                        )}
-                    />
-
                     <Route exact path="/" render={() => (
                         <div className="container"
                             style={{
@@ -1393,7 +1382,7 @@ export default class App extends Component {
                                 match={match}
                                 history={history}
                                 location={location}
-d
+
                                 desactivaFiltres={this.desactivaFiltres}
                             />
                         );
