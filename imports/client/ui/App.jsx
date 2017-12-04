@@ -649,6 +649,7 @@ class ColorsSUBCAT extends Component {
                                 case "111": {
                                     // alert("C111");
                                     this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
+
                                     this.props.filtrantColor(null);
                                     break;
                                 }
@@ -745,12 +746,12 @@ class ColorsSUBCAT extends Component {
                                         switch (`${fM}${fT}${fC}`) {
                                             case "111": {
                                                 // alert("C111");
-                                                linkTo = `../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreMarca.value}.${v.colorId}`;
+                                                linkTo = `../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "110": {
                                                 // alert("C110");
-                                                linkTo = `../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreMarca.value}.${v.colorId}`;
+                                                linkTo = `../marca-talla-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}-${v.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}.${v.colorId}`;
                                                 break;
                                             }
                                             case "101": {
@@ -1348,7 +1349,7 @@ export default class App extends Component {
                         </div>
                     )}/>
 
-                    <Route path="/categoria/:subcategoryId" render={({ match, history, location }) => {
+                    <Route exact path="/categoria/:subcategoryId" render={({ match, history, location }) => {
                         let
                             variables = Object.assign({}, this.state.variables, {
                                 subcategoryId: match.params.subcategoryId.match(/\d+$/)[0]
@@ -1378,6 +1379,334 @@ export default class App extends Component {
 
                                 filtrantColor={this.filtrantColor}
                                 filtreColor={this.state.filtreColor}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+                    <Route exact path="/categoria/:catname.:catid/marca/:mn.:mid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid,
+                                marcaId: match.params.mid
+                            }),
+
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={{
+                                    label: match.params.mn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.mid
+                                }}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+                    <Route exact path="/categoria/:catname.:catid/talla/:tn.:tid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid
+                            }),
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={this.state.filtreMarca}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={{
+                                    label: match.params.tn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.tid
+                                }}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+                    <Route exact path="/categoria/:catname.:catid/color/:cn.:cid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid
+                            }),
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={this.state.filtreMarca}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={{
+                                    colorId: match.params.cid,
+                                    nom_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    label_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase())
+                                }}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+
+                    <Route exact path="/categoria/:catn.:catid/marca-talla/:mn-:tn.:mid.:tid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid,
+                                marcaId: match.params.mid
+                            }),
+
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={{
+                                    label: match.params.mn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.mid
+                                }}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={{
+                                    label: match.params.tn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.tid
+                                }}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+                    <Route exact path="/categoria/:catn.:catid/marca-color/:mn-:cn.:mid.:cid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid
+                            }),
+
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={{
+                                    label: match.params.mn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.mid
+                                }}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={{
+                                    colorId: match.params.cid,
+                                    nom_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    label_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase())
+                                }}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+                    <Route exact path="/categoria/:catn.:catid/talla-color/:tn-:cn.:tid.:cid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid
+                            }),
+
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={this.state.filtreMarca}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={{
+                                    label: match.params.tn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.tid
+                                }}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={{
+                                    colorId: match.params.cid,
+                                    nom_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    label_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase())
+                                }}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>
+
+                    <Route exact path="/categoria/:catname.:catid/marca-talla-color/:mn-:tn-:cn.:mid.:tid.:cid" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.catid
+                            }),
+
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={{
+                                    label: match.params.mn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.mid
+                                }}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={{
+                                    label: match.params.tn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    value: match.params.tid
+                                }}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={{
+                                    colorId: match.params.cid,
+                                    nom_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase()),
+                                    label_color: match.params.cn.replace(/\./g, " ").replace(/\b\w/g, l => l.toUpperCase())
+                                }}
 
                                 match={match}
                                 history={history}
