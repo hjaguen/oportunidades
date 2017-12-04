@@ -39,12 +39,12 @@ import {
 import * as Qs from './Queries.jsx';
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
-import Radium, { StyleRoot } from 'radium';
+//import Radium, { StyleRoot } from 'radium';
 import MainContentProducte from './DetallProducte.jsx';
 
 import * as Stylo from './StyledComponents.jsx';
 
-FreeContent = Radium(FreeContent);
+//FreeContent = Radium(FreeContent);
 
 
 let variables = {
@@ -473,6 +473,7 @@ class TallesSUBCAT extends Component {
                     value={this.state.selectValue}
                     placeholder="Filtrar por talla..."
                     searchable={this.state.searchable}
+                    clearValueText="Desactivar el filtro"
                 />
             </div>
         );
@@ -1156,9 +1157,7 @@ export default class App extends Component {
 
             render() {
                 return (
-                    <div
-                        style={conf.estil_filtres}
-                    >
+                    <Stylo.Filtro>
                     {
                         (this.props.filtreTalla || this.props.filtreMarca || this.props.filtreColor)
                             ?   <span
@@ -1200,7 +1199,7 @@ export default class App extends Component {
                                 ?   <ColorsSubCategoriaMARCA {...this.props} />
                                 :   <ColorsSubCategoriaTOTS {...this.props} />
                         }
-                    </div>
+                    </Stylo.Filtro>
                 );
             }
         }
@@ -1212,67 +1211,21 @@ export default class App extends Component {
 
             render() {
                 return (
-                    [
-                        <div
-                            key="columna"
-                            style={{
-                                position: `relative`,
-                                gridArea: conf.filtres_posicio
-                            }}
-                        >
-                            <div
-                                style={{
-                                    position: `-webkit-sticky`,
-                                    position: `sticky`,
-                                    top: `20px`
-                                }}
-                            >
+                      <Stylo.ProductsLayout>
+                        <Stylo.PosicionFiltro
+                            key="columna">
                                 <BuscadorColumnaSUBCAT {...this.props} />
-                            </div>
-                        </div>
-                    ,
-                        <div
-                            key="content"
-                            style={{
-                                gridArea: `content`
-                            }}
-                        >
+                        </Stylo.PosicionFiltro>
+
+
+                        <Stylo.PosicionProductos
+                            key="content">
                             <MostrariAmbProductes {...this.props} />
-                        </div>
-                    ]
+                        </Stylo.PosicionProductos>
+			</Stylo.ProductsLayout>
                 );
             }
         }
-
-        let
-
-            FCMediaVideo = () =>
-                <FreeContent>
-                    <div
-                        style={{
-                                '@media (max-width: 1000px)': {
-                                margin: 'auto'
-                                }
-                        }}>
-                        {conf.video_latinmoda}
-                    </div>
-                </FreeContent>
-            ,
-
-            SubTituloPagina = () =>
-                <FreeContent>
-                    <div
-                        style={{
-                            color: 'black',
-                                '@media (max-width: 900px)': {
-                                color: 'fuchsia'
-                                }
-                        }}>
-                        <h2>Ropa Colombiana en Europa</h2>
-                    </div>
-                </FreeContent>
-
-        ;
 
 //////////// index ////////////
 
@@ -1281,11 +1234,6 @@ export default class App extends Component {
                 <Stylo.MainLayout>
                     <Route path="/"
                         render={() => (
-                            <div
-                                style={{
-                                    gridArea: `navbar`
-                                }}
-                            >
                                 <NavbarAdaptatAmbSubcategories
                                     subcategoryIdAlState={this.subcategoryIdAlState}
                                     fluid
@@ -1300,53 +1248,26 @@ export default class App extends Component {
                                     filtrantColor={this.filtrantColor}
                                     filtreColor={this.state.filtreColor}
                                 />
-                            </div>
                         )}
                     />
 
                     <Route exact path="/" render={() => (
-                        <div className="container"
-                            style={{
-                                gridArea: `present`
-                            }}
-                        >
+                        <Stylo.HomeLayout>
+		            <Stylo.MainVideo>
+		              {conf.video_latinmoda}
+		            </Stylo.MainVideo>
 
-                            {/*Titulo de la Pagina*/}
-                            <StyleRoot>
-                                <SubTituloPagina />
-                            </StyleRoot>
+		            <Stylo.MainContent>
+		              <h1>{conf.subtituloPagina}</h1>
+		              <h2>{conf.titulo_contenido}</h2>
+		              {conf.texto_contenido}
+		              {conf.bloque_info}
+		            </Stylo.MainContent>
 
-                            <StyleRoot>
-                                <FCMediaVideo />
-                            </StyleRoot>
+		              {/*{conf.segon_lliure}*/}
 
-                                {/*<FreeContent children={conf.video_latinmoda} />*/} {/*Asi se comenta en JSX, entre llaves.*/}
+		          </Stylo.HomeLayout>
 
-                            <FreeContent>
-                                {conf.primer_contingut}
-                            </FreeContent>
-
-                            <FreeContent>
-                                <div
-                                    style={{
-                                        margin: `50px`
-                                    }}
-                                >
-                                    Ací voldria un paràgraf... que posaré ara:
-                                    <p> Ja veus... podria passar-me el dia escrivint en HTML pla... tal volta deguera fer-ho.
-                                    </p>
-                                </div>
-                            </FreeContent>
-
-                            <FreeContent>
-                                {conf.segon_lliure}
-                            </FreeContent>
-
-                            <FreeContent>
-                                {conf.vimeoEx}
-                            </FreeContent>
-
-                        </div>
                     )}/>
 
                     <Route exact path="/categoria/:subcategoryId" render={({ match, history, location }) => {

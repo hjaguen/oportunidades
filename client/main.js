@@ -9,7 +9,6 @@ import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { graphql, ApolloProvider } from 'react-apollo';
 
 import App from '/imports/client/ui/App.jsx';
-import '/imports/client/ui/style.css';
 
 const client = new ApolloClient({
     networkInterface: createNetworkInterface({

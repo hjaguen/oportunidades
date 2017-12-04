@@ -18,7 +18,7 @@ import {
 } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import * as conf from './config.jsx';
-
+import * as Stylo from './StyledComponents.jsx';
 //import './style.css';
 
 export default class NavbarAdaptat extends Component {
@@ -62,37 +62,21 @@ export default class NavbarAdaptat extends Component {
         }
 
         return (
-            <nav className="navbar blacker" role="navigation">
-                <div className="container-fluid" style={{margin: `5px`}}>
-                    <div className="nav navbar-nav navbar-header col-xs-12">
-                        {/* idea! El H1 se puede configurar desde "config" como title.*/}
-                        <a className="nav navbar-nav navbar-brand" to="#" style={{margin: `0`,height: `80px`,paddingTop: `0`}}><h1 >Blusas Colombianas</h1></a>
-                        <ul className="nav navbar-nav navbar-right">
-                            <li>
-                                {conf.emailContacto}
-                            </li>
-                            <li>
-                                <Link to="#">{conf.telContacto}</Link>
-                            </li>
-                            <li className="dropdown">
-                                <Link to="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown <b className="caret"></b></Link>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <Link to="#">Action</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Another action</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Something else here</Link>
-                                    </li>
-                                    <li className="divider"></li>
-                                    <li>
-                                        <Link to="#">Separated link</Link>
-                                    </li>
-                                </ul>
-                            </li>
+            <Stylo.MainNavBar id="menu" className="navbar" role="navigation">
+                <div className="container-fluid">
+                    <div className="navbar-header col-xs-12">
+                        <Stylo.aBrand href="/" >
+                          <Stylo.NavTitle>{conf.tituloPagina}</Stylo.NavTitle>
+                        </Stylo.aBrand>
+                          <ul className="nav navbar-nav navbar-right">
+                            <Stylo.liNav>
+                                <Stylo.aLink>{conf.emailContacto}</Stylo.aLink>
+                            </Stylo.liNav>
+                            <Stylo.liNav>
+                                <Stylo.aLink href="#">{conf.telContacto}</Stylo.aLink>
+                            </Stylo.liNav>
                         </ul>
+
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span className="sr-only">Toggle navigation</span>
                             <span className="icon-bar"></span>
@@ -107,45 +91,25 @@ export default class NavbarAdaptat extends Component {
                                 this.props.data.subcategories.map(
                                     (v,i,a) => {
                                         return (
+                                          <Stylo.liNav>
                                             <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
-                                                <NavItem
+                                                <Stylo.aLink
                                                     eventKey={i}
                                                     onClick={this.canviaSubcat}
                                                     data-subcategory-id={v.categoriaId}
                                                 >                   {v.nom_categoria}
-                                                </NavItem>
+                                                </Stylo.aLink>
                                             </LinkContainer>
+                                          </Stylo.liNav>
                                         )
                                     }
                                 )
                             }
-                            <li className="dropdown">
-                                <Link to="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown <b className="caret"></b></Link>
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <Link to="#">Action</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Another action</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Something else here</Link>
-                                    </li>
-                                    <li className="divider"></li>
-                                    <li>
-                                        <Link to="#">Separated link</Link>
-                                    </li>
-                                    <li className="divider"></li>
-                                    <li>
-                                        <Link to="#">One more separated link</Link>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
 
                     </div>
                 </div>
-            </nav>
+            </Stylo.MainNavBar>
         );
     }
 }
