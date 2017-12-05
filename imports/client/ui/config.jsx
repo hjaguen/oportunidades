@@ -37,7 +37,8 @@ export let
     ,
 
 // Estilo para modulo de filtro
-    // filtres_posicio = `columna` // `columna` | `bloque`
+     filtres_posicio = `columna` // `columna` | `bloque`
+     ,
     // ,
     //             layoutTemplateArea =
     //                 filtres_posicio === `columna`
@@ -77,7 +78,7 @@ export let
 
     texto_contenido =
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec convallis rutrum magna, a ornare est hendrerit id.
           Donec molestie pellentesque auctor. Etiam a dui consequat,
           faucibus lorem in, feugiat eros. Vivamus varius suscipit tellus
@@ -87,9 +88,9 @@ export let
           vehicula velit posuere tristique ac sed turpis. Nam facilisis nisl
           ligula, et vehicula nisi fringilla eget. Suspendisse volutpat sem
           ac erat fermentum malesuada. Morbi dictum ipsum id mi scelerisque,
-          sed aliquet sapien vehicula. Phasellus eu venenatis lacus.
+          sed aliquet sapien vehicula. Phasellus eu venenatis lacus.</p>
 
-          Duis venenatis aliquet magna, quis blandit nulla. Sed viverra aliquam
+          <p>Duis venenatis aliquet magna, quis blandit nulla. Sed viverra aliquam
           leo quis posuere. Vivamus pretium orci in magna laoreet, eu consectetur
           enim fringilla. Pellentesque tempus magna malesuada sollicitudin
           vestibulum. Morbi magna diam, venenatis et risus nec, pellentesque
@@ -97,7 +98,7 @@ export let
           finibus. Nunc blandit arcu sapien. Etiam pharetra dui sed magna
           pellentesque tristique. Phasellus in feugiat orci. Nulla id ante metus.
           Phasellus ornare ipsum a euismod aliquet. Nulla semper purus nibh,
-          a malesuada ex placerat et.</p>
+          a malesuada ex placerat et.</p></div>
 
     ,
 

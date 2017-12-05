@@ -25,26 +25,18 @@ import {
     Footer, FooterSection, FooterDropDownSection, FooterLinkList
 } from  'react-mdl';
 import sanitizeHtml from 'sanitize-html-react';
-//import StackGrid from "react-stack-grid";
-
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import * as conf from './config.jsx';
-//import NavbarAdaptat from './NavBar.jsx';
 import NavbarAdaptat from './NavBarExp.jsx';
 import {
-    //MostrariTOTS,
     MostrariSubcategoriaPRODUCTES
 } from './Mostraris.jsx';
 import * as Qs from './Queries.jsx';
 import FootrAdaptat from './Footer.jsx';
 import FreeContent from './FreeContent.jsx';
-//import Radium, { StyleRoot } from 'radium';
 import MainContentProducte from './DetallProducte.jsx';
-
 import * as Stylo from './StyledComponents.jsx';
-
-//FreeContent = Radium(FreeContent);
 
 
 let variables = {
@@ -58,15 +50,11 @@ let variables = {
     productId: ""
 };
 
-
-
 const NavbarAdaptatAmbSubcategories = graphql(Qs.SubcategoriesQuery, {
     options: {
         variables
     }
 })(NavbarAdaptat);
-
-
 
 class MarquesSUBCAT extends Component {
     constructor(props) {
@@ -291,14 +279,6 @@ class TallesSUBCAT extends Component {
         this.updateValue = this.updateValue.bind(this);
     }
 
-    // static propTypes = {
-    //     data: PropTypes.shape({
-    //         loading: PropTypes.bool,
-    //         error: PropTypes.object,
-    //         subcategoriaTALLES: PropTypes.array
-    //     }).isRequired
-    // }
-
     static defaultProps = {
         ...Component.defaultProps,
         label: 'Talles:',
@@ -401,34 +381,6 @@ class TallesSUBCAT extends Component {
                 break;
             }
         }
-
-// if (!location.pathname.includes("/talla/")) {
-//     (this.props.filtreTalla)
-//         ?
-//             this.props.history.push(`${location.pathname}/talla/${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreTalla.value}`, {
-//                 selectValue: nouVal
-//             })
-//         :
-//             this.props.history.push(`${location.pathname}/talla/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
-//                 selectValue: nouVal
-//             })
-//
-//     // this.setState({
-//     //     selectValue: nouVal
-//     // })
-//     ;
-// } else {
-//     (nouVal)
-//         ? null
-//         : (() => {
-//             this.props.history.push(`..`);
-//             this.props.history.replace(location.pathname.substring(0,location.pathname.length-1));
-//           })()
-// }
-                    // this.setState({
-                    //     selectValue: nouVal
-                    // });
-        //console.log("Selected: ", nouVal);
         this.props.filtrantTalla(nouVal);
     }
 
@@ -487,111 +439,7 @@ class ColorsSUBCAT extends Component {
         this.filtraPerColor = this.filtraPerColor.bind(this);
     }
 
-    // static propTypes = {
-    //     data: PropTypes.shape({
-    //         loading: PropTypes.bool,
-    //         error: PropTypes.object,
-    //         subcategoriaCOLORS: PropTypes.array
-    //     }).isRequired
-    // }
-
-    componentWillReceiveProps(nextProps) {
-//        alert(`fM: ${nextProps.filtreMarca} \n fT: ${nextProps.filtreTalla} \n fC: ${nextProps.filtreColor}`);
-    }
-
     filtraPerColor(ev) {
-
-        // const
-        //     fM = this.props.filtreMarca ? "1" : "0",
-        //     fT = this.props.filtreTalla ? "1" : "0",
-        //     fC = this.props.filtreColor ? "1" : "0"
-        // ;
-        //
-        // switch (`${fM}${fT}${fC}`) {
-        //     case "111": {
-        //         alert("C111");
-        //         break;
-        //     }
-        //     case "110": {
-        //         alert("C110");
-        //         break;
-        //     }
-        //     case "101": {
-        //         alert("C101");
-        //         break;
-        //     }
-        //     case "100": {
-        //         //alert("C100");
-        //         this.props.history.push(`../marca-color/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${ev.target.dataset['colorid']}`, {
-        //             filtreColor: {
-        //                 colorId: ev.target.dataset['colorid'],
-        //                 nom_color: ev.target.dataset['nomcolor'],
-        //                 label_color: ev.target.dataset['labelcolor']
-        //         }});
-        //         break;
-        //     }
-        //     case "011": {
-        //         alert("C011");
-        //         break;
-        //     }
-        //     case "010": {
-        //         alert("C010");
-        //         break;
-        //     }
-        //     case "001": {
-        //     //    alert("C001");
-        //         break;
-        //     }
-        //     case "000": {
-        //     //    alert("C000");
-        //         this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
-        //             filtreColor: {
-        //                 colorId: ev.target.dataset['colorid'],
-        //                 nom_color: ev.target.dataset['nomcolor'],
-        //                 label_color: ev.target.dataset['labelcolor']
-        //         }})
-        //         break;
-        //     }
-        // }
-
-                        //         if (!location.pathname.includes("/color/")) {
-                        // //             (this.props.filtreColor)
-                        // //             ?
-                        // //             this.props.history.push(`../color/${this.props.filtreColor.label_color.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreColor.colorId}`, {
-                        // //                 filtreColor: {
-                        // //                     colorId: ev.target.dataset['colorid'],
-                        // //                     nom_color: ev.target.dataset['nomcolor'],
-                        // //                     label_color: ev.target.dataset['labelcolor']
-                        // //                 }
-                        // //             })
-                        // //             : null
-                        // // // this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
-                        // // //     filtreColor: {
-                        // // //         colorId: ev.target.dataset['colorid'],
-                        // // //         nom_color: ev.target.dataset['nomcolor'],
-                        // // //         label_color: ev.target.dataset['labelcolor']
-                        // // // }})
-                        // //
-                        // //             // this.setState({
-                        // //             //     selectValue: nouVal
-                        // //             // })
-                        // //             ;
-                        //         } else {
-                        //             (ev.target.dataset['colorid'])
-                        //                 ? this.props.history.push(`../color/${ev.target.dataset['labelcolor'].trim().replace(/ /g, ".").toLowerCase()}.${ev.target.dataset['colorid']}`, {
-                        //                     filtreColor: {
-                        //                         colorId: ev.target.dataset['colorid'],
-                        //                         nom_color: ev.target.dataset['nomcolor'],
-                        //                         label_color: ev.target.dataset['labelcolor']
-                        //                 }})
-                        //                 : this.props.history.push(location.pathname);
-                        //         }
-
-                                //console.log("Selected: ", nouVal);
-            //    this.props.filtrantMarca(nouVal);
-
-
-
         ev.target.style.border = "3px solid fuchsia";
         this.props.filtrantColor(ev);
     }
@@ -602,7 +450,6 @@ class ColorsSUBCAT extends Component {
         }
 
         if (this.props.data.error) {
-           /* console.log(this.props.data.error)*/
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
@@ -930,8 +777,6 @@ export default class App extends Component {
 
         this.variables = variables;
 
-        //this.filtreMarca = null;
-
         this.subcategoryIdAlState = this.subcategoryIdAlState.bind(this);
         this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
         this.tallaIdAVariables = this.tallaIdAVariables.bind(this);
@@ -946,24 +791,6 @@ export default class App extends Component {
     marcaTallaUpdate(m, t) {
         this.props.history.push(`../marca-talla/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}-${this.props.filtreTalla.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}.${this.props.filtreTalla.value}`);
     }
-
-    marcaColorUpdate(m, c) {
-
-    }
-
-    tallaColorUpdate(t, c) {
-
-    }
-
-
-
-
-    marcaTallaColorUpdate(m, t, c) {
-
-    }
-
-
-
 
     subcategoryIdAlState(ev) {
         console.dir(ev.target.dataset);
@@ -1047,15 +874,8 @@ export default class App extends Component {
 
     render() {
         let
-            // MostrariAmbTOTSElsProductes = graphql(CategoriaPRODUCTESQuery, {
-            //     options: {
-            //         variables: this.state.variables
-            //     }
-            // })(MostrariTOTS),
-
             MarquesSubCategoria = graphql(Qs.SubCategoriaMARQUESQuery, {
                 options: () => {
-                //    console.dir("thisVars:", this.variables);
                     return ({
                         variables: this.variables
                     });
@@ -1064,7 +884,6 @@ export default class App extends Component {
 
             TallesSubCategoriaTOTS = graphql(Qs.SubCategoriaTALLESQuery, {
                 options: () => {
-                    //console.dir("thisVars:", this.variables);
                     let
                         variables = Object.assign(this.variables, {queryVariant: "subcategoriaTALLES"});
                     return ({
@@ -1075,7 +894,6 @@ export default class App extends Component {
 
             TallesSubCategoriaMARCA = graphql(Qs.MarcaSubCategoriaTALLESQuery, {
                 options: () => {
-                    //console.dir("thisVars:", this.variables);
                     let
                         variables = Object.assign(this.variables, {queryVariant: "marcaSubcategoriaTALLES"});
                     return ({
@@ -1086,7 +904,6 @@ export default class App extends Component {
 
             ColorsSubCategoriaTOTS = graphql(Qs.SubCategoriaCOLORSQuery, {
                 options: () => {
-                    //console.dir("thisVars:", this.variables);
                     let
                         variables = Object.assign(this.variables, {queryVariant: "subcategoriaCOLORS"});
                     return ({
@@ -1097,7 +914,6 @@ export default class App extends Component {
 
             ColorsSubCategoriaMARCA = graphql(Qs.MarcaSubcategoriaCOLORSQuery, {
                 options: () => {
-                    //console.dir("thisVars:", this.variables);
                     let
                         variables = Object.assign(this.variables, {queryVariant: "marcaSubcategoriaCOLORS"});
                     return ({
@@ -1108,39 +924,18 @@ export default class App extends Component {
 
             MostrariAmbProductes = graphql(Qs.SubCategoriaPRODUCTESQuery, {
                 options: () => {
-                    //console.dir("thisVars:", this.variables);
                     return ({
                         variables: this.variables
                     });
                 }
             })(MostrariSubcategoriaPRODUCTES),
 
-
-// Falta definir les consultes correctes DE FILTRAT, de moment
-// prenem ProductesQuery com a base:
-  //ProductesMARCAQuery = ProductesTALLAQuery = ProductesQuery,
-
-            // MostrariAmbProductesMARCA = graphql(ProductesMARCAQuery, {
-            //     options: {
-            //         variables: this.state.variables
-            //     }
-            // })(MostrariSubcategoriaPRODUCTES),
-            //
-            // MostrariAmbProductesTALLA = graphql(ProductesTALLAQuery, {
-            //     options: {
-            //         variables: this.state.variables
-            //     }
-            // })(MostrariSubcategoriaPRODUCTES),
-
-//>>>>>>>>>>>>>>>>>>>>>>><< FOOTR - Un per a cada tipus de consulta
             FootrAdaptatAmbSubcategories = graphql(Qs.SubcategoriesQuery, {
                 options: {
                     variables
                 }
             })(FootrAdaptat)
         ;
-
-
 
         class BuscadorColumnaSUBCAT extends Component {
             constructor(props) {
@@ -1210,20 +1005,19 @@ export default class App extends Component {
             }
 
             render() {
-                return (
-                      <Stylo.ProductsLayout>
+                return ([
                         <Stylo.PosicionFiltro
-                            key="columna">
-                                <BuscadorColumnaSUBCAT {...this.props} />
+                            key="columna"
+                        >
+                            <BuscadorColumnaSUBCAT {...this.props} />
                         </Stylo.PosicionFiltro>
-
-
-                        <Stylo.PosicionProductos
-                            key="content">
-                            <MostrariAmbProductes {...this.props} />
-                        </Stylo.PosicionProductos>
-			</Stylo.ProductsLayout>
-                );
+                    ,
+                    <Stylo.PosicionProductos
+                        key="mostrari"
+                    >
+                        <MostrariAmbProductes {...this.props} />
+                    </Stylo.PosicionProductos>
+                ]);
             }
         }
 
@@ -1231,44 +1025,40 @@ export default class App extends Component {
 
         return (
             <Router>
-                <Stylo.MainLayout>
-                    <Route path="/"
-                        render={() => (
-                                <NavbarAdaptatAmbSubcategories
-                                    subcategoryIdAlState={this.subcategoryIdAlState}
-                                    fluid
-                                    inverse
+                <Stylo.LO>
+                    <Route path="/" render={() => (
+                        <NavbarAdaptatAmbSubcategories
+                            subcategoryIdAlState={this.subcategoryIdAlState}
+                            fluid
+                            inverse
 
-                                    filtrantMarca={this.filtrantMarca}
-                                    filtreMarca={this.state.filtreMarca}
+                            filtrantMarca={this.filtrantMarca}
+                            filtreMarca={this.state.filtreMarca}
 
-                                    filtrantTalla={this.filtrantTalla}
-                                    filtreTalla={this.state.filtreTalla}
+                            filtrantTalla={this.filtrantTalla}
+                            filtreTalla={this.state.filtreTalla}
 
-                                    filtrantColor={this.filtrantColor}
-                                    filtreColor={this.state.filtreColor}
-                                />
-                        )}
-                    />
-
-                    <Route exact path="/" render={() => (
-                        <Stylo.HomeLayout>
-		            <Stylo.MainVideo>
-		              {conf.video_latinmoda}
-		            </Stylo.MainVideo>
-
-		            <Stylo.MainContent>
-		              <h1>{conf.subtituloPagina}</h1>
-		              <h2>{conf.titulo_contenido}</h2>
-		              {conf.texto_contenido}
-		              {conf.bloque_info}
-		            </Stylo.MainContent>
-
-		              {/*{conf.segon_lliure}*/}
-
-		          </Stylo.HomeLayout>
-
+                            filtrantColor={this.filtrantColor}
+                            filtreColor={this.state.filtreColor}
+                        />
                     )}/>
+
+                    <Route exact path="/" render={() => ([
+    		            <Stylo.MainVideo
+                            key="video"
+                        >
+    		              {conf.video_latinmoda}
+    		            </Stylo.MainVideo>
+                        ,
+    		            <Stylo.MainContent
+                            key="content"
+                        >
+    		              <h1>{conf.subtituloPagina}</h1>
+    		              <h2>{conf.titulo_contenido}</h2>
+    		              {conf.texto_contenido}
+    		              {conf.bloque_info}
+    		            </Stylo.MainContent>
+                    ])}/>
 
                     <Route exact path="/categoria/:subcategoryId" render={({ match, history, location }) => {
                         let
@@ -1441,7 +1231,6 @@ export default class App extends Component {
                             />
                         );
                     }}/>
-
 
                     <Route exact path="/categoria/:catn.:catid/marca-talla/:mn-:tn.:mid.:tid" render={({ match, history, location }) => {
                         let
@@ -1639,13 +1428,12 @@ export default class App extends Component {
                     }}/>
 
                     <Route exact path="/producto/:productId" render={({ match }) => {
-
                         let
                             variables = Object.assign({}, this.state.variables, {
                                 productId: match.params.productId.match(/\d+$/)[0]
                             }),
 
-                            MainProducteDETALLS = graphql(ProducteDETALLSQuery, {
+                            MainProducteDETALLS = graphql(Qs.ProducteDETALLSQuery, {
                                 options: {
                                     variables
                                 }
@@ -1663,7 +1451,7 @@ export default class App extends Component {
                     <Route path="/" render={() => (
                         <div
                             style={{
-                                gridArea: `footer`
+                                gridArea: `ft`
                             }}
                         >
                             <FootrAdaptatAmbSubcategories
@@ -1671,7 +1459,7 @@ export default class App extends Component {
                             />
                         </div>
                     )}/>
-                </Stylo.MainLayout>
+                </Stylo.LO>
             </Router>
         );
     }
