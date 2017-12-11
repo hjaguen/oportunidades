@@ -2,7 +2,25 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import * as conf from './config.jsx';
 
+let bloCol = (conf.filtres_posicio) === `columna` ? `"col mos mos"` : `"bq bq bq" "mos mos mos"`;
+
 export const
+    LO = styled.div`
+        display: grid;
+        grid-template-areas:
+            "nb nb nb"
+            ". v ."
+            ". c ."
+            ${bloCol}
+            "min fot tex"
+            "ft ft ft"
+        ;
+        grid-template-columns: 20% auto auto;
+        background-image: url(/${conf.fonsPrincipal});
+        background-size: ${conf.backgroundSize};
+        background-repeat: ${conf.backgroundRepeat};
+        background-attachment: ${conf.backgroundAttachment};
+    `,
 
     MainLayout = styled.div.attrs({
       className: 'container'
@@ -25,16 +43,16 @@ export const
         background-attachment: ${conf.backgroundAttachment};
     `,
 
-    HomeLayout = styled.div.attrs({
-      className: 'container'
-    })`
-      display: grid;
-      grid-template-columns: auto;
-      grid-template-rows: auto auto;
-      grid-template-areas:
-      "video"
-      "content"
-    `,
+    // HomeLayout = styled.div.attrs({
+    //   className: 'container'
+    // })`
+    //   display: grid;
+    //   grid-template-columns: auto;
+    //   grid-template-rows: auto auto;
+    //   grid-template-areas:
+    //   "video"
+    //   "content"
+    // `,
 
     ProductsLayout = styled.div`
       display: grid;
@@ -45,7 +63,8 @@ export const
     `,
 
     MainNavBar = styled.nav`
-        grid-area: navbar;
+        //grid-area: navbar;
+        grid-area: nb;
         position: sticky;
         top: 0;
         height: min-height;
@@ -55,7 +74,7 @@ export const
     `,
 
     PosicionFiltro = styled.div`
-      grid-area: filtro;
+      grid-area: col;
     `,
 
 
@@ -72,7 +91,7 @@ export const
       `,
 
     PosicionProductos = styled.div`
-      grid-area: content;
+      grid-area: mos;
     `,
 
     NavTitle = styled.h1`
@@ -93,11 +112,14 @@ export const
     `,
 
     MainVideo = styled.div`
-      grid-area: video;
+      grid-area: v;
     `,
 
-    MainContent = styled.div`
-        grid-area: content;
+    MainContent = styled.div.attrs({
+      className: 'container'
+    })`
+        grid-area: c;
+
         margin-top: 20px;
         margin-bottom: 20px;
 
@@ -119,7 +141,7 @@ export const
           font-weight: 300;
         }
 
-        > p {
+        p {
           font-family: 'Comfortaa', sans-serif;
           font-size: 1.2em;
           font-weight: 100;

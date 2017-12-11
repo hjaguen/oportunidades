@@ -5,6 +5,12 @@ import sanitizeHtml from 'sanitize-html-react';
 export default class MainContentProducte extends Component {
     constructor(props, context) {
         super(props, context);
+
+        this.state = {
+            selectedImgSrc: ""
+        };
+
+    //    this.canviaImatge = this.canviaImatge.bind(this);
     }
 
     componentDidMount() {
@@ -15,24 +21,32 @@ export default class MainContentProducte extends Component {
 
     }
 
+    // canviaImatge({props}) {
+    //     this.setState({
+    //         selectedImgSrc: `http://images.colombiaespassion.net/${props.v.imagen_min}`
+    //     })
+    // }
+
     render() {
 
         console.dir(this.props.data);
-
+// display: `grid`,
+// gridTemplateColumns: `1fr 1fr`,
+// gridTemplateRows: `auto`,
+// gridAutoFlow: `row dense`,
         return (
             [
                 <div
                     key='columna'
                     style={{
-                        gridArea: conf.filtres_posicio
+                        gridArea: conf.filtres_posicio,
+                        gridArea: `min`
                     }}
                 >
                     <div
                         style={{
-                            display: `grid`,
-                            gridTemplateColumns: `1fr 1fr`,
-                            gridTemplateRows: `auto`,
-                            gridAutoFlow: `row dense`,
+                            display: `flex`,
+                            flexWrap: `wrap`,
                             position: `-webkit-sticky`,
                             position: `sticky`,
                             top: `20px`,
@@ -42,12 +56,23 @@ export default class MainContentProducte extends Component {
                         {   this.props.data.producteDETALLS
                                 ? this.props.data.producteDETALLS[0].gallery.map(
                                         (v,i,a) => {
+
                                             return (
                                                 <img
-                                                    key={i}
+                                                    key={this.props.i}
                                                     src={`http://images.colombiaespassion.net/${v.imagen_min}`}
                                                     style={{
-                                                        maxWidth: `110px`
+                                                        maxWidth: `110px`,
+                                                        flexGrow: `1`,
+                                                        flexShrink: `1`,
+                                                        margin: `.5em`,
+                                                        borderRadius: `3px`
+                                                    }}
+                                                    onClick={() => {
+                                                        console.dir(v);
+                                                        this.setState({
+                                                            selectedImgSrc: `http://images.colombiaespassion.net/${v.imagen_min}`
+                                                        });
                                                     }}
                                                  />
                                             );
@@ -90,15 +115,12 @@ export default class MainContentProducte extends Component {
                 <div
                     key='central'
                     style={{
-                        gridColumnStart: `2`,
-                        gridColumnEnd: `span 2`,
-                        gridRowStart: `2`,
-                        gridRowEnd: `span 1`
+                        gridArea: `fot`
                     }}
                 >
                     {this.props.data.producteDETALLS
                         ? <img
-                            src={`http://images.colombiaespassion.net/${this.props.data.producteDETALLS[0].imagen_principal}`}
+                            src={this.state.selectedImgSrc ? this.state.selectedImgSrc : `http://images.colombiaespassion.net/${this.props.data.producteDETALLS[0].gallery[0].imagen_min}`}
                             style={{
                                 width: `100%`,
                                 borderRadius: `1.5vw`,
@@ -111,7 +133,9 @@ export default class MainContentProducte extends Component {
             ,
                 <div
                     key='detall'
-
+                    style={{
+                        gridArea: `tex`
+                    }}
                 >
                     {this.props.data.producteDETALLS
                         ? <div
@@ -137,3 +161,8 @@ export default class MainContentProducte extends Component {
         );
     }
 }
+
+// gridColumnStart: `2`,
+// gridColumnEnd: `span 2`,
+// gridRowStart: `2`,
+// gridRowEnd: `span 1`
