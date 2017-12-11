@@ -74,7 +74,7 @@ export const
     `,
 
     PosicionFiltro = styled.div`
-      grid-area: col;
+        grid-area: ${(conf.filtres_posicio) === "columna" ? "col" : "bq"};
     `,
 
 
