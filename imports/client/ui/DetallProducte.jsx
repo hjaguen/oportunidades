@@ -71,7 +71,7 @@ export default class MainContentProducte extends Component {
                                                     onClick={() => {
                                                         console.dir(v);
                                                         this.setState({
-                                                            selectedImgSrc: `http://images.colombiaespassion.net/${v.imagen}`
+                                                            selectedImgSrc: `http://images.colombiaespassion.net/${v.imagen_min}`
                                                         });
                                                     }}
                                                  />
@@ -120,7 +120,7 @@ export default class MainContentProducte extends Component {
                 >
                     {this.props.data.producteDETALLS
                         ? <img
-                            src={this.state.selectedImgSrc ? this.state.selectedImgSrc : `http://images.colombiaespassion.net/${this.props.data.producteDETALLS[0].gallery[0].imagen}`}
+                            src={this.state.selectedImgSrc ? this.state.selectedImgSrc : `http://images.colombiaespassion.net/${this.props.data.producteDETALLS[0].gallery[0].imagen_min}`}
                             style={{
                                 width: `100%`,
                                 borderRadius: `1.5vw`,

@@ -70,29 +70,13 @@ class MarquesSUBCAT extends Component {
 
     }
 
-    // static propTypes = {
-    //     data: PropTypes.shape({
-    //         loading: PropTypes.bool,
-    //         error: PropTypes.object,
-    //         subcategoriaMARQUES: PropTypes.array
-    //     }).isRequired
-    // };
-
     static defaultProps = {
         ...Component.defaultProps,
         label: 'Marques:',
         searchable: true
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     const locationChanged = nextProps.location !== this.props.location
-    // }
-
     updateValue(nouVal) {
-        // this.props.history.push(`${location.pathname}/marca/${this.state.selectValue.label.trim().replace(/ /g, ".").toLowerCase()}.${this.state.selectValue.value}`, {
-        //     selectValue: nouVal
-        // });
-
         const
             fM = this.props.filtreMarca ? "1" : "0",
             fT = this.props.filtreTalla ? "1" : "0",
@@ -194,28 +178,6 @@ class MarquesSUBCAT extends Component {
             }
         }
 
-        // this.props.history.push(`${location.pathname}/marca/${this.props.filtreMarca.label.trim().replace(/ /g, ".").toLowerCase()}.${this.props.filtreMarca.value}`, {
-        //     selectValue: nouVal
-        // })
-
-        // if (!location.pathname.includes("/marca/")) {
-        //     (this.props.filtreMarca)
-        //          ?
-        //
-        //
-        //          : null // this.props.history.push(`${location.pathname}/marca/${nouVal.label.trim().replace(/ /g, ".").toLowerCase()}.${nouVal.value}`, {
-        //             //     selectValue: nouVal
-        //             // })
-        //
-        //     // this.setState({
-        //     //     selectValue: nouVal
-        //     // })
-        //     ;
-    //    } else {
-
-    //    }
-
-        //console.log("Selected: ", nouVal);
         this.props.filtrantMarca(nouVal);
     }
 
