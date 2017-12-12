@@ -110,7 +110,7 @@ export default class FootrAdaptat extends Component {
                               </div>
                               <div class="form-group">
                                 <label for="mensajeCliente">Mensaje:</label>
-                                <input type="password" class="form-control" id="mensajeCliente" placeholder="Escriba su Mensaje" />
+                                <textarea class="form-control" id="mensajeCliente" placeholder="Escriba su Mensaje" />
                               </div>
                               <button type="submit" class="btn btn-default">Enviar</button>
                             </form>
