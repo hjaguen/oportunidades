@@ -5,8 +5,14 @@ import * as conf from './config.jsx';
 let bloCol = (conf.filtres_posicio) === `columna` ? `"col mos mos"` : `"bq bq bq" "mos mos mos"`;
 
 export const
-    LO = styled.div`
+    LO = styled.div.attrs({
+      className: 'container'
+    })`
+        width: 100%;
+        height: 100%;
+        padding: 0px;
         display: grid;
+        grid-template-columns: auto auto auto;
         grid-template-areas:
             "nb nb nb"
             ". v ."
@@ -15,33 +21,32 @@ export const
             "min fot tex"
             "ft ft ft"
         ;
-        grid-template-columns: 20% auto auto;
         background-image: url(/${conf.fonsPrincipal});
         background-size: ${conf.backgroundSize};
         background-repeat: ${conf.backgroundRepeat};
         background-attachment: ${conf.backgroundAttachment};
     `,
 
-    MainLayout = styled.div.attrs({
-      className: 'container'
-    })`
-        width: 100%;
-        height: 100%;
-        padding: 0px;
-        // display: grid;
-        // grid-template-columns: auto auto auto;
-        // grid-template-rows: auto auto auto;
-        // grid-template-areas:
-        // "navbar navbar navbar"
-        // "filtro content content"
-        // //${conf.layoutTemplateArea}
-        // "present present present"
-        // "footer footer footer";
-        background-image: url(/${conf.fonsPrincipal});
-        background-size: ${conf.backgroundSize};
-        background-repeat: ${conf.backgroundRepeat};
-        background-attachment: ${conf.backgroundAttachment};
-    `,
+    // MainLayout = styled.div.attrs({
+    //   className: 'container'
+    // })`
+    //     width: 100%;
+    //     height: 100%;
+    //     padding: 0px;
+    //     display: grid;
+    //     grid-template-columns: auto auto auto;
+    //     grid-template-rows: auto auto auto;
+    //     grid-template-areas:
+    //     "navbar navbar navbar"
+    //     "filtro content content"
+    //     ${conf.layoutTemplateArea}
+    //     "present present present"
+    //     "footer footer footer";
+    //     background-image: url(/${conf.fonsPrincipal});
+    //     background-size: ${conf.backgroundSize};
+    //     background-repeat: ${conf.backgroundRepeat};
+    //     background-attachment: ${conf.backgroundAttachment};
+    // `,
 
     // HomeLayout = styled.div.attrs({
     //   className: 'container'

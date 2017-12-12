@@ -114,15 +114,15 @@ export let
                         Tendremos el gusto de atenderte.</p>
                         <div className="row">
                             <div className="col-sm-5 col-xs-12">
-                                <a href="#" className="btn btn-block btn-primary"><span className="fa fa-cloud-upload"></span> FB Messenger</a>
+                                <a href="http://m.me/latinmoda" target="_blank" className="btn btn-block btn-primary"><span className="fa fa-cloud-upload"></span> FB Messenger</a>
                             </div>
                             <div className="col-sm-5 col-xs-12">
-                                <a href="#" className="btn btn-block btn-warning"><span className="fa fa-check"></span> WhatsApp</a>
+                                <a href="http://bit.ly/SAC_Latinmoda" target="_blank" className="btn btn-block btn-success"><span className="fa fa-check"></span> WhatsApp</a>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-5 col-sm-offset-1">
-                        <img className="img-rounded img-responsive" src="http://placehold.it/600x400"/>
+                        <img className="img-rounded img-responsive" src="./slide3.jpg"/>
                     </div>
                 </div>
             </div>
