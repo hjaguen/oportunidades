@@ -10,6 +10,7 @@ import {
   ShareCounts,
   generateShareIcon
 } from 'react-share';
+import * as conf from './config.jsx';
 import * as info from './addInfo.jsx';
 
 const {
@@ -86,11 +87,11 @@ export default class FootrAdaptat extends Component {
                                 </a>
                             </FooterLinkList>
                         </FooterDropDownSection>
-                        <FooterDropDownSection title="Details">
+                        <FooterDropDownSection title="Contáctanos">
                             <FooterLinkList>
-                                <a href="#">Specs</a>
-                                <a href="#">Tools</a>
-                                <a href="#">Resources</a>
+                                <a href="#">{conf.telContacto}</a>
+                                <a href="#">{conf.emailContacto}</a>
+                                <a href={conf.whatsappMsg}>Click para WhatsApp</a>
                             </FooterLinkList>
                         </FooterDropDownSection>
 
@@ -102,7 +103,7 @@ export default class FootrAdaptat extends Component {
                             </FooterLinkList>
                         </FooterDropDownSection>
 
-                        <FooterDropDownSection title="Contáctanos">
+                        <FooterDropDownSection title="Escríbenos">
                             <form>
                               <div class="form-group">
                                 <label for="emailCliente">Dirección de Email:</label>
@@ -116,11 +117,10 @@ export default class FootrAdaptat extends Component {
                             </form>
                         </FooterDropDownSection>
                     </FooterSection>
-                    <FooterSection type="bottom" logo="Title">
-                        <FooterLinkList>
-                            <a href="#">Help</a>
-                            <a href="#">Privacy & Terms</a>
-                        </FooterLinkList>
+
+
+                    <FooterSection type="bottom" logo={conf.tituloPagina}>
+                      <p>Copyright &copy; 2018 - Ropa Colombiana en España.</p>
                     </FooterSection>
 
 

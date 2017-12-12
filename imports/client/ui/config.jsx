@@ -13,6 +13,8 @@ export let
     ,
     emailContacto = `ejemplo@duckduckgo.com`
     ,
+    whatsappMsg = `https://api.whatsapp.com/send?phone=34674150202&text=Hola%2C%20necesito%20información`
+    ,
 
 // Imagen de fondo y sus opciones
     fonsPrincipal = `background_blue_v0011.jpg`,
