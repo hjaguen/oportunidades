@@ -240,6 +240,10 @@ export default class App extends Component {
             constructor(props) {
                 super(props);
 
+                this.state = {
+                    ocultaMostra: "Muestra"
+                };
+
                 this.desactivaFiltres = this.desactivaFiltres.bind(this);
             }
 
@@ -294,13 +298,21 @@ export default class App extends Component {
                                 :   <ColorsSubCategoriaTOTS {...this.props} />
                         }
                         <button
-                            className="mobile toggle-filtres"
+                            className="mobile toggle-filtres oculta-mostra"
                             onClick={() => {
                                 [...document.querySelectorAll(".filtro > *")].map(
                                     (v,i,a) => {
                                         v.classList.toggle("amaga");
                                         v.classList.toggle("mostra");
-
+                                        if (document.querySelector(".filtreC").classList.contains("amaga")) {
+                                            this.setState({
+                                                ocultaMostra: "Muestra"
+                                            })
+                                        } else {
+                                            this.setState({
+                                                ocultaMostra: "Oculta"
+                                            })
+                                        }
                                         // v.style.opacity = 1;
                                         // v.style.height = "2em";
                                         // v.style.width = "80%";
@@ -308,7 +320,7 @@ export default class App extends Component {
                                     }
                                 );
                             }}
-                        >{document.querySelector(".filtro >*.amaga:nth-of-type(1)")?`Muestra`:`Oculta`} los filtros</button>
+                        >{`${this.state.ocultaMostra} los filtros`}</button>
 
                     </Stylo.Filtro>
                 );
