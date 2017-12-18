@@ -295,7 +295,19 @@ export default class App extends Component {
                         }
                         <button
                             className="mobile toggle-filtres"
-                            onClick={() => {}}
+                            onClick={() => {
+                                [...document.querySelectorAll(".filtro > *")].map(
+                                    (v,i,a) => {
+                                        v.classList.toggle("amaga");
+                                        v.classList.toggle("mostra");
+
+                                        // v.style.opacity = 1;
+                                        // v.style.height = "2em";
+                                        // v.style.width = "80%";
+                                        // v.style.padding = ".5em";                                       v.style.visibility = "visible";
+                                    }
+                                );
+                            }}
                         >Filtra los productos</button>
 
                     </Stylo.Filtro>
@@ -348,20 +360,20 @@ export default class App extends Component {
                     )}/>
 
                     <Route exact path="/" render={() => ([
-    		            <Stylo.MainVideo
+                        <Stylo.MainVideo
                             key="video"
                         >
-    		              {conf.video_latinmoda}
-    		            </Stylo.MainVideo>
+                            {conf.video_latinmoda}
+                        </Stylo.MainVideo>
                         ,
-    		            <Stylo.MainContent
+                        <Stylo.MainContent
                             key="content"
                         >
-    		              <h1>{conf.subtituloPagina}</h1>
-    		              <h2>{conf.titulo_contenido}</h2>
-    		              {conf.texto_contenido}
-    		              {conf.bloque_info}
-    		            </Stylo.MainContent>
+                            <h1>{conf.subtituloPagina}</h1>
+                            <h2>{conf.titulo_contenido}</h2>
+                            {conf.texto_contenido}
+                            {conf.bloque_info}
+                        </Stylo.MainContent>
                     ])}/>
 
                     <Route exact path="/categoria/:subcategoryId" render={({ match, history, location }) => {

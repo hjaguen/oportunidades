@@ -78,7 +78,9 @@ export const
     `,
 
 
-    Filtro = styled.div`
+    Filtro = styled.div.attrs({
+      className: 'filtro'
+    })`
         width: 90%;
         max-width: 300px;
         background: rgba(255, 255, 255, 0.25);
@@ -94,20 +96,36 @@ export const
         }
 
         @media (max-width: 500px) {
-            > :not(.mobile), .Select {
-                height: 0 !important;
+            //> :not(.mobile), .Select {
+            .amaga {
+                height: 0;
                 margin: 0 !important;
-                padding: 0 !important;
-                opacity: 0 !important;
+                padding: 0;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .mostra {
+                margin: 2em 2em;
+                //padding: 2em;
+                height: auto;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .filtreC.mostra {
+                margin: 0;
+                margin-top: 3em;
             }
         }
 
         @media (min-width: 500px) {
             .mobile {
-                height: 0 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                opacity: 0 !important;
+                height: 0;
+                margin: 0;
+                padding: 0;
+                opacity: 0;
+                visibility: hidden;
             }
         }
     `,
