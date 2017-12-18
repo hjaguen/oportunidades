@@ -308,7 +308,7 @@ export default class App extends Component {
                                     }
                                 );
                             }}
-                        >Filtra los productos</button>
+                        >{(querySelector(".filtro > *:nth-of-type(1)").classList.contains("amaga")?`Muestra`:`Oculta`} los filtros</button>
 
                     </Stylo.Filtro>
                 );
