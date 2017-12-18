@@ -293,6 +293,11 @@ export default class App extends Component {
                                 ?   <ColorsSubCategoriaMARCA {...this.props} />
                                 :   <ColorsSubCategoriaTOTS {...this.props} />
                         }
+                        <button
+                            className="mobile toggle-filtres"
+                            onClick={() => {}}
+                        >Filtra los productos</button>
+
                     </Stylo.Filtro>
                 );
             }
@@ -326,20 +331,20 @@ export default class App extends Component {
             <Router>
                 <Stylo.LO>
                     <Route path="/" render={() => (
-                        <NavbarAdaptatAmbSubcategories
-                            subcategoryIdAlState={this.subcategoryIdAlState}
-                            fluid
-                            inverse
+                            <NavbarAdaptatAmbSubcategories
+                                subcategoryIdAlState={this.subcategoryIdAlState}
+                                fluid
+                                inverse
 
-                            filtrantMarca={this.filtrantMarca}
-                            filtreMarca={this.state.filtreMarca}
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={this.state.filtreMarca}
 
-                            filtrantTalla={this.filtrantTalla}
-                            filtreTalla={this.state.filtreTalla}
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
 
-                            filtrantColor={this.filtrantColor}
-                            filtreColor={this.state.filtreColor}
-                        />
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
+                            />
                     )}/>
 
                     <Route exact path="/" render={() => ([

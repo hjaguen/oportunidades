@@ -79,16 +79,38 @@ export const
 
 
     Filtro = styled.div`
-      width: 90%;
-      max-width: 300px;
-      background: rgba(255, 255, 255, 0.25);
-      margin: 2em 2em;
-      padding: 2em;
-      borderRadius: 1em;
-      position: -webkit-sticky;
-      position: sticky;
-      top: 160px;
-      `,
+        width: 90%;
+        max-width: 300px;
+        background: rgba(255, 255, 255, 0.25);
+        margin: 2em 2em;
+        padding: 2em;
+        borderRadius: 1em;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 160px;
+
+        * {
+            transition: all 1s ease;
+        }
+
+        @media (max-width: 500px) {
+            > :not(.mobile), .Select {
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                opacity: 0 !important;
+            }
+        }
+
+        @media (min-width: 500px) {
+            .mobile {
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                opacity: 0 !important;
+            }
+        }
+    `,
 
     PosicionProductos = styled.div`
       grid-area: mos;
