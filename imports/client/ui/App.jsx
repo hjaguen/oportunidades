@@ -381,11 +381,12 @@ export default class App extends Component {
                         <Stylo.MainContent
                             key="content"
                         >
-                            <h1>{conf.subtituloPagina}</h1>
-                            <h2>{conf.titulo_contenido}</h2>
-                            {conf.texto_contenido}
-                            {conf.bloque_info}
-                        </Stylo.MainContent>
+    		              <h1>{conf.subtituloPagina}</h1>
+    		              <h2>{conf.titulo_contenido}</h2>
+    		              {conf.texto_contenido}
+    		              {conf.bloque_info}
+
+    		            </Stylo.MainContent>
                     ])}/>
 
                     <Route exact path="/categoria/:subcategoryId" render={({ match, history, location }) => {

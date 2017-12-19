@@ -9,9 +9,11 @@ export let
     ,
     subtituloPagina = `Ropa Colombiana en Europa`
     ,
-    telContacto = `(+34) 777-7777`
+    telContacto = `(+34) 962 441 478`
     ,
-    emailContacto = `ejemplo@duckduckgo.com`
+    emailContacto = `ventas@latinmoda.info`
+    ,
+    whatsappMsg = `34674150202`
     ,
 
 // Imagen de fondo y sus opciones
@@ -37,7 +39,7 @@ export let
     ,
 
 // Estilo para modulo de filtro
-     filtres_posicio = `bloque` // `columna` | `bloque`
+     filtres_posicio = `columna` // `columna` | `bloque`
      ,
     // ,
     //             layoutTemplateArea =
@@ -114,15 +116,15 @@ export let
                         Tendremos el gusto de atenderte.</p>
                         <div className="row">
                             <div className="col-sm-5 col-xs-12">
-                                <a href="#" className="btn btn-block btn-primary"><span className="fa fa-cloud-upload"></span> FB Messenger</a>
+                                <a href="http://m.me/latinmoda" target="_blank" className="btn btn-block btn-primary"><span className="fa fa-cloud-upload"></span> FB Messenger</a>
                             </div>
                             <div className="col-sm-5 col-xs-12">
-                                <a href="#" className="btn btn-block btn-warning"><span className="fa fa-check"></span> WhatsApp</a>
+                                <a href="http://bit.ly/SAC_Latinmoda" target="_blank" className="btn btn-block btn-success"><span className="fa fa-check"></span> WhatsApp</a>
                             </div>
                         </div>
                     </div>
                     <div className="col-sm-5 col-sm-offset-1">
-                        <img className="img-rounded img-responsive" src="http://placehold.it/600x400"/>
+                        <img className="img-rounded img-responsive" src="./slide3.jpg"/>
                     </div>
                 </div>
             </div>

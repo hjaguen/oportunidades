@@ -10,6 +10,8 @@ import {
   ShareCounts,
   generateShareIcon
 } from 'react-share';
+import * as conf from './config.jsx';
+import * as info from './addInfo.jsx';
 
 const {
   FacebookShareButton,
@@ -61,44 +63,148 @@ export default class FootrAdaptat extends Component {
             <div>
                 <Footer size="mega">
                     <FooterSection type="middle">
-                        <FooterDropDownSection title="Features">
+                        <FooterDropDownSection title="Información">
                             <FooterLinkList>
-                                <a href="#">About</a>
-                                <a href="#">Terms</a>
-                                <a href="#">Partners</a>
-                                <a href="#">Updates</a>
+                                <a href=""
+                                  data-toggle="modal"
+                                  data-target="#about">
+                                  Quiénes Somos
+                                </a>
+                                <a href=""
+                                  data-toggle="modal"
+                                  data-target="#terms">
+                                  Términos y Condiciones
+                                </a>
+                                <a href=""
+                                  data-toggle="modal"
+                                  data-target="#cookies">
+                                  Políticas de Cookies
+                                </a>
+                                <a href=""
+                                  data-toggle="modal"
+                                  data-target="#faq">
+                                  FAQ
+                                </a>
                             </FooterLinkList>
                         </FooterDropDownSection>
-                        <FooterDropDownSection title="Details">
+                        <FooterDropDownSection title="Contáctanos">
                             <FooterLinkList>
-                                <a href="#">Specs</a>
-                                <a href="#">Tools</a>
-                                <a href="#">Resources</a>
+                                <a href="#">{conf.telContacto}</a>
+                                <a href="#">{conf.emailContacto}</a>
+                                <a href={`https://api.whatsapp.com/send?phone=${conf.whatsappMsg}&text=Hola%2C%20necesito%20información`}>Click para WhatsApp</a>
                             </FooterLinkList>
                         </FooterDropDownSection>
-                        <FooterDropDownSection title="Technology">
+
+                        <FooterDropDownSection title="Nuestras Tiendas">
                             <FooterLinkList>
-                                <a href="#">How it works</a>
-                                <a href="#">Patterns</a>
-                                <a href="#">Usage</a>
-                                <a href="#">Products</a>
-                                <a href="#">Contracts</a>
+                                <a href="http://fajascolombianas.es" target="_blank">Fajas Colombianas</a>
+                                <a href="http://jeanscolombianos.es" target="_blank">Jeans Colombianos</a>
+                                <a href="http://vestidosdefiestacolombianos.es" target="_blank">Vestidos de Fiesta</a>
+                                <a href="http://ropacolombianaenrebajas.com" target="_blank">Outlet</a>
                             </FooterLinkList>
                         </FooterDropDownSection>
-                        <FooterDropDownSection title="FAQ">
-                            <FooterLinkList>
-                                <a href="#">Questions</a>
-                                <a href="#">Answers</a>
-                                <a href="#">Contact Us</a>
-                            </FooterLinkList>
+
+                        <FooterDropDownSection title="Escríbenos">
+                            <form>
+                              <div class="form-group">
+                                <label for="emailCliente">Dirección de Email:</label>
+                                <input type="email" class="form-control" id="emailCliente" placeholder="Introduzca su Email" />
+                              </div>
+                              <div class="form-group">
+                                <label for="mensajeCliente">Mensaje:</label>
+                                <textarea class="form-control" id="mensajeCliente" placeholder="Escriba su Mensaje" />
+                              </div>
+                              <button type="submit" class="btn btn-default">Enviar</button>
+                            </form>
                         </FooterDropDownSection>
                     </FooterSection>
-                    <FooterSection type="bottom" logo="Title">
-                        <FooterLinkList>
-                            <a href="#">Help</a>
-                            <a href="#">Privacy & Terms</a>
-                        </FooterLinkList>
+
+
+                    <FooterSection type="bottom" logo={conf.tituloPagina}>
+                      <p>Copyright &copy; 2018 - Ropa Colombiana en España.</p>
                     </FooterSection>
+
+
+
+
+
+                    <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{info.titleAbout}</h4>
+                          </div>
+                          <div class="modal-body">
+                            {info.contAbout}
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="modal fade about-modal-lg" id="terms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{info.titleTerms}</h4>
+                          </div>
+                          <div class="modal-body">
+                            {info.contTerms}
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="modal fade about-modal-lg" id="cookies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{info.titleCookies}</h4>
+                          </div>
+                          <div class="modal-body">
+                            {info.contCookies}
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{info.titleFAQ}</h4>
+                          </div>
+                          <div class="modal-body">
+                            {info.contFAQ}
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
 
                     <FacebookShareButton url="http://www.facebook.com/latinmoda" />
                     <TwitterShareButton url="http://twitter.com/latinmoda"/>
