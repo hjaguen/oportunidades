@@ -9,11 +9,11 @@ export let
     ,
     subtituloPagina = `Ropa Colombiana en Europa`
     ,
-    telContacto = `(+34) 777-7777`
+    telContacto = `(+34) 962 441 478`
     ,
-    emailContacto = `ejemplo@duckduckgo.com`
+    emailContacto = `ventas@latinmoda.info`
     ,
-    whatsappMsg = `https://api.whatsapp.com/send?phone=34674150202&text=Hola%2C%20necesito%20información`
+    whatsappMsg = `34674150202`
     ,
 
 // Imagen de fondo y sus opciones
@@ -39,7 +39,7 @@ export let
     ,
 
 // Estilo para modulo de filtro
-     filtres_posicio = `bloque` // `columna` | `bloque`
+     filtres_posicio = `columna` // `columna` | `bloque`
      ,
     // ,
     //             layoutTemplateArea =

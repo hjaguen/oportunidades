@@ -91,15 +91,16 @@ export default class FootrAdaptat extends Component {
                             <FooterLinkList>
                                 <a href="#">{conf.telContacto}</a>
                                 <a href="#">{conf.emailContacto}</a>
-                                <a href={conf.whatsappMsg}>Click para WhatsApp</a>
+                                <a href={`https://api.whatsapp.com/send?phone=${conf.whatsappMsg}&text=Hola%2C%20necesito%20información`}>Click para WhatsApp</a>
                             </FooterLinkList>
                         </FooterDropDownSection>
 
-                        <FooterDropDownSection title="FAQ">
+                        <FooterDropDownSection title="Nuestras Tiendas">
                             <FooterLinkList>
-                                <a href="#">Questions</a>
-                                <a href="#">Answers</a>
-                                <a href="#">Contact Us</a>
+                                <a href="http://fajascolombianas.es" target="_blank">Fajas Colombianas</a>
+                                <a href="http://jeanscolombianos.es" target="_blank">Jeans Colombianos</a>
+                                <a href="http://vestidosdefiestacolombianos.es" target="_blank">Vestidos de Fiesta</a>
+                                <a href="http://ropacolombianaenrebajas.com" target="_blank">Outlet</a>
                             </FooterLinkList>
                         </FooterDropDownSection>
 
