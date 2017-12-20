@@ -6,13 +6,13 @@ let bloCol = (conf.filtres_posicio) === `columna` ? `"col mos mos"` : `"bq bq bq
 
 export const
     LO = styled.div.attrs({
-      className: 'container'
+      //className: 'container'
     })`
         width: 100%;
         height: 100%;
         padding: 0px;
         display: grid;
-        grid-template-columns: auto auto auto;
+        //grid-template-columns: auto auto auto;
         grid-template-areas:
             "nb nb nb"
             ". v ."
