@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -105,16 +106,23 @@ export default class FootrAdaptat extends Component {
                         </FooterDropDownSection>
 
                         <FooterDropDownSection title="Escríbenos">
-                            <form>
-                              <div class="form-group">
-                                <label for="emailCliente">Dirección de Email:</label>
-                                <input type="email" class="form-control" id="emailCliente" placeholder="Introduzca su Email" />
+                            <form >
+                              <div className="form-group">
+                                <label htmlFor="emailCliente">Dirección de Email:</label>
+                                <input type="email" className="form-control" id="emailCliente" placeholder="Introduzca su Email" ref={input => this.from = input} />
                               </div>
-                              <div class="form-group">
-                                <label for="mensajeCliente">Mensaje:</label>
-                                <textarea class="form-control" id="mensajeCliente" placeholder="Escriba su Mensaje" />
+                              <div className="form-group">
+                                <label htmlFor="mensajeCliente">Mensaje:</label>
+                                <textarea className="form-control" id="mensajeCliente" placeholder="Escriba su Mensaje" ref={ta => this.text = ta }/>
                               </div>
-                              <button type="submit" class="btn btn-default">Enviar</button>
+                              <button
+                                className="btn btn-default"
+                                onClick={(ev)=>{
+                                    ev.preventDefault();
+                                    ev.stopPropagation();
+                                    Meteor.call('enviaCorreu', this.from.value, this.text.value );
+                                }}
+                              >Enviar</button>
                             </form>
                         </FooterDropDownSection>
                     </FooterSection>
@@ -128,18 +136,18 @@ export default class FootrAdaptat extends Component {
 
 
 
-                    <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{info.titleAbout}</h4>
+                    <div className="modal fade" id="about" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="myModalLabel">{info.titleAbout}</h4>
                           </div>
-                          <div class="modal-body">
+                          <div className="modal-body">
                             {info.contAbout}
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
                           </div>
                         </div>
                       </div>
@@ -147,18 +155,18 @@ export default class FootrAdaptat extends Component {
 
 
 
-                    <div class="modal fade about-modal-lg" id="terms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{info.titleTerms}</h4>
+                    <div className="modal fade about-modal-lg" id="terms" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div className="modal-dialog modal-lg" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="myModalLabel">{info.titleTerms}</h4>
                           </div>
-                          <div class="modal-body">
+                          <div className="modal-body">
                             {info.contTerms}
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
                           </div>
                         </div>
                       </div>
@@ -166,18 +174,18 @@ export default class FootrAdaptat extends Component {
 
 
 
-                    <div class="modal fade about-modal-lg" id="cookies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{info.titleCookies}</h4>
+                    <div className="modal fade about-modal-lg" id="cookies" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div className="modal-dialog modal-lg" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="myModalLabel">{info.titleCookies}</h4>
                           </div>
-                          <div class="modal-body">
+                          <div className="modal-body">
                             {info.contCookies}
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
                           </div>
                         </div>
                       </div>
@@ -185,18 +193,18 @@ export default class FootrAdaptat extends Component {
 
 
 
-                    <div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">{info.titleFAQ}</h4>
+                    <div className="modal fade" id="faq" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="myModalLabel">{info.titleFAQ}</h4>
                           </div>
-                          <div class="modal-body">
+                          <div className="modal-body">
                             {info.contFAQ}
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
                           </div>
                         </div>
                       </div>

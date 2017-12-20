@@ -161,7 +161,8 @@ export const
     `,
 
     MainContent = styled.div.attrs({
-      className: 'container'
+      //className: 'container'
+      className: 'maincontent'
     })`
         grid-area: c;
 
