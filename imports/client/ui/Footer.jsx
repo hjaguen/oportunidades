@@ -121,6 +121,7 @@ export default class FootrAdaptat extends Component {
                                     ev.preventDefault();
                                     ev.stopPropagation();
                                     Meteor.call('enviaCorreu', this.from.value, this.text.value );
+                                    alert("Mensaje enviado. ¡Gracias por contactar con nosotros!");
                                 }}
                               >Enviar</button>
                             </form>
