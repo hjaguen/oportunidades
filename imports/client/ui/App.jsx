@@ -6,6 +6,7 @@ import {
     Link
 } from 'react-router-dom';
 import { graphql } from 'react-apollo';
+
 import {
     Button,
     Navbar,
@@ -17,6 +18,7 @@ import {
     Row,
     Col
 } from 'react-bootstrap';
+
 import { LinkContainer } from 'react-router-bootstrap';
 import 'react-mdl/extra/material.css';
 import 'react-mdl/extra/material.js';
@@ -24,6 +26,7 @@ import {
     Card, CardTitle, CardText, CardActions, Button as ButtonCard,
     Footer, FooterSection, FooterDropDownSection, FooterLinkList
 } from  'react-mdl';
+
 import sanitizeHtml from 'sanitize-html-react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
@@ -334,11 +337,11 @@ export default class App extends Component {
 
             render() {
                 return ([
-                        <Stylo.PosicionFiltro
-                            key="columna"
-                        >
-                            <BuscadorColumnaSUBCAT {...this.props} />
-                        </Stylo.PosicionFiltro>
+                    <Stylo.PosicionFiltro
+                        key="columna"
+                    >
+                        <BuscadorColumnaSUBCAT {...this.props} />
+                    </Stylo.PosicionFiltro>
                     ,
                     <Stylo.PosicionProductos
                         key="mostrari"

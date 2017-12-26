@@ -105,38 +105,39 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                     })()
                                 }
                             </div>
-                            Tallas:
-                            <div>
-                                {props.v.sizes.map(
-                                    (v,i,a) => (
-                                        <span
-                                            key={i}
-                                            style={{
-                                                // background: `${v.num_color}`,
-                                                // minWidth: `20px`,
-                                                // minHeight: `20px`,
-                                                // border: `1px solid black`,
-                                                // margin: `.1em`,
-                                                // display: `inline-block`,
-
-                                                display: `grid`,
-                                                border: `1px black solid`,
-                                                borderRadius: `1em`,
-                                                height: `20px`,
-                                                background: `white`,
-                                                padding: `1em`,
-                                                alignContent: `center`,
-                                                // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, ${v.num_color} 100%)`,
-                                                margin: `.2em`,
-                                                textAlign: `center`
-                                            }}
-                                        >{`${v.label_talla}: ${Number(v.existencia_talla)}`}
-
-                                        </span>
-
-                                    )
-                                )}
-                            </div>
+                            {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
+                                Tallas:
+                            // <div>
+                            //     props.v.sizes.map(
+                            //         (v,i,a) => (
+                            //             <span
+                            //                 key=i}
+                            //                 style=
+                            //                     // background: `$v.num_color}`,
+                            //                     // minWidth: `20px`,
+                            //                     // minHeight: `20px`,
+                            //                     // border: `1px solid black`,
+                            //                     // margin: `.1em`,
+                            //                     // display: `inline-block`,
+                            //
+                            //                     display: `grid`,
+                            //                     border: `1px black solid`,
+                            //                     borderRadius: `1em`,
+                            //                     height: `20px`,
+                            //                     background: `white`,
+                            //                     padding: `1em`,
+                            //                     alignContent: `center`,
+                            //                     // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, $v.num_color} 100%)`,
+                            //                     margin: `.2em`,
+                            //                     textAlign: `center`
+                            //                 }}
+                            //             >`$v.label_talla}: $Number(v.existencia_talla)}`}
+                            //
+                            //             </span>
+                            //
+                            //         )
+                            //     )}
+                            / </div> */}
                         </div>
                     </Link>
                 </li>
