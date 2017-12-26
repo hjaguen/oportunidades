@@ -23,125 +23,164 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
 
         const
             Fitxeta = (props) => (
-                <li key={props.i}
-                    style={ conf.estil_fitxetes }
-                >
-                    <Link to={`/producto/${props.v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${props.v.id}`} >
+                (props.v.imagen_principal && props.v.imagen_principal !== "null")
+                ?
+                    <li
+                        key={props.i}
+                        style={ conf.estil_fitxetes }
+                    >
+                        <Link
+                            to={`/producto/${props.v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${props.v.id}`}
+                            style={{
+                                textDecoration: `none`
+                            }}
+                        >
 
-                        <img
-                            src={`http://cashflow.colombiaespassion.net/productos/${props.v.imagen_principal}`}
-                            alt={props.v.descripcion}
-                            style={{
-                                position: `relative`,
-                                width: `100%`,
-                                display: `block`,
-                                borderRadius: `.3em`
-                            }}
-                        />
-                        <div
-                            style={{
-                                padding: `.3em`
-                            }}
-                        >
-                            Referencia: {props.v.referencia} - Nombre: {props.v.descripcion}
-                        </div>
-                        <div
-                            style={{
-                                padding: `.3em`
-                            }}
-                        >
-                            Colores:
+                            <img
+                                src={`http://cashflow.colombiaespassion.net/productos/${props.v.imagen_principal}`}
+                                alt={props.v.descripcion}
+                                style={{
+                                    position: `relative`,
+                                    width: `100%`,
+                                    display: `block`,
+                                    borderRadius: `.3em`
+                                }}
+                            />
                             <div
                                 style={{
-                                    display: `flex`,
-                                    justifyContent: `center`,
-                                    flexWrap: `wrap`,
-                                    alignItems: `center`
+                                    padding: `.3em`,
+                                    marginBottom: `.1em`
                                 }}
                             >
-                                {
-                                    (() => {
-                                        let
-                                            arrColors = props.v.galleryColors.map(
+                                <div
+                                    style={{
+                                        fontWeight: `bold`,
+                                        textAlign: `center`
+                                    }}
+                                >{props.v.referencia}
+                                </div>
+                                <div
+                                    style={{
+                                        fontSize: `.9em`,
+                                        lineHeight: `.8em`,
+                                        fontStyle: `italic`
+                                    }}
+                                >{props.v.descripcion}
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    padding: `.3em`,
+                                    position: `absolute`,
+                                    bottom: `6em`,
+                                    width: `100%`,
+                                    background: `rgba(255,255,255,.5)`
+
+                                }}
+                            >
+                                {/*// <span
+                                //     style=
+                                //         fontSize: `.7em`
+                                //     }}
+                                // >
+                                //     Colores:
+                                // </span>
+                                */}
+
+                                    <div
+                                        style={{
+                                            display: `flex`,
+                                            justifyContent: `center`,
+                                            flexWrap: `wrap`,
+                                            alignItems: `center`
+                                        }}
+                                    >
+                                        {
+                                            (() => {
+                                                let
+                                                    arrColors = props.v.galleryColors.map(
+                                                            (v,i,a) => (
+                                                                <span
+                                                                    key={i}
+                                                                    style={{
+                                                                        display: `inline-block`,
+                                                                        border: `1px black solid`,
+                                                                        borderRadius: `1em`,
+                                                                        width: `20px`,
+                                                                        height: `20px`,
+                                                                        background: `${v.num_color}`,
+                                                                        margin: `.2em`
+                                                                    }}
+                                                                    title={`${v.label_color}`}
+                                                                />
+                                                            )
+                                                        )
+                                                ;
+
+                                                return arrColors.concat(props.v.othersColors.map(
                                                     (v,i,a) => (
                                                         <span
                                                             key={i}
                                                             style={{
                                                                 display: `inline-block`,
                                                                 border: `1px black solid`,
-                                                                borderRadius: `1em`,
-                                                                width: `20px`,
-                                                                height: `20px`,
+                                                                borderRadius: `0em`,
+                                                                width: `18px`,
+                                                                height: `18px`,
                                                                 background: `${v.num_color}`,
-                                                                margin: `.2em`
+                                                                margin: `.3em`,
+                                                                transform: `rotate(45deg)`
                                                             }}
-                                                            title={`${v.label_color}`}
+                                                            title={`${v.nom_color}`}
                                                         />
                                                     )
-                                                )
-                                        ;
+                                                ));
 
-                                        return arrColors.concat(props.v.othersColors.map(
-                                            (v,i,a) => (
-                                                <span
-                                                    key={i}
-                                                    style={{
-                                                        display: `inline-block`,
-                                                        border: `1px black solid`,
-                                                        borderRadius: `0em`,
-                                                        width: `18px`,
-                                                        height: `18px`,
-                                                        background: `${v.num_color}`,
-                                                        margin: `.3em`,
-                                                        transform: `rotate(45deg)`
-                                                    }}
-                                                    title={`${v.nom_color}`}
-                                                />
-                                            )
-                                        ));
+                                                //arrColors.sort((a,b)=>Number(`0x${a}`)-Number(`0x${b}`))
 
-                                        //arrColors.sort((a,b)=>Number(`0x${a}`)-Number(`0x${b}`))
-
-                                    })()
-                                }
+                                            })()
+                                        }
+                                    </div>
+                                    {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
+                                        Tallas:
+                                    // <div>
+                                    //     props.v.sizes.map(
+                                    //         (v,i,a) => (
+                                    //             <span
+                                    //                 key=i}
+                                    //                 style=
+                                    //                     // background: `$v.num_color}`,
+                                    //                     // minWidth: `20px`,
+                                    //                     // minHeight: `20px`,
+                                    //                     // border: `1px solid black`,
+                                    //                     // margin: `.1em`,
+                                    //                     // display: `inline-block`,
+                                    //
+                                    //                     display: `grid`,
+                                    //                     border: `1px black solid`,
+                                    //                     borderRadius: `1em`,
+                                    //                     height: `20px`,
+                                    //                     background: `white`,
+                                    //                     padding: `1em`,
+                                    //                     alignContent: `center`,
+                                    //                     // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, $v.num_color} 100%)`,
+                                    //                     margin: `.2em`,
+                                    //                     textAlign: `center`
+                                    //                 }}
+                                    //             >`$v.label_talla}: $Number(v.existencia_talla)}`}
+                                    //
+                                    //             </span>
+                                    //
+                                    //         )
+                                    //     )}
+                                    / </div> */}
                             </div>
-                            {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
-                                Tallas:
-                            // <div>
-                            //     props.v.sizes.map(
-                            //         (v,i,a) => (
-                            //             <span
-                            //                 key=i}
-                            //                 style=
-                            //                     // background: `$v.num_color}`,
-                            //                     // minWidth: `20px`,
-                            //                     // minHeight: `20px`,
-                            //                     // border: `1px solid black`,
-                            //                     // margin: `.1em`,
-                            //                     // display: `inline-block`,
-                            //
-                            //                     display: `grid`,
-                            //                     border: `1px black solid`,
-                            //                     borderRadius: `1em`,
-                            //                     height: `20px`,
-                            //                     background: `white`,
-                            //                     padding: `1em`,
-                            //                     alignContent: `center`,
-                            //                     // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, $v.num_color} 100%)`,
-                            //                     margin: `.2em`,
-                            //                     textAlign: `center`
-                            //                 }}
-                            //             >`$v.label_talla}: $Number(v.existencia_talla)}`}
-                            //
-                            //             </span>
-                            //
-                            //         )
-                            //     )}
-                            / </div> */}
-                        </div>
-                    </Link>
-                </li>
-            ),
+                        </Link>
+                    </li>
+                :
+                    null
+            )
+            ,
             fitxetaMapper = (v,i,a) => {
                 //console.log(v);
                 if (i < 40000) {

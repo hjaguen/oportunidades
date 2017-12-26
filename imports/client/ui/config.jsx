@@ -134,47 +134,47 @@ export let
     ,
 
 // 2do Contendido libre en "Home"
-    segon_lliure =
-        <Grid
-            style={{
-                background: `fuchsia`,
-                margin: `50px`
-            }}
-            fluid
-        >
-            <Row
-                className="show-grid"
-                style={{
-                    position: `relative`
-                }}
-            >
-                <Col
-                    xs={6}
-                    md={3}
-                    style={{
-                        background: `gold`
-                    }}
-                ><code>&lt;{'Col xs={6} md={3}'} /&gt;</code></Col>
-                <Col
-                    xs={6}
-                    md={6}
-                    style={{
-                        background: `grey`
-                    }}
-                >
-                </Col>
-                <Col
-                    xsHidden
-                    md={3}
-                    style={{
-                        background: `gold`,
-                        height: `100%`
-                    }}
-                ><code>&lt;{'Col xsHidden md={3}'} /&gt;</code></Col>
-            </Row>
-        </Grid>
-
-    ,
+    // segon_lliure =
+    //     <Grid
+    //         style={{
+    //             background: `fuchsia`,
+    //             margin: `50px`
+    //         }}
+    //         fluid
+    //     >
+    //         <Row
+    //             className="show-grid"
+    //             style={{
+    //                 position: `relative`
+    //             }}
+    //         >
+    //             <Col
+    //                 xs={6}
+    //                 md={3}
+    //                 style={{
+    //                     background: `gold`
+    //                 }}
+    //             ><code>&lt;{'Col xs={6} md={3}'} /&gt;</code></Col>
+    //             <Col
+    //                 xs={6}
+    //                 md={6}
+    //                 style={{
+    //                     background: `grey`
+    //                 }}
+    //             >
+    //             </Col>
+    //             <Col
+    //                 xsHidden
+    //                 md={3}
+    //                 style={{
+    //                     background: `gold`,
+    //                     height: `100%`
+    //                 }}
+    //             ><code>&lt;{'Col xsHidden md={3}'} /&gt;</code></Col>
+    //         </Row>
+    //     </Grid>
+    //
+    // ,
 
 
 // Contenido libre de Video en "Home"

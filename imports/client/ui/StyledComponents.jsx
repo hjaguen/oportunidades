@@ -68,7 +68,6 @@ export const
     `,
 
     MainNavBar = styled.nav`
-        //grid-area: navbar;
         grid-area: nb;
         position: sticky;
         top: 0;
