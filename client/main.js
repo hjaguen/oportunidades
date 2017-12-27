@@ -28,9 +28,6 @@ Meteor.startup(() => {
             document.getElementById("menu").style.backgroundColor = "rgba(255, 255, 255, 0.25)";
             [...document.querySelectorAll(".nombre-marca h1, .emailytel")].map((v,i,a)=>v.style.color = "white");
         }
-        //
-        // if (document.body.scrollTop < 350 || document.documentElement.scrollTop < 350) {
-        // }
     }
 
     render(
