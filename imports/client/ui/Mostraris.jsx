@@ -21,24 +21,32 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
             return (<div>Ocurrió un error inesperado.</div>);
         }
 
-        const
-            Fitxeta = (props) => (
-                (props.v.imagen_principal && props.v.imagen_principal !== "null")
+        class Fitxeta extends Component {
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    imagenActual: props.v.imagen_principal
+                }
+            }
+
+            render() {
+                return (this.props.v.imagen_principal && this.props.v.imagen_principal !== "null")
                 ?
                     <li
-                        key={props.i}
+                        key={this.props.i}
                         style={ conf.estil_fitxetes }
                     >
                         <Link
-                            to={`/producto/${props.v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${props.v.id}`}
+                            to={`/producto/${this.props.v.descripcion.trim().toLowerCase().replace(/\s+/g, '.')}.${this.props.v.id}`}
                             style={{
                                 textDecoration: `none`
                             }}
                         >
 
                             <img
-                                src={`http://cashflow.colombiaespassion.net/productos/${props.v.imagen_principal}`}
-                                alt={props.v.descripcion}
+                                src={`http://cashflow.colombiaespassion.net/productos/${this.state.imagenActual}`}
+                                alt={this.props.v.descripcion}
                                 style={{
                                     position: `relative`,
                                     width: `100%`,
@@ -49,7 +57,11 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                             <div
                                 style={{
                                     padding: `.3em`,
-                                    marginBottom: `.1em`
+                                    marginBottom: `.1em`,
+                                    position: `absolute`,
+                                    bottom: `.5em`,
+                                    width: `100%`,
+                                    background: `rgba(255,255,255,.8)`
                                 }}
                             >
                                 <div
@@ -57,7 +69,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         fontWeight: `bold`,
                                         textAlign: `center`
                                     }}
-                                >{props.v.referencia}
+                                >{this.props.v.referencia}
                                 </div>
                                 <div
                                     style={{
@@ -65,16 +77,16 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         lineHeight: `.8em`,
                                         fontStyle: `italic`
                                     }}
-                                >{props.v.descripcion}
+                                >{this.props.v.descripcion}
                                 </div>
                             </div>
                             <div
                                 style={{
                                     padding: `.3em`,
                                     position: `absolute`,
-                                    bottom: `6em`,
+                                    bottom: `4em`,
                                     width: `100%`,
-                                    background: `rgba(255,255,255,.5)`
+                                    background: `rgba(255,255,255,.8)`
 
                                 }}
                             >
@@ -98,7 +110,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         {
                                             (() => {
                                                 let
-                                                    arrColors = props.v.galleryColors.map(
+                                                    arrColors = this.props.v.galleryColors.map(
                                                             (v,i,a) => (
                                                                 <span
                                                                     key={i}
@@ -112,12 +124,17 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                                         margin: `.2em`
                                                                     }}
                                                                     title={`${v.label_color}`}
+                                                                    onMouseOver={()=>{
+                                                                        this.setState({
+                                                                            imagenActual: v.imagen_min
+                                                                        })
+                                                                    }}
                                                                 />
                                                             )
                                                         )
                                                 ;
 
-                                                return arrColors.concat(props.v.othersColors.map(
+                                                return arrColors.concat(this.props.v.othersColors.map(
                                                     (v,i,a) => (
                                                         <span
                                                             key={i}
@@ -132,6 +149,12 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                                 transform: `rotate(45deg)`
                                                             }}
                                                             title={`${v.nom_color}`}
+                                                            onMouseOver={()=>{
+                                                                // this.setState({
+                                                                //     imagenActual: v.imagen_min
+                                                                // })
+                                                                        //alert("Imagen no disponible para este color.");
+                                                            }}
                                                         />
                                                     )
                                                 ));
@@ -144,7 +167,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                     {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
                                         Tallas:
                                     // <div>
-                                    //     props.v.sizes.map(
+                                    //     this.props.v.sizes.map(
                                     //         (v,i,a) => (
                                     //             <span
                                     //                 key=i}
@@ -179,8 +202,10 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                     </li>
                 :
                     null
-            )
-            ,
+            }
+        }
+
+        const
             fitxetaMapper = (v,i,a) => {
                 //console.log(v);
                 if (i < 40000) {

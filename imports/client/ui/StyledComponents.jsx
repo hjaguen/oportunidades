@@ -208,9 +208,13 @@ export const
     `,
 
     aBrand = styled.a.attrs({
-      className: 'navbar-brand'
+      className: 'navbar-brand nombre-marca'
     })`
       margin-bottom: 20px;
+
+      h1 {
+          transition: color 3s;
+      }
     `,
 
     liNav = styled.li`

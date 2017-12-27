@@ -70,10 +70,10 @@ export default class NavbarAdaptat extends Component {
                         </Stylo.aBrand>
                           <ul className="nav navbar-nav navbar-right">
                             <Stylo.liNav>
-                                <Stylo.aLink>{conf.emailContacto}</Stylo.aLink>
+                                <Stylo.aLink className="emailytel">{conf.emailContacto}</Stylo.aLink>
                             </Stylo.liNav>
                             <Stylo.liNav>
-                                <Stylo.aLink href="#">{conf.telContacto}</Stylo.aLink>
+                                <Stylo.aLink href="#" className="emailytel">{conf.telContacto}</Stylo.aLink>
                             </Stylo.liNav>
                         </ul>
 
