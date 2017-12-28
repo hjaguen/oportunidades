@@ -198,8 +198,8 @@ export const
       color: #fff;
       font-size: 1.25em;
 	    text-shadow: 0 1px 0 rgba(255,255,255,.25);
-      font-family: 'Comfortaa', sans-serif;
-      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
 
         &:hover, &:focus {
           color: rgb(255, 64, 129);

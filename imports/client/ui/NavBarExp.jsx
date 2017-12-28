@@ -73,7 +73,19 @@ export default class NavbarAdaptat extends Component {
                                 <Stylo.aLink className="emailytel">{conf.emailContacto}</Stylo.aLink>
                             </Stylo.liNav>
                             <Stylo.liNav>
-                                <Stylo.aLink href="#" className="emailytel">{conf.telContacto}</Stylo.aLink>
+                                <Stylo.aLink className="emailytel">{conf.telContacto}</Stylo.aLink>
+                            </Stylo.liNav>
+                            <Stylo.liNav>
+                              <Stylo.aLink href="https://facebook.com/latinmoda" target="_blank"> <i className="fa fa-facebook fa-2x"></i></Stylo.aLink>
+                            </Stylo.liNav>
+                            <Stylo.liNav>
+                              <Stylo.aLink href="https://twitter.com/latinmoda" target="_blank"> <i className="fa fa-twitter fa-2x"></i></Stylo.aLink>
+                            </Stylo.liNav>
+                            <Stylo.liNav>
+                              <Stylo.aLink href="https://instagram.com/latinmoda_oficial" target="_blank"> <i className="fa fa-instagram fa-2x"></i></Stylo.aLink>
+                            </Stylo.liNav>
+                            <Stylo.liNav>
+                              <Stylo.aLink href={`https://api.whatsapp.com/send?phone=${conf.whatsappMsg}&text=Hola%2C%20necesito%20información`} target="_blank"> <i className="fa fa-whatsapp fa-2x"></i></Stylo.aLink>
                             </Stylo.liNav>
                         </ul>
 
