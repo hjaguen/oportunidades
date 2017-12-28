@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } from 'react-bootstrap';
 
+
 export let
 
     categoryId = `2`
@@ -207,7 +208,7 @@ export let
       <div className="container">
         <div className="row" >
           <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item"
+            <iframe style={{border: `1em solid white`, boxShadow: `8px 5px 10px black`, WebkitBoxShadow: `8px 5px 10px black`}} className="embed-responsive-item"
                 src="https://player.vimeo.com/video/240463716">
             </iframe>
           </div>
