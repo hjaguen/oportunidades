@@ -5,14 +5,10 @@ import * as conf from './config.jsx';
 let bloCol = (conf.filtres_posicio) === `columna` ? `"col mos mos"` : `"bq bq bq" "mos mos mos"`;
 
 export const
-    LO = styled.div.attrs({
-      //className: 'container'
-    })`
-        width: 100%;
-        height: 100%;
+    LO = styled.div`
         padding: 0px;
         display: grid;
-        //grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto auto;
         grid-template-areas:
             "nb nb nb"
             ". v ."
@@ -157,6 +153,7 @@ export const
 
     MainVideo = styled.div`
       grid-area: v;
+      padding: 20px;
     `,
 
     MainContent = styled.div.attrs({
@@ -223,5 +220,11 @@ export const
           background-color: transparent;
       }
     }
+    `,
+
+    footer = styled.footer.attrs({
+      className: 'mdl-mega-footer'
+    })`
+      background-color: black;
     `
 ;

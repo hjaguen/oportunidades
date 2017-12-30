@@ -40,7 +40,7 @@ export let
     ,
 
 // Estilo para modulo de filtro
-     filtres_posicio = `columna` // `columna` | `bloque`
+     filtres_posicio = `bloque` // `columna` | `bloque`
      ,
     // ,
     //             layoutTemplateArea =
@@ -206,9 +206,9 @@ export let
 
     video_latinmoda =
       <div className="container">
-        <div className="row" >
+        <div style={{border: `1em solid white`, borderRadius: `10px`, boxShadow: `8px 8px 20px #000`}} className="row" >
           <div className="embed-responsive embed-responsive-16by9">
-            <iframe style={{border: `1em solid white`, boxShadow: `8px 5px 10px black`, WebkitBoxShadow: `8px 5px 10px black`}} className="embed-responsive-item"
+            <iframe className="embed-responsive-item"
                 src="https://player.vimeo.com/video/240463716">
             </iframe>
           </div>

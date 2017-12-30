@@ -13,6 +13,7 @@ import {
 } from 'react-share';
 import * as conf from './config.jsx';
 import * as info from './addInfo.jsx';
+import * as Stylo from './StyledComponents.jsx';
 
 const {
   FacebookShareButton,
@@ -62,7 +63,7 @@ export default class FootrAdaptat extends Component {
 
         return (
             <div>
-                <Footer size="mega">
+                <Stylo.footer size="mega">
                     <FooterSection type="middle">
                         <FooterDropDownSection title="Información">
                             <FooterLinkList>
@@ -217,7 +218,7 @@ export default class FootrAdaptat extends Component {
 
                     <FacebookShareButton url="http://www.facebook.com/latinmoda" />
                     <TwitterShareButton url="http://twitter.com/latinmoda"/>
-                </Footer>
+                </Stylo.footer>
             </div>
         );
     }
