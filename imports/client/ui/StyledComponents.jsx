@@ -71,6 +71,7 @@ export const
         background-color: rgba(255, 255, 255, 0.25);
         transition: all 1s ease;
         z-index: 100;
+        font-family: 'Comfortaa', sans-serif;
     `,
 
     PosicionFiltro = styled.div`
@@ -192,12 +193,14 @@ export const
 
     aLink = styled('a')`
       padding: 15px;
+      // padding-top: 7px !important;
+      // padding-bottom: 7px !important;
       color: #fff;
       font-size: 1.25em;
 	    text-shadow: 0 1px 0 rgba(255,255,255,.25);
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
-
+      //transform: scaleX(.9);
         &:hover, &:focus {
           color: rgb(255, 64, 129);
 
