@@ -79,12 +79,23 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                     }}
                                 >{this.props.v.descripcion}
                                 </div>
+                                <div
+                                    style={{
+                                        fontSize: `.9em`,
+                                        lineHeight: `.8em`,
+                                        fontStyle: `italic`,
+                                        textAlign: `right`,
+                                        fontWeight: `bold`,
+                                        marginTop: `.4em`
+                                    }}
+                                >{this.props.v.nom_marca}
+                                </div>
                             </div>
                             <div
                                 style={{
                                     padding: `.3em`,
                                     position: `absolute`,
-                                    bottom: `4em`,
+                                    bottom: `5em`,
                                     width: `100%`,
                                     background: `rgba(255,255,255,.8)`
 

@@ -45,8 +45,8 @@ export default class MainContentProducte extends Component {
                 >
                     <div
                         style={{
-                            display: `flex`,
-                            flexWrap: `wrap`,
+                            /*display: `flex`,
+                            flexWrap: `wrap`,*/
                             position: `-webkit-sticky`,
                             position: `sticky`,
                             top: `20px`,

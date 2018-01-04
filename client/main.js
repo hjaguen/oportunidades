@@ -20,7 +20,7 @@ const client = new ApolloClient({
 Meteor.startup(() => {
 
     window.onscroll = () => {
-        if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             document.getElementById("menu").style.backgroundColor = "black";
             [...document.querySelectorAll(".nombre-marca h1, .emailytel")].map((v,i,a)=>v.style.color = "#FF4081");
 

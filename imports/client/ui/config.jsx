@@ -40,7 +40,7 @@ export let
     ,
 
 // Estilo para modulo de filtro
-     filtres_posicio = `bloque` // `columna` | `bloque`
+     filtres_posicio = `columna` // `columna` | `bloque`
      ,
     // ,
     //             layoutTemplateArea =

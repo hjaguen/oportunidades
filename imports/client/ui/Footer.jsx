@@ -37,6 +37,8 @@ const WhatsappIcon = generateShareIcon('whatsapp');
 const RedditIcon = generateShareIcon('reddit');
 const EmailIcon = generateShareIcon('email');
 
+let dat = new Date();
+
 export default class FootrAdaptat extends Component {
     constructor(props) {
         super(props);
@@ -131,7 +133,7 @@ export default class FootrAdaptat extends Component {
 
 
                     <FooterSection type="bottom" logo={conf.tituloPagina}>
-                      <p>Copyright &copy; 2018 - Ropa Colombiana en España.</p>
+                      <p>{`Copyright © ${dat.getFullYear()} - Ropa Colombiana en España.`}</p>
                     </FooterSection>
 
 
