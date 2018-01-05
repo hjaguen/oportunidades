@@ -8,7 +8,7 @@ export const
     LO = styled.div`
         padding: 0px;
         display: grid;
-        grid-template-columns: 0.8fr 1.2fr 1.2fr;
+        grid-template-columns: 0.8fr 1fr 1.2fr;
         grid-template-areas:
             "nb nb nb"
             ". v ."
