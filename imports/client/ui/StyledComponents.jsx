@@ -8,7 +8,7 @@ export const
     LO = styled.div`
         padding: 0px;
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: 0.8fr 1.2fr 1.2fr;
         grid-template-areas:
             "nb nb nb"
             ". v ."
@@ -65,7 +65,7 @@ export const
 
     MainNavBar = styled.nav`
         grid-area: nb;
-        position: sticky;
+        //position: sticky;
         top: 0;
         height: min-height;
         background-color: rgba(255, 255, 255, 0.25);

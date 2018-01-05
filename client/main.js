@@ -19,7 +19,7 @@ const client = new ApolloClient({
 
 Meteor.startup(() => {
 
-    window.onscroll = () => {
+    /*window.onscroll = () => {
         if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             document.getElementById("menu").style.backgroundColor = "black";
             [...document.querySelectorAll(".nombre-marca h1, .emailytel")].map((v,i,a)=>v.style.color = "#FF4081");
@@ -28,7 +28,7 @@ Meteor.startup(() => {
             document.getElementById("menu").style.backgroundColor = "rgba(255, 255, 255, 0.25)";
             [...document.querySelectorAll(".nombre-marca h1, .emailytel")].map((v,i,a)=>v.style.color = "white");
         }
-    }
+    }*/
 
     render(
         <ApolloProvider client={client}>
