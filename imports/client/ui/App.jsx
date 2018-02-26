@@ -48,6 +48,8 @@ import {
     BuscadorColumnaSUBCAT
 } from './Filtros.jsx';
 
+import Cookies from './cookies'
+
 
 let variables = {
     apiUrl: "http://api.colombiaespassion.net",
@@ -779,6 +781,12 @@ export default class App extends Component {
                             />
                         );
                     }}/>
+
+                    <Route path="/" render={() => (
+                        <div>
+                            <Cookies />
+                        </div>
+                    )}/>
 
                     <Route path="/" render={() => (
                         <div
