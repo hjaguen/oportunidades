@@ -140,8 +140,8 @@ export default class FootrAdaptat extends Component {
 
 
 
-                    <div className="modal fade" id="about" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div className="modal-dialog" role="document">
+                    <div className="modal fade about-modal-lg" id="about" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div className="modal-dialog modal-lg" role="document">
                         <div className="modal-content">
                           <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

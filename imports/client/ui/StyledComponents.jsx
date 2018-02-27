@@ -21,6 +21,21 @@ export const
         background-size: ${conf.backgroundSize};
         background-repeat: ${conf.backgroundRepeat};
         background-attachment: ${conf.backgroundAttachment};
+
+        @media (max-width:500px) {
+          grid-template-columns:auto;
+          grid-template-areas:
+              "nb"
+              "v"
+              "c"
+              "col"
+              "mos"
+              "fot"
+              "min"
+              "tex"
+              "ft"
+          ;
+        }
     `,
 
     // MainLayout = styled.div.attrs({
@@ -170,24 +185,56 @@ export const
           font-family: 'Comfortaa', sans-serif;
           font-size: 2.5em;
           font-weight: 700;
+
+          @media (min-width:351px) and (max-width:500px) {
+          font-size: 1.4em;
+          }
+
+          @media (max-width:350px) {
+          font-size: 1.1em;
+          }
         }
 
         > h2 {
           font-family: 'Comfortaa', sans-serif;
           font-size: 2em;
           font-weight: 500;
+
+          @media (min-width:351px) and (max-width:500px) {
+          font-size: 1.4em;
+          }
+
+          @media (max-width:350px) {
+            font-size: 1.1em;
+          }
         }
 
         > h3 {
           font-family: 'Comfortaa', sans-serif;
           font-size: 1.7em;
           font-weight: 300;
+
+          @media (min-width:351px) and (max-width:500px) {
+          font-size: 1.2em;
+        }
+
+        @media (max-width:350px) {
+          font-size: 0.9em;
+        }
         }
 
         p {
           font-family: 'Comfortaa', sans-serif;
           font-size: 1.2em;
           font-weight: 100;
+
+          @media (min-width:351px) and (max-width:500px) {
+          font-size: 1em;
+          }
+
+          @media (max-width:350px) {
+            font-size: 0.80em;
+          }
         }
     `,
 
@@ -200,6 +247,13 @@ export const
 	    text-shadow: 0 1px 0 rgba(255,255,255,.25);
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
+      @media (min-width:351px) and (max-width:500px) {
+          font-size: 1.0em;
+        }
+
+        @media (max-width:350px) {
+          font-size: 0.8em;
+        }
       //transform: scaleX(.9);
         &:hover, &:focus {
           color: rgb(255, 64, 129);

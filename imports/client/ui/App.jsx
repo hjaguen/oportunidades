@@ -388,7 +388,7 @@ export default class App extends Component {
                         >
     		              <h1>{conf.subtituloPagina}</h1>
     		              <h2>{conf.titulo_contenido}</h2>
-    		              {conf.texto_contenido}
+    		              {conf.bloque_contenido}
     		              {conf.bloque_info}
 
     		            </Stylo.MainContent>

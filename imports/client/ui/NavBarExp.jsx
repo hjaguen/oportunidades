@@ -69,27 +69,27 @@ export default class NavbarAdaptat extends Component {
                           <Stylo.NavTitle>{conf.tituloPagina}</Stylo.NavTitle>
                         </Stylo.aBrand>
                           <ul className="nav navbar-nav navbar-right">
-                            <Stylo.liNav>
+                            <Stylo.liNav style={{display:`inline-block`}}>
                                 <Stylo.aLink className="emailytel">{conf.emailContacto}</Stylo.aLink>
                             </Stylo.liNav>
-                            <Stylo.liNav>
+                            <Stylo.liNav style={{display:`inline-block`}}>
                                 <Stylo.aLink className="emailytel">{conf.telContacto}</Stylo.aLink>
                             </Stylo.liNav>
-                            <Stylo.liNav>
+                            <Stylo.liNav style={{display:`inline-block`}}>
                               <Stylo.aLink href="https://facebook.com/latinmoda" target="_blank"> <i className="fa fa-facebook fa-2x"></i></Stylo.aLink>
                             </Stylo.liNav>
-                            <Stylo.liNav>
+                            <Stylo.liNav style={{display:`inline-block`}}>
                               <Stylo.aLink href="https://twitter.com/latinmoda" target="_blank"> <i className="fa fa-twitter fa-2x"></i></Stylo.aLink>
                             </Stylo.liNav>
-                            <Stylo.liNav>
+                            <Stylo.liNav style={{display:`inline-block`}}>
                               <Stylo.aLink href="https://instagram.com/latinmoda_oficial" target="_blank"> <i className="fa fa-instagram fa-2x"></i></Stylo.aLink>
                             </Stylo.liNav>
-                            <Stylo.liNav>
-                              <Stylo.aLink href={`https://api.whatsapp.com/send?phone=${conf.whatsappMsg}&text=Hola%2C%20necesito%20información`} target="_blank"> <i className="fa fa-whatsapp fa-2x"></i></Stylo.aLink>
+                            <Stylo.liNav style={{display:`inline-block`}}>
+                              <Stylo.aLink href={`https://api.whatsapp.com/send?phone=${conf.whatsappMsg}&text=Hola%2C%20necesito%20información`} target="_blank"> <i className="fa fa-whatsapp fa-2x responsivo"></i></Stylo.aLink>
                             </Stylo.liNav>
                         </ul>
 
-                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <button type="button" className="navbar-toggle fa fa-bars fa-2x" style={{color:`white`,float:`left`}} data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span className="sr-only">Toggle navigation</span>
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
