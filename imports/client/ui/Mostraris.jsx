@@ -5,6 +5,8 @@ import Masonry from 'react-masonry-component';
 import * as conf from './config.jsx';
 
 import { Link } from 'react-router-dom';
+import LazyLoad from 'react-lazyload';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 export class MostrariSubcategoriaPRODUCTES extends Component {
     constructor(props) {
@@ -43,172 +45,173 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                 textDecoration: `none`
                             }}
                         >
-
-                            <img
-                                src={`http://cashflow.colombiaespassion.net/productos/${this.state.imagenActual}`}
-                                alt={this.props.v.descripcion}
-                                style={{
-                                    position: `relative`,
-                                    width: `100%`,
-                                    display: `block`,
-                                    borderRadius: `.3em`
-                                }}
-                            />
-                            <div
-                                style={{
-                                    padding: `.3em`,
-                                    marginBottom: `.1em`,
-                                    position: `absolute`,
-                                    bottom: `.5em`,
-                                    width: `100%`,
-                                    background: `rgba(255,255,255,.8)`
-                                }}
-                            >
+                            <LazyLoad height={560} offset={[-200, 0]} >
+                                <img
+                                    src={`http://cashflow.colombiaespassion.net/productos/${this.state.imagenActual}`}
+                                    alt={this.props.v.descripcion}
+                                    style={{
+                                        position: `relative`,
+                                        width: `100%`,
+                                        display: `block`,
+                                        borderRadius: `.3em`
+                                    }}
+                                />
                                 <div
                                     style={{
-                                        fontWeight: `bold`,
-                                        textAlign: `center`
+                                        padding: `.3em`,
+                                        marginBottom: `.1em`,
+                                        position: `absolute`,
+                                        bottom: `.5em`,
+                                        width: `100%`,
+                                        background: `rgba(255,255,255,.8)`
                                     }}
-                                >{this.props.v.referencia}
-                                </div>
-                                <div
-                                    style={{
-                                        fontSize: `.9em`,
-                                        lineHeight: `.8em`,
-                                        fontStyle: `italic`
-                                    }}
-                                >{this.props.v.descripcion}
-                                </div>
-                                <div
-                                    style={{
-                                        fontSize: `.9em`,
-                                        lineHeight: `.8em`,
-                                        fontStyle: `italic`,
-                                        textAlign: `right`,
-                                        fontWeight: `bold`,
-                                        marginTop: `.4em`
-                                    }}
-                                >{this.props.v.nom_marca}
-                                </div>
-                            </div>
-                            <div
-                                style={{
-                                    padding: `.3em`,
-                                    position: `absolute`,
-                                    bottom: `5em`,
-                                    width: `100%`,
-                                    background: `rgba(255,255,255,.8)`
-
-                                }}
-                            >
-                                {/*// <span
-                                //     style=
-                                //         fontSize: `.7em`
-                                //     }}
-                                // >
-                                //     Colores:
-                                // </span>
-                                */}
-
+                                >
                                     <div
                                         style={{
-                                            display: `flex`,
-                                            justifyContent: `center`,
-                                            flexWrap: `wrap`,
-                                            alignItems: `center`
+                                            fontWeight: `bold`,
+                                            textAlign: `center`
                                         }}
-                                    >
-                                        {
-                                            (() => {
-                                                let
-                                                    arrColors = this.props.v.galleryColors.map(
-                                                            (v,i,a) => (
-                                                                <span
-                                                                    key={i}
-                                                                    style={{
-                                                                        display: `inline-block`,
-                                                                        border: `1px black solid`,
-                                                                        borderRadius: `1em`,
-                                                                        width: `20px`,
-                                                                        height: `20px`,
-                                                                        background: `${v.num_color}`,
-                                                                        margin: `.2em`
-                                                                    }}
-                                                                    title={`${v.label_color}`}
-                                                                    onMouseOver={()=>{
-                                                                        this.setState({
-                                                                            imagenActual: v.imagen_min
-                                                                        })
-                                                                    }}
-                                                                />
-                                                            )
-                                                        )
-                                                ;
-
-                                                return arrColors.concat(this.props.v.othersColors.map(
-                                                    (v,i,a) => (
-                                                        <span
-                                                            key={i}
-                                                            style={{
-                                                                display: `inline-block`,
-                                                                border: `1px black solid`,
-                                                                borderRadius: `0em`,
-                                                                width: `18px`,
-                                                                height: `18px`,
-                                                                background: `${v.num_color}`,
-                                                                margin: `.3em`,
-                                                                transform: `rotate(45deg)`
-                                                            }}
-                                                            title={`${v.nom_color}`}
-                                                            onMouseOver={()=>{
-                                                                // this.setState({
-                                                                //     imagenActual: v.imagen_min
-                                                                // })
-                                                                        //alert("Imagen no disponible para este color.");
-                                                            }}
-                                                        />
-                                                    )
-                                                ));
-
-                                                //arrColors.sort((a,b)=>Number(`0x${a}`)-Number(`0x${b}`))
-
-                                            })()
-                                        }
+                                    >{this.props.v.referencia}
                                     </div>
-                                    {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
-                                        Tallas:
-                                    // <div>
-                                    //     this.props.v.sizes.map(
-                                    //         (v,i,a) => (
-                                    //             <span
-                                    //                 key=i}
-                                    //                 style=
-                                    //                     // background: `$v.num_color}`,
-                                    //                     // minWidth: `20px`,
-                                    //                     // minHeight: `20px`,
-                                    //                     // border: `1px solid black`,
-                                    //                     // margin: `.1em`,
-                                    //                     // display: `inline-block`,
-                                    //
-                                    //                     display: `grid`,
-                                    //                     border: `1px black solid`,
-                                    //                     borderRadius: `1em`,
-                                    //                     height: `20px`,
-                                    //                     background: `white`,
-                                    //                     padding: `1em`,
-                                    //                     alignContent: `center`,
-                                    //                     // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, $v.num_color} 100%)`,
-                                    //                     margin: `.2em`,
-                                    //                     textAlign: `center`
-                                    //                 }}
-                                    //             >`$v.label_talla}: $Number(v.existencia_talla)}`}
-                                    //
-                                    //             </span>
-                                    //
-                                    //         )
-                                    //     )}
-                                    / </div> */}
-                            </div>
+                                    <div
+                                        style={{
+                                            fontSize: `.9em`,
+                                            lineHeight: `.8em`,
+                                            fontStyle: `italic`
+                                        }}
+                                    >{this.props.v.descripcion}
+                                    </div>
+                                    <div
+                                        style={{
+                                            fontSize: `.9em`,
+                                            lineHeight: `.8em`,
+                                            fontStyle: `italic`,
+                                            textAlign: `right`,
+                                            fontWeight: `bold`,
+                                            marginTop: `.4em`
+                                        }}
+                                    >{this.props.v.nom_marca}
+                                    </div>
+                                </div>
+                                <div
+                                    style={{
+                                        padding: `.3em`,
+                                        position: `absolute`,
+                                        bottom: `5em`,
+                                        width: `100%`,
+                                        background: `rgba(255,255,255,.8)`
+
+                                    }}
+                                >
+                                    {/*// <span
+                                    //     style=
+                                    //         fontSize: `.7em`
+                                    //     }}
+                                    // >
+                                    //     Colores:
+                                    // </span>
+                                    */}
+
+                                        <div
+                                            style={{
+                                                display: `flex`,
+                                                justifyContent: `center`,
+                                                flexWrap: `wrap`,
+                                                alignItems: `center`
+                                            }}
+                                        >
+                                            {
+                                                (() => {
+                                                    let
+                                                        arrColors = this.props.v.galleryColors.map(
+                                                                (v,i,a) => (
+                                                                    <span
+                                                                        key={i}
+                                                                        style={{
+                                                                            display: `inline-block`,
+                                                                            border: `1px black solid`,
+                                                                            borderRadius: `1em`,
+                                                                            width: `20px`,
+                                                                            height: `20px`,
+                                                                            background: `${v.num_color}`,
+                                                                            margin: `.2em`
+                                                                        }}
+                                                                        title={`${v.label_color}`}
+                                                                        onMouseOver={()=>{
+                                                                            this.setState({
+                                                                                imagenActual: v.imagen_min
+                                                                            })
+                                                                        }}
+                                                                    />
+                                                                )
+                                                            )
+                                                    ;
+
+                                                    return arrColors.concat(this.props.v.othersColors.map(
+                                                        (v,i,a) => (
+                                                            <span
+                                                                key={i}
+                                                                style={{
+                                                                    display: `inline-block`,
+                                                                    border: `1px black solid`,
+                                                                    borderRadius: `0em`,
+                                                                    width: `18px`,
+                                                                    height: `18px`,
+                                                                    background: `${v.num_color}`,
+                                                                    margin: `.3em`,
+                                                                    transform: `rotate(45deg)`
+                                                                }}
+                                                                title={`${v.nom_color}`}
+                                                                onMouseOver={()=>{
+                                                                    // this.setState({
+                                                                    //     imagenActual: v.imagen_min
+                                                                    // })
+                                                                            //alert("Imagen no disponible para este color.");
+                                                                }}
+                                                            />
+                                                        )
+                                                    ));
+
+                                                    //arrColors.sort((a,b)=>Number(`0x${a}`)-Number(`0x${b}`))
+
+                                                })()
+                                            }
+                                        </div>
+                                        {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
+                                            Tallas:
+                                        // <div>
+                                        //     this.props.v.sizes.map(
+                                        //         (v,i,a) => (
+                                        //             <span
+                                        //                 key=i}
+                                        //                 style=
+                                        //                     // background: `$v.num_color}`,
+                                        //                     // minWidth: `20px`,
+                                        //                     // minHeight: `20px`,
+                                        //                     // border: `1px solid black`,
+                                        //                     // margin: `.1em`,
+                                        //                     // display: `inline-block`,
+                                        //
+                                        //                     display: `grid`,
+                                        //                     border: `1px black solid`,
+                                        //                     borderRadius: `1em`,
+                                        //                     height: `20px`,
+                                        //                     background: `white`,
+                                        //                     padding: `1em`,
+                                        //                     alignContent: `center`,
+                                        //                     // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, $v.num_color} 100%)`,
+                                        //                     margin: `.2em`,
+                                        //                     textAlign: `center`
+                                        //                 }}
+                                        //             >`$v.label_talla}: $Number(v.existencia_talla)}`}
+                                        //
+                                        //             </span>
+                                        //
+                                        //         )
+                                        //     )}
+                                        / </div> */}
+                                </div>
+                            </LazyLoad>
                         </Link>
                     </li>
                 :
