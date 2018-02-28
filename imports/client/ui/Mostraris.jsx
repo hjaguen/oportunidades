@@ -6,7 +6,6 @@ import * as conf from './config.jsx';
 
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
-import { CSSTransitionGroup } from 'react-transition-group';
 
 export class MostrariSubcategoriaPRODUCTES extends Component {
     constructor(props) {
