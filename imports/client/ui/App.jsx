@@ -377,11 +377,11 @@ export default class App extends Component {
                     )}/>
 
                     <Route exact path="/" render={() => ([
-                        <Stylo.MainVideo
-                            key="video"
+                        <Stylo.MainSlider
+                            key="slider"
                         >
-                            {conf.video_latinmoda}
-                        </Stylo.MainVideo>
+                            {conf.slider}
+                        </Stylo.MainSlider>
                         ,
                         <Stylo.MainContent
                             key="content"
