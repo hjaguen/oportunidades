@@ -23,7 +23,8 @@ export default class Cookies extends React.Component{
 
     this.state = {
       cookieName : 'cookiePopup',
-      message : 'We use cookies to ensure that we give you the best experience on our website. By selecting to close this alert, you are agreeing to allowing this site to use 3rd party cookies.',
+      //message : 'We use cookies to ensure that we give you the best experience on our website. By selecting to close this alert, you are agreeing to allowing this site to use 3rd party cookies.',
+      message : 'Utilizamos cookies propias y de terceros orientadas a medir el uso de nuestros servicios y mejorarlos para ofrecerle una mejor experiencia en nuestro sitio web. Si continua navegando, consideramos que acepta su uso.',
       expiresIn : 365,
       cookieSet : false
     }
@@ -62,7 +63,7 @@ export default class Cookies extends React.Component{
       <div className={classes}>
         <div className="cookies-message">{this.state.message}</div>
         <div className="button-wrapper">
-          <button id="close-button" type="button" onClick={this.closeMessage.bind(this)}>&times;</button>
+          <button id="close-button" type="button" onClick={this.closeMessage.bind(this)}>Acepto</button>
         </div>
       </div>
     )

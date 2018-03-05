@@ -11,7 +11,7 @@ export const
         grid-template-columns: 0.8fr 1fr 1.2fr;
         grid-template-areas:
             "nb nb nb"
-            ". v ."
+            ". s ."
             ". c ."
             ${bloCol}
             "min fot tex"
@@ -26,7 +26,7 @@ export const
           grid-template-columns:auto;
           grid-template-areas:
               "nb"
-              "v"
+              "s"
               "c"
               "col"
               "mos"
@@ -167,8 +167,8 @@ export const
         }
     `,
 
-    MainVideo = styled.div`
-      grid-area: v;
+    MainSlider = styled.div`
+      grid-area: s;
       padding: 20px;
     `,
 

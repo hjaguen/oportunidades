@@ -116,14 +116,25 @@ export let
 
     ,
 
-    video_latinmoda =
-      <div className="container">
-        <div style={{border: `1em solid white`, borderRadius: `10px`, boxShadow: `8px 8px 20px #000`}} className="row" >
-          <div className="embed-responsive embed-responsive-16by9">
-            <iframe className="embed-responsive-item"
-                src="https://player.vimeo.com/video/240463716">
-            </iframe>
-          </div>
+    slider =
+    <div style={{border: `1em solid white`, borderRadius: `10px`, boxShadow: `8px 8px 20px #000`}}> 
+        <div className="slider">   
+            <div className="contenedor-img imagenes-slider">
+                <img src="./blusas-de-moda-latinmoda.png"/>
+                <img src="./blusas-sexis-latinmoda.png"/>
+                <img src="./blusas-colombianas-de-moda.png"/>
+            </div>
         </div>
-      </div>
+    </div> 
+
+    // video_latinmoda =
+    //   <div className="container">
+    //     <div style={{border: `1em solid white`, borderRadius: `10px`, boxShadow: `8px 8px 20px #000`}} className="row" >
+    //       <div className="embed-responsive embed-responsive-16by9">
+    //         <iframe className="embed-responsive-item"
+    //             src="https://player.vimeo.com/video/240463716">
+    //         </iframe>
+    //       </div>
+    //     </div>
+    //   </div>
 ;
