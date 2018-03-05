@@ -6,12 +6,40 @@ import * as conf from './config.jsx';
 
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
+import Counter from './Counter';
 
 export class MostrariSubcategoriaPRODUCTES extends Component {
     constructor(props) {
         super(props);
     }
 
+    resetQuantity(){
+
+    }
+    addToCart(image, name, price, id, quantity){
+        this.setState({
+            selectedProduct: {
+                image: image,
+                name: name,
+                price: price,
+                id: id,
+                quantity: quantity
+            }
+        }, function(){
+            this.props.addToCart(this.state.selectedProduct);
+        })
+        this.setState({
+            buttonLabel: "✔ ADDED"
+        }, function(){
+            setTimeout(() => {
+                this.setState({ 
+                    buttonLabel: "ADD TO CART",
+                    selectedProduct: {} 
+                });
+            }, 5000);
+        });
+    }
+    
     render() {
         if (this.props.data.loading) {
             return (<div>Cargando...</div>);
@@ -102,15 +130,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
 
                                     }}
                                 >
-                                    {/*// <span
-                                    //     style=
-                                    //         fontSize: `.7em`
-                                    //     }}
-                                    // >
-                                    //     Colores:
-                                    // </span>
-                                    */}
-
+                                    
                                         <div
                                             style={{
                                                 display: `flex`,
@@ -162,54 +182,19 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                                                 }}
                                                                 title={`${v.nom_color}`}
                                                                 onMouseOver={()=>{
-                                                                    // this.setState({
-                                                                    //     imagenActual: v.imagen_min
-                                                                    // })
-                                                                            //alert("Imagen no disponible para este color.");
                                                                 }}
                                                             />
                                                         )
                                                     ));
 
-                                                    //arrColors.sort((a,b)=>Number(`0x${a}`)-Number(`0x${b}`))
-
                                                 })()
                                             }
                                         </div>
-                                        {/* --Al loro con las aperturas de las llaves. Para poder comentar han sido borradas. !!!
-                                            Tallas:
-                                        // <div>
-                                        //     this.props.v.sizes.map(
-                                        //         (v,i,a) => (
-                                        //             <span
-                                        //                 key=i}
-                                        //                 style=
-                                        //                     // background: `$v.num_color}`,
-                                        //                     // minWidth: `20px`,
-                                        //                     // minHeight: `20px`,
-                                        //                     // border: `1px solid black`,
-                                        //                     // margin: `.1em`,
-                                        //                     // display: `inline-block`,
-                                        //
-                                        //                     display: `grid`,
-                                        //                     border: `1px black solid`,
-                                        //                     borderRadius: `1em`,
-                                        //                     height: `20px`,
-                                        //                     background: `white`,
-                                        //                     padding: `1em`,
-                                        //                     alignContent: `center`,
-                                        //                     // background: `radial-gradient(ellipse at center, rgba(255,255,255,.05) 0%, $v.num_color} 100%)`,
-                                        //                     margin: `.2em`,
-                                        //                     textAlign: `center`
-                                        //                 }}
-                                        //             >`$v.label_talla}: $Number(v.existencia_talla)}`}
-                                        //
-                                        //             </span>
-                                        //
-                                        //         )
-                                        //     )}
-                                        / </div> */}
                                 </div>
+                                {/*<Counter productQuantity={quantity} updateQuantity={this.props.updateQuantity} resetQuantity={this.resetQuantity}/>
+                                <div className="product-action">
+                                    <button type="button" onClick={this.addToCart.bind(this, image, name, price, id, quantity)}>{this.state.buttonLabel}</button>
+                                </div>*/}
                             </LazyLoad>
                         </Link>
                     </li>
