@@ -6,40 +6,12 @@ import * as conf from './config.jsx';
 
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
-import Counter from './Counter';
 
 export class MostrariSubcategoriaPRODUCTES extends Component {
     constructor(props) {
         super(props);
     }
-
-    resetQuantity(){
-
-    }
-    addToCart(image, name, price, id, quantity){
-        this.setState({
-            selectedProduct: {
-                image: image,
-                name: name,
-                price: price,
-                id: id,
-                quantity: quantity
-            }
-        }, function(){
-            this.props.addToCart(this.state.selectedProduct);
-        })
-        this.setState({
-            buttonLabel: "✔ ADDED"
-        }, function(){
-            setTimeout(() => {
-                this.setState({ 
-                    buttonLabel: "ADD TO CART",
-                    selectedProduct: {} 
-                });
-            }, 5000);
-        });
-    }
-    
+ 
     render() {
         if (this.props.data.loading) {
             return (<div>Cargando...</div>);
@@ -191,10 +163,14 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                             }
                                         </div>
                                 </div>
-                                {/*<Counter productQuantity={quantity} updateQuantity={this.props.updateQuantity} resetQuantity={this.resetQuantity}/>
-                                <div className="product-action">
-                                    <button type="button" onClick={this.addToCart.bind(this, image, name, price, id, quantity)}>{this.state.buttonLabel}</button>
-                                </div>*/}
+                                <i 
+                                style={{
+                                        position: `absolute`,
+                                        bottom: `1.0em`,
+                                        right:`0.5em`
+
+                                    }}
+                                class="fa fa-shopping-basket fa-2x"></i>
                             </LazyLoad>
                         </Link>
                     </li>

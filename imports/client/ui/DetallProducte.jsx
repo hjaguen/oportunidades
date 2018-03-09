@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import * as conf from './config.jsx';
 import sanitizeHtml from 'sanitize-html-react';
+import Counter from './Counter';
 
 export default class MainContentProducte extends Component {
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            selectedImgSrc: ""
+            selectedImgSrc: "",
+            selectedProduct: {},
+            estado: "ADD TO CART",
         };
 
     //    this.canviaImatge = this.canviaImatge.bind(this);
@@ -19,6 +22,36 @@ export default class MainContentProducte extends Component {
     //     })
     // }
 
+    resetQuantity(){
+
+    }
+
+    addToCart(imagen, nombre, ref, marca, color, talla, cantidad){
+        this.setState({
+            selectedProduct: {
+                imagen: imagen,
+                nombre: nombre,   //Descripcion
+                ref: ref,       //Referencia
+                marca:marca,    //nom_marca
+                color: color,   // num_color, label_color
+                talla: talla,   // label_talla
+                cantidad: cantidad  //quantity
+            }
+        }, function(){
+            this.props.addToCart(this.state.selectedProduct);
+        })
+        this.setState({
+            estado: "✔ ADDED"
+        }, function(){
+            setTimeout(() => {
+                this.setState({ 
+                    estado: "ADD TO CART",
+                    selectedProduct: {} 
+                });
+            }, 5000);
+        });
+    }
+
     render() {
 
         console.dir(this.props.data);
@@ -26,6 +59,13 @@ export default class MainContentProducte extends Component {
 // gridTemplateColumns: `1fr 1fr`,
 // gridTemplateRows: `auto`,
 // gridAutoFlow: `row dense`,
+        let imagen = this.props.imagen_min;
+        let nombre = this.props.descripcion;   //Descripcion
+        let ref = this.props.referencia;       //Referencia
+        let marca =this.props.nom_marca;    //nom_marca
+        let color = this.props.num_color;   // num_color, label_color
+        let talla = this.props.label_talla;   // label_talla
+        let cantidad = this.props.productQuantity;  //quantity
         return (
             [
                 <div
@@ -70,7 +110,7 @@ export default class MainContentProducte extends Component {
                                             );
                                         }
                                     )
-                                : "Carregant..."
+                                : "Cargando..."
                         }
                     </div>
                 </div>
@@ -90,7 +130,7 @@ export default class MainContentProducte extends Component {
                                 marginBottom: `20px`
                             }}
                           />
-                        : "Carregant..."
+                        : "Cargando..."
                     }
                 </div>
             ,
@@ -162,7 +202,7 @@ export default class MainContentProducte extends Component {
 
 
                                        return (
-                                           <span
+                                           <button
                                                key={i}
                                                style={{
                                                    background: `${v.num_color}`,
@@ -177,9 +217,12 @@ export default class MainContentProducte extends Component {
                                                    fontWeight: `bold`,
                                                    color: `#${invertHex}`
                                                }}
-                                               title={v.labelColor}
+                                               title="Agregar a Pedido" //{v.labelColor}
+                                               data-toggle="modal"
+                                               data-target="#count"
+                                               //onClick={this.addToCart.bind(this, imagen, nombre, ref, marca, color, talla, cantidad)}
                                             >{v.label_talla}
-                                            </span>
+                                            </button>
                                        );
                                    }
                                )
@@ -188,6 +231,24 @@ export default class MainContentProducte extends Component {
                           </div>
                         : null
                     }
+                </div>
+            ,
+                <div className="modal fade" id="count" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 className="modal-title" id="myModalLabel">¿Cuantos productos desea añadir al pedido?</h4>
+                      </div>
+                      <div className="modal-body">
+                        <Counter productQuantity={cantidad} updateQuantity={this.props.updateQuantity} resetQuantity={this.resetQuantity}/>
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-success" onClick={this.addToCart.bind(this, imagen, nombre, ref, marca, color, talla, cantidad)}>Agregar</button>
+                        {/*<button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>*/}
+                      </div>
+                    </div>
+                  </div>
                 </div>
             ]
         );

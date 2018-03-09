@@ -782,6 +782,48 @@ export default class App extends Component {
                         );
                     }}/>
 
+                    {/*Página de Pedido    */}
+                    {/*<Route exact path="/pedido" render={({ match, history, location }) => {
+                        let
+                            variables = Object.assign({}, this.state.variables, {
+                                subcategoryId: match.params.subcategoryId.match(/\d+$/)[0]
+                            }),
+
+                            MainContentSUBCAT = graphql(Qs.SubCategoriaPRODUCTESQuery, {
+                                ...this.props,
+                                options: {
+                                    variables
+                                }
+                            })(MainContentSubCat)
+                        ;
+
+                        this.variables = variables;
+
+                        return (
+                            <MainContentSUBCAT
+                                marcaIdAVariables={this.marcaIdAVariables}
+                                tallaIdAVariables={this.tallaIdAVariables}
+                                colorIdAVariables={this.colorIdAVariables}
+
+                                filtrantMarca={this.filtrantMarca}
+                                filtreMarca={this.state.filtreMarca}
+
+                                filtrantTalla={this.filtrantTalla}
+                                filtreTalla={this.state.filtreTalla}
+
+                                filtrantColor={this.filtrantColor}
+                                filtreColor={this.state.filtreColor}
+
+                                match={match}
+                                history={history}
+                                location={location}
+
+                                desactivaFiltres={this.desactivaFiltres}
+                            />
+                        );
+                    }}/>*/}
+
+
                     <Route path="/" render={() => (
                         <div>
                             <Cookies />
