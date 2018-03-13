@@ -20,7 +20,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import * as conf from './config.jsx';
 import * as Stylo from './StyledComponents.jsx';
 //import './style.css';
-import CartScrollBar from './CartScrollBar';
+//import CartScrollBar from './CartScrollBar';
 import EmptyCart from './EmptyCart';
 import {findDOMNode} from 'react-dom';
 
@@ -191,9 +191,9 @@ export default class NavbarAdaptat extends Component {
                                             </tbody>
                                         </table>*/}
                                         <div className={this.state.showCart ? "cart-preview active" : "cart-preview"} ref="cartPreview">
-                                            <CartScrollBar>
+                                            {/*<CartScrollBar>
                                                 
-                                            </CartScrollBar>
+                                            </CartScrollBar>*/}
                                             <div className="action-block">
                                                 {/*<button type="button" className={this.state.cart.length > 0 ? " " : "disabled"}>PROCEED TO CHECKOUT</button>*/}
                                             </div>
