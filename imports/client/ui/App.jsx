@@ -76,7 +76,7 @@ export default class App extends Component {
             variables,
             filtreMarca: null,
             filtreTalla: null,
-            filtreColor: null
+            filtreColor: null,
         };
 
         this.variables = variables;
@@ -85,11 +85,6 @@ export default class App extends Component {
         this.marcaIdAVariables = this.marcaIdAVariables.bind(this);
         this.tallaIdAVariables = this.tallaIdAVariables.bind(this);
         this.colorIdAVariables = this.colorIdAVariables.bind(this);
-        //this.productIdAlState = this.productIdAlState.bind(this);
-        this.filtrantMarca = this.filtrantMarca.bind(this);
-        this.filtrantTalla = this.filtrantTalla.bind(this);
-        this.filtrantColor = this.filtrantColor.bind(this);
-        this.desactivaFiltres = this.desactivaFiltres.bind(this);
     }
 
     // marcaTallaUpdate(m, t) {
@@ -175,6 +170,59 @@ export default class App extends Component {
             filtreMarca: null
         });
     }
+
+    // handleAddToCart(selectedProducts){
+    //     let cartItem = this.state.cart;
+    //     let productID = selectedProducts.id;
+    //     let productQty = selectedProducts.cantidad;
+    //     if(this.checkProduct(productID)){
+    //         console.log('hi');
+    //         let index = cartItem.findIndex((x => x.id == productID));
+    //         cartItem[index].cantidad = Number(cartItem[index].cantidad) + Number(productQty);
+    //         this.setState({
+    //             cart: cartItem
+    //         })
+    //     } else {
+    //         cartItem.push(selectedProducts);
+    //     }
+    //     this.setState({
+    //         cart : cartItem,
+    //         cartBounce: true,
+    //     });
+    //     setTimeout(function(){
+    //         this.setState({
+    //             cartBounce:false,
+    //             cantidad: 1
+    //         });
+    //         console.log(this.state.cantidad);
+    //         console.log(this.state.cart);
+    // }.bind(this),1000);  
+    //     this.sumTotalItems(this.state.cart);
+    // }
+    // handleRemoveProduct(id, e){
+    //     let cart = this.state.cart;
+    //     let index = cart.findIndex((x => x.id == id));
+    //     cart.splice(index, 1);
+    //     this.setState({
+    //         cart: cart
+    //     })
+    //     this.sumTotalItems(this.state.cart);
+    //     e.preventDefault();
+    // }
+    // checkProduct(productID){
+    //     let cart = this.state.cart;
+    //     return cart.some(function(item) {
+    //         return item.id === productID;
+    //     }); 
+    // }
+    // sumTotalItems(){
+    //     let total = 0;
+    //     let cart = this.state.cart;
+    //     total = cart.length;
+    //     this.setState({
+    //         totalItems: total
+    //     })
+    // }
 
     render() {
         let

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Counter extends Component {
 	constructor(props){
 		super(props)
-		this.state = { value: this.props.productQuantity };
+		this.state = { value: this.props.cantidad };
 		this.increment = this.increment.bind(this);
 		this.decrement = this.decrement.bind(this);
 	}
@@ -49,7 +49,7 @@ class Counter extends Component {
 		return (
 			<div className="stepper-input">
 				<a href="#" className="decrement" onClick={this.decrement}>–</a>
-				<input ref="feedQty" type="number" className="quantity" value={this.state.value} />
+				<input ref="feedQty" type="number" className="cantidad" value={this.state.value} />
 				<a href="#" className="increment" onClick={this.increment}>+</a>
 			</div>
 		)

@@ -170,7 +170,7 @@ export class MostrariSubcategoriaPRODUCTES extends Component {
                                         right:`0.5em`
 
                                     }}
-                                class="fa fa-shopping-basket fa-2x"></i>
+                                className="fa fa-shopping-basket fa-2x"></i>
                             </LazyLoad>
                         </Link>
                     </li>

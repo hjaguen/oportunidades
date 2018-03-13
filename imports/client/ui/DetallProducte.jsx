@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as conf from './config.jsx';
 import sanitizeHtml from 'sanitize-html-react';
-import Counter from './Counter';
+// import Counter from './Counter';
 
 export default class MainContentProducte extends Component {
     constructor(props, context) {
@@ -10,7 +10,10 @@ export default class MainContentProducte extends Component {
         this.state = {
             selectedImgSrc: "",
             selectedProduct: {},
-            estado: "ADD TO CART",
+            estado: "ADD TO CART", 
+            cart: [],
+            cantidad:1,
+            cartBounce: false,
         };
 
     //    this.canviaImatge = this.canviaImatge.bind(this);
@@ -22,8 +25,60 @@ export default class MainContentProducte extends Component {
     //     })
     // }
 
-    resetQuantity(){
+    // resetQuantity(){
 
+    // }
+    handleAddToCart(selectedProducts){
+        let cartItem = this.state.cart;
+        let productID = selectedProducts.ref;
+        let productQty = selectedProducts.cantidad;
+        if(this.checkProduct(productID)){
+            console.log('hi');
+            let index = cartItem.findIndex((x => x.id == productID));
+            cartItem[index].cantidad = Number(cartItem[index].cantidad) + Number(productQty);
+            this.setState({
+                cart: cartItem
+            })
+        } else {
+            cartItem.push(selectedProducts);
+        }
+        this.setState({
+            cart : cartItem,
+            cartBounce: true,
+        });
+        setTimeout(function(){
+            this.setState({
+                cartBounce:false,
+                cantidad: 1
+            });
+            console.log(this.state.cantidad);
+            console.log(this.state.cart);
+    }.bind(this),1000);  
+        this.sumTotalItems(this.state.cart);
+    }
+    handleRemoveProduct(id, e){
+        let cart = this.state.cart;
+        let index = cart.findIndex((x => x.id == id));
+        cart.splice(index, 1);
+        this.setState({
+            cart: cart
+        })
+        this.sumTotalItems(this.state.cart);
+        e.preventDefault();
+    }
+    checkProduct(productID){
+        let cart = this.state.cart;
+        return cart.some(function(item) {
+            return item.id === productID;
+        }); 
+    }
+    sumTotalItems(){
+        let total = 0;
+        let cart = this.state.cart;
+        total = cart.length;
+        this.setState({
+            totalItems: total
+        })
     }
 
     addToCart(imagen, nombre, ref, marca, color, talla, cantidad){
@@ -38,7 +93,7 @@ export default class MainContentProducte extends Component {
                 cantidad: cantidad  //quantity
             }
         }, function(){
-            this.props.addToCart(this.state.selectedProduct);
+            this.handleAddToCart(this.state.selectedProduct);
         })
         this.setState({
             estado: "✔ ADDED"
@@ -65,7 +120,7 @@ export default class MainContentProducte extends Component {
         let marca =this.props.nom_marca;    //nom_marca
         let color = this.props.num_color;   // num_color, label_color
         let talla = this.props.label_talla;   // label_talla
-        let cantidad = this.props.productQuantity;  //quantity
+        let cantidad = this.props.cantidad;  //quantity
         return (
             [
                 <div
@@ -241,10 +296,11 @@ export default class MainContentProducte extends Component {
                         <h4 className="modal-title" id="myModalLabel">¿Cuantos productos desea añadir al pedido?</h4>
                       </div>
                       <div className="modal-body">
-                        <Counter productQuantity={cantidad} updateQuantity={this.props.updateQuantity} resetQuantity={this.resetQuantity}/>
+                        {/*<Counter cantidad={cantidad} updateQuantity={this.updateQuantity} resetQuantity={this.resetQuantity}/>*/}
+                        <div><input defaultValue="1" id="cantidad" /></div>
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-success" onClick={this.addToCart.bind(this, imagen, nombre, ref, marca, color, talla, cantidad)}>Agregar</button>
+                        <button type="button" className="btn btn-success" onClick={this.addToCart.bind(this, imagen, nombre, ref, marca, color, talla, cantidad)} data-dismiss="modal">Agregar</button>
                         {/*<button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>*/}
                       </div>
                     </div>
