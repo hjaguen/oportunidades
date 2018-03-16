@@ -244,7 +244,14 @@ export default class MainContentProducte extends Component {
                                     }}/>
                                 : null
                             }
-
+                            
+                            <p style={{
+                                    fontFamily: `'Pacifico', cursive`
+                                }}>
+                                Para Agregar el el producto al pedido, por favor 
+                                haga click sobre la talla y color que desea agregar 
+                                y después escoja la cantidad
+                            </p>
 
                             {this.props.data.producteDETALLS[0].tallas.map(
                                    (v,i,a) => {

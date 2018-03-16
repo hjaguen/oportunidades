@@ -52,13 +52,28 @@ export let
 
     <div className="col-sm-12">
         <div className="col-sm-4 col-xs-12" style={{marginBottom: `1em`}}>
-            <img className="img-rounded img-responsive" src="./blusas-de-moda-latinmoda.jpg"/>    
+            <img className="img-rounded img-responsive" src="./blusas-de-moda-latinmoda.jpg"/>
+            <p>En <strong>Latinmoda</strong> tenemos las mejores <strong>Blusas Colombianas</strong>
+            , fabricadas con excelentes materiales y con la mejor calidad. Encuenta aquí la última 
+            <strong> moda de 2018</strong>
+            </p>    
         </div>
         <div className="col-sm-4 col-xs-12" style={{marginBottom: `1em`}}>
             <img className="img-rounded img-responsive" src="./blusas-colombianas-latinmoda.jpg"/>
+            <p><strong>Blusas de Manga Larga y Manga Corta</strong>,
+            <strong> Blusas Elegantes y Casuales</strong>, 
+            <strong> Diseños Exclusivos</strong>,
+            <strong> Moda 100% Colombiana</strong>
+            </p>
         </div>
         <div className="col-sm-4 col-xs-12" style={{marginBottom: `1em`}}>
             <img className="img-rounded img-responsive" src="./blusas-latinmoda.jpg"/>
+            <p>Luce <strong>Sensual y atractiva</strong> con nuestras 
+            <strong>Sexis Blusas </strong>
+            100% <strong>Colombianas</strong>, perfectas para disfrutar 
+            y lucir Hermosa este <strong>Verano</strong> que se acerca.
+
+            </p>
         </div>
     </div>
     // texto_contenido =
