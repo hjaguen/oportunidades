@@ -430,16 +430,16 @@ export default class App extends Component {
                         >
                             {conf.slider}
                         </Stylo.MainSlider>
-                        ,
-                        <Stylo.MainContent
-                            key="content"
-                        >
-    		              <h1>{conf.subtituloPagina}</h1>
-    		              <h2>{conf.titulo_contenido}</h2>
-    		              {conf.bloque_contenido}
-    		              {conf.bloque_info}
+                  //       ,
+                  //       <Stylo.MainContent
+                  //           key="content"
+                  //       >
+    		            //   <h1>{conf.subtituloPagina}</h1>
+    		            //   <h2>{conf.titulo_contenido}</h2>
+    		            //   {conf.bloque_contenido}
+    		            //   {conf.bloque_info}
 
-    		            </Stylo.MainContent>
+    		            // </Stylo.MainContent>
                     ])}/>
 
                     <Route exact path="/categoria/:subcategoryId" render={({ match, history, location }) => {

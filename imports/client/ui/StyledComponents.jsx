@@ -17,10 +17,10 @@ export const
             "min fot tex"
             "ft ft ft"
         ;
-        background-image: url(/${conf.fonsPrincipal});
-        background-size: ${conf.backgroundSize};
-        background-repeat: ${conf.backgroundRepeat};
-        background-attachment: ${conf.backgroundAttachment};
+        // background-image: url(/${conf.fonsPrincipal});
+        // background-size: ${conf.backgroundSize};
+        // background-repeat: ${conf.backgroundRepeat};
+        // background-attachment: ${conf.backgroundAttachment};
 
         @media (max-width:500px) {
           grid-template-columns:auto;
@@ -83,7 +83,8 @@ export const
         //position: sticky;
         top: 0;
         height: min-height;
-        background-color: rgba(255, 255, 255, 0.25);
+        // background-color: rgba(255, 255, 255, 0.25);
+        background-color: white
         transition: all 1s ease;
         z-index: 100;
         font-family: 'Comfortaa', sans-serif;
@@ -152,9 +153,9 @@ export const
 
     NavTitle = styled.h1`
         margin-top: 0;
-        font-size: 2.5em;
-        color: white;
-        text-shadow: 8px 5px 10px black;
+        font-size: 1.5em;
+        color: rgb(25, 46, 96);;
+        //text-shadow: 8px 5px 10px black;
         font-family: 'Comfortaa', sans-serif;
         font-weight: 700;
 
@@ -242,9 +243,9 @@ export const
       padding: 15px;
       // padding-top: 7px !important;
       // padding-bottom: 7px !important;
-      color: #fff;
+      color: rgb(25, 46, 96);
       font-size: 1.25em;
-	    text-shadow: 0 1px 0 rgba(255,255,255,.25);
+	    //text-shadow: 0 1px 0 rgba(255,255,255,.25);
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
       @media (min-width:351px) and (max-width:500px) {
@@ -256,7 +257,30 @@ export const
         }
       //transform: scaleX(.9);
         &:hover, &:focus {
-          color: rgb(255, 64, 129);
+          //color: rgb(255, 64, 129);
+
+        }
+    `,
+
+    aLink2 = styled('a')`
+      padding: 15px;
+      // padding-top: 7px !important;
+      // padding-bottom: 7px !important;
+      color: white;
+      font-size: 1.25em;
+      //text-shadow: 0 1px 0 rgba(255,255,255,.25);
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      @media (min-width:351px) and (max-width:500px) {
+          font-size: 1.0em;
+        }
+
+        @media (max-width:350px) {
+          font-size: 0.8em;
+        }
+      //transform: scaleX(.9);
+        &:hover, &:focus {
+          //color: rgb(255, 64, 129);
 
         }
     `,
@@ -282,6 +306,6 @@ export const
     footer = styled.footer.attrs({
       className: 'mdl-mega-footer'
     })`
-      background-color: black;
+      background-color: rgb(204, 12, 47);
     `
 ;

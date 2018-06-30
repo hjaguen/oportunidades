@@ -4,9 +4,9 @@ import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Grid, Row, Col } f
 
 export let
 
-    categoryId = `2`
+    categoryId = `17`
     ,
-    tituloPagina = `Blusas Colombianas`
+    tituloPagina = `OPORTUNIDADES LATINMODA`
     ,
     subtituloPagina = `Ropa Colombiana en Europa`
     ,

@@ -103,16 +103,20 @@ export default class NavbarAdaptat extends Component {
             <Stylo.MainNavBar id="menu" className="navbar" role="navigation">
                 <div className="container-fluid">
                     <div className="navbar-header col-xs-12">
-                        <Stylo.aBrand href="/" >
-                          <Stylo.NavTitle>{conf.tituloPagina}</Stylo.NavTitle>
-                        </Stylo.aBrand>
-                          <ul className="nav navbar-nav navbar-right">
+                        <ul className="nav navbar-nav" style={{fontSize:`10px`, width:`80%`}}>
                             <Stylo.liNav style={{display:`inline-block`}}>
                                 <Stylo.aLink className="emailytel">{conf.emailContacto}</Stylo.aLink>
                             </Stylo.liNav>
                             <Stylo.liNav style={{display:`inline-block`}}>
                                 <Stylo.aLink className="emailytel">{conf.telContacto}</Stylo.aLink>
                             </Stylo.liNav>
+                            <Stylo.liNav style={{display:`inline-block`,marginLeft:`15em`}}>
+                                <Stylo.aBrand href="/" >
+                                  <Stylo.NavTitle>{conf.tituloPagina}</Stylo.NavTitle>
+                                </Stylo.aBrand>
+                            </Stylo.liNav>
+                        </ul>
+                        <ul className="nav navbar-nav navbar-right" style={{fontSize:`10px`}}>
                             <Stylo.liNav style={{display:`inline-block`}}>
                               <Stylo.aLink href="https://facebook.com/latinmoda" target="_blank"> <i className="fa fa-facebook fa-2x"></i></Stylo.aLink>
                             </Stylo.liNav>
@@ -140,26 +144,29 @@ export default class NavbarAdaptat extends Component {
                         </button>
                     </div>
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul className="nav navbar-nav">
-                            {
-                                this.props.data.subcategories.map(
-                                    (v,i,a) => {
-                                        return (
-                                          <Stylo.liNav>
-                                            <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
-                                                <Stylo.aLink
-                                                    eventKey={i}
-                                                    onClick={this.canviaSubcat}
-                                                    data-subcategory-id={v.categoriaId}
-                                                >                   {v.nom_categoria}
-                                                </Stylo.aLink>
-                                            </LinkContainer>
-                                          </Stylo.liNav>
-                                        )
-                                    }
-                                )
-                            }
-                        </ul>
+                        <div className="col-xs-12" style={{padding:`0px`,backgroundColor:`rgb(25, 46, 96)`}}>
+                            {/*<ul className="nav navbar-nav col-xs-12" style={{padding:`0px`,backgroundColor:`rgb(25, 46, 96)`, marginLeft:`10em`}}>*/}
+                            <ul className="nav navbar-nav" style={{marginLeft:`10em`}}>
+                                {
+                                    this.props.data.subcategories.map(
+                                        (v,i,a) => {
+                                            return (
+                                              <Stylo.liNav>
+                                                <LinkContainer key={i} to={`/categoria/${v.nom_categoria.trim().toLowerCase().replace(/\s+/g, '.')}.${v.categoriaId}`}>
+                                                    <Stylo.aLink2
+                                                        eventKey={i}
+                                                        onClick={this.canviaSubcat}
+                                                        data-subcategory-id={v.categoriaId}
+                                                    >                   {v.nom_categoria}
+                                                    </Stylo.aLink2>
+                                                </LinkContainer>
+                                              </Stylo.liNav>
+                                            )
+                                        }
+                                    )
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </Stylo.MainNavBar>
