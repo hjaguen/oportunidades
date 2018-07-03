@@ -11,7 +11,7 @@ export const
         grid-template-columns: 0.8fr 1fr 1.2fr;
         grid-template-areas:
             "nb nb nb"
-            ". s ."
+            ". v ."
             ". c ."
             ${bloCol}
             "min fot tex"
@@ -26,7 +26,7 @@ export const
           grid-template-columns:auto;
           grid-template-areas:
               "nb"
-              "s"
+              "v"
               "c"
               "col"
               "mos"
@@ -173,6 +173,10 @@ export const
       padding: 20px;
     `,
 
+    video = styled.div`
+      grid-area: v;
+    `
+     ,
     MainContent = styled.div.attrs({
       //className: 'container'
       className: 'maincontent'
@@ -307,5 +311,10 @@ export const
       className: 'mdl-mega-footer'
     })`
       background-color: rgb(204, 12, 47);
+    `,
+
+    imagenPedido = styled.img`
+      margin-top:0.5em;
+      width:5em;
     `
 ;

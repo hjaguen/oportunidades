@@ -35,7 +35,7 @@ ul {
     left: 0;
     right: 0;
     height: auto;
-    width: 100%;
+    width: 50%;
     display: table;
     background: rgba(0,0,0,.5);
     -webkit-transition: opacity 300ms ease;
@@ -64,7 +64,7 @@ ul {
   width: 6%;
   pointer-events: auto;
 }
-.cookies-wrapper .button-wrapper button {
+.cookies-wrapper .button-wrapper a {
   margin: 0;
   padding: 0;
   width: 100%;

@@ -2,6 +2,8 @@
 
 import React from 'react'
 import cx from 'classnames' /** you need to npm install --save-dev classnames this **/
+import * as info from './addInfo.jsx';
+import * as Stylo from './StyledComponents.jsx';
 /**
  * ReactJS & ES2015 Cookies Pop Up Component
  *  A pop up to inform the user that cookies are used on a/this site.
@@ -24,7 +26,7 @@ export default class Cookies extends React.Component{
     this.state = {
       cookieName : 'cookiePopup',
       //message : 'We use cookies to ensure that we give you the best experience on our website. By selecting to close this alert, you are agreeing to allowing this site to use 3rd party cookies.',
-      message : 'Utilizamos cookies propias y de terceros orientadas a medir el uso de nuestros servicios y mejorarlos para ofrecerle una mejor experiencia en nuestro sitio web. Si continua navegando, consideramos que acepta su uso.',
+      message : 'Utilizamos cookies propias y de terceros orientadas a medir el uso de nuestros servicios y mejorarlos para ofrecerle una mejor experiencia en nuestro sitio web. Por Favor Acepte para continuar. Puede obtener más información pinchado en "Ver Más".',
       expiresIn : 365,
       cookieSet : false
     }
@@ -62,8 +64,31 @@ export default class Cookies extends React.Component{
     return (
       <div className={classes}>
         <div className="cookies-message">{this.state.message}</div>
-        <div className="button-wrapper">
-          <button id="close-button" type="button" onClick={this.closeMessage.bind(this)}>Acepto</button>
+          <div className="button-wrapper">
+            <button id="close-button" type="button" onClick={this.closeMessage.bind(this)}>Acepto</button>
+          </div>
+          <div className="button-wrapper">
+            <a href=""
+              data-toggle="modal"
+              data-target="#cookies">
+              Ver Más
+            </a>
+          </div>
+          <div className="modal fade about-modal-lg" id="cookies" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 className="modal-title" id="myModalLabel">{info.titleCookies}</h4>
+              </div>
+              <div className="modal-body">
+                {info.contCookies}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

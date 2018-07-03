@@ -52,14 +52,14 @@ export let
 
     <div className="col-sm-12">
         <div className="col-sm-4 col-xs-12" style={{marginBottom: `1em`}}>
-            <img className="img-rounded img-responsive" src="./blusas-de-moda-latinmoda.jpg"/>
+            <img className="img-rounded img-responsive" src="./1499.jpg"/>
             <p>En <strong>Latinmoda</strong> tenemos las mejores <strong>Blusas Colombianas</strong>
             , fabricadas con excelentes materiales y con la mejor calidad. Encuenta aquí la última 
             <strong> moda de 2018</strong>
             </p>    
         </div>
         <div className="col-sm-4 col-xs-12" style={{marginBottom: `1em`}}>
-            <img className="img-rounded img-responsive" src="./blusas-colombianas-latinmoda.jpg"/>
+            <img className="img-rounded img-responsive" src="./2172.jpg"/>
             <p><strong>Blusas de Manga Larga y Manga Corta</strong>,
             <strong> Blusas Elegantes y Casuales</strong>, 
             <strong> Diseños Exclusivos</strong>,
@@ -67,7 +67,7 @@ export let
             </p>
         </div>
         <div className="col-sm-4 col-xs-12" style={{marginBottom: `1em`}}>
-            <img className="img-rounded img-responsive" src="./blusas-latinmoda.jpg"/>
+            <img className="img-rounded img-responsive" src="./8005.jpg"/>
             <p>Luce <strong>Sensual y atractiva</strong> con nuestras 
             <strong>Sexis Blusas </strong>
             100% <strong>Colombianas</strong>, perfectas para disfrutar 
@@ -142,14 +142,16 @@ export let
         </div>
     </div> 
 
-    // video_latinmoda =
-    //   <div className="container">
-    //     <div style={{border: `1em solid white`, borderRadius: `10px`, boxShadow: `8px 8px 20px #000`}} className="row" >
-    //       <div className="embed-responsive embed-responsive-16by9">
-    //         <iframe className="embed-responsive-item"
-    //             src="https://player.vimeo.com/video/240463716">
-    //         </iframe>
-    //       </div>
-    //     </div>
-    //   </div>
+    ,
+
+    video =
+      <div className="container">
+        <div style={{border: `1em solid rgb(204, 12, 47)`, borderRadius: `10px`, boxShadow: `8px 8px 20px #000`}} className="row" >
+          <div className="embed-responsive embed-responsive-16by9">
+            <iframe className="embed-responsive-item"
+                src="https://player.vimeo.com/video/278145074">
+            </iframe>
+          </div>
+        </div>
+      </div>
 ;
